@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+
+
+HashMap<String, String> baseDependencies = rootProject.ext.dependencies
+HashMap<String, String> testDependencies = rootProject.ext.testDependencies
+HashMap<String, String> application = rootProject.ext.application
+HashMap<String, String> versions = rootProject.ext.versions
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode application.versionCode
+        versionName application.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    buildToolsVersion '27.0.3'
+}
+
+kapt {
+    generateStubs = true
+}
+
+dependencies {
+    api project(':domain')
+    implementation baseDependencies.kotlin_std_lib
+    implementation baseDependencies.rx_java
+    implementation baseDependencies.dagger2
+    implementation baseDependencies.dagger2_android_support
+    kapt baseDependencies.dagger2_compiler
+    kapt baseDependencies.dagger2_android_processor
+    api baseDependencies.retrofit
+    api baseDependencies.retrofit_adapter_rxjava
+    api baseDependencies.retrofit_converter_gson
+    api baseDependencies.logging_interceptor
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockitoKotlin
+}

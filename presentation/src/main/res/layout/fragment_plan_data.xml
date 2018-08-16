@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/textViewMsgWhenEntering"
+            style="@style/Secondary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="@string/msg_personal_data_top"
+            android:textAllCaps="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/inputLayoutRegister"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="2">
+
+                <EditText
+                    android:id="@+id/editTextRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_register"
+                    android:inputType="number" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/inputLayoutOrder"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/editTextOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_order"
+                    android:inputType="number" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/inputLayoutContract"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/editTextContract"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="4"
+                android:hint="@string/text_contract"
+                android:inputType="number" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_weight="1"
+                android:id="@+id/inputLayoutRegisterValidation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/editTextRegisterValidation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_register_validation"
+                    android:inputType="date" />
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/registerValidationCalendarButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingBottom="4dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:src="@drawable/ic_date" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp">
+
+            <CheckBox
+                android:id="@+id/acceptTermsCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_accept_terms"
+                android:textSize="12sp" />
+
+            <FrameLayout
+                android:id="@+id/termsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="4dp"
+                android:layout_marginStart="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:paddingBottom="2dp"
+                    android:text="@string/title_terms_of_use"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="82dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="bottom|center"
+                    android:background="@color/colorPrimary" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

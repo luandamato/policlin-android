@@ -1,0 +1,76 @@
+package br.com.policlinsaude.core.base
+
+import android.os.Bundle
+import android.support.annotation.StringRes
+import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import android.view.MenuItem
+import android.widget.Toast
+import br.com.policlinsaude.core.application.PoliclinSaudeApplication
+import br.com.policlinsaude.core.helper.DialogHelper
+import br.com.policlinsaude.core.helper.InvalidData
+import com.basgeekball.awesomevalidation.AwesomeValidation
+import com.basgeekball.awesomevalidation.ValidationStyle
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerAppCompatActivity
+import dagger.android.support.HasSupportFragmentInjector
+import kotlinx.android.synthetic.main.toolbar.*
+
+abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
+
+    lateinit var awesomeValidation: AwesomeValidation
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        performDependencyInjection()
+        awesomeValidation = AwesomeValidation(ValidationStyle.BASIC)
+        super.onCreate(savedInstanceState)
+    }
+
+    private fun performDependencyInjection() {
+        AndroidInjection.inject(this)
+    }
+
+    fun setupToolbar(){
+        setSupportActionBar(toolbar)
+        supportActionBar?.let {
+            with(it){
+                setDisplayHomeAsUpEnabled(true)
+                setHomeButtonEnabled(true)
+            }
+        }
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        item?.let {
+            when (item.itemId) {
+                android.R.id.home -> {
+                    onBackPressed()
+                    Log.d("FILTRO", "BACKPRESSED: onBackPressed()")
+                    return true
+                }else -> {}
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    fun showDialogTryAgain(listenerPositiveButton: ()-> Unit,
+                     message: String = InvalidData.UNINITIALIZED.getString()){
+        DialogHelper.showDialogTryAgain(context = this,
+                listenerPositiveButton = listenerPositiveButton, message = message)
+    }
+
+    fun showToast(@StringRes message: Int) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun showError(message: String = InvalidData.UNINITIALIZED.getString()) {
+        DialogHelper.showErrorDialog(this, message)
+    }
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment>
+            = (application as PoliclinSaudeApplication).fragmentInjector
+
+}

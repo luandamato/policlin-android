@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/filters_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBg"
+        android:drawablePadding="16dp"
+        android:drawableStart="@drawable/arrow"
+        android:gravity="center_vertical"
+        android:padding="12dp"
+        android:text="@string/text_filters_advanced"
+        android:textSize="16sp" />
+
+    <ScrollView
+        android:id="@+id/filters_details_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/ll_filters_details_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:visibility="visible">
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="@string/title_address" />
+
+            <EditText
+                android:id="@+id/addressplan_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/full_names" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider" />
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_neighborhood" />
+
+            <EditText
+                android:id="@+id/neighborhood_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/full_names" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider" />
+
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_zipcode" />
+
+            <EditText
+                android:id="@+id/zipcode_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/full_names" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider" />
+
+
+            <!-- <TextView
+                android:id="@+id/professional_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/full_names" />-->
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_professional_class" />
+
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/spinnerProfessionalClass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider" />
+
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_number_on_the_board" />
+
+            <EditText
+                android:id="@+id/number_on_the_board_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/full_names" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider" />
+
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_prof_fantasy_company" />
+
+            <EditText
+                android:id="@+id/prof_fantasy_company_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/full_names" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider" />
+
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_cnpj" />
+
+            <EditText
+                android:id="@+id/cnpj_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/full_names" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider" />
+
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_phones" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider" />
+
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_speciality"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/speciality_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                android:visibility="gone"
+                tools:text="@tools:sample/full_names" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider"
+                android:visibility="gone" />
+
+
+            <EditText
+                android:id="@+id/phones_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/full_names" />
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_kind_of_service" />
+
+            <!--   <TextView
+                android:id="@+id/kind_of_service_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/full_names" />-->
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/spinnerServiceType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider" />
+
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_type_establishment_filter" />
+
+            <!-- <TextView
+                android:id="@+id/establishment_type_filter_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:textSize="12sp"
+                tools:text="@tools:sample/full_names" />-->
+
+            <org.angmarch.views.NiceSpinner
+                android:id="@+id/spinnerEstablishmentType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="40dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/divider"
+                android:visibility="gone" />
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:text="@string/title_qualifications"
+                android:visibility="visible" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <!--  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:paddingEnd="16dp"
+                      android:paddingStart="16dp"
+                      android:visibility="visible">-->
+
+                <CheckBox
+                    android:id="@+id/cbA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/imgA"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/cbA" />
+
+                <CheckBox
+                    android:id="@+id/cbN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imgA" />
+
+                <ImageView
+                    android:id="@+id/imgN"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/cbN" />
+
+                <CheckBox
+                    android:id="@+id/cbP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imgN" />
+
+                <ImageView
+                    android:id="@+id/imgP"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/cbP" />
+
+                <CheckBox
+                    android:id="@+id/cbR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imgP" />
+
+                <ImageView
+                    android:id="@+id/imgR"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/cbR" />
+
+                <CheckBox
+                    android:id="@+id/cbE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imgR" />
+
+                <ImageView
+                    android:id="@+id/imgE"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/cbE" />
+
+                <CheckBox
+                    android:id="@+id/cbQ"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imgE" />
+
+                <ImageView
+                    android:id="@+id/imgQ"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/cbQ" />
+
+                <CheckBox
+                    android:id="@+id/cbG"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imgQ" />
+
+                <ImageView
+                    android:id="@+id/imgG"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/cbG" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/cbI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    android:id="@+id/imgI"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/cbI" />
+
+                <CheckBox
+                    android:id="@+id/cbD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imgI" />
+
+                <ImageView
+                    android:id="@+id/imgD"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/cbD" />
+
+                <CheckBox
+                    android:id="@+id/cbM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imgD" />
+
+                <ImageView
+                    android:id="@+id/imgM"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toEndOf="@+id/cbM" />
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+</LinearLayout>

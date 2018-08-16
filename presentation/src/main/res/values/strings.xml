@@ -1,0 +1,208 @@
+<resources>
+    <string name="app_name">Policlin Saúde</string>
+
+  <string name="maps_key">AIzaSyCjHj4TSx3hKpS1mIriOVEnkV24zAVaJ9s</string>
+
+   <string name="maps_key_original">AIzaSyCDCZFup4UtBr-6jFfJBaglT1qzn3cDjbM</string>
+
+    <!-- nome pacote: br.com.policlinsaude.map.view
+         impressao digital: EE:F9:83:8B:E9:C5:FE:13:ED:2E:0A:34:48:5D:26:2F:39:3F:10:31
+
+         AIzaSyCjHj4TSx3hKpS1mIriOVEnkV24zAVaJ9s
+
+        comando keytool -list -v -keystore mystore.keystore
+
+        <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">YOUR_KEY_HERE</string>
+    -->
+
+    <string name="text_ok">OK</string>
+
+    <string name="msg_welcome">Seja bem-vindo!</string>
+
+    <string name="msg_instruction_recover_password">As instruções para recuperação da senha serão enviadas para o seu e-mail.</string>
+    <string name="msg_when_entering_you_allow">Ao entrar você concorda com nossa política de privacidade e termos de uso.</string>
+    <string name="msg_edit_register">Editar dados cadastrais</string>
+    <string name="action_i_am_client">Sou cliente</string>
+    <string name="action_i_am_not_client">Não sou cliente</string>
+    <string name="action_back">Voltar</string>
+    <string name="action_create">Criar</string>
+    <string name="action_next">Próximo</string>
+    <string name="action_recover_password">Recuperar senha</string>
+    <string name="msg_choiche_bellow_options">Escolha uma das opções a seguir para acessar nosso aplicativo.</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="global_enter">Entrar</string>
+    <string name="action_not_has_password">não tenho senha</string>
+    <string name="action_forgot_password">Esqueci minha senha</string>
+    <string name="text_password">Senha</string>
+    <string name="text_input_email">Insira seu e-mail</string>
+    <string name="text_register_and_order">Matrícula/Ordem</string>
+    <string name="text_order">Ordem</string>
+    <string name="text_register">Matrícula</string>
+    <string name="title_create_password">Senha</string>
+    <string name="title_plan_data">Plano</string>
+    <string name="title_personal_data">Pessoal</string>
+    <string name="text_name">Nome</string>
+    <string name="text_cpf">CPF</string>
+    <string name="text_birthday">Data de nascimento</string>
+    <string name="text_phone">Celular</string>
+    <string name="text_email">E-mail</string>
+    <string name="text_confirm_email">Confirmar e-mail</string>
+    <string name="msg_personal_data_top">Todos os dados devem ser iguais aos apresentados na carteirinha.</string>
+    <string name="text_contract">Contrato</string>
+    <string name="text_register_validation">Validade da carteirinha</string>
+    <string name="text_confirm_password">Confirmar Senha</string>
+    <string name="text_field_required">Campo obrigatório</string>
+    <string name="text_cpf_invalid">CPF inválido</string>
+    <string name="text_min_and_max_password">A senha deve ter de 8 a 32 caracteres.</string>
+    <string name="text_email_invalid">E-mail inválido.</string>
+    <string name="text_phone_invalid">Celular inválido.</string>
+    <string name="text_two_email_invalid">E-mails não conferem.</string>
+    <string name="text_two_password_invalid">Senhas não confere;</string>
+
+    <string name="msg_password_needs">A senha deve ter de 8 a 32 caracteres, contendo letras e números. Não devem ser utilizados caracteres especiais.</string>
+    <string name="msg_error_unknown">Ocorreu um erro durante a operação. Verifique sua conexão e tente mais tarde.Se o problema persistir entre em contato conosco.</string>
+    <string name="title_error_oops">Oops!</string>
+    <string name="title_no_internet_connection">Sem conexão.</string>
+    <string name="title_advise">Aviso</string>
+    <string name="action_try_again">Tentar novamente.</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="title_home">Home</string>
+    <string name="title_social_name">Razão social</string>
+    <string name="title_perfil">Perfil</string>
+    <string name="title_preferences">Preferências</string>
+    <string name="title_tutorial">Tutorial</string>
+    <string name="title_unities">Unidades Policlin Saúde</string>
+    <string name="title_information">Informações</string>
+    <string name="title_telefonecid">CIB - Central de Informação ao Beneficiário</string>
+    <string name="title_speciality">Especialidades/Serviços</string>
+    <string name="title_address">Endereço</string>
+    <string name="title_city">Cidade</string>
+    <string name="title_phones">Telefones</string>
+    <string name="title_type_establishment">Tipo de estabelecimento</string>
+    <string name="title_type_establishment_filter">Tipo de estabelecimento conforme CNES - Cadastro Nacional de Estabelecimentos de Saúde.</string>
+
+    <string name="title_links">Links</string>
+    <string name="title_neighborhood">Bairro</string>
+    <string name="title_zipcode">CEP</string>
+    <string name="title_professional_class">Classe do Profissional</string>
+    <string name="title_number_on_the_board">Número no Conselho</string>
+    <string name="title_prof_fantasy_company">Nome do Profissional/Nome Fantasia/Razão Social</string>
+    <string name="title_kind_of_service">Tipo de Serviço</string>
+    <string name="msg_address_details_format">%s, %s %s - %s - CEP %s</string>
+    <string name="msg_city_details_format">%s - %s</string>
+    <string name="msg_click_at_image">(toque na imagem para trocar de foto)</string>
+    <string name="msg_select_our_preferences">Selecione suas preferencias nas opções disponiveis abaixo.</string>
+    <string name="title_medical_guide">Guia médico</string>
+    <string name="title_medical_guide_list">Lista Guia médico</string>
+    <string name="title_own_network">Rede própria</string>
+    <string name="title_favorites">Favoritos</string>
+    <string name="title_health_insurance">Carteirinha</string>
+    <string name="text_plan">Plano</string>
+    <string name="text_city">Cidade</string>
+    <string name="text_speciality">Especialidade/Serviço</string>
+    <string name="global_search">Pesquisar</string>
+    <string name="text_clean_fields">Limpar campos</string>
+    <string name="text_select">Selecione</string>
+    <string name="msg_type_establishment">Tipo de estabelecimento: %s</string>
+    <string name="msg_speciality">Especialidade/Serviço: %s</string>
+    <string name="msg_address_format">%s, %s %s - %s - CEP %s \n %s - %s</string>
+    <string name="msg_more_details">+ detalhes</string>
+    <string name="action_info">Informações</string>
+    <string name="msg_information_about_icon_and_qualification">Legenda para os ícones dos atributos de qualificação dos prestadores de serviço na saúde suplementar.</string>
+    <string name="msg_information_about_icon_and_qualification_and_link">Legenda e descrição pormenorizada para os ícones dos atributos de qualificação dos prestadores de serviço na saúde suplementar, &lt;u>&lt;font color=\'blue\'>clique aqui&lt;/font>&lt;/u> para visualizar.</string>
+    <string name="title_cnpj">CNPJ</string>
+    <string name="title_medical_guide_details">Detalhes</string>
+    <string name="msg_get_person_error">Erro ao buscar inforamções do usuário.</string>
+    <string name="text_sort_by_proximity">Ordenar mais próximos</string>
+    <string name="text_plans">Planos atendidos</string>
+    <string name="text_filters">Filtros</string>
+    <string name="text_filters_advanced">Filtro Avançado</string>
+    <string name="text_nothing_to_show">Não há dados a exibir.</string>
+    <string name="text_no_internet">Você não está conectado à internet. Conecte-se e tente novamente.</string>
+    <string name="text_no_internet_short">Você não está conectado à internet.</string>
+    <string name="text_no_internet_no_photo">Você não está conectado à internet. Para ter a carteirinha armazenada no App, é necessário logar ao menos uma vez e acessar a opção Carteirinha.</string>
+    <string name="text_no_internet_favorites">Você não está conectado à internet. As informações a seguir, são de armazenamento local, conforme últimas ações em Favoritos.</string>
+    <string name="title_login">Deseja fazer login agora?</string>
+    <string name="text_login">Para ter acesso a esta funcionalidade, você deve ser cliente e efetuar seu login.</string>
+    <string name="global_yes">Sim</string>
+    <string name="global_no">Não</string>
+    <string name="msg_unexpected_error">Ocorreu um erro inesperado. Se o problema persistir, entre em contato conosco.</string>
+    <string name="text_guest">Visitante - Usuário sem conta.</string>
+    <string name="title_permissions_needed">Permissão necessária</string>
+    <string name="text_permissions_needed">Para prosseguir, você precisa conceder todas as permissões necessárias.</string>
+    <string name="text_location_missing_error">Não foi possível obter sua localização. Tente novamente mais tarde.</string>
+    <string name="text_location_missing_gps_off">Não foi possível obter sua localização. Ative o GPS e tente novamente, ou desabilite a Localização em Preferências.</string>
+    <string name="text_select_preferences">Selecione suas preferências nas opções disponíveis abaixo.</string>
+    <string name="text_logoff">Efetuar Logoff</string>
+    <string name="text_policlin_rights">Policlin Saúde S/A\n© 2018 - Todos os direitos reservados</string>
+    <string name="text_preferences_notifications">Notificações</string>
+    <string name="text_preferences_location">Localização</string>
+    <string name="title_logoff">Efetuar Logoff</string>
+    <string name="text_logoff_confirmation">Deseja realmente sair do aplicativo?</string>
+    <string name="text_review_tutorial_screens">Rever telas explicativas</string>
+    <string name="title_about">Sobre</string>
+    <string name="title_version">Versão</string>
+    <string name="title_privacy_policy">Política de Privacidade</string>
+    <string name="title_terms_of_use">Termos de Uso</string>
+    <string name="text_version" formatted="false">v%s</string>
+    <string name="title_health_policlin">Policlin Saúde</string>
+    <string name="title_policlin_group">Grupo Policlin</string>
+    <string name="title_cib">CIB - Central de Informação ao Beneficiário</string>
+    <string name="title_ombudsman">Ouvidoria</string>
+    <string name="title_contact_phones">Telefones de Contato</string>
+    <string name="title_abramge">Abramge</string>
+    <string name="title_ans">ANS - Agência Nacional de Saúde Suplementar</string>
+    <string name="text_accept_terms">Declaro que concordo com os</string>
+    <string name="text_must_accept_terms">Para prosseguir, você deve aceitar os termos.</string>
+    <string name="text_person_home_title" formatted="false">%s - %s</string>
+    <string name="url_policlin">https://www.policlinsaude.com.br/</string>
+    <string name="url_policlin_group">http://www.policlin.com.br/</string>
+    <string name="url_abramge">http://www.policlinsaude.com.br/abramge.html</string>
+    <string name="url_ans">http://www.ans.gov.br/</string>
+    <string name="url_cib">https://policlinsaude.com.br/cib.html</string>
+    <string name="url_ombudsman">https://policlinsaude.com.br/ouvidoria.html</string>
+    <string name="url_contact_phones">https://policlinsaude.com.br/unidades.html</string>
+    <string name="url_privacy_policy">https://policlinsaude.com.br/termos-de-uso-e-politica-de-privacidade.html</string>
+    <string name="url_terms">https://policlinsaude.com.br/termos-de-uso-e-politica-de-privacidade.html</string>
+    <string name="text_register_and_order_number" formatted="false">%010d-%02d</string>
+    <string name="text_password_placeholder">********</string>
+    <string name="text_favorite_success">Adicionado aos favoritos com sucesso</string>
+    <string name="text_km">km</string>
+    <string name="text_distance" formatted="false">%.2f</string>
+    <string name="text_location_not_enabled">Você precisa habilitar a localização para prosseguir.</string>
+    <string name="text_image_chooser_title">Selecione uma opção.</string>
+    <string name="text_image_pick_error">Erro ao selecionar imagem.</string>
+    <string name="text_avatar_change_success">Avatar alterado com sucesso.</string>
+    <string name="title_pasword_change">Alterar senha</string>
+    <string name="title_new_password">Nova Senha</string>
+    <string name="title_confirm_password">Confirmar Senha</string>
+    <string name="title_edit_password">Alterar Senha</string>
+    <string name="text_send">Enviar</string>
+    <string name="title_success">Sucesso</string>
+    <string name="text_edit_password_success">Senha alterada com sucesso</string>
+    <string name="title_edit_phone">Alterar Celular</string>
+    <string name="text_new_phone">Novo número</string>
+    <string name="text_current_email">E-mail atual</string>
+    <string name="text_edit_phone_success">Celular alterado com sucesso.</string>
+    <string name="url_custom_infos">https://policlinsaude.com.br/legenda_pormenorizada.html</string>
+    <string name="text_add_photo">Clique na imagem abaixo para adicionar uma foto.</string>
+    <string name="text_photo_needed">A foto  é necessária para cadastro.</string>
+    <string name="title_client_area">ÁREA DO CLIENTE</string>
+    <string name="text_remove_favorite_success">Removido dos favoritos com sucesso.</string>
+    <string name="text_email_sent">E-mail enviado com sucesso.</string>
+    <string name="title_exit">Sair</string>
+    <string name="text_exit_confirmation">Deseja realmente sair?</string>
+    <string name="text_empty_medical_guide">Não houve nenhum resultado em sua busca.</string>
+    <string name="text_date" formatted="false">%02d/%02d/%04d</string>
+    <string name="text_date_invalid">Data inválida.</string>
+    <string name="title_own_network_map">Mapa Rede Própria</string>
+    <string name="title_medical_guide_map">Prestadores Plano Saúde</string>
+    <string name="title_qualifications">Qualificações</string>
+    <string name="title_few_options">Atenção</string>
+    <string name="text_few_options">Poucos parâmetros no filtro podem trazer vários resultados, consumindo seu pacote de dados. Continuar mesmo assim?</string>
+    <string name="title_activity_maps_teste">Map</string>
+
+</resources>

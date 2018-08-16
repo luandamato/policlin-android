@@ -1,0 +1,191 @@
+package br.com.policlinsaude.home.view
+
+import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
+import android.support.annotation.StringRes
+import android.support.v4.content.ContextCompat
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.widget.Toolbar
+import android.view.MenuItem
+import android.view.View
+import br.com.domain.model.Person
+import br.com.policlinsaude.R
+import br.com.policlinsaude.core.base.BaseActivity
+import br.com.policlinsaude.core.helper.DialogHelper
+import br.com.policlinsaude.core.helper.getBitmapFromImage
+import br.com.policlinsaude.home.navigator.MenuNavigator
+import br.com.policlinsaude.home.presenter.MenuPresenter
+import br.com.policlinsaude.home.view.adapter.MenuAdapter
+import br.com.policlinsaude.home.view.model.PresentationMenuEnum
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.nav_header_home.view.*
+import kotlinx.android.synthetic.main.toolbar.*
+import javax.inject.Inject
+
+class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListener {
+
+    companion object {
+
+        fun start(activity: Activity) {
+            val intent = Intent(activity, MenuActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            activity.startActivity(intent)
+        }
+    }
+
+    @Inject
+    lateinit var presenter: MenuPresenter
+
+    @Inject
+    lateinit var menuNavigator: MenuNavigator
+
+    lateinit var toggle: ActionBarDrawerToggle
+
+    var isGuest: Boolean = false
+
+    lateinit var phone: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_home)
+        setupDrawer()
+
+        setupFragmentToolbar(toolbar, null)
+
+        setSelectedItem(PresentationMenuEnum.HOME)
+        getCurrentPerson()
+    }
+
+    fun getCurrentPerson() {
+        presenter.getCurrentPerson()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
+            drawer_layout.closeDrawer(GravityCompat.START)
+        } else {
+            if (supportFragmentManager.backStackEntryCount > 1) {
+                supportFragmentManager.popBackStackImmediate()
+            } else {
+                showQuitConfirmation()
+            }
+        }
+    }
+
+    private fun showQuitConfirmation() {
+        DialogHelper.showDialog(this,
+                R.string.title_exit,
+                R.string.text_exit_confirmation,
+                R.string.global_yes,
+                R.string.action_cancel,
+                { finish() })
+    }
+
+    override fun onClick(menuItem: PresentationMenuEnum) {
+        setSelectedItem(menuItem)
+        drawer_layout.closeDrawer(GravityCompat.START)
+    }
+
+    private fun setupDrawer() {
+        menu_items_list_view.adapter = MenuAdapter(this,
+                R.layout.list_item_menu,
+                PresentationMenuEnum.values(),
+                this)
+    }
+
+    override fun renderPerson(person: Person) {
+        try {
+            nav_header.profile_picture_image_view.setImageBitmap(person.photo.getBitmapFromImage())
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // ignored
+        }
+        nav_header.name_text_view.visibility = View.VISIBLE
+        nav_header.plan_text_view.visibility = View.VISIBLE
+        nav_header.name_text_view.text = person.name
+        nav_header.plan_text_view.text = person.descriptionPlan
+    }
+
+    override fun setupGuest() {
+        nav_header.name_text_view.visibility = View.GONE
+        nav_header.plan_text_view.visibility = View.GONE
+        isGuest = true
+    }
+
+    override fun showError(throwable: Throwable) {
+        DialogHelper.showDialog(this,
+                R.string.title_error_oops,
+                R.string.msg_unexpected_error,
+                R.string.text_ok)
+    }
+
+    override fun showLoginDialog() {
+        DialogHelper.showDialog(this,
+                R.string.title_login,
+                R.string.text_login,
+                R.string.global_yes,
+                R.string.action_cancel,
+                { presenter.onLoginClicked() })
+    }
+
+    fun setupFragmentToolbar(toolbar: Toolbar?, @StringRes title: Int?) {
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = if (title == null) null else getString(title)
+
+        toggle = ActionBarDrawerToggle(
+                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+        toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
+
+        drawer_layout.addDrawerListener(toggle)
+    }
+
+    private fun setSelectedItem(item: PresentationMenuEnum) {
+        when (item) {
+            PresentationMenuEnum.HOME -> {
+                menuNavigator.goToHome()
+            }
+            PresentationMenuEnum.PROFILE -> {
+                if (isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    menuNavigator.goToPerfil()
+                }
+            }
+            PresentationMenuEnum.PREFERENCES -> {
+                if (isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    menuNavigator.goToPreferences()
+                }
+            }
+
+            PresentationMenuEnum.INFORMATION -> {
+                menuNavigator.goToInformations()
+            }
+
+            PresentationMenuEnum.UNITIES -> {
+                menuNavigator.goToUnits()
+            }
+            PresentationMenuEnum.LINKS -> {
+                menuNavigator.goToLinks()
+            }
+            PresentationMenuEnum.TELEFONECID -> {
+                menuNavigator.goToCallIntent()
+            }
+
+
+        }
+    }
+}

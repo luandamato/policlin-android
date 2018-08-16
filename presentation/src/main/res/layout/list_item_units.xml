@@ -1,0 +1,119 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/establishmentContainerUnits"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/textViewNameUnits"
+        style="@style/Primary.Text.Style.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/imageViewFrontCardView"
+        android:scaleType="fitXY"
+        android:textAllCaps="true"
+        android:textSize="14sp"
+        android:visibility="visible"
+        tools:text="Bioclin caçapava" />
+
+    <TextView
+        android:id="@+id/textViewSubtitleUnits"
+        style="@style/Primary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewNameUnits"
+        android:layout_toStartOf="@+id/imageViewFrontCardView"
+        android:textSize="12sp"
+        tools:text="POLICLIN S/A SERVIÇOS MEDICO HOSPITALARES" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/qualificationsRecyclerViewUnits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewSubtitleUnits"
+        android:layout_marginEnd="16dp"
+        android:layout_toStartOf="@+id/imageViewFrontCardViewUnits"
+        android:orientation="horizontal"
+        tools:listitem="@layout/list_item_qualification_icon" />
+
+    <TextView
+        android:id="@+id/textViewTypeEstablishmentUnits"
+        style="@style/Secondary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/qualificationsRecyclerViewUnits"
+        android:layout_toStartOf="@+id/imageViewFrontCardViewUnits"
+        android:textSize="12sp"
+        tools:text="@string/msg_type_establishment" />
+
+    <TextView
+        android:id="@+id/textViewAddressUnits"
+        style="@style/Secondary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewTypeEstablishmentUnits"
+        android:layout_toStartOf="@+id/imageViewFrontCardViewUnits"
+        android:textSize="12sp"
+        tools:text="AV. São joão, 5700" />
+
+    <TextView
+        android:id="@+id/textViewPhoneOneUnits"
+        style="@style/Secondary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewAddressUnits"
+        android:layout_toStartOf="@+id/imageViewFrontCardViewUnits"
+        android:textSize="12sp"
+        tools:text="(11) 96555-3333" />
+
+    <TextView
+        android:id="@+id/textViewPhoneTwoUnits"
+        style="@style/Secondary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textViewPhoneOneUnits"
+        android:textSize="12sp"
+        tools:text="(11) 96555-3333" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/imageViewFrontCardViewUnits"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true">
+
+        <ImageView
+            android:id="@+id/imageViewFrontUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/male_placeholder" />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:textAllCaps="true"
+        android:id="@+id/buttonMoreDetailsUnits"
+        style="@style/Primary.Text.Style.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textViewPhoneTwoUnits"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        android:text="@string/msg_more_details"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/buttonMoreDetailsUnits"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/divider" />
+
+</RelativeLayout>

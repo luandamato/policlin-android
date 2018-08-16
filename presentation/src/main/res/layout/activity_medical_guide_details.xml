@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_2"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/imageViewFront"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:scaleType="center"
+                        app:srcCompat="@drawable/logo" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="88dp"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/black_gradient_bg" />
+
+                    <TextView
+                        android:id="@+id/title_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:padding="8dp"
+                        android:textColor="@color/lightBg"
+                        android:textSize="15sp"
+                        tools:text="@tools:sample/full_names" />
+                </FrameLayout>
+
+                <!--<fragment xmlns:android="http://schemas.android.com/apk/res/android"-->
+                <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+                <!--android:id="@+id/map"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="200dp"/>-->
+
+                <LinearLayout
+                    android:id="@+id/containerButtons"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@android:color/white"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/imageButtonFavorite"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:src="@drawable/ic_favorite" />
+
+                    <ImageButton
+                        android:id="@+id/imageButtonPhone"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:src="@drawable/ic_ligar" />
+
+                    <ImageButton
+                        android:id="@+id/imageButtonMap"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:src="@drawable/ic_maps" />
+
+                    <ImageButton
+                        android:id="@+id/imageButtonShare"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:src="@drawable/ic_share" />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:clipToPadding="false"
+                    android:paddingEnd="4dp"
+                    android:paddingStart="4dp"
+                    android:paddingTop="4dp"
+                    tools:listitem="@layout/list_item_medical_guide_details" />
+
+                <TextView
+                    android:id="@+id/plansTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_planos_atendidos"
+                    android:padding="16dp"
+                    android:text="@string/text_plans"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/loading_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/loadingBackground"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

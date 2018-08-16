@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightBg"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/policlinButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:paddingBottom="16dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:text="@string/title_health_policlin"
+                android:textColor="@color/secondaryText"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/policlinGroupButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@color/white"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:paddingBottom="16dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:text="@string/title_policlin_group"
+                android:textColor="@color/secondaryText"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/cibButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:background="@color/white"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:paddingBottom="16dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:text="@string/title_cib"
+                android:textColor="@color/secondaryText"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ombudsmanButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:background="@color/white"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:paddingBottom="16dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:text="@string/title_ombudsman"
+                android:textColor="@color/secondaryText"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/contactPhonesButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@color/white"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:paddingBottom="16dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:text="@string/title_contact_phones"
+                android:textColor="@color/secondaryText"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/abramgeButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:background="@color/white"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:paddingBottom="16dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:text="@string/title_abramge"
+                android:textColor="@color/secondaryText"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ansButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:background="@color/white"
+                android:drawableEnd="@drawable/ic_arrow_right"
+                android:paddingBottom="16dp"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
+                android:paddingTop="16dp"
+                android:text="@string/title_ans"
+                android:textColor="@color/secondaryText"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="48dp"
+                app:srcCompat="@drawable/logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="@string/text_policlin_rights"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

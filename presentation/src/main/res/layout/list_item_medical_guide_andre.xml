@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/establishmentContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+  >
+
+    <TextView
+        android:id="@+id/textViewPlano"
+        style="@style/Primary.Text.Style.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/establishmentContainer"
+        android:background="#666666"
+        android:textAllCaps="true"
+        android:paddingLeft="8dp"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:lineSpacingExtra = "4dp"
+        tools:ignore="NotSibling"
+        tools:text="Bioclin caçapava" />
+
+    <View
+        android:id="@+id/viewEspaco1"
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"
+        android:layout_below="@id/textViewPlano"/>
+
+    <TextView
+        android:id="@+id/textViewCidade"
+        style="@style/Primary.Text.Style.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/viewEspaco1"
+        android:background="#A91231"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="8dp"
+        android:textAllCaps="true"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        tools:text="Bioclin caçapava" />
+
+    <View
+        android:id="@+id/viewEspaco2"
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"
+        android:layout_below="@id/textViewCidade"/>
+
+
+    <TextView
+        android:id="@+id/textViewServiooTipo"
+        style="@style/Primary.Text.Style.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/viewEspaco2"
+        android:background="#CCCCCC"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="8dp"
+        android:textAllCaps="true"
+        android:textSize="14sp"
+        tools:text="Bioclin caçapava" />
+
+    <View
+        android:id="@+id/viewEspaco3"
+        android:layout_width="wrap_content"
+        android:layout_height="5dp"
+        android:layout_below="@id/textViewServiooTipo"/>
+
+
+    <TextView
+        android:id="@+id/textViewEspecialidade"
+        style="@style/Primary.Text.Style.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/viewEspaco3"
+        android:background="#EEEEEE"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="12dp"
+        android:textAllCaps="true"
+        android:textSize="14sp"
+        tools:text="Bioclin caçapava" />
+
+    <View
+        android:id="@+id/viewEspaco4"
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"
+        android:layout_below="@id/textViewEspecialidade"/>
+
+
+    <TextView
+        android:id="@+id/textViewName"
+        style="@style/Primary.Text.Style.Bold"
+        android:layout_width="309dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/viewEspaco4"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="16dp"
+        android:textAllCaps="true"
+        android:textSize="14sp"
+        tools:text="Bioclin caçapava" />
+
+    <TextView
+        android:id="@+id/textViewSubtitle"
+        style="@style/Primary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewName"
+        android:layout_marginBottom="@dimen/margin_vertical_spacing_default"
+        android:layout_marginEnd="16dp"
+        android:layout_toStartOf="@+id/distanceContainer"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="20dp"
+        android:textSize="12sp"
+        tools:text="POLICLIN S/A SERVIÇOS MEDICO HOSPITALARES" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/qualificationsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewSubtitle"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        tools:listitem="@layout/list_item_qualification_icon" />
+
+    <TextView
+        android:id="@+id/textViewTypeEstablishment"
+        style="@style/Secondary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/qualificationsRecyclerView"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="20dp"
+        android:textSize="12sp"
+        tools:text="@string/msg_type_establishment" />
+
+    <TextView
+        android:id="@+id/textViewSpeciality"
+        style="@style/Secondary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewTypeEstablishment"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="20dp"
+        android:textSize="12sp"
+        tools:text="@string/msg_speciality" />
+
+    <TextView
+        android:id="@+id/textViewAddress"
+        style="@style/Secondary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewSpeciality"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="20dp"
+        android:textSize="12sp"
+        tools:text="AV. São joão, 5700" />
+
+    <TextView
+        android:id="@+id/textViewPhoneOne"
+        style="@style/Secondary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewAddress"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="20dp"
+        android:textSize="12sp"
+        tools:text="(11) 96555-3333" />
+
+    <TextView
+        android:id="@+id/textViewPhoneTwo"
+        style="@style/Secondary.Text.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewPhoneOne"
+        android:lineSpacingExtra="4dp"
+        android:paddingLeft="20dp"
+        android:textSize="12sp"
+        tools:text="(11) 96555-3333" />
+
+
+    <TextView
+        android:id="@+id/buttonMoreDetails"
+        style="@style/Primary.Text.Style.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textViewPhoneTwo"
+        android:layout_gravity="end"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        android:lineSpacingExtra="4dp"
+        android:text="@string/msg_more_details"
+        android:textAllCaps="true"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/buttonMoreDetails"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/divider" />
+
+    <LinearLayout
+        android:id="@+id/distanceContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/qualificationsRecyclerView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="2dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/colorPrimary" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewDistance"
+                style="@style/Secondary.Text.Style.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                tools:text="999" />
+
+            <TextView
+                android:id="@+id/textViewKm"
+                style="@style/Secondary.Text.Style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_km"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

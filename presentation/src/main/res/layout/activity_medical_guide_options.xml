@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <ProgressBar
+        android:id="@+id/login_progressbar"
+        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingTop="16dp">
+
+        <TextView
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:text="@string/text_plan" />
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/spinnerPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@android:color/darker_gray" />
+
+        <TextView
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:text="@string/text_city" />
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/spinnerCity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:background="@android:color/darker_gray" />
+
+
+        <TextView
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:text="@string/text_speciality" />
+
+        <org.angmarch.views.NiceSpinner
+            android:id="@+id/spinnerSpeciality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="40dp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"/>
+
+    <include layout="@layout/view_filters" />
+
+   <CheckBox
+        android:id="@+id/order_by_distance_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="40dp"
+        android:text="@string/text_sort_by_proximity"
+        android:textAllCaps="true"
+       android:visibility="gone"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"/>
+
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_login_default"
+        android:layout_marginRight="@dimen/margin_login_default"
+        android:background="@drawable/button_selector_secondary"
+        android:text="@string/global_search"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/buttonCleanFields"
+        style="@style/Primary.Button.Style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_login_default"
+        android:layout_marginRight="@dimen/margin_login_default"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:text="@string/text_clean_fields" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"/>
+
+
+</LinearLayout>
+</ScrollView>
