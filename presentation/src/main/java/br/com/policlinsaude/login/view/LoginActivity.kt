@@ -23,6 +23,7 @@ class LoginActivity : BaseActivity(), LoginView {
 
     companion object {
 
+        // teste de GIT
         fun start(activity: Activity) {
             val intent = Intent(activity, LoginActivity::class.java)
 
