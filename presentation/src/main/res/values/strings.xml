@@ -34,7 +34,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="global_enter">Entrar</string>
-    <string name="action_not_has_password">não tenho senha</string>
+    <string name="action_not_has_password">Não tenho senha</string>
     <string name="action_forgot_password">Esqueci minha senha</string>
     <string name="text_password">Senha</string>
     <string name="text_input_email">Insira seu e-mail</string>
@@ -70,7 +70,7 @@
     <string name="action_try_again">Tentar novamente.</string>
     <string name="action_cancel">Cancelar</string>
     <string name="title_home">Home</string>
-    <string name="title_social_name">Razão social</string>
+    <string name="title_social_name">Razão Social</string>
     <string name="title_perfil">Perfil</string>
     <string name="title_preferences">Preferências</string>
     <string name="title_tutorial">Tutorial</string>
@@ -94,10 +94,10 @@
     <string name="msg_address_details_format">%s, %s %s - %s - CEP %s</string>
     <string name="msg_city_details_format">%s - %s</string>
     <string name="msg_click_at_image">(toque na imagem para trocar de foto)</string>
-    <string name="msg_select_our_preferences">Selecione suas preferencias nas opções disponiveis abaixo.</string>
-    <string name="title_medical_guide">Guia médico</string>
-    <string name="title_medical_guide_list">Lista Guia médico</string>
-    <string name="title_own_network">Rede própria</string>
+    <string name="msg_select_our_preferences">Selecione suas preferências nas opções disponiveis abaixo.</string>
+    <string name="title_medical_guide">Guia Médico</string>
+    <string name="title_medical_guide_list">Lista Guia Médico</string>
+    <string name="title_own_network">Rede Própria</string>
     <string name="title_favorites">Favoritos</string>
     <string name="title_health_insurance">Carteirinha</string>
     <string name="text_plan">Plano</string>
@@ -115,16 +115,16 @@
     <string name="msg_information_about_icon_and_qualification_and_link">Legenda e descrição pormenorizada para os ícones dos atributos de qualificação dos prestadores de serviço na saúde suplementar, &lt;u>&lt;font color=\'blue\'>clique aqui&lt;/font>&lt;/u> para visualizar.</string>
     <string name="title_cnpj">CNPJ</string>
     <string name="title_medical_guide_details">Detalhes</string>
-    <string name="msg_get_person_error">Erro ao buscar inforamções do usuário.</string>
+    <string name="msg_get_person_error">Erro ao buscar informações do usuário.</string>
     <string name="text_sort_by_proximity">Ordenar mais próximos</string>
-    <string name="text_plans">Planos atendidos</string>
+    <string name="text_plans">Planos Atendidos</string>
     <string name="text_filters">Filtros</string>
     <string name="text_filters_advanced">Filtro Avançado</string>
     <string name="text_nothing_to_show">Não há dados a exibir.</string>
     <string name="text_no_internet">Você não está conectado à internet. Conecte-se e tente novamente.</string>
     <string name="text_no_internet_short">Você não está conectado à internet.</string>
     <string name="text_no_internet_no_photo">Você não está conectado à internet. Para ter a carteirinha armazenada no App, é necessário logar ao menos uma vez e acessar a opção Carteirinha.</string>
-    <string name="text_no_internet_favorites">Você não está conectado à internet. As informações a seguir, são de armazenamento local, conforme últimas ações em Favoritos.</string>
+    <string name="text_no_internet_favorites">Você não está conectado à internet. As informações a seguir são de armazenamento local, conforme últimas ações em Favoritos.</string>
     <string name="title_login">Deseja fazer login agora?</string>
     <string name="text_login">Para ter acesso a esta funcionalidade, você deve ser cliente e efetuar seu login.</string>
     <string name="global_yes">Sim</string>

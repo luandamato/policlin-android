@@ -31,9 +31,9 @@ class LoginActivity : BaseActivity(), LoginView {
         }
 
         fun start(fragment: Fragment) {
-            val intent = Intent(fragment.context, LoginActivity::class.java)
+        /*    val intent = Intent(fragment.context, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-            fragment.startActivity(intent)
+            fragment.startActivity(intent)*/
         }
     }
 

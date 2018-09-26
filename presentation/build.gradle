@@ -13,7 +13,7 @@ android {
         config {
             keyAlias 'policlin-saude'
             keyPassword 'FjbnNhLT1oMKf7hyWKS9'
-            storeFile file('C:/Users/andre.menegussi/Dropbox/Projetos Android Studio/policlin-saude-smith/keystore/keystore.jks')
+            storeFile file('C:/Users/Andrei/Dropbox/Projetos Android Studio/policlin-saude-smith/keystore/keystore.jks')
             storePassword 'FjbnNhLT1oMKf7hyWKS9'
         }
     }
@@ -22,11 +22,11 @@ android {
         applicationId application.applicationId
         minSdkVersion 19
         targetSdkVersion 27
-        versionName '1.17'
+        versionName '1.18'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         signingConfig signingConfigs.config
-        versionCode 18
+        versionCode 19
     }
     buildTypes {
         release {
