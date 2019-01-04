@@ -10,7 +10,10 @@ class MedicalGuideDetailsNavigatorImpl(private val activity: MedicalGuideDetails
     : MedicalGuideDetailsNavigator {
 
     override fun goToCallIntent(phone: String) {
-        activity.startActivity(Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:$phone")))
+
+        var temp: String = "0$phone"
+
+        activity.startActivity(Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:$temp")))
     }
 
     override fun goToShareIntent(establishment: PresentationEstablishment) {

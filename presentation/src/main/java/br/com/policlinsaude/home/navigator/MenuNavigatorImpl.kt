@@ -51,7 +51,7 @@ class MenuNavigatorImpl(private val activity: MenuActivity,
     }
 
     override fun goToCallIntent() {
-        activity.startActivity(Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:1221392599")))
+        activity.startActivity(Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:01221392599")))
     }
 
     private fun goToFragment(fragment: Fragment) {
