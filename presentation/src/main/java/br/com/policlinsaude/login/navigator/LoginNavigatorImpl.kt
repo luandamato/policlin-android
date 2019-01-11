@@ -22,5 +22,6 @@ class LoginNavigatorImpl(private val activity: LoginActivity): LoginNavigator {
 
     override fun goToHomeWithoutLogin() {
         MenuActivity.start(activity)
+
     }
 }

@@ -1,6 +1,13 @@
 package br.com.policlinsaude.perfil.navigator
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.hardware.Camera
+import android.support.v4.app.Fragment
+import android.util.Log
+import android.view.Surface
+import android.view.WindowManager
 import br.com.policlinsaude.R
 import br.com.policlinsaude.editPhone.view.EditPhoneActivity
 import br.com.policlinsaude.editPassword.view.EditPasswordActivity
@@ -13,7 +20,8 @@ import pl.aprilapps.easyphotopicker.EasyImage
 class PerfilNavigatorImpl(private val fragment: PerfilFragment) : PerfilNavigator {
 
     override fun goToImagePicker() {
-        EasyImage.openChooserWithGallery(fragment, fragment.getString(R.string.text_image_chooser_title), 0)
+
+                EasyImage.openChooserWithGallery(fragment, fragment.getString(R.string.text_image_chooser_title), 0)
     }
 
     override fun goToEditPhone() {
@@ -21,6 +29,18 @@ class PerfilNavigatorImpl(private val fragment: PerfilFragment) : PerfilNavigato
     }
 
     override fun goToEditPassword() {
+
+
         fragment.startActivity(Intent(fragment.context, EditPasswordActivity::class.java))
     }
+
+
+
+
+
+
+
+
+
+
 }

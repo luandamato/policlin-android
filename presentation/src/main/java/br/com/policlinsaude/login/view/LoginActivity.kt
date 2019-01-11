@@ -4,15 +4,18 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.Html
 import android.text.InputType
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import br.com.domain.exception.MessageErrorException
 import br.com.policlinsaude.BuildConfig
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
+import br.com.policlinsaude.core.helper.IntentHelper
 import br.com.policlinsaude.login.presenter.LoginPresenter
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import kotlinx.android.synthetic.main.activity_login.*
@@ -46,6 +49,9 @@ class LoginActivity : BaseActivity(), LoginView {
         setContentView(R.layout.activity_login)
 
         presenter.checkHasToken()
+
+        val textViewMsgWhenEntering = findViewById<TextView>(R.id.textViewMsgWhenEntering)
+        textViewMsgWhenEntering.setText(Html.fromHtml(getString(R.string.msg_when_entering_you_allow)), TextView.BufferType.SPANNABLE)
     }
 
     override fun onPersonNotFound() {
@@ -82,6 +88,12 @@ class LoginActivity : BaseActivity(), LoginView {
         imgEye.setOnClickListener {
             presenter.clickedEye()
         }
+
+        textViewMsgWhenEntering.setOnClickListener {
+            presenter.clickedLink()
+        }
+
+
     }
 
 
@@ -153,11 +165,17 @@ class LoginActivity : BaseActivity(), LoginView {
         }
 
     }
-   /* private fun setupDebug() {
-        if (BuildConfig.DEBUG) {
-            editTextRegister.setText("90540")
-            editTextOrder.setText("0")
-            editTextPassword.setText("PS10631817")
-        }
-    }*/
+
+    override fun clickedLink() {
+
+        IntentHelper.openUrlInBrowser(this, getString(R.string.url_privacy))
+    }
+
+    /* private fun setupDebug() {
+         if (BuildConfig.DEBUG) {
+             editTextRegister.setText("90540")
+             editTextOrder.setText("0")
+             editTextPassword.setText("PS10631817")
+         }
+     }*/
 }

@@ -9,6 +9,8 @@ import br.com.domain.usecase.GetMedicalGuideOptionsUseCase
 import br.com.domain.usecase.SetLocationPreferenceUseCase
 import br.com.domain.usecase.requestvalues.GetBooleanPreferenceRV
 import br.com.domain.usecase.requestvalues.SetLocationPreferenceRV
+import br.com.policlinsaude.R
+import br.com.policlinsaude.core.helper.IntentHelper
 import br.com.policlinsaude.core.helper.LocationHelper
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.mapper.PresentationMedicalGuideOptionsMapper
@@ -144,5 +146,9 @@ class MedicalGuideOptionsPresenterImpl(private val navigator: MedicalGuideOption
                             it.printStackTrace()
                             view.showDialogError(it)
                         })
+    }
+
+    override fun clickedLink() {
+        view.clickedLink()
     }
 }

@@ -6,23 +6,26 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.drawable.BitmapDrawable
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.LinearLayoutManager
+import android.text.Html
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import br.com.data.datasource.networking.rest.model.JsonQualificationsForFilter
+import android.widget.TextView
 import br.com.domain.exception.MessageErrorException
 import br.com.domain.helper.InvalidData
-import br.com.domain.model.ServiceTypeOptions
 import br.com.policlinsaude.R
+
 import br.com.policlinsaude.core.base.BaseActivity
-import br.com.policlinsaude.core.helper.DialogHelper
-import br.com.policlinsaude.core.helper.LocationHelper
-import br.com.policlinsaude.core.helper.getBitmapFromImage
+import br.com.policlinsaude.core.helper.*
 import br.com.policlinsaude.medicalGuideOptions.presenter.MedicalGuideOptionsPresenter
 import br.com.policlinsaude.model.*
+import br.com.policlinsaude.qualificationInfo.QualificationFilterAdapter
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
@@ -30,10 +33,16 @@ import dagger.android.AndroidInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_medical_guide_options.*
+import kotlinx.android.synthetic.main.custom_view_info_medical_guide_list_units.*
 import kotlinx.android.synthetic.main.view_filters.*
+import java.text.ParseException
 import javax.inject.Inject
+import java.util.logging.Level.SEVERE
 
-class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
+
+
+
+class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
 
     companion object {
 
@@ -62,6 +71,10 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
     //Armazenar filtro antes de ir para o Guia
     private var EMPTY = ""
     private var myPreferences = "myPrefs"
+
+    //05/01/2018
+    private var PLAN = "plan"
+    //------
     private var CITIES = "cities"
     private var SPECIALITY = "specialty"
 
@@ -87,7 +100,14 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
     private var CBD = "cbM"
     private var CBM = "cbN"
 
+    //Andre - controle de mascaras
+    private var zipcodeMask: TextWatcher? = null
+    private var cnpjMask: TextWatcher? = null
+    private var phoneMask: TextWatcher? = null
+
     private lateinit var sharedPreferences: SharedPreferences
+
+    lateinit var adapter: QualificationFilterAdapter
 
     //Andre
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,6 +116,7 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
 
         sharedPreferences = getSharedPreferences(myPreferences, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
+        editor.putInt(PLAN,0)
         editor.putInt(CITIES,0)
         editor.putInt(SPECIALITY,0)
         editor.putInt(PROFESSIONAL_CLASS, 0)
@@ -119,26 +140,77 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
         editor.putString(CNPJ, EMPTY)
         editor.putString(PHONES, EMPTY)
 
-
-
         editor.apply()
 
         setContentView(R.layout.activity_medical_guide_options)
         AndroidInjection.inject(this)
+
+        infoTextViewLink.setOnClickListener { IntentHelper.openUrlInBrowser(this, getString(R.string.url_custom_infos)) }
+
+        val infoTextView = infoTextViewLink.findViewById<TextView>(R.id.infoTextViewLink)
+        infoTextView.setText(Html.fromHtml(getString(R.string.msg_information_about_icon_and_qualification_and_link)), TextView.BufferType.SPANNABLE)
+
+
+        zipcodeMask = MascaraAndre.Mask.mask("#####-###", zipcode_filter_text_view)
+     // zipcode_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("#####-###", zipcode_filter_text_view))
+      //  zipcode_filter_text_view.addTextChangedListener(zipcodeMask)
+
+        cnpjMask = MascaraAndre.Mask.mask("##.###.###/####-##", cnpj_filter_text_view)
+     //   cnpj_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("###.###.###/####-##", cnpj_filter_text_view))
+        cnpj_filter_text_view.addTextChangedListener(cnpjMask)
+
+        phoneMask = MascaraAndre.Mask.mask("(##) ####-####", phones_filter_text_view)
+       // phones_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("(##) ####-####", phones_filter_text_view))
+        phones_filter_text_view.addTextChangedListener(phoneMask)
+
         showMedicalGuideOptions(PresentationMedicalGuideOptions(), null)
 
         presenter.getLocationPreference()
 
 
 
+
+      //  cnpjMask = Mask.insert("##.###.###/####-##", cnpj_filter_text_view)
+     //   zipcodeMask = Mask.insert("#####-###", zipcode_filter_text_view)
+     //   phoneMask = Mask.insert("(##)####-####",phones_filter_text_view)
+   //     cnpj_filter_text_view.addTextChangedListener(cnpjMask)
+     //   zipcode_filter_text_view.addTextChangedListener(zipcodeMask)
+     //   phones_filter_text_view.addTextChangedListener(phoneMask)
+
+        Log.d("MASCARA", "no ONCREATE")
+
         setupToolbar()
 
         setOnClickListeners()
     }
 
+    fun showSnackFeedback(message : String, isValid : Boolean, view : View){
+        val snackbar : Snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+        var v : View = snackbar.view
+        if (isValid)
+            v.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_green_dark))
+        else
+            v.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_red_dark))
+
+        snackbar.show()
+    }
+
+
     override fun onStart() {
         super.onStart()
-        Log.d("FILTRO", "no ONSTART")
+        Log.d("MASCARA", "no ONSTART - valor de zipcode: "+ sharedPreferences.getString(ZIPCODE, EMPTY))
+        zipcode_filter_text_view.removeTextChangedListener(zipcodeMask)
+        zipcode_filter_text_view.setText(sharedPreferences.getString(ZIPCODE, EMPTY))
+
+        cnpj_filter_text_view.removeTextChangedListener(cnpjMask)
+        cnpj_filter_text_view.setText(sharedPreferences.getString(CNPJ, EMPTY))
+
+
+        phones_filter_text_view.removeTextChangedListener(phoneMask)
+        phones_filter_text_view.setText(sharedPreferences.getString(PHONES, EMPTY))
+
+
+
 
 
         presenter.getMedicalGuideOptions()
@@ -170,8 +242,26 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
         buttonSearch.setOnClickListener {
 
 
+        var maskValidation = true
+
 
             if (awesomeValidation.validate()) {
+
+                if ((cnpj_filter_text_view.length() > 0 ) && (cnpj_filter_text_view.length() < 18 )) {
+                    showSnackFeedback("Campo CNPJ incompleto!", false, cnpj_filter_text_view)
+                    maskValidation = false
+
+                }
+
+                if ((zipcode_filter_text_view.length() > 0 ) && (zipcode_filter_text_view.length() < 9 )) {
+                    showSnackFeedback("Campo CEP incompleto!", false, cnpj_filter_text_view)
+                    maskValidation = false
+                }
+
+                if ((phones_filter_text_view.length() > 0 ) && (phones_filter_text_view.length() < 8 )) {
+                    showSnackFeedback("Campo Telefone incompleto!", false, cnpj_filter_text_view)
+                    maskValidation = false
+                }
 
                 var numOptionsSelected: Int = 0
 
@@ -182,6 +272,7 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
                 val plan = plans[spinnerPlan.selectedIndex]
                 if (!(spinnerPlan.selectedIndex == 0) ){
                     numOptionsSelected++
+                    editor.putInt(PLAN, spinnerPlan.selectedIndex)
 
                 }
                 Log.d("MEDICALGUIDELISTOPTIONS","Plano:--" + plan+"--")
@@ -245,10 +336,15 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
                     editor.putString(NEIGHBORHOOD, neighborhood_filter)
                 }
 
-                val zipcode_filter      =  if (zipcode_filter_text_view.text.equals(InvalidData.UNINITIALIZED.getString())) null else  zipcode_filter_text_view.text.toString()  //Andre
+                var zipcode_filter      =  if (zipcode_filter_text_view.text.equals(InvalidData.UNINITIALIZED.getString())) null else  zipcode_filter_text_view.text.toString()  //Andre
                 if (zipcode_filter != "") {
                     numOptionsSelected++
-                    editor.putString(ZIPCODE, zipcode_filter)
+                   // if (zipcode_filter != null) {
+                    //  zipcode_filter =  zipcode_filter.replace("-","")
+                        editor.putString(ZIPCODE, zipcode_filter)
+                        Log.e("ZIPCODE", "valor armazenado; " + zipcode_filter)
+                  //  }
+
                 }
 
                 val number_on_the_board_filter =  if (number_on_the_board_filter_text_view.text.equals(InvalidData.UNINITIALIZED.getString())) null else  number_on_the_board_filter_text_view.text.toString()  //Andre
@@ -367,7 +463,7 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
                     showDialogFewOptions(plan, city, speciality, isLocationActive, professionalClass, serviceType, establishmentType,
                             address_filter, neighborhood_filter, zipcode_filter, number_on_the_board_filter,prof_fantasy_fliter, cnpj_filter, phones_filter, qualificationsSearch)
                 }
-                else{
+                else if (maskValidation){
                     //presenter.clickedButtonSearch(plan, city, speciality, orderByDistance, professionalClass, serviceType, establishmentType,
                     presenter.clickedButtonSearch(plan, city, speciality, isLocationActive, professionalClass, serviceType, establishmentType,
                             address_filter, neighborhood_filter, zipcode_filter, number_on_the_board_filter,prof_fantasy_fliter, cnpj_filter, phones_filter, qualificationsSearch)
@@ -447,15 +543,29 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
 
         Log.d("FILTRO", "no showMedicalGuideOptions")
 
+
+
         plans = mutableListOf(PresentationPlanOptions(description = getString(R.string.text_select)))
         plans.addAll(presentationMedicalGuideOptions.planOptions)
         spinnerPlan.attachDataSource(plans)
 
+//Ajuste para usuario nao logado
+
+            var retPlan: Int = sharedPreferences.getInt(PLAN, 0)
+
+            Log.d("MEDICALGUIDELISTOPTIONS", "VALOR DE retPLAN: " + retPlan)
+
+            if (retPlan > 0) spinnerPlan.selectedIndex = retPlan
+
+
+
         userCodePlan?.let {
             plans.forEachIndexed({ index, plan ->
-                if (plan.codePlan == userCodePlan) {
+                if ((plan.codePlan == userCodePlan) && (retPlan == 0)) {
                     spinnerPlan.selectedIndex = index
                 }
+
+
             })
         }
 
@@ -506,14 +616,63 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
 
         addressplan_filter_text_view.setText(sharedPreferences.getString(ADDRESS, EMPTY))
         neighborhood_filter_text_view.setText(sharedPreferences.getString(NEIGHBORHOOD, EMPTY))
-        zipcode_filter_text_view.setText(sharedPreferences.getString(ZIPCODE, EMPTY))
-        number_on_the_board_filter_text_view.setText(sharedPreferences.getString(ZIPCODE, EMPTY))
+
+       //    zipcodeMask = MascaraAndre.Mask.mask("#####-###", zipcode_filter_text_view)
+// zipcode_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("#####-###", zipcode_filter_text_view))
+ //  zipcode_filter_text_view.addTextChangedListener(zipcodeMask)
+
+ //  cnpjMask = MascaraAndre.Mask.mask("###.###.###/####-##", cnpj_filter_text_view)
+//   cnpj_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("###.###.###/####-##", cnpj_filter_text_view))
+//   cnpj_filter_text_view.addTextChangedListener(cnpjMask)
+
+   //phoneMask = MascaraAndre.Mask.mask("(##) ####-####", phones_filter_text_view)
+ //  phones_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("(##) ####-####", phones_filter_text_view))
+  // phones_filter_text_view.addTextChangedListener(phoneMask)
+
+
+
+
+        //Andre controle de mascara quando recupera o filtro ------
+     //   zipcode_filter_text_view.removeTextChangedListener(MascaraAndre.Mask.mask("#####-###", zipcode_filter_text_view))
+     //   zipcode_filter_text_view.removeTextChangedListener(zipcodeMask)
+    //    zipcode_filter_text_view.setText(sharedPreferences.getString(ZIPCODE, EMPTY))
+    //    zipcode_filter_text_view.addTextChangedListener(zipcodeMask)
+
+      //  cnpj_filter_text_view.removeTextChangedListener(cnpjMask)
+     //   cnpj_filter_text_view.setText(sharedPreferences.getString(CNPJ, EMPTY))
+      //  cnpj_filter_text_view.addTextChangedListener(cnpjMask)
+
+       // phones_filter_text_view.removeTextChangedListener(phoneMask)
+       // phones_filter_text_view.setText(sharedPreferences.getString(PHONES, EMPTY))
+      //  phones_filter_text_view.addTextChangedListener(phoneMask)
+        //---------------
+        number_on_the_board_filter_text_view.setText(sharedPreferences.getString(NUMBER_ON_THE_BOARD, EMPTY))
         prof_fantasy_company_filter_text_view.setText(sharedPreferences.getString(PROF_FANTASY, EMPTY))
-        cnpj_filter_text_view.setText(sharedPreferences.getString(CNPJ, EMPTY))
-        phones_filter_text_view.setText(sharedPreferences.getString(PHONES, EMPTY))
+
+//----
+
+
+
+
+//        ----
+
 
         qualificationsForFilter = mutableListOf(PresentationQualificationForFilter())
         qualificationsForFilter.addAll(presentationMedicalGuideOptions.qualificationOptions)
+
+
+
+
+        //novo para legenda no filtro
+
+
+        adapter = QualificationFilterAdapter(qualificationsForFilter)
+
+
+        qualificationsFilterRecyclerView.adapter = adapter
+        qualificationsFilterRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        //-----------------------
 
         for (qualifier in qualificationsForFilter){
 
@@ -688,6 +847,11 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
 
     }
 
+    override fun clickedLink() {
+
+        IntentHelper.openUrlInBrowser(this, getString(R.string.url_custom_infos))
+    }
+
     override fun setLocationActive(locationActive: Boolean) {
         Log.d("Andre", "DENTRO do setLocationActive: locationActive --> " + locationActive)
 
@@ -721,7 +885,7 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
         super.onSaveInstanceState(outState)
         // do nothing
         // this is because the amount of data in the pagers
-        Log.d("FILTRO", "DENTRO do onSaveInstanceState de MedicalguideOptionsActivity")
+        Log.d("MASCARA", "DENTRO do onSaveInstanceState de MedicalguideOptionsActivity")
 
         if (outState != null) {
         //    outState.putString("MyString", "Welcome back to Android")
@@ -731,7 +895,7 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
-        Log.d("FILTRO", "DENTRO do onRestoreInstanceState de MedicalguideOptionsActivity")
+        Log.d("MASCARA", "DENTRO do onRestoreInstanceState de MedicalguideOptionsActivity")
 
       //  val myString:String = savedInstanceState!!.getString("MyString")
       //  Log.d("FILTRO", "DENTRO do onRestoreInstanceState de MedicalguideOptionsActivity --> Valor de MyString: " + myString)
@@ -740,13 +904,18 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
 
     override fun onPause() {
         super.onPause()
-        Log.d("FILTRO", "DENTRO do onPause de MedicalguideOptionsActivity --> ")
+        Log.d("MASCARA", "DENTRO do onPause de MedicalguideOptionsActivity --> ")
+
+
 
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("FILTRO", "DENTRO do onResume de MedicalguideOptionsActivity --> ")
+        Log.d("MASCARA", "DENTRO do onResume de MedicalguideOptionsActivity --> ")
+        zipcode_filter_text_view.addTextChangedListener(zipcodeMask)
+        cnpj_filter_text_view.addTextChangedListener(cnpjMask)
+        phones_filter_text_view.addTextChangedListener(phoneMask)
 
     }
 }

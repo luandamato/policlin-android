@@ -20,7 +20,9 @@
     <string name="msg_welcome">Seja bem-vindo!</string>
 
     <string name="msg_instruction_recover_password">As instruções para recuperação da senha serão enviadas para o seu e-mail.</string>
-    <string name="msg_when_entering_you_allow">Ao entrar você concorda com nossa política de privacidade e termos de uso.</string>
+    <string name="msg_when_entering_you_allow"> Ao entrar você concorda com nossa &lt;u>&lt;font color=\'blue\'>política de privacidade&lt;/font>&lt;/u> e &lt;u>&lt;font color=\'blue\'>termos de uso.&lt;/font>&lt;/u></string>
+
+
     <string name="msg_edit_register">Editar dados cadastrais</string>
     <string name="action_i_am_client">Sou cliente</string>
     <string name="action_i_am_not_client">Não sou cliente</string>
@@ -188,6 +190,8 @@
     <string name="text_current_email">E-mail atual</string>
     <string name="text_edit_phone_success">Celular alterado com sucesso.</string>
     <string name="url_custom_infos">https://policlinsaude.com.br/legenda_pormenorizada.html</string>
+    <string name="url_privacy"> https://policlinsaude.com.br/termos-de-uso-e-politica-de-privacidade.html</string>
+
     <string name="text_add_photo">Clique na imagem abaixo para adicionar uma foto.</string>
     <string name="text_photo_needed">A foto  é necessária para cadastro.</string>
     <string name="title_client_area">ÁREA DO CLIENTE</string>
@@ -204,5 +208,9 @@
     <string name="title_few_options">Atenção</string>
     <string name="text_few_options">Poucos parâmetros no filtro podem trazer vários resultados, consumindo seu pacote de dados. Continuar mesmo assim?</string>
     <string name="title_activity_maps_teste">Map</string>
+
+
+
+
 
 </resources>

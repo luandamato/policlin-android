@@ -1,5 +1,7 @@
 package br.com.policlinsaude.medicalGuideOptions.view
 
+import br.com.policlinsaude.R
+import br.com.policlinsaude.core.helper.IntentHelper
 import br.com.policlinsaude.model.*
 
 interface MedicalGuideOptionsView {
@@ -36,5 +38,7 @@ interface MedicalGuideOptionsView {
     //Andre
     fun setLocationActive(locationActive: Boolean)
     fun isGPSEnable(): Boolean
+    fun clickedLink()
+
 
 }

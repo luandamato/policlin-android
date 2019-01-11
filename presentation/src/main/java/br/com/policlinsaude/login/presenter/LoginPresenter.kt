@@ -7,4 +7,5 @@ interface LoginPresenter {
     fun clickedButtonIamNotClient()
     fun checkHasToken()
     fun clickedEye()
+    fun clickedLink()
 }

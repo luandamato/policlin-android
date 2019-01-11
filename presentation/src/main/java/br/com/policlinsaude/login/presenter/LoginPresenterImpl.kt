@@ -5,6 +5,8 @@ import br.com.data.exception.RealmNotFoundException
 import br.com.domain.usecase.DoLoginUseCase
 import br.com.domain.usecase.GetCurrentPersonUseCase
 import br.com.domain.usecase.requestvalues.DoLoginRV
+import br.com.policlinsaude.R
+import br.com.policlinsaude.core.helper.IntentHelper
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.login.navigator.LoginNavigator
 import br.com.policlinsaude.login.view.LoginView
@@ -14,6 +16,7 @@ class LoginPresenterImpl(private val navigator: LoginNavigator,
                          private val doLoginUseCase: DoLoginUseCase,
                          private val getCurrentPersonUseCase: GetCurrentPersonUseCase,
                          private val view: LoginView) : LoginPresenter {
+
 
     override fun clickedButtonIamNotClient() {
         navigator.goToHomeWithoutLogin()
@@ -73,6 +76,10 @@ class LoginPresenterImpl(private val navigator: LoginNavigator,
 
     override fun clickedEye() {
        view.changeEye()
+    }
+
+    override fun clickedLink() {
+        view.clickedLink()
     }
 
 }

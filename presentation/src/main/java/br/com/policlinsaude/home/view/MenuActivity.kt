@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import br.com.domain.model.Person
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
@@ -119,6 +120,10 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
         nav_header.name_text_view.visibility = View.GONE
         nav_header.plan_text_view.visibility = View.GONE
         isGuest = true
+        val nameTextView: TextView = findViewById(R.id.person_name_text_view)
+
+        nameTextView.setText(R.string.text_guest) //alteração da parte preta
+
     }
 
     override fun showError(throwable: Throwable) {

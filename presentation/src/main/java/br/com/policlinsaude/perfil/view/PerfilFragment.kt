@@ -3,10 +3,8 @@ package br.com.policlinsaude.perfil.view
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import br.com.domain.exception.MessageErrorException
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
@@ -23,6 +21,8 @@ import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 import java.lang.Exception
 import javax.inject.Inject
+import android.media.ExifInterface
+
 
 class PerfilFragment : BaseFragmentWithInject(), PerfilView {
 
@@ -68,10 +68,28 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         EasyImage.handleActivityResult(requestCode, resultCode, data, activity, object : EasyImage.Callbacks {
 
+
             override fun onImagePicked(imageFile: File?, source: EasyImage.ImageSource?, type: Int) {
-                imageFile?.let {
-                    presenter.onImagePicked(it.toBase64(500))
-                }
+             //   if (source == EasyImage.ImageSource.CAMERA && imageFile != null) {
+                    Log.e("TESTE", "Dentro de onImagePicked")
+
+                    //ajuste de rotação de imagem devido ao problema de posição de sensor dependendo do fabricante
+                    val rotation = applyRotationIfNeeded(imageFile!!)
+                    Log.e("TESTE", "Dentro de onImagePicked - valor de rotation: " + rotation)
+
+
+                    imageFile?.let {
+                        presenter.onImagePicked(it.toBase64(500, rotation))
+                    }
+              //  }
+            /*    else {
+                    Log.e("TESTE", "onImagePicked == NULL")
+                    imageFile?.let {
+                        presenter.onImagePicked(it.toBase64(500, 0))
+                    }
+                }*/
+
+
             }
 
             override fun onImagePickerError(e: Exception?, source: EasyImage.ImageSource?, type: Int) {
@@ -136,5 +154,20 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
             presenter.onAvatarChangeClicked()
         }
     }
+
+
+    private fun applyRotationIfNeeded(imageFile: File): Int {
+        val exif = ExifInterface(imageFile.absolutePath)
+        val exifRotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+        return when(exifRotation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> 90
+            ExifInterface.ORIENTATION_ROTATE_180 -> 180
+            ExifInterface.ORIENTATION_ROTATE_270 -> 270
+            else -> 0
+        }
+    }
+
+
+
 
 }

@@ -13,4 +13,5 @@ interface LoginView {
     fun showLoading()
     fun hideLoading()
     fun changeEye()
+    fun clickedLink()
 }

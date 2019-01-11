@@ -92,6 +92,8 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
         viewPager.adapter = homePageAdapter
 
         presenter.onViewAttached()
+
+
     }
 
     override fun renderPerson(person: Person) {

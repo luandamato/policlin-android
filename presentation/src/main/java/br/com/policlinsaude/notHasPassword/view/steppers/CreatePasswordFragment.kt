@@ -52,7 +52,7 @@ class CreatePasswordFragment : BaseFragment(), Step {
 
             override fun onImagePicked(imageFile: File?, source: EasyImage.ImageSource?, type: Int) {
                 imageFile?.let {
-                    val image = it.toBase64(500)
+                    val image = it.toBase64(500,0)
                     presenter.onImagePicked(image)
                     if (!image.isNullOrEmpty()) {
                         imageView.setImageBitmap(image!!.getBitmapFromImage())

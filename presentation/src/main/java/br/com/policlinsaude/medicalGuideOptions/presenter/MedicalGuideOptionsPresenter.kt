@@ -4,6 +4,8 @@ import br.com.domain.helper.InvalidData
 import br.com.domain.model.Establishment
 import br.com.domain.model.ProfessionalClassOptions
 import br.com.domain.model.ServiceTypeOptions
+import br.com.policlinsaude.R
+import br.com.policlinsaude.core.helper.IntentHelper
 import br.com.policlinsaude.medicalGuideOptions.presenter.model.PresentationLocation
 import br.com.policlinsaude.model.*
 import kotlinx.android.synthetic.main.view_filters.*
@@ -28,4 +30,6 @@ interface MedicalGuideOptionsPresenter {
     fun onLocationNotEnabledDialogOkClicked()
     fun onOrderByDistanceChanged(checked: Boolean)
     fun onAdvancedFilterClicked(clicked: Boolean)
+
+    fun clickedLink()
 }
