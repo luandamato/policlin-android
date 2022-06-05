@@ -9,6 +9,19 @@ HashMap<String, String> application = rootProject.ext.application
 HashMap<String, String> versions = rootProject.ext.versions
 
 android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+
+    defaultConfig {
+        applicationId application.applicationId
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionName '1.20'
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        versionCode 21
+    }
+
     signingConfigs {
         config {
             keyAlias 'policlin-saude'
@@ -17,17 +30,7 @@ android {
             storePassword 'FjbnNhLT1oMKf7hyWKS9'
         }
     }
-    compileSdkVersion 27
-    defaultConfig {
-        applicationId application.applicationId
-        minSdkVersion 19
-        targetSdkVersion 27
-        versionName '1.20'
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
-        signingConfig signingConfigs.config
-        versionCode 21
-    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -43,8 +46,12 @@ android {
             versionNameSuffix '1.1'
         }
     }
-    buildToolsVersion '27.0.3'
-    productFlavors {
+
+    productFlavors {}
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 }
 
