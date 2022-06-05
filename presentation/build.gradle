@@ -13,7 +13,7 @@ android {
         config {
             keyAlias 'policlin-saude'
             keyPassword 'FjbnNhLT1oMKf7hyWKS9'
-            storeFile file('C:/Users/Andrei/Dropbox/Projetos Android Studio/policlin-saude-smith/keystore/keystore.jks')
+            storeFile file('../keystore/keystore.jks')
             storePassword 'FjbnNhLT1oMKf7hyWKS9'
         }
     }
@@ -38,7 +38,7 @@ android {
         }
         debug {
             signingConfig signingConfigs.config
-            proguardFile '/Users/felipedc/Projetos/em-desenvolvimento/Policlin/policlin-saude/presentation/proguard-rules.pro'
+            proguardFile 'proguard-rules.pro'
             zipAlignEnabled true
             versionNameSuffix '1.1'
         }
