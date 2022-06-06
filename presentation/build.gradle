@@ -12,33 +12,40 @@ android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
 
-    defaultConfig {
-        applicationId application.applicationId
-        minSdkVersion 19
-        targetSdkVersion 27
-        versionName '1.20'
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        multiDexEnabled true
-        versionCode 21
-    }
-
     signingConfigs {
         config {
-            keyAlias 'policlin-saude'
-            keyPassword 'FjbnNhLT1oMKf7hyWKS9'
-            storeFile file('../keystore/keystore.jks')
-            storePassword 'FjbnNhLT1oMKf7hyWKS9'
+            storeFile file(RELEASE_STORE_FILE)
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            storePassword RELEASE_STORE_PASSWORD
+
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
+    }
+
+    defaultConfig {
+        applicationId application.applicationId
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionName '1.20'
+        versionCode 21
+
+        multiDexEnabled true
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
+            multiDexEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
             zipAlignEnabled true
             versionNameSuffix '1.1'
         }
+
         debug {
             signingConfig signingConfigs.config
             proguardFile 'proguard-rules.pro'
@@ -50,8 +57,8 @@ android {
     productFlavors {}
 
     compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
