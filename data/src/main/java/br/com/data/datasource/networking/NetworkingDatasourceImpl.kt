@@ -61,28 +61,29 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
                 }
             }
 
-    override fun getMedicalGuideList(codePlan: Int, codeCity: Int, codeSpecialityService: Int,//Andre
-                                     ownNetwork: Int, latitude: Double?, longitude: Double?, codeProfessionalClass: String?,codeServiceType: String?, codeEstablishmentType: String? ,
-                                     specialityType :String?,
-                                     address_filter: String?, neighborhood_filter: String?, zipcode_filter: String?, number_on_the_board_filter: String?,//Andre
-                                     prof_fantasy_filter: String?, cnpj_filter: String?, phones_filter: String?, qualificationsSearch: String?, //Andre
-                                     token: String?): Flowable<MedicalGuideList> =
-            networkingService.getMedicalGuideList(codePlan = codePlan, codeCity = codeCity,
-                    codeSpecialityService = codeSpecialityService, ownNetwork = ownNetwork,
-                    latitude = latitude, longitude = longitude,professionalClassOption = codeProfessionalClass,
-                    serviceTypeOption = codeServiceType, establishmentType = codeEstablishmentType, specialityType = specialityType ,
-                    address_filter = address_filter, neighborhood_filter = neighborhood_filter, zipcode_filter = zipcode_filter,
-                    number_on_the_board_filter = number_on_the_board_filter, prof_fantasy_fliter = prof_fantasy_filter, cnpj_filter = cnpj_filter,
-                    phones_filter = phones_filter, qualificationsSearch = qualificationsSearch,
-
-                    token = token)
-                    .flatMap {
-                        if (validateMsgIsSuccess(it.msgInternal)) {
-                            Flowable.error(MessageErrorException(it.msgExternal ?: ""))
-                        } else {
-                            Flowable.just(JsonMedicalGuideListResponseMapper.transform(it))
-                        }
-                    }
+    override fun getMedicalGuideList(
+        codePlan: Int, codeCity: Int, codeSpecialityService: Int,//Andre
+        ownNetwork: Int, latitude: Double?, longitude: Double?, codeProfessionalClass: String?,codeServiceType: String?, codeEstablishmentType: String? ,
+        specialityType :String?,
+        address_filter: String?, neighborhood_filter: String?, zipcode_filter: String?, number_on_the_board_filter: String?,//Andre
+        prof_fantasy_filter: String?, cnpj_filter: String?, phones_filter: String?, qualificationsSearch: String?, //Andre
+        token: String?
+    ): Flowable<MedicalGuideList> =
+            networkingService.getMedicalGuideList(
+                codePlan = codePlan, codeCity = codeCity,
+                codeSpecialityService = codeSpecialityService, ownNetwork = ownNetwork,
+                latitude = latitude, longitude = longitude,professionalClassOption = codeProfessionalClass,
+                serviceTypeOption = codeServiceType, establishmentType = codeEstablishmentType, specialityType = specialityType ,
+                address_filter = address_filter, neighborhood_filter = neighborhood_filter, zipcode_filter = zipcode_filter,
+                number_on_the_board_filter = number_on_the_board_filter, prof_fantasy_fliter = prof_fantasy_filter, cnpj_filter = cnpj_filter,
+                phones_filter = phones_filter, qualificationsSearch = qualificationsSearch, token = token
+            ).flatMap {
+                if (validateMsgIsSuccess(it.msgInternal)) {
+                    Flowable.error(MessageErrorException(it.msgExternal ?: ""))
+                } else {
+                    Flowable.just(JsonMedicalGuideListResponseMapper.transform(it))
+                }
+            }
 
     override fun getOwnNetwork(token: String?): Flowable<OwnNetworkList> {
         Log.d("REDEPROPRIA","DENTRO DO NETWORKDATASOURCE" )
@@ -228,14 +229,15 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
                 method = "Validar",
                 name = person.name.toUpperCase(),
                 phone = person.getPhoneWithoutCodeArea(),
-                termAccepted = 1)
-                .flatMapCompletable {
-                    if (validateMsgIsSuccess(it.msgInternal)) {
-                        Completable.error(MessageErrorException(it.msgExternal ?: ""))
-                    } else {
-                        Completable.complete()
-                    }
-                }
+                termAccepted = 1,
+                mothersName = person.mothersName
+        ).flatMapCompletable {
+            if (validateMsgIsSuccess(it.msgInternal)) {
+                Completable.error(MessageErrorException(it.msgExternal ?: ""))
+            } else {
+                Completable.complete()
+            }
+        }
     }
 
     override fun removeFromFavorites(establishment: Establishment, token: String): Completable {
@@ -255,6 +257,13 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
                         Completable.complete()
                     }
                 }
+    }
+
+    override fun onValidateUserConnected(registration: String, order: String): Flowable<UserConnected> {
+        return networkingService.validateUserConnected(registration, order)
+            .flatMap {
+                Flowable.just(it)
+        }
     }
 
     fun validateMsgIsSuccess(message: String?): Boolean = (message.isNullOrEmpty() || message != "OK")

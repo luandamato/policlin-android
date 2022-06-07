@@ -261,6 +261,8 @@ class MedicalGuideListActivity : BaseActivity(), MedicalGuideListView, MedicalGu
                             itemEstablishment.state = medicalGuideV4.get(itMedicalGuide).state
                             itemEstablishment.phoneOne = medicalGuideV4.get(itMedicalGuide).phoneOne
                             itemEstablishment.phoneTwo = medicalGuideV4.get(itMedicalGuide).phoneTwo
+                            /*itemEstablishment.typePhoneOne = medicalGuideV4.get(itMedicalGuide).typePhoneOne
+                            itemEstablishment.typePhoneTwo = medicalGuideV4.get(itMedicalGuide).typePhoneTwo*/
                             itemEstablishment.latitude = medicalGuideV4.get(itMedicalGuide).latitude
                             itemEstablishment.longitude = medicalGuideV4.get(itMedicalGuide).longitude
                             itemEstablishment.distance = medicalGuideV4.get(itMedicalGuide).distance

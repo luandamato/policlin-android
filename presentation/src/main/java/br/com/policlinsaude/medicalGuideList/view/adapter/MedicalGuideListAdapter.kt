@@ -168,6 +168,8 @@ class MedicalGuideListAdapter(private val onItemClickListener: OnItemClickListen
             itemView.textViewPhoneTwo.text = establishment.phoneTwo
             itemView.textViewPhoneOne.visibility = if (establishment.phoneOne.isEmpty()) View.GONE else View.VISIBLE
             itemView.textViewPhoneTwo.visibility = if (establishment.phoneTwo.isEmpty()) View.GONE else View.VISIBLE
+            /*itemView.iconWhatsAppPhoneOne.visibility = if(establishment.typePhoneOne == "2") View.VISIBLE else View.GONE
+            itemView.iconWhatsAppPhoneTwo.visibility = if(establishment.typePhoneTwo == "2") View.VISIBLE else View.GONE*/
             itemView.establishmentContainer.setOnClickListener {
                 onItemClickListener.onItemClick(establishment)
             }

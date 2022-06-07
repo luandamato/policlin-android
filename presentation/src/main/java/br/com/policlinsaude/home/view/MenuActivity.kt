@@ -142,6 +142,17 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
                 { presenter.onLoginClicked() })
     }
 
+    override fun showUserNotConnectedDialog(message: String) {
+        DialogHelper.showDialog(
+            this,
+            getString(R.string.title_error_oops).orEmpty(),
+            message,
+            getString(R.string.text_ok).orEmpty(),
+            null,
+            { presenter.onLoginClicked() }
+        )
+    }
+
     fun setupFragmentToolbar(toolbar: Toolbar?, @StringRes title: Int?) {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

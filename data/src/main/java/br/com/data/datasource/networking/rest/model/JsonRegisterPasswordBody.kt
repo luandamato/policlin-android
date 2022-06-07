@@ -16,4 +16,5 @@ data class JsonRegisterPasswordBody(
         @SerializedName("senha") var password: String = InvalidData.UNINITIALIZED.getString(),
         @SerializedName("aceiteTermo") var acceptTerm: Int = InvalidData.UNINITIALIZED.getInt(),
         @SerializedName("dtaNasc") var birthday: String = InvalidData.UNINITIALIZED.getString(),
-        @SerializedName("avatar") var avatar: String = InvalidData.UNINITIALIZED.getString())
+        @SerializedName("avatar") var avatar: String = InvalidData.UNINITIALIZED.getString(),
+        @SerializedName("nomeMae") var mothersName: String = InvalidData.UNINITIALIZED.getString())

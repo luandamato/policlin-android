@@ -38,5 +38,6 @@ interface Repository {
     fun getBanners(): Flowable<List<Banner>>
     fun checkPlan(person: Person, plan: Plan): Completable
     fun removeFromFavorites(establishment: Establishment): Completable
+    fun validateUserConnected(registration: String, order: String): Flowable<UserConnected>
 
 }

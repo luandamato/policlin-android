@@ -52,28 +52,46 @@ class RepositoryImpl(private val networkingDatasource: NetworkingDatasource,
 
     override fun getMedicalGuideOptions(): Flowable<MedicalGuideOptions> = networkingDatasource.getMedicalGuideOptions()
 
-    override fun getMedicalGuideList(codePlan: Int, codeCity: Int, codeSpecialityService: Int,
-                                     ownNetwork: Int, latitude: Double?, longitude: Double?, codeProfessionalClass: String?, codeServiceType: String?,
-                                     codeEstablishmentType: String?, specialityType: String?,
-                                     address_filter: String?, neighborhood_filter: String?, zipcode_filter: String?, number_on_the_board_filter: String?,//Andre
-                                     prof_fantasy_filter: String?, cnpj_filter: String?, phones_filter: String?, qualificationsSearch: String?) //Andre
-            : Flowable<MedicalGuideList> = preferencesDatasource.getToken().onErrorReturnItem("").flatMap({ token ->
-        networkingDatasource.getMedicalGuideList(codePlan, codeCity, codeSpecialityService,
-                ownNetwork, latitude, longitude, codeProfessionalClass, codeServiceType, codeEstablishmentType, specialityType,
-                address_filter, neighborhood_filter, zipcode_filter, number_on_the_board_filter, prof_fantasy_filter, cnpj_filter, phones_filter, qualificationsSearch,
-                if (token.isEmpty()) null else token)//Andre
-    })
+    override fun getMedicalGuideList(
+        codePlan: Int, codeCity: Int, codeSpecialityService: Int,
+        ownNetwork: Int, latitude: Double?, longitude: Double?, codeProfessionalClass: String?, codeServiceType: String?,
+        codeEstablishmentType: String?, specialityType: String?,
+        address_filter: String?, neighborhood_filter: String?, zipcode_filter: String?, number_on_the_board_filter: String?,//Andre
+        prof_fantasy_filter: String?, cnpj_filter: String?, phones_filter: String?, qualificationsSearch: String?) //Andre
+    : Flowable<MedicalGuideList> = preferencesDatasource.getToken().onErrorReturnItem("").flatMap { token ->
+        networkingDatasource.getMedicalGuideList(
+            codePlan,
+            codeCity,
+            codeSpecialityService,
+            ownNetwork,
+            latitude,
+            longitude,
+            codeProfessionalClass,
+            codeServiceType,
+            codeEstablishmentType,
+            specialityType,
+            address_filter,
+            neighborhood_filter,
+            zipcode_filter,
+            number_on_the_board_filter,
+            prof_fantasy_filter,
+            cnpj_filter,
+            phones_filter,
+            qualificationsSearch,
+            if (token.isEmpty()) null else token
+        )//Andre
+    }
 
     override fun getOwnNetwork()
-            : Flowable<OwnNetworkList> = preferencesDatasource.getToken().onErrorReturnItem("").flatMap({ token ->
+            : Flowable<OwnNetworkList> = preferencesDatasource.getToken().onErrorReturnItem("").flatMap { token ->
         networkingDatasource.getOwnNetwork(if (token.isEmpty()) null else token)
-    })
+    }
 
     override fun getUnits()//Andre
-            : Flowable<UnitsList> = preferencesDatasource.getToken().onErrorReturnItem("").flatMap({ token ->
+            : Flowable<UnitsList> = preferencesDatasource.getToken().onErrorReturnItem("").flatMap { token ->
         networkingDatasource.getUnits(if (token.isEmpty()) null else token)
 
-    })
+    }
 
 
     override fun getMedicalGuidePlans(proUF: String, prsCod: String, proCls: String, proCod: String): Flowable<List<MedicalGuidePlan>> = networkingDatasource.getMedicalGuideDetails(proUF, prsCod, proCls, proCod)
@@ -119,5 +137,8 @@ class RepositoryImpl(private val networkingDatasource: NetworkingDatasource,
             .flatMapCompletable {
                 networkingDatasource.removeFromFavorites(establishment, it)
             }
+
+    override fun validateUserConnected(registration: String, order: String)
+        : Flowable<UserConnected> = networkingDatasource.onValidateUserConnected(registration, order)
 
 }

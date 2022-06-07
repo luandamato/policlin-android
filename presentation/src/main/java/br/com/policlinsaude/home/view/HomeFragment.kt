@@ -10,13 +10,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import br.com.domain.model.Banner
 import br.com.domain.model.Person
+import br.com.domain.model.UserConnected
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseFragmentWithInject
+import br.com.policlinsaude.core.helper.DialogHelper
 import br.com.policlinsaude.home.navigator.HomeNavigator
 import br.com.policlinsaude.home.presenter.HomePresenter
 import br.com.policlinsaude.home.view.adapter.HomeAdapter
 import br.com.policlinsaude.home.view.adapter.HomePageAdapter
 import br.com.policlinsaude.home.view.model.PresentationHomeOptionEnum
+import br.com.policlinsaude.preferences.presenter.PreferencesPresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -36,7 +39,6 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
 
     @Inject
     lateinit var presenter: HomePresenter
-
     @Inject
     lateinit var homePageAdapter: HomePageAdapter
 
@@ -99,7 +101,11 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
     override fun renderPerson(person: Person) {
         view?.findViewById<TextView>(R.id.person_name_text_view)?.text =
                 getString(R.string.text_person_home_title, person.name, person.descriptionPlan)
+
+        presenter.onValidateConnectedUser(person.plan.register, person.plan.order)
     }
+
+
 
     override fun onItemClick(option: PresentationHomeOptionEnum) {
         when (option) {
@@ -126,6 +132,10 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
 
     override fun showLoginDialog() {
         (activity as MenuView).showLoginDialog()
+    }
+
+    override fun showUserNotConnectedDialog(item: UserConnected) {
+        (activity as MenuView).showUserNotConnectedDialog(item.msgExterna.orEmpty())
     }
 
     override fun renderEmptyBanners() {

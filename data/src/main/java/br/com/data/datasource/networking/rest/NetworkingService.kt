@@ -2,6 +2,7 @@ package br.com.data.datasource.networking.rest
 
 import br.com.data.datasource.networking.rest.model.*
 import br.com.data.helper.InvalidData
+import br.com.domain.model.UserConnected
 import io.reactivex.Flowable
 import retrofit2.http.*
 
@@ -134,7 +135,9 @@ interface NetworkingService {
                   @Field("validadeCarterinha") expirationDate: String,
                   @Field("aceiteTermo") termAccepted: Int,
                   @Field("dtaNasc") birthday: String,
-                  @Field("metodo") method: String): Flowable<JsonCheckPlanResponse>
+                  @Field("metodo") method: String,
+                  @Field("nomeMae") mothersName: String
+    ): Flowable<JsonCheckPlanResponse>
 
     @FormUrlEncoded
     @POST("MAPP_ManutencaoFavoritos")
@@ -153,8 +156,12 @@ interface NetworkingService {
     fun getUnits(@Query("token") token: String? = null): Flowable<JsonUnitsResponse>
 
 
-
-
+    @FormUrlEncoded
+    @POST("MAPP_ValidaBeneficiario")
+    fun validateUserConnected(
+        @Field("matricula") registration: String,
+        @Field("ordem") order: String
+    ): Flowable<UserConnected>
 
 
 

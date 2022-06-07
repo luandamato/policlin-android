@@ -23,7 +23,7 @@ object DialogHelper {
     }
 
     fun showDialog(context: Context, title: String, message: String,
-                   messagePositiveButton: String, messageNegativeButton: String?,
+                   messagePositiveButton: String? = "", messageNegativeButton: String? = "",
                    listenerPositiveButton: () -> Unit = { },
                    listenerNegativeButton: (() -> Unit)? = { },
                    onDismiss: (() -> Unit)? = { }): AlertDialog {
@@ -32,7 +32,7 @@ object DialogHelper {
         with(alertDialogBuilder) {
             setTitle(title)
             setMessage(message)
-            if (messagePositiveButton.isNotEmpty()) {
+            if (messagePositiveButton?.isNotEmpty() != null) {
                 setPositiveButton(messagePositiveButton) { _, _ ->
                     listenerPositiveButton.invoke()
                 }
@@ -82,4 +82,5 @@ object DialogHelper {
                 context.getString(R.string.text_ok),
                 null)
     }
+
 }

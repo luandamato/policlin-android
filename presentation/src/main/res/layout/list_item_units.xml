@@ -73,8 +73,8 @@
         style="@style/Secondary.Text.Style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/textViewPhoneOneUnits"
+        android:layout_alignParentStart="true"
         android:textSize="12sp"
         tools:text="(11) 96555-3333" />
 

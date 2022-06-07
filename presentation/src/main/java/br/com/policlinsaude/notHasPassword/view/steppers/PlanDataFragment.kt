@@ -49,17 +49,9 @@ class PlanDataFragment : BaseFragment(), BlockingStep {
         addValidationFields()
         setFields()
         setOnClickListeners()
-        setupMasks()
-    }
-
-    private fun setupMasks() {
-        MaskUtils.applyMaskToView(MaskUtils.DATE, editTextRegisterValidation, null)
     }
 
     private fun setOnClickListeners() {
-        registerValidationCalendarButton.setOnClickListener {
-            showDatePicker(editTextRegisterValidation)
-        }
         termsContainer.setOnClickListener {
             IntentHelper.openUrlInBrowser(context!!, getString(R.string.url_terms))
         }
@@ -72,7 +64,6 @@ class PlanDataFragment : BaseFragment(), BlockingStep {
         editTextContract.setText(plan.contract)
         val calendar = Calendar.getInstance()
         calendar.time = plan.validationRegister
-        setDateAtEditText(editTextRegisterValidation, calendar)
     }
 
     private fun addValidationFields() {
@@ -82,10 +73,6 @@ class PlanDataFragment : BaseFragment(), BlockingStep {
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
         awesomeValidation.addValidation(editTextContract,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextRegisterValidation,
-                RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextRegisterValidation,
-                { value: String -> Validations.isValidDate(value) }, getString(R.string.text_date_invalid))
     }
 
     override fun onSelected() {
@@ -96,7 +83,6 @@ class PlanDataFragment : BaseFragment(), BlockingStep {
             plan.register = editTextRegister.text.toString()
             plan.order = editTextOrder.text.toString()
             plan.contract = editTextContract.text.toString()
-            plan.validationRegister = getDateFromEditText(editTextRegisterValidation)
             return null
         }
         return VerificationError("Validation error")

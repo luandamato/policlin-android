@@ -20,6 +20,7 @@ object RegisterPasswordMapper {
         person.cpf = presentationPerson.cpf
         person.phone = presentationPerson.phone
         person.photo = presentationPerson.photo
+        person.mothersName = presentationPerson.mothersName
 
         val plan = transform(presentationPlan)
 
