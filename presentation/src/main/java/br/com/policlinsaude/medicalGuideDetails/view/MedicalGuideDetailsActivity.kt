@@ -1,11 +1,13 @@
 package br.com.policlinsaude.medicalGuideDetails.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.DividerItemDecoration
@@ -77,11 +79,12 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        adapter.onClickListenerWpp = {
+            openWhatsApp(it)
+        }
         getEstablishment()
         setupOnClickListeners()
     }
-
-
 
 
     private fun setupOnClickListeners() {
@@ -98,16 +101,26 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
             presenter.onShareClicked()
         }
         plansTextView.setOnClickListener {
-            presenter.onPlansClicked()
+           presenter.onPlansClicked()
         }
     }
 
-    private fun getEstablishment() {
-
-        presenter.setEstablishment(intent.getParcelableExtra(EXTRA_ESTABLISHMENT))
+    private fun openWhatsApp(wpp: String) {
+        try {
+            startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://api.whatsapp.com/send?phone=55${wpp.replace(" ", "").replace("(", "").replace(")", "").replace("-","")}")
+                ))
+        } catch (e: Exception) {}
 
     }
 
+    private fun getEstablishment() {
+        presenter.setEstablishment(intent.getParcelableExtra(EXTRA_ESTABLISHMENT))
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     override fun showMedicalGuideDetails(presentationEstablishment: PresentationEstablishment) {
         try {
             imageViewFront.setImageBitmap(presentationEstablishment.photoFront.getBitmapFromImage())
@@ -130,7 +143,13 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
                 }
             }
         }
-        var caller = intent.getStringExtra(EXTRA_CALLER_ACTIVITY)
+        val caller = intent.getStringExtra(EXTRA_CALLER_ACTIVITY)
+
+        when {
+            presentationEstablishment.typePhoneOne == "2" -> imageButtonWhatsApp.setOnClickListener { openWhatsApp(presentationEstablishment.phoneOne) }
+            presentationEstablishment.typePhoneTwo == "2" -> imageButtonWhatsApp.setOnClickListener { openWhatsApp(presentationEstablishment.phoneTwo) }
+            else -> imageButtonWhatsApp.visibility = View.GONE
+        }
 
         if (caller == "Units"){
             imageButtonFavorite.visibility = View.GONE
@@ -211,9 +230,9 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     override fun showSelectPhones(phoneOne: String, phoneTwo: String) {
         val phones = arrayOf(phoneOne, phoneTwo)
         val builder = AlertDialog.Builder(this)
-        builder.setItems(phones, { _, index ->
+        builder.setItems(phones) { _, index ->
             presenter.onPhoneSelected(phones[index])
-        })
+        }
         builder.create().show()
     }
 

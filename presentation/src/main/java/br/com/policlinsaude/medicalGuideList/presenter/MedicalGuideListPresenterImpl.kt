@@ -73,9 +73,6 @@ class MedicalGuideListPresenterImpl(private val navigator: MedicalGuideListNavig
                            } else {
                                // this.establishments = it.establishments
                                 this.medicalGuideListPlansV4 = it.medicalGuideListPlansV4
-                                Log.d("PRESENTATION","-----------------------------------")
-                                Log.d("PRESENTATION", "Valor de medicalGuideListPlansV4 dentro de medicalGuideListPlansV4: " + medicalGuideListPlansV4.toString())
-                                Log.d("PRESENTATION","-----------------------------------")
 
                                 view.showMedicalGuideList(it)
                             }

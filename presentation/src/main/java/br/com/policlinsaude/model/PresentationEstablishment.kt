@@ -30,6 +30,8 @@ data class PresentationEstablishment(var showPlansV4: Int = 0,//Andre
                                      var state: String = InvalidData.UNINITIALIZED.getString(),
                                      var phoneOne: String = InvalidData.UNINITIALIZED.getString(),
                                      var phoneTwo: String = InvalidData.UNINITIALIZED.getString(),
+                                     var typePhoneOne: String = InvalidData.UNINITIALIZED.getString(),
+                                     var typePhoneTwo: String = InvalidData.UNINITIALIZED.getString(),
                                      var latitude: String = InvalidData.UNINITIALIZED.getString(),
                                      var longitude: String = InvalidData.UNINITIALIZED.getString(),
                                      var distance: Double = InvalidData.UNINITIALIZED.getDouble(),
@@ -57,6 +59,8 @@ constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
         parcel.createTypedArrayList(PresentationQualification),
+        parcel.readString(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -112,6 +116,8 @@ constructor(parcel: Parcel) : this(
         parcel.writeString(state)
         parcel.writeString(phoneOne)
         parcel.writeString(phoneTwo)
+        parcel.writeString(typePhoneOne)
+        parcel.writeString(typePhoneTwo)
         parcel.writeString(latitude)
         parcel.writeString(longitude)
         parcel.writeDouble(distance)

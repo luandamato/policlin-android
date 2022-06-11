@@ -90,8 +90,6 @@ class PersonalDataFragment : BaseFragment(), Step {
     private fun addValidationFields() {
         awesomeValidation.addValidation(editTextName,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextMothersName,
-            RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
         awesomeValidation.addValidation(editTextBirthday,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
         awesomeValidation.addValidation(editTextPhone,

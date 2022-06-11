@@ -1,18 +1,16 @@
 package br.com.policlinsaude.login.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.text.Html
-import android.text.InputType
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import br.com.domain.exception.MessageErrorException
-import br.com.policlinsaude.BuildConfig
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.IntentHelper
@@ -20,6 +18,12 @@ import br.com.policlinsaude.login.presenter.LoginPresenter
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
+import android.telephony.TelephonyManager
+
+import android.os.Build
+import android.provider.Settings
+import java.util.*
+
 
 class LoginActivity : BaseActivity(), LoginView {
 
@@ -57,7 +61,6 @@ class LoginActivity : BaseActivity(), LoginView {
     override fun onPersonNotFound() {
         addValidationFields()
         setOnClickListeners()
-        //setupDebug()
     }
 
     private fun addValidationFields() {
@@ -87,6 +90,7 @@ class LoginActivity : BaseActivity(), LoginView {
 
         imgEye.setOnClickListener {
             presenter.clickedEye()
+            getUid()
         }
 
         textViewMsgWhenEntering.setOnClickListener {
@@ -96,18 +100,13 @@ class LoginActivity : BaseActivity(), LoginView {
 
     }
 
-
-
-    /*      switch ( event.getAction() ) {
-                case MotionEvent.ACTION_DOWN:
-                   editText.setInputType(InputType.TYPE_CLASS_TEXT);
-                break;
-                case MotionEvent.ACTION_UP:
-                    editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                break;
-                }
-                return true;
-    * */
+    @SuppressLint("MissingPermission", "HardwareIds")
+    private fun getUid() {
+        val m = android.provider.Settings.Secure.getString(applicationContext.contentResolver, android.provider.Settings.Secure.ANDROID_ID);
+        val cc = UUID.randomUUID().toString()
+        Log.d("TOKEN2 === ", cc.toString())
+        Log.d("TOKEN === ", m.toString())
+    }
 
     override fun showDialogError(it: Throwable) {
         val listener = {
