@@ -1,8 +1,8 @@
 package br.com.policlinsaude.home.view
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.Toolbar
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -89,7 +89,8 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView.adapter = homeAdapter
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager =
+            GridLayoutManager(context, 2)
 
         viewPager.adapter = homePageAdapter
 

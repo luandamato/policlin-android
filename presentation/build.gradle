@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'com.google.gms.google-services'
 
 HashMap<String, String> baseDependencies = rootProject.ext.dependencies
 HashMap<String, String> application = rootProject.ext.application
 HashMap<String, String> versions = rootProject.ext.versions
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 29
+    buildToolsVersion '29.0.3'
 
     signingConfigs {
         config {
@@ -26,14 +26,14 @@ android {
 
     defaultConfig {
         applicationId application.applicationId
-        minSdkVersion 21
-        targetSdkVersion 27
-        versionName '1.20'
-        versionCode 21
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode application.versionCode
+        versionName application.versionName
 
         multiDexEnabled true
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -101,6 +101,9 @@ dependencies {
     implementation baseDependencies.multidex
     implementation baseDependencies.multidex
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation platform('com.google.firebase:firebase-bom:30.0.1')
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
 }
 
 

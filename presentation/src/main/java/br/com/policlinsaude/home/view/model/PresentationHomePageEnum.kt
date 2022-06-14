@@ -1,6 +1,6 @@
 package br.com.policlinsaude.home.view.model
 
-import android.support.annotation.DrawableRes
+import androidx.annotation.DrawableRes
 import br.com.policlinsaude.R
 
 enum class PresentationHomePageEnum(@DrawableRes val drawable: Int) {

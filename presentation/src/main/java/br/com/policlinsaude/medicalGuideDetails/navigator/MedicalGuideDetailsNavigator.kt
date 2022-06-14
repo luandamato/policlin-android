@@ -8,4 +8,5 @@ interface MedicalGuideDetailsNavigator {
     fun goToShareIntent(establishment: PresentationEstablishment)
     fun goToMapIntent(lat: String, lng: String, name: String)
     fun goToLogin()
+    fun goToWhatsApp(phone: String)
 }

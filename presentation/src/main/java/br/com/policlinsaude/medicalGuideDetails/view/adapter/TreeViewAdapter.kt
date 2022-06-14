@@ -19,7 +19,7 @@ class TreeViewAdapter: BaseExpandableListAdapter(){
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getGroupView(p0: Int, p1: Boolean, p2: View?, p3: ViewGroup?): View {
+    override fun getGroupView(p0: Int, p1: Boolean, p2: View?, p3: ViewGroup): View {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -35,7 +35,7 @@ class TreeViewAdapter: BaseExpandableListAdapter(){
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun getChildView(p0: Int, p1: Int, p2: Boolean, p3: View?, p4: ViewGroup?): View {
+    override fun getChildView(p0: Int, p1: Int, p2: Boolean, p3: View?, p4: ViewGroup): View {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

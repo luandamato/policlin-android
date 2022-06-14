@@ -62,13 +62,13 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
         presenter.getOwnNetworks()
     }
 
-    @SuppressLint("MissingSuperCall")
+    /*@SuppressLint("MissingSuperCall")
     override fun onSaveInstanceState(outState: Bundle?) {
         // do nothing
         // this is because the amount of data in the pagers
 
         Log.d("FILTRO", "DENTRO do onSaveInstanceState de OwnNetWorkActivity")
-    }
+    }*/
 
     override fun showOwnNetworks(ownNetworks: List<Pair<String, List<PresentationEstablishment>>>,
                                  qualifications: MutableList<PresentationQualification>) {

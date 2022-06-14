@@ -1,6 +1,6 @@
 package br.com.policlinsaude.units.view.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,12 +38,12 @@ class UnitsAdapter(private val onItemClickListener: OnItemClickListener)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == TYPE_ITEM) {
-            UnitsViewHolder(LayoutInflater.from(parent?.context)
+            UnitsViewHolder(LayoutInflater.from(parent.context)
                     .inflate(R.layout.list_item_units, parent, false))
         } else {
-            MedicalGuideListAdapter.MedicalGuideListFooterViewHolder(LayoutInflater.from(parent?.context)
+            MedicalGuideListAdapter.MedicalGuideListFooterViewHolder(LayoutInflater.from(parent.context)
                     .inflate(R.layout.custom_view_info_medical_guide_list_units, parent, false), qualifications)
         }
     }

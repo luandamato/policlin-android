@@ -2,8 +2,8 @@ package br.com.policlinsaude.notHasPassword.view.adapter
 
 import android.content.Context
 import com.stepstone.stepper.viewmodel.StepViewModel
-import android.support.annotation.NonNull
-import android.support.v4.app.FragmentManager
+import androidx.annotation.NonNull
+import androidx.fragment.app.FragmentManager
 import br.com.policlinsaude.notHasPassword.presenter.NotHasPasswordPresenter
 import br.com.policlinsaude.notHasPassword.view.steppers.CreatePasswordFragment
 import br.com.policlinsaude.notHasPassword.view.steppers.PersonalDataFragment

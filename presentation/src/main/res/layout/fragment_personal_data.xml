@@ -20,7 +20,7 @@
             android:text="@string/msg_personal_data_top"
             android:textAllCaps="true" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,9 +35,9 @@
                 android:text="Teste"
                 android:inputType="textCapCharacters" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutCpf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -50,13 +50,13 @@
                 android:hint="@string/text_cpf"
                 android:inputType="number" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputLayoutBirthday"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                     android:text="01/01/1980"
                     android:inputType="date" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
                 android:id="@+id/birthdayCalendarButton"
@@ -84,7 +84,7 @@
                 android:src="@drawable/ic_date" />
         </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -96,9 +96,9 @@
                 android:hint="@string/text_phone"
                 android:inputType="phone" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutMothersName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -110,9 +110,9 @@
                 android:hint="@string/text_mothers_name"
                 android:inputType="textEmailAddress" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -124,9 +124,9 @@
                 android:hint="@string/text_email"
                 android:inputType="textEmailAddress" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLayoutConfirmEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -138,7 +138,7 @@
                 android:hint="@string/text_confirm_email"
                 android:inputType="textEmailAddress" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 </ScrollView>

@@ -1,34 +1,35 @@
 package br.com.policlinsaude.favorites.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import br.com.policlinsaude.R
 import br.com.policlinsaude.model.PresentationEstablishment
 
 /**
  * Created by lmiyagi on 12/04/18.
  */
-class FavoritesAdapter(private val listener: FavoritesAdapter.OnItemClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FavoritesAdapter(private val listener: FavoritesAdapter.OnItemClickListener) : RecyclerView.Adapter<ViewHolder>() {
 
     private val TYPE_ITEM = 1
     private val TYPE_HEADER = 0
 
     private val favorites = ArrayList<FavoritesWrapper>()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return if (viewType == TYPE_HEADER) {
-            FavoritesHeaderViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.list_item_favorite_header, parent, false))
+            FavoritesHeaderViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_favorite_header, parent, false))
         } else {
-            return FavoritesItemViewHolder(LayoutInflater.from(parent?.context).inflate(R.layout.list_item_favorite_item, parent, false))
+            FavoritesItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.list_item_favorite_item, parent, false))
         }
     }
 
     override fun getItemCount(): Int = favorites.size
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder is FavoritesHeaderViewHolder) {
             holder.format(favorites[position])
         } else if (holder is FavoritesItemViewHolder) {
@@ -62,14 +63,14 @@ class FavoritesAdapter(private val listener: FavoritesAdapter.OnItemClickListene
         }
     }
 
-    inner class FavoritesHeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class FavoritesHeaderViewHolder(itemView: View) : ViewHolder(itemView) {
 
         fun format(favoritesWrapper: FavoritesWrapper) {
             itemView.findViewById<TextView>(R.id.titleTextView).text = favoritesWrapper.title
         }
     }
 
-    inner class FavoritesItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class FavoritesItemViewHolder(itemView: View) : ViewHolder(itemView) {
 
         fun format(favoritesWrapper: FavoritesWrapper) {
             itemView.findViewById<TextView>(R.id.titleTextView).text = favoritesWrapper.title

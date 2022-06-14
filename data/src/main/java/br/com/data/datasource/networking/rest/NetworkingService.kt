@@ -12,16 +12,17 @@ interface NetworkingService {
     @POST("MAPP_Login")
     fun login(@Field("matricula") register: String = InvalidData.UNINITIALIZED.getString(),
               @Field("ordem") order: String = InvalidData.UNINITIALIZED.getString(),
-              @Field("senha") password: String = InvalidData.UNINITIALIZED.getString()):
-            Flowable<JsonLoginResponse>
+              @Field("senha") password: String = InvalidData.UNINITIALIZED.getString(),
+              @Field("firebaseToken") firebaseToken: String = InvalidData.UNINITIALIZED.getString()
+    ): Flowable<JsonLoginResponse>
 
 
     @FormUrlEncoded
     @POST("MAPP_RecuperarSenha")
     fun recoverPassword(@Field("matricula") register: String = InvalidData.UNINITIALIZED.getString(),
                         @Field("ordem") order: String = InvalidData.UNINITIALIZED.getString(),
-                        @Field("email") email: String = InvalidData.UNINITIALIZED.getString()):
-            Flowable<JsonRecoverPasswordResponse>
+                        @Field("email") email: String = InvalidData.UNINITIALIZED.getString()
+    ): Flowable<JsonRecoverPasswordResponse>
 
     @POST("MAPP_ManutencaoBeneficiario")
     fun registerPassword(@Body json: JsonRegisterPasswordBody): Flowable<JsonRecoverPasswordResponse>

@@ -22,7 +22,7 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
                 }
             }
 
-    override fun doLogin(register: String, order: String, password: String): Flowable<Pair<Person, String>> = networkingService.login(register = register, order = order, password = password)
+    override fun doLogin(register: String, order: String, password: String, firebaseToken: String): Flowable<Pair<Person, String>> = networkingService.login(register = register, order = order, password = password, firebaseToken = firebaseToken)
             .flatMap {
                 if (validateMsgIsSuccess(it.msgInternal)
                         || it.user == null || it.token == null) {

@@ -18,6 +18,7 @@
         tools:text="Razao social" />
 
     <LinearLayout
+        android:id="@+id/linearLayout_telefone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -26,6 +27,8 @@
         <TextView
             android:id="@+id/textViewInfo"
             style="@style/Secondary.Text.Style"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAllCaps="true"
@@ -34,8 +37,8 @@
 
         <ImageView
             android:id="@+id/iconWhatsAppPhoneOne"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
             android:visibility="gone"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="6dp"
@@ -57,14 +60,16 @@
             style="@style/Secondary.Text.Style"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:layout_gravity="bottom"
             android:textAllCaps="true"
             android:textSize="14sp"
             tools:text="Razao social" />
 
         <ImageView
             android:id="@+id/iconWhatsAppPhoneTwo"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
             android:visibility="gone"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="6dp"
@@ -74,7 +79,7 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/qualificationsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

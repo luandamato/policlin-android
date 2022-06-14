@@ -1,7 +1,7 @@
 package br.com.policlinsaude.home.view.model
 
-import android.support.annotation.DrawableRes
-import android.support.annotation.StringRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import br.com.policlinsaude.R
 
 /**

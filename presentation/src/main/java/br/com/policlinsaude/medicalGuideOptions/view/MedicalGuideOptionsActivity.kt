@@ -9,9 +9,9 @@ import android.content.SharedPreferences
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.Html
 import android.text.TextWatcher
 import android.util.Log
@@ -670,7 +670,8 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
 
 
         qualificationsFilterRecyclerView.adapter = adapter
-        qualificationsFilterRecyclerView.layoutManager = LinearLayoutManager(this)
+        qualificationsFilterRecyclerView.layoutManager =
+            LinearLayoutManager(this)
 
         //-----------------------
 
@@ -880,7 +881,7 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
         return (isOn)
     }
 
-    @SuppressLint("MissingSuperCall")
+    /*@SuppressLint("MissingSuperCall")
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
         // do nothing
@@ -891,7 +892,7 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
         //    outState.putString("MyString", "Welcome back to Android")
         //    Log.d("FILTRO", "SALVANDO MyString no onSaveInstanceState de MedicalguideOptionsActivity")
         }
-    }
+    }*/
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)

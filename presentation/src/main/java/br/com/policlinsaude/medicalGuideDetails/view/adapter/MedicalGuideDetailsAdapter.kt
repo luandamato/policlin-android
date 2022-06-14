@@ -3,7 +3,8 @@ package br.com.policlinsaude.medicalGuideDetails.view.adapter
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.support.v7.widget.RecyclerView
+import android.util.Log
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,9 +36,12 @@ class MedicalGuideDetailsAdapter(
                 if(k.isNotEmpty()) {
                     holder.itemView.qualificationsRecyclerView.visibility = View.GONE
                     holder.itemView.textViewInfo.text = k[0].replace("@", "")
+                    Log.d("Te123", k[1])
                     if(k[1].replace("@", "") == "2") {
+                        Log.d("Te123", (k[1].replace("@", "") == "2").toString())
                         holder.itemView.iconWhatsAppPhoneOne.visibility = View.VISIBLE
-                        holder.itemView.linearLayout_telefone2.setOnClickListener {
+                        holder.itemView.linearLayout_telefone.setOnClickListener {
+                            Log.d("T >>>> ", (k[1].replace("@", "") == "2").toString())
                             onClickListenerWpp.invoke(k[0].replace("@", ""))
                         }
                     }
@@ -49,6 +53,7 @@ class MedicalGuideDetailsAdapter(
                     if(k[3].replace("@", "") == "2") {
                         holder.itemView.iconWhatsAppPhoneTwo.visibility = View.VISIBLE
                         holder.itemView.linearLayout_telefone2.setOnClickListener {
+                            Log.d("Te >>>> ", (k[1].replace("@", "") == "2").toString())
                             onClickListenerWpp.invoke(k[2].replace("@", ""))
                         }
                     }

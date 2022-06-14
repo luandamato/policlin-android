@@ -12,9 +12,12 @@ class DoLoginUseCase(private val repository: Repository) :
     override fun executeUseCase(requestValues: DoLoginRV?):
             Flowable<Any> {
         requestValues?.let {
-            return repository.doLogin(register = requestValues.register,
-                    order = requestValues.order,
-                    password = requestValues.password).toFlowable()
+            return repository.doLogin(
+                register = requestValues.register,
+                order = requestValues.order,
+                password = requestValues.password,
+                firebaseToken = requestValues.firebaseToken
+            ).toFlowable()
         }
         return Flowable.error(RequestValuesNotImplementedException(this.javaClass.name))
     }

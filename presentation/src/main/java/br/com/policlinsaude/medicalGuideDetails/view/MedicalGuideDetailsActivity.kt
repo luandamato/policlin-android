@@ -9,9 +9,9 @@ import android.content.SharedPreferences
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -77,10 +77,16 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
         setupToolbar()
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        recyclerView.layoutManager =
+            LinearLayoutManager(this)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
+        )
         adapter.onClickListenerWpp = {
-            openWhatsApp(it)
+            presenter.onWhatsClicked(it)
         }
         getEstablishment()
         setupOnClickListeners()
@@ -105,15 +111,8 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
         }
     }
 
-    private fun openWhatsApp(wpp: String) {
-        try {
-            startActivity(
-                Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://api.whatsapp.com/send?phone=55${wpp.replace(" ", "").replace("(", "").replace(")", "").replace("-","")}")
-                ))
-        } catch (e: Exception) {}
-
+    private fun openWhatsApp() {
+        presenter.onWhatsClicked()
     }
 
     private fun getEstablishment() {
@@ -146,8 +145,8 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
         val caller = intent.getStringExtra(EXTRA_CALLER_ACTIVITY)
 
         when {
-            presentationEstablishment.typePhoneOne == "2" -> imageButtonWhatsApp.setOnClickListener { openWhatsApp(presentationEstablishment.phoneOne) }
-            presentationEstablishment.typePhoneTwo == "2" -> imageButtonWhatsApp.setOnClickListener { openWhatsApp(presentationEstablishment.phoneTwo) }
+            presentationEstablishment.typePhoneOne == "2" -> imageButtonWhatsApp.setOnClickListener { openWhatsApp() }
+            presentationEstablishment.typePhoneTwo == "2" -> imageButtonWhatsApp.setOnClickListener { openWhatsApp() }
             else -> imageButtonWhatsApp.visibility = View.GONE
         }
 
@@ -174,7 +173,7 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
     override fun showPlansDialog(plans: List<MedicalGuidePlan>?) {
         val builder = AlertDialog.Builder(this)
-                .setAdapter(object : ArrayAdapter<MedicalGuidePlan>(this, android.R.layout.simple_list_item_1, plans) {}, null)
+                .setAdapter(object : ArrayAdapter<MedicalGuidePlan>(this, android.R.layout.simple_list_item_1, plans ?: arrayListOf()) {}, null)
         builder.setPositiveButton(R.string.text_ok, null)
         val dialog = builder.create()
         dialog.listView.divider = ColorDrawable(ContextCompat.getColor(this, R.color.divider))
@@ -232,6 +231,15 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
         val builder = AlertDialog.Builder(this)
         builder.setItems(phones) { _, index ->
             presenter.onPhoneSelected(phones[index])
+        }
+        builder.create().show()
+    }
+
+    override fun showSelectWhats(phoneOne: String, phoneTwo: String) {
+        val phones = arrayOf(phoneOne, phoneTwo)
+        val builder = AlertDialog.Builder(this)
+        builder.setItems(phones) { _, index ->
+            presenter.onWhatsSelected(phones[index])
         }
         builder.create().show()
     }

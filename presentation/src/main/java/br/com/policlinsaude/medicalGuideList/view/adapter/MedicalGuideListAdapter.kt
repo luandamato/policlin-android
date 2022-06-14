@@ -1,7 +1,7 @@
 package br.com.policlinsaude.medicalGuideList.view.adapter
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
@@ -32,7 +32,7 @@ class MedicalGuideListAdapter(private val onItemClickListener: OnItemClickListen
     var listV4: MutableList<PresentationMedicalGuideListPlansV4> = mutableListOf()
     var qualifications: MutableList<PresentationQualification> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == TYPE_ITEM) {
             MedicalGuideListViewHolder(LayoutInflater.from(parent?.context)
                     .inflate(R.layout.list_item_medical_guide_andre, parent, false))
@@ -42,7 +42,7 @@ class MedicalGuideListAdapter(private val onItemClickListener: OnItemClickListen
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is MedicalGuideListViewHolder) {
             holder.format(list[position])
             Log.d("PRESENTATIONACTIVITY","-----------------------------------")
@@ -108,7 +108,8 @@ class MedicalGuideListAdapter(private val onItemClickListener: OnItemClickListen
         fun format() {
             val recyclerView = itemView.findViewById<RecyclerView>(R.id.recyclerView)
             recyclerView.adapter = QualificationAdapter(qualifications)
-            recyclerView.layoutManager = LinearLayoutManager(itemView.context)
+            recyclerView.layoutManager =
+                LinearLayoutManager(itemView.context)
 
             itemView.findViewById<TextView>(R.id.infoTextView).setOnClickListener { IntentHelper.openUrlInBrowser(itemView.context, itemView.context.getString(R.string.url_custom_infos)) }
 

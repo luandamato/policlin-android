@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -50,7 +50,8 @@ class UnitsActivity : BaseActivity(), UnitsView, UnitsAdapter.OnItemClickListene
         tabsunits.setupWithViewPager(viewPagerUnits)*/
         adapter = UnitsAdapter(this)
         recyclerViewUnits.adapter = adapter
-        recyclerViewUnits.layoutManager = LinearLayoutManager(this)
+        recyclerViewUnits.layoutManager =
+            LinearLayoutManager(this)
 
         getUnits()
     }
@@ -59,12 +60,12 @@ class UnitsActivity : BaseActivity(), UnitsView, UnitsAdapter.OnItemClickListene
         presenter.getUnits()
     }
 
-    @SuppressLint("MissingSuperCall")
+    /*@SuppressLint("MissingSuperCall")
     override fun onSaveInstanceState(outState: Bundle?) {
         // do nothing
         // this is because the amount of data in the pagers
 
-    }
+    }*/
 
 
 

@@ -1,8 +1,8 @@
 package br.com.policlinsaude.core.helper
 
 import android.content.Context
-import android.support.annotation.StringRes
-import android.support.v7.app.AlertDialog
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import br.com.policlinsaude.R
 
 object DialogHelper {
@@ -42,6 +42,8 @@ object DialogHelper {
                     listenerNegativeButton?.invoke()
                 }
             }
+
+            setCancelable(false)
             setOnDismissListener({ onDismiss?.invoke() })
         }
         val alertDialog = alertDialogBuilder.create()

@@ -45,6 +45,19 @@ class MedicalGuideDetailsPresenterImpl(private val navigator: MedicalGuideDetail
         }
     }
 
+    override fun onWhatsClicked() {
+        establishment?.let {
+            when {
+                it.typePhoneOne == "2" && it.typePhoneTwo == "2" ->  view.showSelectWhats(it.phoneOne, it.phoneTwo)
+                it.typePhoneOne == "2" -> navigator.goToWhatsApp(it.phoneOne)
+                it.typePhoneTwo == "2" -> navigator.goToWhatsApp(it.phoneOne)
+            }
+        }
+    }
+    override fun onWhatsClicked(phone: String) {
+        navigator.goToWhatsApp(phone)
+    }
+
     override fun onMapClicked() {
         establishment?.let {
             navigator.goToMapIntent(it.latitude, it.longitude, it.name)
@@ -153,5 +166,9 @@ class MedicalGuideDetailsPresenterImpl(private val navigator: MedicalGuideDetail
 
     override fun onPhoneSelected(phone: String) {
         if (phone.isNotEmpty()) navigator.goToCallIntent(phone)
+    }
+
+    override fun onWhatsSelected(phone: String) {
+        if (phone.isNotEmpty()) navigator.goToWhatsApp(phone)
     }
 }

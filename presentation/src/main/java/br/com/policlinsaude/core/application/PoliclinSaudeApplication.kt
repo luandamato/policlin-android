@@ -3,14 +3,14 @@ package br.com.policlinsaude.core.application
 import android.app.Activity
 import android.app.Application
 import android.content.Context
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import br.com.data.helper.ModuleDataHelper
 import br.com.policlinsaude.core.di.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.HasActivityInjector
 import dagger.android.DispatchingAndroidInjector
 import javax.inject.Inject
-import android.support.multidex.MultiDex
+import androidx.multidex.MultiDex
 
 
 

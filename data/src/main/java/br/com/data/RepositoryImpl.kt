@@ -29,8 +29,8 @@ class RepositoryImpl(private val networkingDatasource: NetworkingDatasource,
     override fun recoverPassword(register: String, order: String, email: String): Completable = networkingDatasource
             .recoverPassword(register = register, order = order, email = email)
 
-    override fun doLogin(register: String, order: String, password: String): Completable = networkingDatasource
-            .doLogin(register = register, order = order, password = password)
+    override fun doLogin(register: String, order: String, password: String, firebaseToken: String): Completable = networkingDatasource
+            .doLogin(register = register, order = order, password = password, firebaseToken = firebaseToken)
             .flatMapCompletable {
                 realmDatasource.savePerson(it.first, it.second)
                         .andThen(preferencesDatasource.saveToken(it.second))

@@ -1,7 +1,7 @@
 package br.com.policlinsaude.ownNetwork.view
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -50,7 +50,8 @@ class OwnNetworkFragment : BaseFragmentWithInject(), OwnNetworkAdapter.OnItemCli
         adapter.setEstablishments((arguments!!.getParcelableArray(EXTRA_ESTABLISHMENTS) as Array<PresentationEstablishment>).toMutableList(),
                 (arguments!!.getParcelableArray(EXTRA_QUALIFICATIONS) as Array<PresentationQualification>).toMutableList())
 
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context)
         recyclerView.adapter = adapter
     }
 
@@ -59,8 +60,8 @@ class OwnNetworkFragment : BaseFragmentWithInject(), OwnNetworkAdapter.OnItemCli
         navigator.goToDetails(establishment)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
+    /*override fun onSaveInstanceState(outState: Bundle) {
         // do nothing
         Log.d("FILTRO", "DENTRO do onSaveInstanceState de OwnNetWorkFragment")
-    }
+    }*/
 }

@@ -2,7 +2,7 @@ package br.com.policlinsaude.home.view.adapter
 
 import android.content.Context
 import android.graphics.drawable.BitmapDrawable
-import android.support.v4.view.PagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater

@@ -10,10 +10,18 @@ class MedicalGuideDetailsNavigatorImpl(private val activity: MedicalGuideDetails
     : MedicalGuideDetailsNavigator {
 
     override fun goToCallIntent(phone: String) {
-
-        var temp: String = "0$phone"
-
+        val temp: String = "0$phone"
         activity.startActivity(Intent(Intent.ACTION_DIAL).setData(Uri.parse("tel:$temp")))
+    }
+
+    override fun goToWhatsApp(phone: String) {
+        try {
+            activity.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://api.whatsapp.com/send?phone=55${phone.replace(" ", "").replace("(", "").replace(")", "").replace("-","")}")
+                ))
+        } catch (e: Exception) {}
     }
 
     override fun goToShareIntent(establishment: PresentationEstablishment) {

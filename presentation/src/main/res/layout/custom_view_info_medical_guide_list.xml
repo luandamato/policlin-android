@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/margin_vertical_spacing_default"
         android:text="@string/msg_information_about_icon_and_qualification" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

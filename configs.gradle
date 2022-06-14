@@ -6,17 +6,17 @@ ext {
     ]
 
     versions = [
-            buildTools: "27.0.2",
+            buildTools: "29.0.3",
             minSdk    : 19,
-            targetSdk : 27,
-            compileSdk: 27,
+            targetSdk : 29,
+            compileSdk: 29,
     ]
 
-    supportVersion = '27.0.2'
-    daggerVersion = '2.14.1'
+    supportVersion = '27.1.1'
+    daggerVersion = '2.16'
     rxVersion = '2.1.9'
     rxkotlinVersion = '2.1.0'
-    kotlinVersion = '1.2.51'
+    kotlinVersion = '1.3.10'
     realmVersion = '4.3.3'
     rxAndroidVersion = "2.0.1"
     gradleVersion = "3.0.1"
@@ -33,7 +33,7 @@ ext {
     usefulviewsVersion = '2.3.6'
     circleImageViewVersion = '2.2.0'
     flexBoxLayoutVersion = '0.3.2'
-    servicesVersion = '12.0.0'
+    servicesVersion = '18.0.0'
     reactiveLocationVersion = '2.1@aar'
     dexterVersion = '4.2.0'
     easyImageVersion = '1.3.1'
@@ -50,21 +50,21 @@ ext {
             rx_android               : "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
             rx_kotlin                : "io.reactivex.rxjava2:rxkotlin:$rxkotlinVersion",
 
-            kotlin_std_lib           : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlinVersion",
+            kotlin_std_lib           : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
 
-            app_compat               : "com.android.support:appcompat-v7:$supportVersion",
-            card_view                : "com.android.support:cardview-v7:$supportVersion",
-            constraint_layout        : "com.android.support.constraint:constraint-layout:$constraintLayouVersion",
-            support_design           : "com.android.support:design:$supportVersion",
-            support_annotations      : "com.android.support:support-annotations:$supportVersion",
-            recycler_view            : "com.android.support:recyclerview-v7:$supportVersion",
+            app_compat               : 'androidx.appcompat:appcompat:1.0.0',
+            card_view                : 'androidx.cardview:cardview:1.0.0',
+            constraint_layout        : 'androidx.constraintlayout:constraintlayout:1.1.3',
+            support_design           : 'com.google.android.material:material:1.0.0',
+            support_annotations      : 'androidx.annotation:annotation:1.0.0',
+            recycler_view            : 'androidx.recyclerview:recyclerview:1.0.0',
             material_stepper         : "com.stepstone.stepper:material-stepper:$materialStepperVersion",
             awesome_validation       : "com.basgeekball:awesome-validation:$awesomeValidationVersion",
             page_indicator_view      : "com.romandanylyk:pageindicatorview:$pageIndicatorViewVersion",
             input_mask               : "com.redmadrobot:inputmask:$inputMaskVersion",
             material_spinner         : "com.satsuware.lib:usefulviews:$usefulviewsVersion",
 
-            multidex                 : "com.android.support:multidex:$multidexVersion",
+            multidex                 : 'androidx.multidex:multidex:2.0.0',
 
 
             arch_lifecycle_extensions: "android.arch.lifecycle:extensions:$lifecycle",
