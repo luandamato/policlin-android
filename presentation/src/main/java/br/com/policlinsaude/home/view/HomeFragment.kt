@@ -1,5 +1,6 @@
 package br.com.policlinsaude.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.appcompat.widget.Toolbar
@@ -20,6 +21,7 @@ import br.com.policlinsaude.home.view.adapter.HomeAdapter
 import br.com.policlinsaude.home.view.adapter.HomePageAdapter
 import br.com.policlinsaude.home.view.model.PresentationHomeOptionEnum
 import br.com.policlinsaude.preferences.presenter.PreferencesPresenter
+import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -123,6 +125,11 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
                 } else {
                     homeNavigator.goToFavorites()
                 }
+            }
+
+            PresentationHomeOptionEnum.TICKET -> {
+                val intent = Intent(context, TicketsActivity::class.java)
+                startActivity(intent)
             }
             else -> {
             }

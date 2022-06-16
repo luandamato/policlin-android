@@ -37,7 +37,7 @@
                 android:id="@+id/sendButton"
                 android:layout_width="120dp"
                 android:layout_height="20dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/button_primary"
                 android:text="VER DETALHE"
                 android:textSize="7dp"
                 android:textColor="@color/lightText"

@@ -12,8 +12,7 @@ class HomeAdapter(private val onItemClickListener: OnItemClickListener): Recycle
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         val option = PresentationHomeOptionEnum.values()[position]
-        holder.itemView.imageView
-                .setImageDrawable(ContextCompat.getDrawable(holder.itemView.context, option.drawable))
+        holder.itemView.imageView.setImageDrawable(ContextCompat.getDrawable(holder.itemView.context, option.drawable))
         holder.itemView.setOnClickListener {
             onItemClickListener.onItemClick(option)
         }
