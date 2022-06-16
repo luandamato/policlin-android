@@ -40,7 +40,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="4dp"
-                        android:background="@color/colorPrimaryDark"/>
+                        android:background="@color/colorPrimary"/>
 
                     <TextView
                         style="@style/Primary.Text.Style.Bold"
@@ -139,6 +139,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
+                            android:layout_marginHorizontal="30dp"
                             android:background="@drawable/button_selector_secondary"
                             android:text="VER DETALHE"
                             android:textColor="@color/lightText"
@@ -146,10 +147,46 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@color/colorPrimary"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.cardview.widget.CardView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="12dp"
+            android:background="@color/white">
+
+            <TextView
+                style="@style/Primary.Text.Style.Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp"
+                android:textColor="@color/gray_2"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:text="Histórico dos boletos em aberto" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="26dp"
+                android:scrollbars="none"
+                tools:listitem="@layout/adapter_tickets"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:spanCount="10" />
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
