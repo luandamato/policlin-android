@@ -1,8 +1,10 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.gms.google-services'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+}
 
 HashMap<String, String> baseDependencies = rootProject.ext.dependencies
 HashMap<String, String> application = rootProject.ext.application
@@ -25,10 +27,10 @@ android {
     }
 
     defaultConfig {
-        applicationId application.applicationId
+        applicationId versions.applicationId
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode application.versionCode
+        versionCode versions.versionCode
         versionName application.versionName
 
         multiDexEnabled true
@@ -70,6 +72,7 @@ kapt {
 dependencies {
     api project(':domain')
     api project(':data')
+    implementation project(":newfeature")
     implementation baseDependencies.recycler_view
     implementation baseDependencies.kotlin_std_lib
     implementation baseDependencies.dagger2
@@ -101,9 +104,16 @@ dependencies {
     implementation baseDependencies.multidex
     implementation baseDependencies.multidex
     implementation 'com.google.code.gson:gson:2.8.2'
+
+    //Firebase
     implementation platform('com.google.firebase:firebase-bom:30.0.1')
     implementation 'com.google.firebase:firebase-messaging'
     implementation 'com.google.firebase:firebase-analytics'
+
+    //Koin
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"
+    testImplementation "io.insert-koin:koin-test:$koin_version"
 }
 
 

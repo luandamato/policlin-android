@@ -11,8 +11,10 @@ import dagger.android.HasActivityInjector
 import dagger.android.DispatchingAndroidInjector
 import javax.inject.Inject
 import androidx.multidex.MultiDex
-
-
+import com.policlinsaude.newfeature.di.appModules
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidFileProperties
+import org.koin.core.context.startKoin
 
 class PoliclinSaudeApplication : Application(), HasActivityInjector {
 
@@ -26,6 +28,12 @@ class PoliclinSaudeApplication : Application(), HasActivityInjector {
         super.onCreate()
         injectDependencies()
         ModuleDataHelper.configureDatabase(this)
+
+        startKoin {
+            androidContext(this@PoliclinSaudeApplication)
+            androidFileProperties()
+            modules(appModules)
+        }
     }
 
     override fun attachBaseContext(base: Context?) {

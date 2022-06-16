@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.policlinsaude.newfeature">
+
+    <application>
+        <activity
+            android:name=".features.tickets.ui.activities.TicketsActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

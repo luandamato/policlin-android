@@ -10,9 +10,9 @@ data class PresentationQualificationForFilter(var imgQualificacao: String = Inva
                                               var cod: String = InvalidData.UNINITIALIZED.getString()
 ): Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString())
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty())
 
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

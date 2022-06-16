@@ -5,7 +5,7 @@ import dagger.android.support.AndroidSupportInjection
 
 abstract class BaseFragmentWithInject : BaseFragment() {
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         injectDependencies()
         super.onAttach(context)
     }

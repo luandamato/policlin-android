@@ -78,7 +78,7 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
         autoScrollObservable = null
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         activity?.let {
             return it.onOptionsItemSelected(item)
         }
@@ -105,8 +105,6 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
 
         presenter.onValidateConnectedUser(person.plan.register, person.plan.order)
     }
-
-
 
     override fun onItemClick(option: PresentationHomeOptionEnum) {
         when (option) {
