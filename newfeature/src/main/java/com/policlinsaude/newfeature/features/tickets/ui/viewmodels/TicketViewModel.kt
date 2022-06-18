@@ -7,7 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.policlinsaude.newfeature.data.networking.ServerErrorResponse
 import com.policlinsaude.newfeature.data.networking.ViewModelResponse
 import com.policlinsaude.newfeature.data.repositories.TicketRepository
+import com.policlinsaude.newfeature.features.tickets.data.models.TicketBodyModel
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TicketViewModel(
@@ -24,7 +26,7 @@ class TicketViewModel(
                 _responseTickets.postValue(viewModelResponse)
                 _responseTickets.postValue(
                     viewModelResponse.setData(
-                        repository.onGetTickets("ANvS4u5P2kg7e5HLyaVbQ7QXcXLe/qfH", option, year, month)
+                        repository.onGetTickets(TicketBodyModel(option = option, year = year, month = month))
                     )
                 )
             } catch (e: ServerErrorResponse) {
@@ -32,4 +34,9 @@ class TicketViewModel(
             }
         }
     }
+
+    fun clear() {
+        _responseTickets.postValue(null)
+    }
+
 }

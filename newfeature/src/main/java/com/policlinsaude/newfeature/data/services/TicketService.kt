@@ -1,18 +1,18 @@
 package com.policlinsaude.newfeature.data.services
 
+import com.policlinsaude.newfeature.features.tickets.data.models.TicketBodyModel
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketModel
 import retrofit2.Response
-import retrofit2.http.GET
+import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface TicketService {
 
-    @GET("rest/apiBoletos")
+    @POST("apiapp_prot/rest/apiBoletos")
     suspend fun getTickets(
-        @Query("token") token: String?,
-        @Query("opcao") opcao: Int,
-        @Query("ano") ano: Int,
-        @Query("mes") mes: Int
+        @Body ticketBody: TicketBodyModel
     ): Response<TicketModel>
 
 }

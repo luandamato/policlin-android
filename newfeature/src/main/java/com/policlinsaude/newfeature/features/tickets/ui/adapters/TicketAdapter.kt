@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.policlinsaude.newfeature.databinding.AdapterTicketsBinding
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketDetail
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketModel
+import com.policlinsaude.newfeature.utils.toCurrencyBRL
+import com.policlinsaude.newfeature.utils.toMMYYYY
 
 class TicketAdapter(
     private var list: MutableList<TicketDetail> = arrayListOf(),
@@ -34,8 +36,11 @@ class TicketAdapter(
 
         fun bind(item: TicketDetail) {
             with(binding) {
-                textviewDueDateTicket.text = item.vencimento
-                textviewValueTicket.text = item.valor
+                textviewDueDateTicket.text = item.vencimento?.toMMYYYY()
+                textviewValueTicket.text = item.valor?.toCurrencyBRL()
+                buttonSeeDetails.setOnClickListener {
+                    setOnClickListener(item)
+                }
             }
         }
     }

@@ -1,4 +1,23 @@
 <resources>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+
+    <!-- TICKETS -->
+    <string name="ticket_filter">Filtro</string>
+    <string name="ticket_history_opened">Histórico dos boletos em aberto</string>
+    <string name="ticket_button_see_details">VER DETALHE</string>
+    <string name="ticket_value">Valor</string>
+    <string name="ticket_due">Vencimento</string>
+
+    <string name="ticket_detail_due">Vencimento %s</string>
+    <string name="ticket_details_copy_code">Código de barras copiado com sucesso</string>
+    <string name="ticket_detail_code_payment">Código de barra para pagamento:</string>
+    <string name="ticket_detail_button_copy_code">Copiar código de barras</string>
+    <string name="ticket_detail_see_document">VER EM PDF</string>
+
+    <!-- ERROR -->
+    <string name="title_error_oops">Oops!</string>
+    <string name="text_ok">OK</string>
+
+
 </resources>

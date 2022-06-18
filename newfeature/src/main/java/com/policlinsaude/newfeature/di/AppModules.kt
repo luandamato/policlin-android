@@ -10,5 +10,6 @@ import org.koin.dsl.module
 val appModules = module {
 
     single<TicketRepository> { TicketRepositoryImpl() }
-    single { TicketViewModel(get()) }
+
+    viewModel { TicketViewModel(get()) }
 }

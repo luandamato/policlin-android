@@ -1,23 +1,29 @@
 package com.policlinsaude.newfeature.utils
 
+import android.provider.ContactsContract.CommonDataKinds.StructuredPostal
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.policlinsaude.newfeature.data.networking.ServerErrorResponse
 import kotlinx.coroutines.coroutineScope
 import retrofit2.Response
 import java.lang.reflect.Method
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
+import android.provider.ContactsContract.CommonDataKinds.StructuredPostal.COUNTRY
+import java.text.NumberFormat
+import java.util.*
+
 
 suspend fun <T> makeRequest(call: suspend () -> Response<T>): T {
     return coroutineScope {
         val response = try {
             call.invoke()
         } catch (ex: Exception) {
-            throw Exception() //ServerErrorResponse.verifyError(ex)
+            throw ServerErrorResponse.verifyError(ex)
         }
 
         if(!response.isSuccessful) {
-            throw Exception()//ServerErrorResponse.verifyError(response.errorBody(), response.code())
+            throw ServerErrorResponse.verifyError(response.errorBody(), response.code())
         }
 
         return@coroutineScope response.body() as T
@@ -31,4 +37,8 @@ suspend fun Method.invokeSuspend(obj: Any, vararg args: Any?): Any? =
         cont.resume(ret)
     }
 
-inline fun <reified T> Gson.fromJson(json: String) = fromJson<T>(json, object: TypeToken<T>() {}.type)
+
+fun String.toCurrencyBRL(): String {
+    val format = NumberFormat.getCurrencyInstance(Locale("pt", "BR"))
+    return format.format(this.toDouble())
+}
