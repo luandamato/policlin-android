@@ -35,8 +35,4 @@ class TicketViewModel(
         }
     }
 
-    fun clear() {
-        _responseTickets.postValue(null)
-    }
-
 }

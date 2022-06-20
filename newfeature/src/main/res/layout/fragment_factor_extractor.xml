@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".features.extractor.ui.fragments.FactorExtractorFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayout_items"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp">
+
+        <TextView
+            style="@style/Primary.Text.Style.Bold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:textColor="@color/black_2"
+            android:textSize="22sp"
+            android:gravity="center"
+            android:text="EXTRATO DE FATOR" />
+
+
+        <TextView
+            android:id="@+id/textview_year_factor_extractor"
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/factor_extractor_textview"
+            android:textColor="@color/black_2"
+            android:textSize="16sp"
+            android:paddingStart="56dp"
+            android:text="@string/factor_extractor_select_year"
+            android:drawableEnd="@drawable/ic_arrow_drop_down"
+            android:drawableTint="@color/gray_2"/>
+
+        <TextView
+            android:id="@+id/textview_month_factor_extractor"
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/factor_extractor_textview"
+            android:textColor="@color/black_2"
+            android:textSize="16sp"
+            android:paddingStart="56dp"
+            android:text="@string/factor_extractor_select_month"
+            android:drawableEnd="@drawable/ic_arrow_drop_down"
+            android:drawableTint="@color/gray_2"/>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:paddingBottom="24dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button_search_factor_extractor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:background="@drawable/button_secondary"
+                    android:text="Pesquisar"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/button_clean_factor_extractor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/button_primary"
+                    android:textColor="@color/red_4"
+                    android:text="limpar campos" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_tickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</FrameLayout>

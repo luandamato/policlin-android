@@ -1,13 +1,13 @@
 ext {
     application = [
-            versionCode  : 22,
-            versionName  : "1.22",
+            versionCode  : 23,
+            versionName  : "1.23",
             applicationId: "br.com.policlinsaude"
     ]
 
     versions = [
             buildTools: "29.0.3",
-            minSdk    : 19,
+            minSdk    : 21,
             targetSdk : 29,
             compileSdk: 29,
     ]

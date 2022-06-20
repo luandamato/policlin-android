@@ -8,5 +8,7 @@ enum class PresentationHomeOptionEnum(@DrawableRes val drawable: Int) {
     OWN_NETWORK(R.drawable.own_network),
     FAVORITES(R.drawable.favorites),
     HEALTH_INSURANCE(R.drawable.health_insurance),
-    TICKET(R.drawable.medical_guide)
+    TICKET(R.drawable.tickets),
+    RESEARCH_VALUES_CO_PARTICIPATION(R.drawable.research_coparticipation_values),
+    FACTOR_EXTRACTOR(R.drawable.factor_extractor)
 }

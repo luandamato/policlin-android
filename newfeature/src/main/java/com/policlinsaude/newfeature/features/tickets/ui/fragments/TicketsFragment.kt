@@ -22,9 +22,6 @@ import com.policlinsaude.newfeature.databinding.FragmentTicketsBinding
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketModel
 import com.policlinsaude.newfeature.features.tickets.ui.adapters.TicketAdapter
 import com.policlinsaude.newfeature.features.tickets.ui.viewmodels.TicketViewModel
-import com.policlinsaude.newfeature.utils.toCurrencyBRL
-import com.policlinsaude.newfeature.utils.toDDMMYYYY
-import com.policlinsaude.newfeature.utils.toMMYYYY
 import kotlinx.coroutines.channels.ticker
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.util.*
@@ -35,7 +32,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketDetail
 import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
-import com.policlinsaude.newfeature.utils.DialogHelper
+import com.policlinsaude.newfeature.utils.*
 import com.whiteelephant.monthpicker.MonthPickerDialog
 import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -141,51 +138,23 @@ class TicketsFragment : Fragment() {
         popup.setOnMenuItemClickListener { menuItem: MenuItem ->
             when(menuItem.itemId) {
                 R.id.filter_open_payment -> { viewModel.onGetTickets(); true }
-                R.id.filter_due_month_year -> { calendarMonthYear(); true }
-                R.id.filter_due_year -> { calendarYear(); true }
+                R.id.filter_due_month_year -> {
+                    context?.calendarMonthYear { month, year ->
+                        viewModel.onGetTickets(option = 2, year = year, month = month)
+                    }
+                    true
+                }
+                R.id.filter_due_year -> {
+                    context?.calendarYear { year ->
+                        viewModel.onGetTickets(option = 3, year = year)
+                    }
+                    true
+                }
                 else -> { false }
             }
         }
 
         popup.show()
-    }
-
-    private fun calendarYear() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-
-        val builder = MonthPickerDialog.Builder(
-            requireContext(),
-            { _, selectedYear ->
-                viewModel.onGetTickets(option = 3, year = selectedYear)
-            }, year,0
-        )
-
-        builder
-            .showYearOnly()
-            .setYearRange(1980, year)
-            .build()
-            .show()
-    }
-
-    private fun calendarMonthYear() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-
-        val builder = MonthPickerDialog.Builder(
-            requireContext(),
-            { selectedMonth, selectedYear ->
-                viewModel.onGetTickets(option = 2, year = selectedYear, month = selectedMonth)
-            }, year,0
-        )
-
-        builder
-            .setActivatedMonth(month)
-            .setMinYear(1960)
-            .setMaxYear(year)
-            .build()
-            .show()
     }
 
     private fun goToTicketDetail(ticket: TicketDetail) {

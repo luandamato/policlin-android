@@ -1,7 +1,10 @@
 package com.policlinsaude.newfeature.di
 
+import com.policlinsaude.newfeature.data.repositories.FactorExtractorRepository
+import com.policlinsaude.newfeature.data.repositories.FactorExtractorRepositoryImpl
 import com.policlinsaude.newfeature.data.repositories.TicketRepository
 import com.policlinsaude.newfeature.data.repositories.TicketRepositoryImpl
+import com.policlinsaude.newfeature.features.extractor.ui.viewmodels.FactorExtractorViewModel
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketDetail
 import com.policlinsaude.newfeature.features.tickets.ui.viewmodels.TicketViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -11,5 +14,9 @@ val appModules = module {
 
     single<TicketRepository> { TicketRepositoryImpl() }
 
+    single<FactorExtractorRepository> { FactorExtractorRepositoryImpl() }
+
     viewModel { TicketViewModel(get()) }
+
+    viewModel { FactorExtractorViewModel(get()) }
 }

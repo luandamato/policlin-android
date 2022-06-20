@@ -4,6 +4,12 @@
 
     <application>
         <activity
+            android:name=".features.extractor.ui.activities.FactorExtractorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.coparticipation.ui.activities.ResearchCoParticipationActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.tickets.ui.activities.TicketsActivity"
             android:exported="false" />
     </application>

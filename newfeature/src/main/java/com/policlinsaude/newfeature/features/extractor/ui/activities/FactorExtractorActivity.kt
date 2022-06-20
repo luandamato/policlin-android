@@ -1,26 +1,26 @@
-package com.policlinsaude.newfeature.features.tickets.ui.activities
+package com.policlinsaude.newfeature.features.extractor.ui.activities
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.policlinsaude.newfeature.R
+import com.policlinsaude.newfeature.databinding.ActivityFactorExtractorBinding
 import com.policlinsaude.newfeature.databinding.ActivityTicketsBinding
 
-class TicketsActivity : AppCompatActivity() {
+class FactorExtractorActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityTicketsBinding
+    private lateinit var binding: ActivityFactorExtractorBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityTicketsBinding.inflate(layoutInflater)
+        binding = ActivityFactorExtractorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(findViewById(R.id.ticket_toolbar))
+        setSupportActionBar(findViewById(R.id.factor_extractor_toolbar))
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
@@ -29,14 +29,13 @@ class TicketsActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, config)
 
-        binding.ticketToolbar.toolbar.setupWithNavController(navController)
+        binding.factorExtractorToolbar.toolbar.setupWithNavController(navController)
     }
 
     fun showBackButton() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        binding.ticketToolbar.toolbar.setNavigationOnClickListener {
+        binding.factorExtractorToolbar.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
     }
-
 }
