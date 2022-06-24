@@ -153,7 +153,7 @@ class MedicalGuideListPresenterImpl(private val navigator: MedicalGuideListNavig
 
                         var i: Int = 0
 
-                        for (itMedicalGuide in 0..medicalGuideV4.size - 1) {
+                        for (itMedicalGuide in medicalGuideV4.indices) {
                             //for (medicalGuide in medicalGuideV4){
 
 

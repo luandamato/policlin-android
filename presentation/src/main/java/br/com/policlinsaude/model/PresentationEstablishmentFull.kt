@@ -12,11 +12,11 @@ data class PresentationEstablishmentFull(var planNameV4: String = InvalidData.UN
                                          var medicalGuide: List<PresentationEstablishment> = mutableListOf()
                                      ) : Parcelable {//, Serializable {
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.createTypedArrayList(PresentationEstablishment)
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty(),
+            parcel.createTypedArrayList(PresentationEstablishment) ?: arrayListOf()
  ) {
     }
 

@@ -5,8 +5,9 @@ import android.os.Parcelable
 import br.com.domain.helper.InvalidData
 import java.io.Serializable  //tirado por Andre
 
-data class PresentationEstablishment(var showPlansV4: Int = 0,//Andre
-                                     var planNameV4: String = InvalidData.UNINITIALIZED.getString(),//Andre
+data class PresentationEstablishment(
+    var showPlansV4: Int = 0,//Andre
+    var planNameV4: String = InvalidData.UNINITIALIZED.getString(),//Andre
                                      var showCityV4: Int = 0,//Andre
                                      var cityV4: String = InvalidData.UNINITIALIZED.getString(),//Andre
                                      var showServiceTypesV4: Int = 0,//Andre
@@ -45,49 +46,50 @@ data class PresentationEstablishment(var showPlansV4: Int = 0,//Andre
                                      var proCod: String = InvalidData.UNINITIALIZED.getString(),
                                      var isOwnNetwork: Boolean = false,
                                      var favorited: Boolean = false,
-                                     var uType: String = InvalidData.UNINITIALIZED.getString()) : Parcelable {//, Serializable {
+                                     var uType: String = InvalidData.UNINITIALIZED.getString()
+) : Parcelable {//, Serializable {
 constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readString(),
+        parcel.readString().orEmpty(),
         parcel.readInt(),
-        parcel.readString(),
+        parcel.readString().orEmpty(),
         parcel.readInt(),
-        parcel.readString(),
+        parcel.readString().orEmpty(),
         parcel.readInt(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.createTypedArrayList(PresentationQualification),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.createTypedArrayList(PresentationQualification) ?: arrayListOf(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
         parcel.readDouble(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
+        parcel.readString().orEmpty(),
         parcel.readByte() != 0.toByte(),
         parcel.readByte() != 0.toByte(),
-        parcel.readString()) {
+        parcel.readString().orEmpty()) {
 }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

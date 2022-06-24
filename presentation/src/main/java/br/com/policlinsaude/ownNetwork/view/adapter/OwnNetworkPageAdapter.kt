@@ -34,8 +34,6 @@ class OwnNetworkPageAdapter(fragmentManager: FragmentManager) : FragmentStatePag
 
     //utilizado para sanar o bug do viewpager
     override fun getItemPosition(`object`: Any): Int {
-        //return super.getItemPosition(`object`)
-
         return POSITION_NONE
     }
 

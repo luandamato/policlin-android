@@ -45,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         item?.let {
             when (item.itemId) {
                 android.R.id.home -> {

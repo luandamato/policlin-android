@@ -1,16 +1,15 @@
 package br.com.policlinsaude.units.view.adapter
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.helper.getBitmapFromImage
 import br.com.policlinsaude.medicalGuideList.view.adapter.MedicalGuideListAdapter
 import br.com.policlinsaude.medicalGuideList.view.adapter.MedicalGuideQualificationAdapter
 import br.com.policlinsaude.model.PresentationEstablishment
 import br.com.policlinsaude.model.PresentationQualification
-import br.com.policlinsaude.units.view.UnitsFragment
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -18,7 +17,6 @@ import com.google.android.flexbox.JustifyContent
 import kotlinx.android.synthetic.main.list_item_own_network.view.*
 import kotlinx.android.synthetic.main.list_item_units.view.*
 
-//class UnitsAdapter(private val onItemClickListener: UnitsFragment)
 class UnitsAdapter(private val onItemClickListener: OnItemClickListener)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

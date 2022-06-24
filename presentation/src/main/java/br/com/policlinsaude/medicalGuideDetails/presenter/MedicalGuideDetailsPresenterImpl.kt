@@ -50,7 +50,7 @@ class MedicalGuideDetailsPresenterImpl(private val navigator: MedicalGuideDetail
             when {
                 it.typePhoneOne == "2" && it.typePhoneTwo == "2" ->  view.showSelectWhats(it.phoneOne, it.phoneTwo)
                 it.typePhoneOne == "2" -> navigator.goToWhatsApp(it.phoneOne)
-                it.typePhoneTwo == "2" -> navigator.goToWhatsApp(it.phoneOne)
+                it.typePhoneTwo == "2" -> navigator.goToWhatsApp(it.phoneTwo)
             }
         }
     }

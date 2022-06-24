@@ -15,7 +15,7 @@ data class PresentationEstablishmentLocation(val latitude: Double = 0.0,
     constructor(parcel: Parcel) : this(
             parcel.readDouble(),
             parcel.readDouble(),
-            parcel.readString()) {
+            parcel.readString().orEmpty()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

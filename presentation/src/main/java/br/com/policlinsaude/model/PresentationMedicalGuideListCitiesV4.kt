@@ -16,9 +16,9 @@ data class PresentationMedicalGuideListCitiesV4(var cityName: String = InvalidDa
                                                 var serviceType: List<PresentationMedicalGuideListServiceTypesV4> = mutableListOf()
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.createTypedArrayList(PresentationMedicalGuideListServiceTypesV4)) {
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty(),
+            parcel.createTypedArrayList(PresentationMedicalGuideListServiceTypesV4) ?: arrayListOf()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

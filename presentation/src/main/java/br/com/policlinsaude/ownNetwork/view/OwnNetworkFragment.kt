@@ -60,8 +60,4 @@ class OwnNetworkFragment : BaseFragmentWithInject(), OwnNetworkAdapter.OnItemCli
         navigator.goToDetails(establishment)
     }
 
-    /*override fun onSaveInstanceState(outState: Bundle) {
-        // do nothing
-        Log.d("FILTRO", "DENTRO do onSaveInstanceState de OwnNetWorkFragment")
-    }*/
 }

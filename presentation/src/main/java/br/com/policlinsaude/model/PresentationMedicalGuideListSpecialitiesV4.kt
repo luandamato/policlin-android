@@ -18,10 +18,10 @@ data class PresentationMedicalGuideListSpecialitiesV4(var specialityName: String
                                                       var medicalGuide: List<PresentationEstablishment> = mutableListOf()
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.createTypedArrayList(PresentationEstablishment)) {
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty(),
+            parcel.createTypedArrayList(PresentationEstablishment) ?: arrayListOf()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

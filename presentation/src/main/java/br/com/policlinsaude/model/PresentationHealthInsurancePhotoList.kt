@@ -15,11 +15,11 @@ data class PresentationHealthInsurancePhotoList( var listaimgFrente: List<Presen
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.createTypedArrayList(PresentationHealthInsurancePhoto),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString()) {
+            parcel.createTypedArrayList(PresentationHealthInsurancePhoto) ?: arrayListOf(),
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

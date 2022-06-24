@@ -78,7 +78,7 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
         autoScrollObservable = null
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         activity?.let {
             return it.onOptionsItemSelected(item)
         }

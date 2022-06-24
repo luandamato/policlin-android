@@ -9,7 +9,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import br.com.domain.exception.MessageErrorException
-import br.com.domain.model.Qualification
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.model.PresentationEstablishment
@@ -62,13 +61,14 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
         presenter.getOwnNetworks()
     }
 
-    /*@SuppressLint("MissingSuperCall")
-    override fun onSaveInstanceState(outState: Bundle?) {
+
+    @SuppressLint("MissingSuperCall")
+    override fun onSaveInstanceState(outState: Bundle) {
         // do nothing
         // this is because the amount of data in the pagers
 
         Log.d("FILTRO", "DENTRO do onSaveInstanceState de OwnNetWorkActivity")
-    }*/
+    }
 
     override fun showOwnNetworks(ownNetworks: List<Pair<String, List<PresentationEstablishment>>>,
                                  qualifications: MutableList<PresentationQualification>) {
@@ -80,8 +80,8 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        item?.let {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        item.let {
             when (item.itemId) {
                 R.id.action_map -> {
                     presenter.onMapClicked(tabs.selectedTabPosition)
@@ -91,7 +91,6 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
                 }
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
 
