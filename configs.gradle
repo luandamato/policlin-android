@@ -1,15 +1,15 @@
 ext {
     application = [
-            versionCode  : 32,
-            versionName  : "1.32",
+            versionCode  : 33,
+            versionName  : "1.33",
             applicationId: "br.com.policlinsaude"
     ]
 
     versions = [
-            buildTools: "29.0.3",
+            buildTools: "30.0.3",
             minSdk    : 21,
-            targetSdk : 29,
-            compileSdk: 29,
+            targetSdk : 30,
+            compileSdk: 30,
     ]
 
     supportVersion = '27.1.1'
