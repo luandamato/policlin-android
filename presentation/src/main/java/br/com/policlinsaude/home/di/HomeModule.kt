@@ -1,5 +1,6 @@
 package br.com.policlinsaude.home.di
 
+import br.com.domain.model.ValidateButtons
 import br.com.domain.repository.Repository
 import br.com.domain.usecase.*
 import br.com.policlinsaude.home.navigator.HomeNavigator
@@ -32,11 +33,12 @@ class HomeModule {
         getCurrentPersonUseCase: GetCurrentPersonUseCase,
         getBannersUseCase: GetBannersUseCase,
         getUserConnected: GetValidationUserConnectedUseCase,
-        doLogoffUseCase: DoLogoffUseCase
-    ): HomePresenter = HomePresenterImpl(view, getCurrentPersonUseCase, getBannersUseCase, getUserConnected, doLogoffUseCase)
+        doLogoffUseCase: DoLogoffUseCase,
+        validateButtons: GetValidationButtonUseCase
+    ): HomePresenter = HomePresenterImpl(view, getCurrentPersonUseCase, getBannersUseCase, getUserConnected, doLogoffUseCase, validateButtons)
 
     @Provides
-    fun provideHomeAdapter(homeFragment: HomeFragment): HomeAdapter = HomeAdapter(homeFragment)
+    fun provideHomeAdapter(homeFragment: HomeFragment): HomeAdapter = HomeAdapter(arrayListOf(), homeFragment)
 
     @Provides
     fun provideHomePageAdapter(homeFragment: HomeFragment): HomePageAdapter = HomePageAdapter(homeFragment.context!!)
@@ -55,6 +57,10 @@ class HomeModule {
     @Provides
     fun provideDoLogoff(repository: Repository)
             : DoLogoffUseCase = DoLogoffUseCase(repository)
+
+    @Provides
+    fun provideGetValidateButtons(repository: Repository)
+        :GetValidationButtonUseCase = GetValidationButtonUseCase(repository)
 
 
 

@@ -1,5 +1,6 @@
 package br.com.policlinsaude.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.appcompat.widget.Toolbar
@@ -11,6 +12,7 @@ import android.widget.TextView
 import br.com.domain.model.Banner
 import br.com.domain.model.Person
 import br.com.domain.model.UserConnected
+import br.com.domain.model.ValidateButtons
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseFragmentWithInject
 import br.com.policlinsaude.core.helper.DialogHelper
@@ -20,6 +22,9 @@ import br.com.policlinsaude.home.view.adapter.HomeAdapter
 import br.com.policlinsaude.home.view.adapter.HomePageAdapter
 import br.com.policlinsaude.home.view.model.PresentationHomeOptionEnum
 import br.com.policlinsaude.preferences.presenter.PreferencesPresenter
+import com.policlinsaude.newfeature.features.coparticipation.ui.activities.ResearchCoParticipationActivity
+import com.policlinsaude.newfeature.features.extractor.ui.activities.FactorExtractorActivity
+import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -28,9 +33,13 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickListener {
+class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickListener {
+
+    private var isCoPartFM: Boolean = false
 
     companion object {
+        private const val CO_PART_FM = "fm"
+        private const val IS_CO_PART_FM = "CO_PART_FM"
 
         fun newInstance(): HomeFragment {
             return HomeFragment()
@@ -51,6 +60,7 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
     private var autoScrollObservable: Observable<Long>? = null
     private var autoScrollDisposable: Disposable? = null
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_home, container, false)
@@ -62,7 +72,6 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
         if ((activity as MenuActivity).isGuest) {
             nameTextView.setText(R.string.text_guest)
         }
-
         return view
     }
 
@@ -93,9 +102,9 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
             GridLayoutManager(context, 2)
 
         viewPager.adapter = homePageAdapter
-
+        homeAdapter.setup(PresentationHomeOptionEnum.values().toMutableList())
+        presenter.onValidateButtons()
         presenter.onViewAttached()
-
 
     }
 
@@ -105,8 +114,6 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
 
         presenter.onValidateConnectedUser(person.plan.register, person.plan.order)
     }
-
-
 
     override fun onItemClick(option: PresentationHomeOptionEnum) {
         when (option) {
@@ -126,7 +133,34 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
                     homeNavigator.goToFavorites()
                 }
             }
-            else -> {
+
+            PresentationHomeOptionEnum.TICKET -> {
+                if ((activity as MenuActivity).isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    val intent = Intent(context, TicketsActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+
+            PresentationHomeOptionEnum.RESEARCH_VALUES_CO_PARTICIPATION -> {
+                if ((activity as MenuActivity).isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    val intent = Intent(context, ResearchCoParticipationActivity::class.java)
+                    intent.putExtra(IS_CO_PART_FM, isCoPartFM)
+                    startActivity(intent)
+                }
+            }
+
+            PresentationHomeOptionEnum.FACTOR_EXTRACTOR -> {
+                if ((activity as MenuActivity).isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    val intent = Intent(context, FactorExtractorActivity::class.java)
+                    intent.putExtra(IS_CO_PART_FM, isCoPartFM)
+                    startActivity(intent)
+                }
             }
         }
     }
@@ -146,6 +180,18 @@ class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClick
     override fun renderBanners(banners: List<Banner>) {
         homePageAdapter.setBanners(banners)
         pageIndicatorView.count = banners.size
+    }
+
+    override fun showButtons(buttons: ValidateButtons) {
+        if (!(activity as MenuActivity).isGuest) {
+            if (!buttons.boleto)
+                homeAdapter.removeTicket()
+
+            if (buttons.copartFM.isEmpty())
+                homeAdapter.removeExtracts()
+
+            isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
+        }
     }
 
     private fun setupAutoScroll() {

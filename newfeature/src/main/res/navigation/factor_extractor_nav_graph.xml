@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/factor_extractor_nav_graph"
+    app:startDestination="@id/factorExtractorFragment">
+
+    <fragment
+        android:id="@+id/factorExtractorFragment"
+        android:label="Extrato Coparticipação"
+        android:name="com.policlinsaude.newfeature.features.extractor.ui.fragments.FactorExtractorFragment"
+        tools:layout="@layout/fragment_factor_extractor" />
+
+</navigation>

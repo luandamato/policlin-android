@@ -60,4 +60,7 @@ class OwnNetworkFragment : BaseFragmentWithInject(), OwnNetworkAdapter.OnItemCli
         navigator.goToDetails(establishment)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+    }
 }

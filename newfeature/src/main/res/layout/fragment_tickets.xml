@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:theme="@style/AppTheme" >
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView_tickets"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F5F5F5"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayout_filter"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center_vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ticket_opened_option"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/Bordo"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    app:cardCornerRadius="4dp">
+
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:id="@+id/textview_ticket_openned"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="11dp"
+                        android:text="@string/ticket_open"
+                        android:textColor="@color/Branco"
+                        android:textSize="13sp" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_year_and_month"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    app:cardCornerRadius="4dp">
+
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:id="@+id/year_and_month"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="@string/ticket_year_month"
+                        android:textColor="@color/Cinza_Claro"
+                        android:textSize="13sp"
+                        app:drawableTint="@color/Bordo"
+                        app:drawableEndCompat="@drawable/ic_arrow_down" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_year"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight=".85"
+                    android:layout_marginEnd="24dp"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    app:cardCornerRadius="4dp">
+
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:id="@+id/year"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/Branco"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="@string/ticket_year"
+                        android:textColor="@color/Cinza_Claro"
+                        android:textSize="13sp"
+                        app:drawableTint="@color/Bordo"
+                        app:drawableEndCompat="@drawable/ic_arrow_down" />
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_tickets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginBottom="12dp"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:spanCount="10"
+                tools:listitem="@layout/adapter_tickets" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_tickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</FrameLayout>

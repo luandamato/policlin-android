@@ -1,10 +1,8 @@
 package br.com.policlinsaude.home.presenter
 
+import android.os.UserHandle
 import br.com.domain.model.UserConnected
-import br.com.domain.usecase.DoLogoffUseCase
-import br.com.domain.usecase.GetBannersUseCase
-import br.com.domain.usecase.GetCurrentPersonUseCase
-import br.com.domain.usecase.GetValidationUserConnectedUseCase
+import br.com.domain.usecase.*
 import br.com.domain.usecase.requestvalues.GetValidationUserConnectedRV
 import br.com.domain.usecase.requestvalues.RecoverPasswordRV
 import br.com.policlinsaude.core.helper.UseCaseHandler
@@ -19,7 +17,8 @@ class HomePresenterImpl(private val view: HomeView,
                         private val getCurrentPersonUseCase: GetCurrentPersonUseCase,
                         private val getBannersUseCase: GetBannersUseCase,
                         private val getValidationUserConnected: GetValidationUserConnectedUseCase,
-                        private val doLogoffUseCase: DoLogoffUseCase
+                        private val doLogoffUseCase: DoLogoffUseCase,
+                        private val validateButtons: GetValidationButtonUseCase
 ) : HomePresenter {
 
     override fun onViewAttached() {
@@ -73,6 +72,15 @@ class HomePresenterImpl(private val view: HomeView,
                     if(it.codAcao == 5)
                         onLogout(it)
                 }
+            )
+    }
+
+    override fun onValidateButtons() {
+        UseCaseHandler.execute(validateButtons)
+            .subscribeBy(
+                onNext = {
+                    view.showButtons(it)
+                },
             )
     }
 

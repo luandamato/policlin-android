@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/Bordo</color>
+    <color name="colorPrimaryDark">@color/red_2</color>
+    <color name="colorAccent">@color/gray_1</color>
+
+    <color name="black">#000000</color>
+    <color name="black_2">#0D0D0D</color>
+
+    <color name="gray_1">#575757</color>
+    <color name="gray_2">#424242</color>
+    <color name="gray_3">#C4C4C4</color>
+    <color name="gray_4">#999494</color>
+
+    <color name="red_1">#9C2837</color>
+    <color name="red_2">#7c202c</color>
+    <color name="red_3">#F23F3F</color>
+    <color name="red_4">#920303</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="white_1">#e5e5e5</color>
+    <color name="white_2">#F7F7F7</color>
+
+    <color name="green_1">#2F862F</color>
+
+    <color name="blue_1">#054F77</color>
+
+    <color name="pink_1">#F0DEDE</color>
+
+    <color name="primaryButtonText">@color/red_1</color>
+    <color name="secondaryText">@color/gray_2</color>
+    <color name="primaryButtonBackground">@color/white</color>
+    <color name="primaryButtonRipple">@color/white_1</color>
+    <color name="secondaryButtonBackground">@color/colorPrimary</color>
+    <color name="darkBg">@color/colorPrimary</color>
+    <color name="lightText">@color/white</color>
+    <color name="toolbarBottomColor">#292825</color>
+    <color name="loadingBackground">#80FFFFFF</color>
+    <color name="divider">#DDDDDD</color>
+    <color name="lightBg">#EEEEEE</color>
+    <color name="headerBg">#CCCCCC</color>
+    <color name="disabledText">#888888</color>
+
+
+    <color name="Bordo">#73282E</color>
+    <color name="Bordo_10">#1673282E</color>
+    <color name="Branco">#FFFFFF</color>
+    <color name="Cinza_Claro">#BBBBBB</color>
+    <color name="Cinza_10">#16AEAEAE</color>
+    <color name="Verde">#31C719</color>
+    <color name="Verde_10">#1631C719</color>
+    <color name="Laranja">#FB9E14</color>
+    <color name="Laranja_10">#16FB9E14</color>
+
+</resources>

@@ -3,6 +3,8 @@ package br.com.data.datasource.networking.rest
 import br.com.data.datasource.networking.rest.model.*
 import br.com.data.helper.InvalidData
 import br.com.domain.model.UserConnected
+import br.com.domain.model.ValidateButtonBody
+import br.com.domain.model.ValidateButtons
 import io.reactivex.Flowable
 import retrofit2.http.*
 
@@ -163,6 +165,12 @@ interface NetworkingService {
         @Field("matricula") registration: String,
         @Field("ordem") order: String
     ): Flowable<UserConnected>
+
+    @POST("")
+    fun validateButtons(
+        @Url url: String = "http://policlinsaude.com.br/apiapp/rest/apiAcessoBotoes",
+        @Body body: ValidateButtonBody
+    ): Flowable<ValidateButtons>
 
 
 

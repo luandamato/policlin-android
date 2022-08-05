@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tickets_nav_graph"
+    app:startDestination="@id/ticketsFragment">
+
+    <fragment
+        android:id="@+id/ticketsFragment"
+        android:label="2º Via Boleto"
+        android:name="com.policlinsaude.newfeature.features.tickets.ui.fragments.TicketsFragment" >
+
+        <action
+            android:id="@+id/ticketsFragment_to_ticketDetailFragment"
+            app:destination="@id/ticketDetailFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/ticketDetailFragment"
+        android:label="Detalhe"
+        android:name="com.policlinsaude.newfeature.features.tickets.ui.fragments.TicketDetailFragment" >
+
+        <argument android:name="detail"
+            app:argType="com.policlinsaude.newfeature.features.tickets.data.models.TicketDetail" />
+
+    </fragment>
+
+</navigation>

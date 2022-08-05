@@ -266,5 +266,13 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
         }
     }
 
+    override fun onValidateButtons(token: String): Flowable<ValidateButtons> {
+
+        return networkingService.validateButtons(body = ValidateButtonBody(token = token))
+            .flatMap {
+                Flowable.just(it)
+            }
+    }
+
     fun validateMsgIsSuccess(message: String?): Boolean = (message.isNullOrEmpty() || message != "OK")
 }

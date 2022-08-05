@@ -12,6 +12,7 @@ object DialogHelper {
                    listenerPositiveButton: () -> Unit = { },
                    listenerNegativeButton: (() -> Unit)? = { },
                    onDismiss: (() -> Unit)? = { }): AlertDialog {
+
         return showDialog(context,
                 context.getString(title),
                 context.getString(message),

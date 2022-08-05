@@ -9,6 +9,7 @@ import android.content.SharedPreferences
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.core.content.ContextCompat
@@ -254,6 +255,10 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     override fun execGetFavorites() {
         storeFavorites.getFavorites()
 
+    }
+
+    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
+        super.onSaveInstanceState(outState, outPersistentState)
     }
 
     override fun saveFavoritesInPrefs(favorites: List<PresentationEstablishment>) {

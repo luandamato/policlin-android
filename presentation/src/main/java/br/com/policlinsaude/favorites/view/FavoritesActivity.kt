@@ -121,31 +121,31 @@ class FavoritesActivity : BaseActivity(), FavoritesView, FavoritesAdapter.OnItem
 
     override fun createFavoritesList(): List<PresentationEstablishment> {
 
-        var favoritesList: List<PresentationEstablishment>
+        val favoritesList: List<PresentationEstablishment>
 
-        var gsonFavoritesRetorno = Gson()
+        val gsonFavoritesRetorno = Gson()
 
 
-        try {
-            var strJsonRetorno: String = sharedPreferences.getString(FAVORITES, null)
+        return try {
+            val strJsonRetorno: String? = sharedPreferences.getString(FAVORITES, null)
 
-            favoritesList  = gsonFavoritesRetorno.fromJson(strJsonRetorno,object: TypeToken<MutableList<PresentationEstablishment>>(){}.type)
+            favoritesList  = gsonFavoritesRetorno.fromJson(strJsonRetorno, object: TypeToken<MutableList<PresentationEstablishment>>(){}.type)
 
             Log.d("FAVORITOS","NUMERO DE FAVORITOS : " + favoritesList.size)
             renderEstablishments(favoritesList)
 
-            return favoritesList
+            favoritesList
 
         } catch (e: Exception) {
-            return emptyList()
+            emptyList()
         }
 
     }
     override fun saveFavoritesInPrefs(favorites: List<PresentationEstablishment>) {
 
-         var gsonFavorites = Gson()
+        val gsonFavorites = Gson()
 
-        var strJsonFavoritses: String = gsonFavorites.toJson(favorites)
+        val strJsonFavoritses: String = gsonFavorites.toJson(favorites)
 
         val editor = sharedPreferences.edit()
 

@@ -28,7 +28,6 @@ import javax.inject.Inject
 class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListener {
 
     companion object {
-
         fun start(activity: Activity) {
             val intent = Intent(activity, MenuActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK

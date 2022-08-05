@@ -62,18 +62,15 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
     }
 
 
-    @SuppressLint("MissingSuperCall")
-    override fun onSaveInstanceState(outState: Bundle) {
-        // do nothing
-        // this is because the amount of data in the pagers
 
-        Log.d("FILTRO", "DENTRO do onSaveInstanceState de OwnNetWorkActivity")
-    }
 
     override fun showOwnNetworks(ownNetworks: List<Pair<String, List<PresentationEstablishment>>>,
                                  qualifications: MutableList<PresentationQualification>) {
         adapter.setOwnNetworks(ownNetworks, qualifications)
     }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onSaveInstanceState(outState: Bundle) { }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.activity_medical_guide_list, menu)

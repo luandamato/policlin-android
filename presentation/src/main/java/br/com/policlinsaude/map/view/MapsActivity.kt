@@ -67,7 +67,8 @@ class MapsActivity : BaseActivity(), MapsView, OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
-        presenter.onMapReady(intent.getParcelableArrayListExtra<PresentationEstablishmentLocation>(EXTRA_ESTABLISHMENTS))
+        intent.getParcelableArrayListExtra<PresentationEstablishmentLocation>(EXTRA_ESTABLISHMENTS)
+            ?.let { presenter.onMapReady(it) }
     }
 
     override fun showLoading() {

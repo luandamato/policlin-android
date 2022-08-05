@@ -78,12 +78,12 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
         val listener = {
             presenter.getImage(this)
         }
-        var photos: List<HealthInsurancePhoto>
+        val photos: List<HealthInsurancePhoto>
 
-        var gsonPhotosRetorno = Gson()
+        val gsonPhotosRetorno = Gson()
 
-        var strJsonRetorno: String? = sharedPreferences.getString(PHOTOS, null)
-        var strPhotoVerso: String? = sharedPreferences.getString(PHOTO_VERSO, null)
+        val strJsonRetorno: String? = sharedPreferences.getString(PHOTOS, null)
+        val strPhotoVerso: String? = sharedPreferences.getString(PHOTO_VERSO, null)
 
         Log.d("CARTEIRINHA","DIALOGERROR -> VALOR DE strJsonRetorno: " + strJsonRetorno)
         Log.d("CARTEIRINHA","DIALOGERROR -> VALOR DE  strPhotoVerso: " + strPhotoVerso)
@@ -128,9 +128,9 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
 
 
-       var gsonPhotos = Gson()
+       val gsonPhotos = Gson()
 
-       var strJson: String = gsonPhotos.toJson(photos)
+       val strJson: String = gsonPhotos.toJson(photos)
 
        val editor = sharedPreferences.edit()
 
@@ -140,13 +140,13 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
        editor.apply()
 
-       var gsonPhotosRetorno = Gson()
+       val gsonPhotosRetorno = Gson()
 
-       var strJsonRetorno: String? = sharedPreferences.getString(PHOTOS, null)
+       val strJsonRetorno: String? = sharedPreferences.getString(PHOTOS, null)
 
       photos  = gsonPhotosRetorno.fromJson(strJsonRetorno,object:TypeToken<MutableList<HealthInsurancePhoto>>(){}.type)
 
-       var strPhotoVerso: String? = sharedPreferences.getString(PHOTO_VERSO, null)
+       val strPhotoVerso: String? = sharedPreferences.getString(PHOTO_VERSO, null)
 
        Log.d("CARTEIRINHA","TAMANHO DE PHOTOS: " + photos.size)
        Log.d("CARTEIRINHA","CONTEUDO DE FOTO VERSO: " + strPhotoVerso)
@@ -219,15 +219,15 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
 
         try {
-            var photos: List<HealthInsurancePhoto>
+            val photos: List<HealthInsurancePhoto>
 
-            var gsonPhotosRetorno = Gson()
+            val gsonPhotosRetorno = Gson()
 
-            var strJsonRetorno: String? = sharedPreferences.getString(PHOTOS, null)
+            val strJsonRetorno: String? = sharedPreferences.getString(PHOTOS, null)
 
             photos  = gsonPhotosRetorno.fromJson(strJsonRetorno,object:TypeToken<MutableList<HealthInsurancePhoto>>(){}.type)
 
-            var strPhotoVerso: String? = sharedPreferences.getString(PHOTO_VERSO, null)
+            val strPhotoVerso: String? = sharedPreferences.getString(PHOTO_VERSO, null)
 
             photoVerso = strPhotoVerso
 

@@ -39,5 +39,6 @@ interface Repository {
     fun checkPlan(person: Person, plan: Plan): Completable
     fun removeFromFavorites(establishment: Establishment): Completable
     fun validateUserConnected(registration: String, order: String): Flowable<UserConnected>
+    fun validateButtons(): Flowable<ValidateButtons>
 
 }
