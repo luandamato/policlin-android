@@ -885,7 +885,7 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
         super.onSaveInstanceState(outState)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         Log.d("MASCARA", "DENTRO do onRestoreInstanceState de MedicalguideOptionsActivity")
 

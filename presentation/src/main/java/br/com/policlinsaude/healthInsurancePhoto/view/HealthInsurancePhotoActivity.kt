@@ -172,7 +172,7 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         item?.let {
             when (item.itemId) {
                 R.id.action_verso -> {

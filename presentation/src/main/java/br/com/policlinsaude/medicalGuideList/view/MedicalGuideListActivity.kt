@@ -335,8 +335,8 @@ class MedicalGuideListActivity : BaseActivity(), MedicalGuideListView, MedicalGu
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        item?.let {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        item.let {
             when (item.itemId) {
                 R.id.action_map -> {
                     presenter.onMapClicked()

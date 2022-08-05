@@ -9,7 +9,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import br.com.domain.exception.MessageErrorException
-import br.com.domain.model.Qualification
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.model.PresentationEstablishment
@@ -63,6 +62,8 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
     }
 
 
+
+
     override fun showOwnNetworks(ownNetworks: List<Pair<String, List<PresentationEstablishment>>>,
                                  qualifications: MutableList<PresentationQualification>) {
         adapter.setOwnNetworks(ownNetworks, qualifications)
@@ -76,8 +77,8 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        item?.let {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        item.let {
             when (item.itemId) {
                 R.id.action_map -> {
                     presenter.onMapClicked(tabs.selectedTabPosition)
@@ -87,7 +88,6 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
                 }
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
 

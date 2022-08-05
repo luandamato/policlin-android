@@ -3,16 +3,15 @@ package br.com.policlinsaude.model
 import android.os.Parcel
 import android.os.Parcelable
 import br.com.domain.helper.InvalidData
-import br.com.domain.model.MedicalGuideListCities
-import java.io.Serializable  //tirado por Andre
 
 /**
  *
  * Andre em 03/06/2018
  */
 
-data class PresentationMedicalGuideListServiceTypesV4(var serviceType: String = InvalidData.UNINITIALIZED.getString(),
-                                                      var specialities: List<PresentationMedicalGuideListSpecialitiesV4> = mutableListOf()
+data class PresentationMedicalGuideListServiceTypesV4(
+    var serviceType: String = InvalidData.UNINITIALIZED.getString(),
+    var specialities: List<PresentationMedicalGuideListSpecialitiesV4> = mutableListOf()
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
             parcel.readString().orEmpty(),

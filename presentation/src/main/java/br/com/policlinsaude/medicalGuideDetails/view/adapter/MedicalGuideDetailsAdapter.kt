@@ -79,8 +79,7 @@ class MedicalGuideDetailsAdapter(
 
     }
 
-    fun setPresentationEstablishment(context: Context,
-                                     presentationEstablishment: PresentationEstablishment, caller: String) {
+    fun setPresentationEstablishment(context: Context, presentationEstablishment: PresentationEstablishment, caller: String) {
         if (caller != "Units") {
             list.add(Pair(context.getString(R.string.title_social_name),
                     presentationEstablishment.socialName))

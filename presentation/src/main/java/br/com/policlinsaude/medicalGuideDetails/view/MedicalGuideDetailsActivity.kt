@@ -10,6 +10,8 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,11 +49,14 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
         fun start(activity: Activity, establishment: PresentationEstablishment, caller: String) {
             val intent = Intent(activity, MedicalGuideDetailsActivity::class.java)
-            Log.d("FAVORITOS", "cidade: " + establishment.city + " Favoritado: " + establishment.favorited)
+            Log.d("FAVORITOS", "TESTEEEE cidade: " + establishment.city + " Favoritado: " + establishment.favorited)
             intent.putExtra(EXTRA_ESTABLISHMENT,establishment)
             intent.putExtra(EXTRA_CALLER_ACTIVITY, caller)
             activity.startActivity(intent)
         }
+
+        private const val  myPreferences = "myPrefs"
+        private const val FAVORITES = "favoritesPref"
     }
 
     @Inject
@@ -62,10 +67,6 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     lateinit var storeFavorites: FavoritesStorePrefsPresenter
 
     private lateinit var sharedPreferences: SharedPreferences
-
-    private var myPreferences = "myPrefs"
-    private var FAVORITES = "favoritesPref"
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,7 +118,8 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     }
 
     private fun getEstablishment() {
-        presenter.setEstablishment(intent.getParcelableExtra(EXTRA_ESTABLISHMENT))
+        val x = intent.getParcelableExtra(EXTRA_ESTABLISHMENT)?: PresentationEstablishment()
+        presenter.setEstablishment(x)
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -162,7 +164,7 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
 
         title_text_view.text = presentationEstablishment.title
-        adapter.setPresentationEstablishment(this, presentationEstablishment, caller)
+        adapter.setPresentationEstablishment(this, presentationEstablishment, caller.orEmpty())
         adapter.notifyDataSetChanged()
     }
 
@@ -220,7 +222,6 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
     override fun setFavorited(favorited: Boolean) {
         imageButtonFavorite.setImageDrawable(ContextCompat.getDrawable(this, if (favorited) R.drawable.ic_favorite_full else R.drawable.ic_favorite))
-        Log.d("FAVORITOS", "setFavorited == " + favorited)
     }
 
     override fun showRemoveFavoriteSuccessMessage() {
@@ -261,21 +262,14 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     }
 
     override fun saveFavoritesInPrefs(favorites: List<PresentationEstablishment>) {
+        val gsonFavorites = Gson()
 
-     //   var favoritesList: List<PresentationEstablishment> = favorites.toMutableList()
-
-
-        var gsonFavorites = Gson()
-
-        var strJsonFavoritses: String = gsonFavorites.toJson(favorites)
+        val strJsonFavoritses: String = gsonFavorites.toJson(favorites)
 
         val editor = sharedPreferences.edit()
 
         editor.putString(FAVORITES, strJsonFavoritses)
         editor.apply()
-
-        Log.d("FAVORITOS", "Salvando em PREFERENCES")
-
     }
 
 }
