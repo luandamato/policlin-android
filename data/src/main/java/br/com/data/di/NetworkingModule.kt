@@ -12,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import com.google.gson.GsonBuilder
 import okhttp3.Response
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -19,7 +20,7 @@ class NetworkingModule {
 
     companion object {
 
-        private const val API_URL : String = "http://policlinsaude.com.br/mapp2/api/"
+        private const val API_URL : String = "http://policlinsaude.com.br/mapp/api/"
         private const val PLATFORM = "plataforma"
         private const val PLATFORM_ANDROID = "A"
         private const val VERSION = "versao"
@@ -50,11 +51,12 @@ class NetworkingModule {
     fun providesOkHttpClient(logger: Interceptor): OkHttpClient = OkHttpClient.Builder()
             .addInterceptor(logger)
             .addInterceptor { chain ->
-                val requestBuilder = chain.request().newBuilder();
+                val requestBuilder = chain.request().newBuilder()
                 requestBuilder.header(PLATFORM, PLATFORM_ANDROID)
                 requestBuilder.header(VERSION, VERSION_ANDROID)
-                chain.proceed(requestBuilder.build());
+                chain.proceed(requestBuilder.build())
             }
+            .connectTimeout(30, TimeUnit.SECONDS)
             .build()
 
     @Provides

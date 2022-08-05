@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import br.com.policlinsaude.core.application.PoliclinSaudeApplication
 import br.com.policlinsaude.core.helper.DialogHelper
@@ -15,9 +16,9 @@ import com.basgeekball.awesomevalidation.ValidationStyle
 import com.google.firebase.FirebaseApp
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
-import dagger.android.support.DaggerAppCompatActivity
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.toolbar.*
+import java.lang.Exception
 
 abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
@@ -42,6 +43,10 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 setHomeButtonEnabled(true)
             }
         }
+
+        try {
+            (toolbar.getChildAt(0) as TextView).textSize = 16f
+        } catch (e: Exception) {}
     }
 
 

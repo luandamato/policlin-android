@@ -16,6 +16,7 @@
         tools:theme="@style/AppTheme">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayout_infos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -25,33 +26,23 @@
 
             <TextView
                 style="@style/Primary.Text.Style.Bold"
-                android:id="@+id/textview_date_ticket_detail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="26sp"
-                android:textColor="@color/blue_1"
-                android:gravity="center"
-                tools:text="05/2022" />
-
-            <TextView
-                style="@style/Primary.Text.Style.Bold"
                 android:id="@+id/textview_value_ticket_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:textSize="32sp"
-                android:textColor="@color/blue_1"
+                android:textColor="@color/Verde"
                 android:gravity="center"
                 tools:text="R$ 241,61" />
 
             <TextView
-                style="@style/Primary.Text.Style.Bold"
+                style="@style/Primary.Text.Style"
                 android:id="@+id/textview_due_ticket_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="14sp"
-                android:textColor="@color/gray_4"
+                android:layout_marginTop="8dp"
+                android:textSize="16sp"
+                android:textColor="@color/Verde"
                 android:gravity="center"
                 tools:text="vencimento 10/05/2022" />
 
@@ -60,26 +51,41 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayout_items"
             android:layout_width="match_parent"
-            android:layout_marginTop="24dp"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="31dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/Primary.Text.Style.Bold"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayout_description_code_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
                 android:layout_marginHorizontal="24dp"
-                android:textSize="22sp"
-                android:textColor="@color/gray_4"
-                android:gravity="center"
-                android:text="@string/ticket_detail_code_payment" />
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_ticket" />
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:text="@string/ticket_detail_code_payment" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="39dp"
                 android:layout_marginHorizontal="24dp"
                 android:paddingVertical="36dp"
                 android:background="@drawable/ticket_detail_background_codes"
@@ -90,8 +96,9 @@
                     android:id="@+id/textview_code_ticket_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:textColor="@color/gray_4"
+                    android:layout_marginHorizontal="16dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
                     android:gravity="center"
                     tools:text="03399492813G982208005033261010238000000000000" />
 
@@ -105,20 +112,39 @@
                 android:layout_marginHorizontal="30dp"
                 android:background="@drawable/button_primary_border"
                 android:text="@string/ticket_detail_button_copy_code"
-                android:textColor="@color/gray_4"
-                app:layout_constraintTop_toBottomOf="@id/view_middle"/>
+                android:textAllCaps="false"
+                android:textColor="@color/Bordo" />
 
             <Button
-                style="@style/Primary.Button.Style"
-                android:id="@+id/button_see_pdf_ticket_detail"
+                android:id="@+id/button_copy_code_ticket_detail_success"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="46dp"
+                android:visibility="gone"
                 android:layout_marginHorizontal="30dp"
-                android:background="@drawable/button_secondary"
-                android:text="@string/ticket_detail_see_document"
-                android:textColor="@color/lightText"
-                app:layout_constraintTop_toBottomOf="@id/view_middle"/>
+                android:background="@drawable/button_green"
+                android:textAllCaps="false"
+                android:textColor="@color/Branco" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="bottom"
+                android:layout_weight="1">
+
+                <Button
+                    style="@style/Primary.Button.Style"
+                    android:id="@+id/button_see_pdf_ticket_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginHorizontal="30dp"
+                    android:background="@drawable/button_secondary"
+                    android:text="@string/ticket_detail_see_document"
+                    android:textAllCaps="false"
+                    android:textColor="@color/lightText" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

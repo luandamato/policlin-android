@@ -16,7 +16,7 @@ class RetrofitInstance (
 
     companion object {
 
-        private const val API_URL : String = "http://policlinsaude.com.br/"
+        private const val API_URL : String = "http://policlinsaude.com.br/apiapp/"
         private const val PLATFORM = "plataforma"
         private const val PLATFORM_ANDROID = "A"
         private const val VERSION = "versao"

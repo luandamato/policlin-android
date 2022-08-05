@@ -141,4 +141,9 @@ class RepositoryImpl(private val networkingDatasource: NetworkingDatasource,
     override fun validateUserConnected(registration: String, order: String)
         : Flowable<UserConnected> = networkingDatasource.onValidateUserConnected(registration, order)
 
+    override fun validateButtons(): Flowable<ValidateButtons>
+        = preferencesDatasource.getToken().onErrorReturnItem("")
+        .flatMap { networkingDatasource.onValidateButtons(it) }
+
+
 }

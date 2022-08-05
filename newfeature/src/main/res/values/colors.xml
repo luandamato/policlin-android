@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/red_1</color>
+    <color name="colorPrimary">@color/Bordo</color>
     <color name="colorPrimaryDark">@color/red_2</color>
     <color name="colorAccent">@color/gray_1</color>
 
@@ -40,4 +40,16 @@
     <color name="lightBg">#EEEEEE</color>
     <color name="headerBg">#CCCCCC</color>
     <color name="disabledText">#888888</color>
+
+
+    <color name="Bordo">#73282E</color>
+    <color name="Bordo_10">#1673282E</color>
+    <color name="Branco">#FFFFFF</color>
+    <color name="Cinza_Claro">#BBBBBB</color>
+    <color name="Cinza_10">#16AEAEAE</color>
+    <color name="Verde">#31C719</color>
+    <color name="Verde_10">#1631C719</color>
+    <color name="Laranja">#FB9E14</color>
+    <color name="Laranja_10">#16FB9E14</color>
+
 </resources>

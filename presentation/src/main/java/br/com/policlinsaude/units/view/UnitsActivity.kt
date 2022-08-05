@@ -60,12 +60,8 @@ class UnitsActivity : BaseActivity(), UnitsView, UnitsAdapter.OnItemClickListene
         presenter.getUnits()
     }
 
-    /*@SuppressLint("MissingSuperCall")
-    override fun onSaveInstanceState(outState: Bundle?) {
-        // do nothing
-        // this is because the amount of data in the pagers
-
-    }*/
+    @SuppressLint("MissingSuperCall")
+    override fun onSaveInstanceState(outState: Bundle) { }
 
 
 

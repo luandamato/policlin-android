@@ -2,6 +2,7 @@ package br.com.policlinsaude.editPassword.view
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import br.com.domain.AppConstants.REGEX_MIN_AND_MAX_LENGTH_PASSWORD
 import br.com.domain.exception.MessageErrorException
 import br.com.policlinsaude.R
@@ -10,6 +11,7 @@ import br.com.policlinsaude.core.helper.DialogHelper
 import br.com.policlinsaude.editPassword.presenter.EditPasswordPresenter
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import kotlinx.android.synthetic.main.activity_edit_password.*
+import kotlinx.android.synthetic.main.toolbar.view.*
 import javax.inject.Inject
 
 class EditPasswordActivity : BaseActivity(), EditPasswordView {

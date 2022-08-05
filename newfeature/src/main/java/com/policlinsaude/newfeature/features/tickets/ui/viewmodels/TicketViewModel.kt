@@ -9,12 +9,19 @@ import com.policlinsaude.newfeature.data.networking.ViewModelResponse
 import com.policlinsaude.newfeature.data.repositories.TicketRepository
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketBodyModel
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketModel
+import com.policlinsaude.newfeature.utils.SharedPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TicketViewModel(
-    val repository: TicketRepository
+    val repository: TicketRepository,
+    val preferences: SharedPreferences
 ): ViewModel() {
+
+    var yearSelected: String? = null
+    var monthYearSelected: String? = null
+
+    private var token: String = preferences.getToken()
 
     private val _responseTickets: MutableLiveData<ViewModelResponse<TicketModel, ServerErrorResponse>> = MutableLiveData()
     val tickets: LiveData<ViewModelResponse<TicketModel, ServerErrorResponse>> get() = _responseTickets
@@ -26,13 +33,18 @@ class TicketViewModel(
                 _responseTickets.postValue(viewModelResponse)
                 _responseTickets.postValue(
                     viewModelResponse.setData(
-                        repository.onGetTickets(TicketBodyModel(option = option, year = year, month = month))
+                        repository.onGetTickets(TicketBodyModel(token = token, option = option, year = year, month = month))
                     )
                 )
             } catch (e: ServerErrorResponse) {
                 _responseTickets.postValue(viewModelResponse.setError(e))
             }
         }
+    }
+
+    fun onClearSelected() {
+        yearSelected = null
+        monthYearSelected = null
     }
 
 }

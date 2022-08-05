@@ -6,14 +6,15 @@ import kotlinx.parcelize.Parcelize
 data class FactorExtractorModel(
     val extratoCopart: ArrayList<FactorExtractorDetailModel> = arrayListOf(),
     val codAcao: Int = 0,
+    val valorTotal: String? = "",
     val msgInterna: String = "",
     val msgExterna: String = "",
 )
 
 data class FactorExtractorDetailModel(
     val prestador: String = "",
-    val data: String = "",
-    val itens: ArrayList<FactorExtractorDetailItemsModel> = arrayListOf()
+    val data: String? = null,
+    val itens: ArrayList<FactorExtractorDetailItemsModel> = arrayListOf(),
 )
 
 @Parcelize

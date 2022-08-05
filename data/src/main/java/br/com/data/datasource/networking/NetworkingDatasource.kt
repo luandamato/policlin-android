@@ -32,4 +32,5 @@ interface NetworkingDatasource {
     fun checkPlan(person: Person, plan: Plan): Completable
     fun removeFromFavorites(establishment: Establishment, token: String): Completable
     fun onValidateUserConnected(registration: String, order: String): Flowable<UserConnected>
+    fun onValidateButtons(token: String): Flowable<ValidateButtons>
 }

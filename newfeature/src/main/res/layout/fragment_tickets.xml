@@ -16,214 +16,105 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#F5F5F5"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/linearLayout_filter"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:padding="12dp"
-                android:background="@drawable/ticket_dropdown_background"
+                android:layout_height="70dp"
                 android:gravity="center_vertical">
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="12dp"
-                    android:background="@drawable/ticket_dropdown_arrow_down"
-                    android:src="@drawable/ic_arrow_down"
-                    android:tint="@color/white"/>
-
-                <TextView
-                    style="@style/Primary.Text.Style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:text="@string/ticket_filter"
-                    android:textColor="@color/gray_2"
-                    android:textSize="16sp" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="12dp"
-                android:background="@color/colorAccent"
-                android:orientation="vertical">
-
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
+                    android:id="@+id/ticket_opened_option"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:elevation="8dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/Bordo"
+                    android:elevation="2dp"
+                    android:gravity="center"
                     app:cardCornerRadius="4dp">
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:id="@+id/textview_ticket_openned"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        android:layout_margin="12dp"
-                        android:orientation="vertical">
+                        android:gravity="center"
+                        android:padding="11dp"
+                        android:text="@string/ticket_open"
+                        android:textColor="@color/Branco"
+                        android:textSize="13sp" />
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="4dp"
-                            android:background="@color/colorPrimary"/>
+                </androidx.cardview.widget.CardView>
 
-                        <TextView
-                            style="@style/Primary.Text.Style.Bold"
-                            android:id="@+id/textview_open_ticket"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginBottom="12dp"
-                            android:background="@color/white"
-                            android:textSize="26sp"
-                            android:gravity="center"
-                            tools:text="05/2022" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_year_and_month"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    app:cardCornerRadius="4dp">
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/divider"/>
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:id="@+id/year_and_month"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="@string/ticket_year_month"
+                        android:textColor="@color/Cinza_Claro"
+                        android:textSize="13sp"
+                        app:drawableTint="@color/Bordo"
+                        app:drawableEndCompat="@drawable/ic_arrow_down" />
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
+                </androidx.cardview.widget.CardView>
 
-                            <androidx.appcompat.widget.LinearLayoutCompat
-                                android:id="@+id/linearLayout_value"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintEnd_toStartOf="@id/view_middle">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_year"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight=".85"
+                    android:layout_marginEnd="24dp"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    app:cardCornerRadius="4dp">
 
-                                <TextView
-                                    style="@style/Primary.Text.Style.Bold"
-                                    android:id="@+id/textview_value_open_ticket"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:textColor="@color/green_1"
-                                    android:textSize="14sp"
-                                    android:gravity="center"
-                                    tools:text="R$ 241,61" />
-
-                                <TextView
-                                    style="@style/Primary.Text.Style.Bold"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
-                                    android:text="@string/ticket_value"
-                                    android:textColor="@color/black"
-                                    android:gravity="center"/>
-
-
-                            </androidx.appcompat.widget.LinearLayoutCompat>
-
-                            <View
-                                android:id="@+id/view_middle"
-                                android:layout_width="1dp"
-                                android:layout_height="match_parent"
-                                android:background="@color/divider"
-                                app:layout_constraintBottom_toBottomOf="@id/linearLayout_due_date"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
-
-                            <androidx.appcompat.widget.LinearLayoutCompat
-                                android:id="@+id/linearLayout_due_date"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical"
-                                app:layout_constraintStart_toEndOf="@id/view_middle"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                                <TextView
-                                    style="@style/Primary.Text.Style.Bold"
-                                    android:id="@+id/textview_due_open_ticket"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="8dp"
-                                    android:textColor="@color/green_1"
-                                    android:textSize="14sp"
-                                    android:gravity="center"
-                                    tools:text="10/05/2022" />
-
-                                <TextView
-                                    style="@style/Primary.Text.Style.Bold"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
-                                    android:text="@string/ticket_due"
-                                    android:textColor="@color/black"
-                                    android:gravity="center"/>
-
-                            </androidx.appcompat.widget.LinearLayoutCompat>
-
-                            <Button
-                                android:id="@+id/sendButton"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginHorizontal="30dp"
-                                android:background="@drawable/button_secondary_border"
-                                android:text="@string/ticket_button_see_details"
-                                android:textColor="@color/lightText"
-                                app:layout_constraintTop_toBottomOf="@id/view_middle"/>
-
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="4dp"
-                            android:layout_marginTop="8dp"
-                            android:background="@color/colorPrimary"/>
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:id="@+id/year"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/Branco"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:text="@string/ticket_year"
+                        android:textColor="@color/Cinza_Claro"
+                        android:textSize="13sp"
+                        app:drawableTint="@color/Bordo"
+                        app:drawableEndCompat="@drawable/ic_arrow_down" />
 
                 </androidx.cardview.widget.CardView>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView_tickets"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/ticket_history_background">
-
-                <TextView
-                    style="@style/Primary.Text.Style.Bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:textColor="@color/gray_2"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:text="@string/ticket_history_opened" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView_tickets"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:layout_marginHorizontal="26dp"
-                    android:scrollbars="none"
-                    tools:listitem="@layout/adapter_tickets"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:spanCount="10" />
-
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginBottom="12dp"
+                android:scrollbars="none"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:spanCount="10"
+                tools:listitem="@layout/adapter_tickets" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

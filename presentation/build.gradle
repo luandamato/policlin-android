@@ -30,8 +30,8 @@ android {
         applicationId versions.applicationId
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode versions.versionCode
         versionName application.versionName
+        versionCode versions.versionCode
 
         multiDexEnabled true
 

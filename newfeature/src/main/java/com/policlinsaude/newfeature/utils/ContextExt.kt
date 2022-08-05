@@ -2,7 +2,9 @@ package com.policlinsaude.newfeature.utils
 
 import android.content.Context
 import android.net.Uri
+import android.view.LayoutInflater
 import androidx.browser.customtabs.CustomTabsIntent
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.whiteelephant.monthpicker.MonthPickerDialog
 import java.util.*
 
@@ -73,3 +75,49 @@ fun Context.calendarMonth(listener: (month: Int) -> Unit) {
         .build()
         .show()
 }
+
+fun getYears(): MutableList<String> {
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val list = mutableListOf<String>()
+    for(i in 1980..year) {
+        list.add(i.toString())
+    }
+    return list.asReversed()
+}
+
+fun getMonths(year: String): MutableList<String> {
+    if(year.isEmpty()) return arrayListOf()
+    val calendar = Calendar.getInstance()
+    val currentYear = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    var list = mutableListOf<String>()
+    if(currentYear == year.toInt()) {
+        for (i in 0..month) {
+            list.add(i.getMonthCalendar())
+        }
+    } else {
+        list = arrayListOf("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro","Dezembro")
+    }
+    return list.asReversed()
+}
+
+fun Int.getMonthCalendar(): String {
+    return when(this) {
+        0 -> "Janeiro"
+        1 -> "Fevereiro"
+        2 -> "Março"
+        3 -> "Abril"
+        4 -> "Maio"
+        5 -> "Junho"
+        6 -> "Julho"
+        7 -> "Agosto"
+        8 -> "Setembro"
+        9 -> "Outubro"
+        10 -> "Novembro"
+        11 -> "Dezembro"
+        else -> this.toString()
+    }
+}
+
+

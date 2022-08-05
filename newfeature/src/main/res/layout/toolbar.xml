@@ -9,4 +9,6 @@
     android:elevation="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:titleTextColor="@android:color/white" />
+    app:titleTextColor="@android:color/white"
+    app:titleTextAppearance="@style/AppTheme.AppBarOverlay_2"
+    app:subtitleTextAppearance="@style/AppTheme.AppBarOverlay_2"/>

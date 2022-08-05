@@ -6,4 +6,5 @@ interface HomePresenter : Serializable {
     fun onViewAttached()
     fun onMenuClickedAsGuest()
     fun onValidateConnectedUser(registration: String, order: String)
+    fun onValidateButtons()
 }

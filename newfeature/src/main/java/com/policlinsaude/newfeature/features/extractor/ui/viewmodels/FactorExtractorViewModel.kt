@@ -7,20 +7,33 @@ import androidx.lifecycle.viewModelScope
 import com.policlinsaude.newfeature.data.networking.ServerErrorResponse
 import com.policlinsaude.newfeature.data.networking.ViewModelResponse
 import com.policlinsaude.newfeature.data.repositories.FactorExtractorRepository
-import com.policlinsaude.newfeature.features.extractor.data.models.FactorExtractorModel
-import com.policlinsaude.newfeature.features.extractor.data.models.FactorExtractorBodyModel
+import com.policlinsaude.newfeature.features.extractor.data.models.*
+import com.policlinsaude.newfeature.utils.SharedPreferences
 import kotlinx.coroutines.launch
-import java.util.*
 
 class FactorExtractorViewModel(
-    val repository: FactorExtractorRepository
+    val repository: FactorExtractorRepository,
+    val preferences: SharedPreferences
 ): ViewModel() {
 
-    var year: Int = Calendar.getInstance().get(Calendar.YEAR)
-    var month: Int = 0
+    var selectedYear: String? = null
+    var selectMonth: String? = null
+
+    var listYears: MutableList<String> = arrayListOf()
+    var listMonths: MutableList<String> = arrayListOf()
+
+    private val token: String = preferences.getToken()
+
+    var isCoPartFm: Boolean = false
 
     private val _responseExtractor: MutableLiveData<ViewModelResponse<FactorExtractorModel, ServerErrorResponse>> = MutableLiveData()
     val extractor: LiveData<ViewModelResponse<FactorExtractorModel, ServerErrorResponse>> get() = _responseExtractor
+
+    private val _responseYear: MutableLiveData<ViewModelResponse<FactorExtractorYearsModel, ServerErrorResponse>> = MutableLiveData()
+    val year: LiveData<ViewModelResponse<FactorExtractorYearsModel, ServerErrorResponse>> get() = _responseYear
+
+    private val _responseMonths: MutableLiveData<ViewModelResponse<FactorExtractorMonthsModel, ServerErrorResponse>> = MutableLiveData()
+    val months: LiveData<ViewModelResponse<FactorExtractorMonthsModel, ServerErrorResponse>> get() = _responseMonths
 
     fun onGetFactorsExtractors() {
         viewModelScope.launch {
@@ -29,7 +42,7 @@ class FactorExtractorViewModel(
                 _responseExtractor.postValue(viewModelResponse)
                 _responseExtractor.postValue(
                     viewModelResponse.setData(
-                        repository.onPostCoParticipationExtractor(FactorExtractorBodyModel(year = year, month = month))
+                        repository.onPostCoParticipationExtractor(FactorExtractorBodyModel(token = token, year = selectedYear?.toInt(), month = selectMonth?.toInt()))
                     )
                 )
             } catch (e: ServerErrorResponse) {
@@ -38,8 +51,47 @@ class FactorExtractorViewModel(
         }
     }
 
-    fun clearDates() {
-        year = Calendar.getInstance().get(Calendar.YEAR)
-        month = 0
+    fun onGetFactorsExtractorsYears() {
+        viewModelScope.launch {
+            val viewModelResponse = ViewModelResponse<FactorExtractorYearsModel, ServerErrorResponse>()
+            try {
+                _responseYear.postValue(viewModelResponse)
+                _responseYear.postValue(
+                    viewModelResponse.setData(
+                        repository.onGetYearsExtractor()
+                    )
+                )
+            } catch (e: ServerErrorResponse) {
+                _responseYear.postValue(viewModelResponse.setError(e))
+            }
+        }
     }
+
+    fun onGetFactorsExtractorsMonths() {
+        viewModelScope.launch {
+            val viewModelResponse = ViewModelResponse<FactorExtractorMonthsModel, ServerErrorResponse>()
+            try {
+                _responseMonths.postValue(viewModelResponse)
+                _responseMonths.postValue(
+                    viewModelResponse.setData(
+                        repository.onGetMonthsExtractor(FactorExtractorMonthsBody(token = token, year = selectedYear?.toInt() ?: 0))
+                    )
+                )
+            } catch (e: ServerErrorResponse) {
+                _responseMonths.postValue(viewModelResponse.setError(e))
+            }
+        }
+    }
+
+    fun clearMonthsSelected() {
+        selectMonth = null
+    }
+
+    fun clearYearSelected() {
+        selectedYear = null
+    }
+
+    fun enableButton(): Boolean = !selectedYear.isNullOrEmpty()
+
+
 }

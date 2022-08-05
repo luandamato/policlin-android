@@ -10,7 +10,7 @@ import retrofit2.http.Query
 
 interface TicketService {
 
-    @POST("apiapp_prot/rest/apiBoletos")
+    @POST("rest/apiBoletos")
     suspend fun getTickets(
         @Body ticketBody: TicketBodyModel
     ): Response<TicketModel>

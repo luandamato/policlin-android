@@ -7,26 +7,8 @@
 
     <fragment
         android:id="@+id/factorExtractorFragment"
-        android:label="Filtros"
+        android:label="Extrato Coparticipação"
         android:name="com.policlinsaude.newfeature.features.extractor.ui.fragments.FactorExtractorFragment"
-        tools:layout="@layout/fragment_factor_extractor">
-
-        <action
-            android:id="@+id/factorExtractorFragment_to_factorExtractorDetailFragment"
-            app:destination="@id/factorExtractorDetailFragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/factorExtractorDetailFragment"
-        android:label="Extrato Fator Coparticipação"
-        android:name="com.policlinsaude.newfeature.features.extractor.ui.fragments.FactorExtractorDetailFragment"
-        tools:layout="@layout/fragment_factor_extractor_detail">
-
-        <argument
-            android:name="details"
-            app:argType="com.policlinsaude.newfeature.features.extractor.data.models.FactorExtractorDetailItemsModel[]" />
-
-    </fragment>
+        tools:layout="@layout/fragment_factor_extractor" />
 
 </navigation>

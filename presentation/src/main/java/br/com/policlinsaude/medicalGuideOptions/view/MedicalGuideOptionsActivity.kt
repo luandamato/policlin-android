@@ -881,18 +881,9 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
         return (isOn)
     }
 
-    /*@SuppressLint("MissingSuperCall")
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        // do nothing
-        // this is because the amount of data in the pagers
-        Log.d("MASCARA", "DENTRO do onSaveInstanceState de MedicalguideOptionsActivity")
-
-        if (outState != null) {
-        //    outState.putString("MyString", "Welcome back to Android")
-        //    Log.d("FILTRO", "SALVANDO MyString no onSaveInstanceState de MedicalguideOptionsActivity")
-        }
-    }*/
+    }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)

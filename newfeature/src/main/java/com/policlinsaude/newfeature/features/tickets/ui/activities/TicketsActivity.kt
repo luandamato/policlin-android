@@ -1,6 +1,7 @@
 package com.policlinsaude.newfeature.features.tickets.ui.activities
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -30,6 +31,7 @@ class TicketsActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, config)
 
         binding.ticketToolbar.toolbar.setupWithNavController(navController)
+        (binding.ticketToolbar.toolbar.getChildAt(0) as TextView).textSize = 16f
     }
 
     fun showBackButton() {

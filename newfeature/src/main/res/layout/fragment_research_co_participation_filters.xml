@@ -7,91 +7,148 @@
     tools:theme="@style/AppTheme">
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScroolView_rcf"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/white"
         android:fillViewport="true">
 
-
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="24dp"
+            android:layout_marginTop="24dp"
             android:paddingBottom="24dp">
-
-            <TextView
-                style="@style/Primary.Text.Style.Bold"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:textColor="@color/black_2"
-                android:textSize="22sp"
-                android:gravity="center"
-                android:text="PESQUISA DE VALORES DE COPARTICIPAÇÃO" />
-
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_marginTop="46dp"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical">
 
                 <TextView
                     style="@style/Primary.Text.Style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Escolha Código TUSS22" />
-
-                <org.angmarch.views.NiceSpinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="40dp" />
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:text="Código TUSS 22" />
 
                 <TextView
+                    android:id="@+id/textview_rcp_select_code"
                     style="@style/Primary.Text.Style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:text="Escolha Grupo Coparticipação" />
+                    android:minHeight="40dp"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:drawableTint="#303030"
+                    android:hint="Selecione"
+                    android:paddingHorizontal="16dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/Cinza_Claro"
+                    android:textSize="12dp" />
 
-                <org.angmarch.views.NiceSpinner
+                <View
+                    android:id="@+id/view1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="40dp" />
-
-                <TextView
-                    style="@style/Primary.Text.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:text="Escreva Procedimento TUSS 22" />
-
-                <org.angmarch.views.NiceSpinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="40dp" />
+                    android:layout_height="1dp"
+                    android:background="@color/Cinza_10" />
 
                 <TextView
                     style="@style/Primary.Text.Style"
+                    android:id="@+id/textview_title_rcp_select_group_participation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
-                    android:text="Escolha Descrição do Grupo Coparticipação" />
+                    android:layout_marginTop="24dp"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:text="Grupo de Coparticipação" />
 
-                <org.angmarch.views.NiceSpinner
+                <TextView
+                    android:id="@+id/textview_rcp_select_group_participation"
+                    style="@style/Primary.Text.Style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="40dp" />
+                    android:minHeight="40dp"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:drawableTint="#303030"
+                    android:hint="Selecione"
+                    android:paddingHorizontal="16dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/Cinza_Claro"
+                    android:textSize="12dp" />
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/Cinza_10" />
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:id="@+id/textview_title_rcp_select_description_group_participation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:paddingEnd="12dp"
+                    android:visibility="gone"
+                    android:paddingStart="12dp"
+                    android:text="Descrição do Grupo Coparticipação"
+                    tools:visibility="visible"/>
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:id="@+id/textview_rcp_select_description_group_participation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="40dp"
+                    android:paddingHorizontal="16dp"
+                    android:gravity="center_vertical"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:drawableTint="#303030"
+                    android:visibility="gone"
+                    android:textColor="@color/black"
+                    android:hint="Selecione"
+                    android:textColorHint="@color/Cinza_Claro"
+                    android:textSize="12dp"
+                    tools:visibility="visible"/>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/Cinza_10" />
+
+                <EditText
+                    style="@style/Primary.Text.Style"
+                    android:id="@+id/textArea_information"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="top|start"
+                    android:inputType="text"
+                    android:padding="16dp"
+                    android:lines="1"
+                    android:backgroundTint="@color/Bordo"
+                    android:imeOptions="actionDone"
+                    android:hint="Escreva o Procedimento"
+                    android:textColorHint="@color/Cinza_Claro"
+                    android:textSize="12dp"
+                    android:textColor="@color/black"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:scrollHorizontally="false" />
+
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
                 android:orientation="vertical">
 
                 <Button
@@ -99,25 +156,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="36dp"
-                    android:background="@drawable/button_secondary"
+                    android:background="@drawable/button_secondary_old"
                     android:text="Pesquisar"
+                    android:textAllCaps="false"
                     android:textColor="@android:color/white" />
 
                 <Button
-                    android:id="@+id/buttonCleanFields"
+                    android:id="@+id/clean_filters"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="12dp"
                     android:background="@drawable/button_primary"
-                    android:textColor="@color/red_4"
-                    android:text="limpar campos" />
+                    android:layout_marginBottom="5dp"
+                    android:text="Limpar campos"
+                    android:textAllCaps="false"
+                    android:textColor="@color/Bordo" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </androidx.core.widget.NestedScrollView>
-
 
     <ProgressBar
         android:id="@+id/progress_bar_tickets"

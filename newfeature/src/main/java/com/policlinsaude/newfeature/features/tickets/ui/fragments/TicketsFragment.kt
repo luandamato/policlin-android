@@ -1,43 +1,24 @@
 package com.policlinsaude.newfeature.features.tickets.ui.fragments
 
-import android.app.AlertDialog
-import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
-import android.app.Dialog
-import android.content.Intent
-import android.graphics.drawable.ColorDrawable
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import android.view.*
-import android.widget.DatePicker
-import androidx.fragment.app.Fragment
-import androidx.annotation.MenuRes
-import androidx.appcompat.widget.PopupMenu
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
-import com.google.android.material.datepicker.MaterialDatePicker
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.policlinsaude.newfeature.R
+import com.policlinsaude.newfeature.components.bottomsheet.BottomSheetCommon
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
 import com.policlinsaude.newfeature.databinding.FragmentTicketsBinding
+import com.policlinsaude.newfeature.features.tickets.data.models.TicketDetail
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketModel
+import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
 import com.policlinsaude.newfeature.features.tickets.ui.adapters.TicketAdapter
 import com.policlinsaude.newfeature.features.tickets.ui.viewmodels.TicketViewModel
-import kotlinx.coroutines.channels.ticker
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.util.*
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import com.policlinsaude.newfeature.features.tickets.data.models.TicketDetail
-import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
 import com.policlinsaude.newfeature.utils.*
-import com.whiteelephant.monthpicker.MonthPickerDialog
-import org.koin.android.ext.android.bind
-import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.Exception
 
 
 class TicketsFragment : Fragment() {
@@ -46,7 +27,7 @@ class TicketsFragment : Fragment() {
 
     private val viewModel: TicketViewModel by viewModel()
 
-    private val adapter by lazy { TicketAdapter() }
+    private val adapter by lazy { TicketAdapter(requireContext()) }
 
     private var firstTicket: TicketDetail? = null
 
@@ -57,7 +38,21 @@ class TicketsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.onGetTickets()
+
+        viewModel.tickets.value?.getData()?.let {
+            success(it)
+        } ?: viewModel.onGetTickets()
+
+        viewModel.yearSelected?.let {
+            ticketOpenedChangeUnSelect()
+            showYear()
+        }
+
+        viewModel.monthYearSelected?.let {
+            ticketOpenedChangeUnSelect()
+            showYearAnMonth()
+        }
+
         setupObservables()
         setupViews()
         setupListeners()
@@ -73,22 +68,80 @@ class TicketsFragment : Fragment() {
 
     private fun setupListeners() {
         with(binding) {
-            linearLayoutFilter.setOnClickListener {
-                showMenu(it, R.menu.tickets_filter_options)
-            }
-
-            sendButton.setOnClickListener {
-                firstTicket?.let {
-                    goToTicketDetail(it)
-                }
-            }
 
             adapter.setOnClickListener = {
                 it?.let { detail ->
                     goToTicketDetail(detail)
                 }
             }
+
+            yearAndMonth.setOnClickListener {
+                bottomSheetYearAndMonth()
+            }
+
+            year.setOnClickListener {
+                bottomSheetYear()
+            }
+
+            ticketOpenedOption.setOnClickListener {
+                ticketOpenedChangeSelect()
+                viewModel.onGetTickets()
+            }
         }
+    }
+
+    private fun bottomSheetYear() {
+        BottomSheetCommon(
+            title = context?.getString(R.string.ticket_year).orEmpty(),
+            description = "Escolha o Ano que deseja filtrar",
+            list = getYears(),
+            onClickListenerNext = {
+                it?.let {
+                    viewModel.yearSelected = it
+                    ticketOpenedChangeUnSelect()
+                    showYear()
+                    viewModel.onGetTickets(option = 3, year = it.toInt())
+                }
+            },
+            onClickListenerClean = {
+                onClear()
+            }
+        ).show(childFragmentManager, OPEN_BOTTOM_SHEET_YEAR)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun bottomSheetYearAndMonth() {
+        BottomSheetCommon(
+            title = context?.getString(R.string.ticket_year_month).orEmpty(),
+            description = "Escolha o ano e em seguida o mês",
+            list = getYears(),
+            buttonTitle = context?.getString(R.string.next),
+            onClickListenerNext = {
+                it?.let { year ->
+                    BottomSheetCommon(
+                        title = context?.getString(R.string.ticket_year_month).orEmpty(),
+                        description = "Escolha o mês e aplique o filtro",
+                        list = getMonths(year),
+                        onClickListenerNext = { month ->
+                            month?.let {
+                                viewModel.monthYearSelected = "$year/${month.substring(0,3)}"
+                                ticketOpenedChangeUnSelect()
+                                showYearAnMonth()
+                                viewModel.onGetTickets(option = 2, year = year.toInt(), month = month.toMonths())
+                            }
+                        },
+                        onClickListenerClean = {
+                            onClear()
+                        }
+                    ).show(childFragmentManager, OPEN_BOTTOM_SHEET_MONTH)
+
+                }
+            },
+
+            onClickListenerClean = {
+                onClear()
+            }
+        ).show(childFragmentManager, OPEN_BOTTOM_SHEET_MONTH)
     }
 
 
@@ -105,6 +158,7 @@ class TicketsFragment : Fragment() {
                             if(!ticket.sdtBoleto.isNullOrEmpty()) {
                                 success(it.getData())
                             } else {
+                                adapter.update(arrayListOf())
                                 DialogHelper.showErrorDialog(requireContext(), ticket.msgExterna.orEmpty())
                             }
                         }
@@ -121,40 +175,8 @@ class TicketsFragment : Fragment() {
     private fun success(ticket: TicketModel?) {
         with(binding) {
             firstTicket = ticket?.sdtBoleto?.get(0)
-            textviewOpenTicket.text = ticket?.sdtBoleto?.get(0)?.vencimento?.toMMYYYY().orEmpty()
-
-            textviewValueOpenTicket.text = ticket?.sdtBoleto?.get(0)?.valor?.toCurrencyBRL().orEmpty()
-            textviewDueOpenTicket.text = ticket?.sdtBoleto?.get(0)?.vencimento?.toDDMMYYYY().orEmpty()
-
             adapter.update(ticket?.sdtBoleto)
         }
-    }
-
-    private fun showMenu(v: View, @MenuRes menuRes: Int) {
-        val popup = PopupMenu(requireContext(), v, Gravity.CENTER, 0, R.style.MyPopupMenu)
-        popup.menuInflater.inflate(menuRes, popup.menu)
-        binding.root.alpha = .1F
-        popup.setOnDismissListener { binding.root.alpha = 1F }
-        popup.setOnMenuItemClickListener { menuItem: MenuItem ->
-            when(menuItem.itemId) {
-                R.id.filter_open_payment -> { viewModel.onGetTickets(); true }
-                R.id.filter_due_month_year -> {
-                    context?.calendarMonthYear { month, year ->
-                        viewModel.onGetTickets(option = 2, year = year, month = month)
-                    }
-                    true
-                }
-                R.id.filter_due_year -> {
-                    context?.calendarYear { year ->
-                        viewModel.onGetTickets(option = 3, year = year)
-                    }
-                    true
-                }
-                else -> { false }
-            }
-        }
-
-        popup.show()
     }
 
     private fun goToTicketDetail(ticket: TicketDetail) {
@@ -175,6 +197,99 @@ class TicketsFragment : Fragment() {
             scrollViewTickets.alpha = 1F
             progressBarTickets.visibility = View.GONE
         }
+    }
+
+    private fun ticketOpenedChangeUnSelect() {
+        with(binding) {
+            ticketOpenedOption.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.Branco))
+            textviewTicketOpenned.setTextColor(ContextCompat.getColor(requireContext(), R.color.Cinza_Claro))
+        }
+    }
+
+    private fun ticketOpenedChangeSelect() {
+        with(binding) {
+            ticketOpenedOption.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.Bordo))
+            textviewTicketOpenned.setTextColor(ContextCompat.getColor(requireContext(), R.color.Branco))
+            onClearYear()
+            onClearMonthAndYear()
+        }
+    }
+
+    private fun showYearAnMonth() {
+        onSelectedMonthAndYear()
+        onClearYear()
+
+    }
+
+    private fun showYear() {
+        onSelectYear()
+        onClearMonthAndYear()
+    }
+
+    private fun onSelectYear() {
+        ticketOpenedChangeUnSelect()
+        with(binding) {
+            year.apply {
+                setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.Bordo))
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.Branco))
+                post {
+                    compoundDrawables.getOrNull(2)?.setTint(ContextCompat.getColor(requireContext(), R.color.Branco))
+                }
+                text = viewModel.yearSelected
+            }
+        }
+    }
+
+    private fun onSelectedMonthAndYear() {
+        ticketOpenedChangeUnSelect()
+        with(binding) {
+            yearAndMonth.apply {
+                setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.Bordo))
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.Branco))
+                compoundDrawables.getOrNull(2)?.setTint(ContextCompat.getColor(requireContext(), R.color.Branco))
+                text = viewModel.monthYearSelected
+            }
+        }
+    }
+
+    private fun onClearYear() {
+        with(binding) {
+            year.apply {
+                setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.Branco))
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.Cinza_Claro))
+                compoundDrawables.getOrNull(2)?.setTint(ContextCompat.getColor(requireContext(), R.color.Bordo))
+                text = context.getString(R.string.ticket_year)
+            }
+            viewModel.yearSelected = null
+        }
+    }
+
+    private fun onClearMonthAndYear() {
+        with(binding) {
+            yearAndMonth.apply {
+                setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.Branco))
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.Cinza_Claro))
+                compoundDrawables.getOrNull(2)?.setTint(ContextCompat.getColor(requireContext(), R.color.Bordo))
+                text = context.getString(R.string.ticket_year_month)
+            }
+
+            viewModel.monthYearSelected = null
+        }
+    }
+
+    private fun onClear() {
+        ticketOpenedChangeSelect()
+        viewModel.apply {
+            onGetTickets()
+            onClearSelected()
+        }
+    }
+
+
+
+    companion object {
+        const val OPEN_BOTTOM_SHEET_YEAR = "OPEN_BOTTOM_SHEET_YEAR"
+        const val OPEN_BOTTOM_SHEET_MONTH = "OPEN_BOTTOM_SHEET_MONTH"
     }
 
 
