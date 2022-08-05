@@ -1,15 +1,19 @@
 package br.com.policlinsaude.medicalGuideDetails.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import android.os.Parcel
+import android.os.Parcelable
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
@@ -44,11 +48,14 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
         fun start(activity: Activity, establishment: PresentationEstablishment, caller: String) {
             val intent = Intent(activity, MedicalGuideDetailsActivity::class.java)
-            Log.d("FAVORITOS", "cidade: " + establishment.city + " Favoritado: " + establishment.favorited)
+            Log.d("FAVORITOS", "TESTEEEE cidade: " + establishment.city + " Favoritado: " + establishment.favorited)
             intent.putExtra(EXTRA_ESTABLISHMENT,establishment)
             intent.putExtra(EXTRA_CALLER_ACTIVITY, caller)
             activity.startActivity(intent)
         }
+
+        private const val  myPreferences = "myPrefs"
+        private const val FAVORITES = "favoritesPref"
     }
 
     @Inject
@@ -59,10 +66,6 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     lateinit var storeFavorites: FavoritesStorePrefsPresenter
 
     private lateinit var sharedPreferences: SharedPreferences
-
-    private var myPreferences = "myPrefs"
-    private var FAVORITES = "favoritesPref"
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,13 +78,20 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
         setupToolbar()
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        recyclerView.layoutManager =
+            LinearLayoutManager(this)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                DividerItemDecoration.VERTICAL
+            )
+        )
+        adapter.onClickListenerWpp = {
+            presenter.onWhatsClicked(it)
+        }
         getEstablishment()
         setupOnClickListeners()
     }
-
-
 
 
     private fun setupOnClickListeners() {
@@ -98,16 +108,20 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
             presenter.onShareClicked()
         }
         plansTextView.setOnClickListener {
-            presenter.onPlansClicked()
+           presenter.onPlansClicked()
         }
     }
 
-    private fun getEstablishment() {
-
-        presenter.setEstablishment(intent.getParcelableExtra(EXTRA_ESTABLISHMENT))
-
+    private fun openWhatsApp() {
+        presenter.onWhatsClicked()
     }
 
+    private fun getEstablishment() {
+        val x = intent.getParcelableExtra(EXTRA_ESTABLISHMENT)?: PresentationEstablishment()
+        presenter.setEstablishment(x)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     override fun showMedicalGuideDetails(presentationEstablishment: PresentationEstablishment) {
         try {
             imageViewFront.setImageBitmap(presentationEstablishment.photoFront.getBitmapFromImage())
@@ -130,7 +144,13 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
                 }
             }
         }
-        var caller = intent.getStringExtra(EXTRA_CALLER_ACTIVITY)
+        val caller = intent.getStringExtra(EXTRA_CALLER_ACTIVITY)
+
+        when {
+            presentationEstablishment.typePhoneOne == "2" -> imageButtonWhatsApp.setOnClickListener { openWhatsApp() }
+            presentationEstablishment.typePhoneTwo == "2" -> imageButtonWhatsApp.setOnClickListener { openWhatsApp() }
+            else -> imageButtonWhatsApp.visibility = View.GONE
+        }
 
         if (caller == "Units"){
             imageButtonFavorite.visibility = View.GONE
@@ -143,7 +163,7 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
 
         title_text_view.text = presentationEstablishment.title
-        adapter.setPresentationEstablishment(this, presentationEstablishment, caller)
+        adapter.setPresentationEstablishment(this, presentationEstablishment, caller.orEmpty())
         adapter.notifyDataSetChanged()
     }
 
@@ -155,7 +175,7 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
     override fun showPlansDialog(plans: List<MedicalGuidePlan>?) {
         val builder = AlertDialog.Builder(this)
-                .setAdapter(object : ArrayAdapter<MedicalGuidePlan>(this, android.R.layout.simple_list_item_1, plans) {}, null)
+                .setAdapter(object : ArrayAdapter<MedicalGuidePlan>(this, android.R.layout.simple_list_item_1, plans ?: arrayListOf()) {}, null)
         builder.setPositiveButton(R.string.text_ok, null)
         val dialog = builder.create()
         dialog.listView.divider = ColorDrawable(ContextCompat.getColor(this, R.color.divider))
@@ -201,7 +221,6 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
     override fun setFavorited(favorited: Boolean) {
         imageButtonFavorite.setImageDrawable(ContextCompat.getDrawable(this, if (favorited) R.drawable.ic_favorite_full else R.drawable.ic_favorite))
-        Log.d("FAVORITOS", "setFavorited == " + favorited)
     }
 
     override fun showRemoveFavoriteSuccessMessage() {
@@ -211,9 +230,18 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     override fun showSelectPhones(phoneOne: String, phoneTwo: String) {
         val phones = arrayOf(phoneOne, phoneTwo)
         val builder = AlertDialog.Builder(this)
-        builder.setItems(phones, { _, index ->
+        builder.setItems(phones) { _, index ->
             presenter.onPhoneSelected(phones[index])
-        })
+        }
+        builder.create().show()
+    }
+
+    override fun showSelectWhats(phoneOne: String, phoneTwo: String) {
+        val phones = arrayOf(phoneOne, phoneTwo)
+        val builder = AlertDialog.Builder(this)
+        builder.setItems(phones) { _, index ->
+            presenter.onWhatsSelected(phones[index])
+        }
         builder.create().show()
     }
 
@@ -229,21 +257,14 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     }
 
     override fun saveFavoritesInPrefs(favorites: List<PresentationEstablishment>) {
+        val gsonFavorites = Gson()
 
-     //   var favoritesList: List<PresentationEstablishment> = favorites.toMutableList()
-
-
-        var gsonFavorites = Gson()
-
-        var strJsonFavoritses: String = gsonFavorites.toJson(favorites)
+        val strJsonFavoritses: String = gsonFavorites.toJson(favorites)
 
         val editor = sharedPreferences.edit()
 
         editor.putString(FAVORITES, strJsonFavoritses)
         editor.apply()
-
-        Log.d("FAVORITOS", "Salvando em PREFERENCES")
-
     }
 
 }

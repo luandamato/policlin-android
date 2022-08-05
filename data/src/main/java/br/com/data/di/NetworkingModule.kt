@@ -11,6 +11,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import com.google.gson.GsonBuilder
+import okhttp3.Response
 import javax.inject.Singleton
 
 @Module
@@ -18,9 +19,14 @@ class NetworkingModule {
 
     companion object {
 
-        private val API_URL : String = "http://policlinsaude.com.br/mapp/api/"
+        private const val API_URL : String = "http://policlinsaude.com.br/mapp/api/"
+        private const val PLATFORM = "plataforma"
+        private const val PLATFORM_ANDROID = "A"
+        private const val VERSION = "versao"
+        private const val VERSION_ANDROID = "10.1.1"
 
     }
+
 
     @Provides
     @Named("baseUrl")
@@ -43,6 +49,12 @@ class NetworkingModule {
     @Provides
     fun providesOkHttpClient(logger: Interceptor): OkHttpClient = OkHttpClient.Builder()
             .addInterceptor(logger)
+            .addInterceptor { chain ->
+                val requestBuilder = chain.request().newBuilder();
+                requestBuilder.header(PLATFORM, PLATFORM_ANDROID)
+                requestBuilder.header(VERSION, VERSION_ANDROID)
+                chain.proceed(requestBuilder.build());
+            }
             .build()
 
     @Provides
@@ -56,13 +68,11 @@ class NetworkingModule {
     @Singleton
     fun providesRetrofit(rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
                          @Named("baseUrl") baseUrl: String, okHttpClient: OkHttpClient,
-                         gsonConverterFactory: GsonConverterFactory): Retrofit
-            = Retrofit.Builder()
+                         gsonConverterFactory: GsonConverterFactory): Retrofit =
+        Retrofit.Builder()
             .client(okHttpClient)
             .addCallAdapterFactory(rxJava2CallAdapterFactory)
             .addConverterFactory(gsonConverterFactory)
             .baseUrl(baseUrl)
             .build()
-
-
 }

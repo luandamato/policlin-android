@@ -3,7 +3,7 @@ package br.com.policlinsaude.medicalGuideList.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -99,7 +99,8 @@ class MedicalGuideListActivity : BaseActivity(), MedicalGuideListView, MedicalGu
         setupToolbar()
         adapter = MedicalGuideListAdapter(this)
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager =
+            LinearLayoutManager(this)
         setupOnClickListener()
         getMedicalGuideOptions()
     }
@@ -261,6 +262,8 @@ class MedicalGuideListActivity : BaseActivity(), MedicalGuideListView, MedicalGu
                             itemEstablishment.state = medicalGuideV4.get(itMedicalGuide).state
                             itemEstablishment.phoneOne = medicalGuideV4.get(itMedicalGuide).phoneOne
                             itemEstablishment.phoneTwo = medicalGuideV4.get(itMedicalGuide).phoneTwo
+                            itemEstablishment.typePhoneOne = medicalGuideV4.get(itMedicalGuide).typePhoneOne
+                            itemEstablishment.typePhoneTwo = medicalGuideV4.get(itMedicalGuide).typePhoneTwo
                             itemEstablishment.latitude = medicalGuideV4.get(itMedicalGuide).latitude
                             itemEstablishment.longitude = medicalGuideV4.get(itMedicalGuide).longitude
                             itemEstablishment.distance = medicalGuideV4.get(itMedicalGuide).distance
@@ -332,8 +335,8 @@ class MedicalGuideListActivity : BaseActivity(), MedicalGuideListView, MedicalGu
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        item?.let {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        item.let {
             when (item.itemId) {
                 R.id.action_map -> {
                     presenter.onMapClicked()

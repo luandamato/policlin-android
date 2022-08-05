@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/establishmentContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-  >
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textViewPlano"
@@ -68,7 +68,7 @@
         android:id="@+id/viewEspaco3"
         android:layout_width="wrap_content"
         android:layout_height="5dp"
-        android:layout_below="@id/textViewServiooTipo"/>
+        android:layout_below="@id/textViewServiooTipo" />
 
 
     <TextView
@@ -119,7 +119,7 @@
         android:textSize="12sp"
         tools:text="POLICLIN S/A SERVIÇOS MEDICO HOSPITALARES" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/qualificationsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
     <TextView
         android:id="@+id/textViewPhoneOne"
         style="@style/Secondary.Text.Style"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewAddress"
         android:lineSpacingExtra="4dp"
@@ -172,16 +172,43 @@
         android:textSize="12sp"
         tools:text="(11) 96555-3333" />
 
+    <ImageView
+        android:id="@+id/iconWhatsAppPhoneOne"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:visibility="gone"
+        android:layout_alignTop="@+id/textViewPhoneOne"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_toEndOf="@+id/textViewPhoneOne"
+        app:srcCompat="@drawable/ic_whatsapp" />
+
     <TextView
         android:id="@+id/textViewPhoneTwo"
         style="@style/Secondary.Text.Style"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewPhoneOne"
         android:lineSpacingExtra="4dp"
         android:paddingLeft="20dp"
         android:textSize="12sp"
         tools:text="(11) 96555-3333" />
+
+    <ImageView
+        android:id="@+id/iconWhatsAppPhoneTwo"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignTop="@+id/textViewPhoneTwo"
+        android:layout_alignBottom="@+id/textViewPhoneTwo"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="1dp"
+        android:layout_toEndOf="@+id/textViewPhoneTwo"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_whatsapp"
+        tools:visibility="visible" />
 
 
     <TextView

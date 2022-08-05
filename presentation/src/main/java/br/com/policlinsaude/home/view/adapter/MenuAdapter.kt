@@ -1,8 +1,8 @@
 package br.com.policlinsaude.home.view.adapter
 
 import android.content.Context
-import android.support.annotation.LayoutRes
-import android.support.v4.content.ContextCompat
+import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +23,7 @@ class MenuAdapter(private val mContext: Context,
     : ArrayAdapter<PresentationMenuEnum>(mContext, layout, values) {
 
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view: View
         val viewHoder: MenuViewHolder
 

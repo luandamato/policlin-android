@@ -51,8 +51,9 @@
     <string name="text_birthday">Data de nascimento</string>
     <string name="text_phone">Celular</string>
     <string name="text_email">E-mail</string>
+    <string name="text_mothers_name">Nome da Mãe</string>
     <string name="text_confirm_email">Confirmar e-mail</string>
-    <string name="msg_personal_data_top">Todos os dados devem ser iguais aos apresentados na carteirinha.</string>
+    <string name="msg_personal_data_top">TODOS OS DADOS DEVEM SER IGUAIS AOS APRESENTADOS EM DOCUMENTOS (RG, CPF ou CNH).</string>
     <string name="text_contract">Contrato</string>
     <string name="text_register_validation">Validade da carteirinha</string>
     <string name="text_confirm_password">Confirmar Senha</string>

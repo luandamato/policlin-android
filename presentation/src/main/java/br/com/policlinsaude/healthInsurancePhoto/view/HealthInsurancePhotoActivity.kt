@@ -82,8 +82,8 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
         var gsonPhotosRetorno = Gson()
 
-        var strJsonRetorno: String = sharedPreferences.getString(PHOTOS, null)
-        var strPhotoVerso: String = sharedPreferences.getString(PHOTO_VERSO, null)
+        var strJsonRetorno: String? = sharedPreferences.getString(PHOTOS, null)
+        var strPhotoVerso: String? = sharedPreferences.getString(PHOTO_VERSO, null)
 
         Log.d("CARTEIRINHA","DIALOGERROR -> VALOR DE strJsonRetorno: " + strJsonRetorno)
         Log.d("CARTEIRINHA","DIALOGERROR -> VALOR DE  strPhotoVerso: " + strPhotoVerso)
@@ -142,11 +142,11 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
        var gsonPhotosRetorno = Gson()
 
-       var strJsonRetorno: String = sharedPreferences.getString(PHOTOS, null)
+       var strJsonRetorno: String? = sharedPreferences.getString(PHOTOS, null)
 
       photos  = gsonPhotosRetorno.fromJson(strJsonRetorno,object:TypeToken<MutableList<HealthInsurancePhoto>>(){}.type)
 
-       var strPhotoVerso: String = sharedPreferences.getString(PHOTO_VERSO, null)
+       var strPhotoVerso: String? = sharedPreferences.getString(PHOTO_VERSO, null)
 
        Log.d("CARTEIRINHA","TAMANHO DE PHOTOS: " + photos.size)
        Log.d("CARTEIRINHA","CONTEUDO DE FOTO VERSO: " + strPhotoVerso)
@@ -172,7 +172,7 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         item?.let {
             when (item.itemId) {
                 R.id.action_verso -> {
@@ -223,11 +223,11 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
             var gsonPhotosRetorno = Gson()
 
-            var strJsonRetorno: String = sharedPreferences.getString(PHOTOS, null)
+            var strJsonRetorno: String? = sharedPreferences.getString(PHOTOS, null)
 
             photos  = gsonPhotosRetorno.fromJson(strJsonRetorno,object:TypeToken<MutableList<HealthInsurancePhoto>>(){}.type)
 
-            var strPhotoVerso: String = sharedPreferences.getString(PHOTO_VERSO, null)
+            var strPhotoVerso: String? = sharedPreferences.getString(PHOTO_VERSO, null)
 
             photoVerso = strPhotoVerso
 

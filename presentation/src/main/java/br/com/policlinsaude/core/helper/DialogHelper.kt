@@ -1,8 +1,8 @@
 package br.com.policlinsaude.core.helper
 
 import android.content.Context
-import android.support.annotation.StringRes
-import android.support.v7.app.AlertDialog
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import br.com.policlinsaude.R
 
 object DialogHelper {
@@ -23,7 +23,7 @@ object DialogHelper {
     }
 
     fun showDialog(context: Context, title: String, message: String,
-                   messagePositiveButton: String, messageNegativeButton: String?,
+                   messagePositiveButton: String? = "", messageNegativeButton: String? = "",
                    listenerPositiveButton: () -> Unit = { },
                    listenerNegativeButton: (() -> Unit)? = { },
                    onDismiss: (() -> Unit)? = { }): AlertDialog {
@@ -32,7 +32,7 @@ object DialogHelper {
         with(alertDialogBuilder) {
             setTitle(title)
             setMessage(message)
-            if (messagePositiveButton.isNotEmpty()) {
+            if (messagePositiveButton?.isNotEmpty() != null) {
                 setPositiveButton(messagePositiveButton) { _, _ ->
                     listenerPositiveButton.invoke()
                 }
@@ -42,6 +42,8 @@ object DialogHelper {
                     listenerNegativeButton?.invoke()
                 }
             }
+
+            setCancelable(false)
             setOnDismissListener({ onDismiss?.invoke() })
         }
         val alertDialog = alertDialogBuilder.create()
@@ -82,4 +84,5 @@ object DialogHelper {
                 context.getString(R.string.text_ok),
                 null)
     }
+
 }

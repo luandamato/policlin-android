@@ -5,7 +5,7 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 
 interface NetworkingDatasource {
-    fun doLogin(register: String, order: String, password: String): Flowable<Pair<Person, String>>
+    fun doLogin(register: String, order: String, password: String, firebaseToken: String): Flowable<Pair<Person, String>>
     fun recoverPassword(register: String, order: String, email: String): Completable
     fun registerPassword(person: Person, plan: Plan): Flowable<String>
     //fun getHealthInsurancePhoto(token: String): Flowable<String>
@@ -31,4 +31,5 @@ interface NetworkingDatasource {
     fun getPerson(token: String): Flowable<Person>
     fun checkPlan(person: Person, plan: Plan): Completable
     fun removeFromFavorites(establishment: Establishment, token: String): Completable
+    fun onValidateUserConnected(registration: String, order: String): Flowable<UserConnected>
 }

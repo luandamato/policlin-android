@@ -45,8 +45,8 @@ class LoginPresenterImpl(private val navigator: LoginNavigator,
                 )
     }
 
-    override fun clickedButtonEnter() {
-        val doLoginRV = DoLoginRV(register = view.getRegister(), order = view.getOrder(), password = view.getPassword())
+    override fun clickedButtonEnter(firebaseToken: String) {
+        val doLoginRV = DoLoginRV(register = view.getRegister(), order = view.getOrder(), password = view.getPassword(), firebaseToken = firebaseToken)
         UseCaseHandler.execute(doLoginUseCase, doLoginRV)
                 .doOnSubscribe {
                     view.showLoginLoading()

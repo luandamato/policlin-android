@@ -59,13 +59,13 @@ class MapsActivity : BaseActivity(), MapsView, OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
         setupToolbar()
-        val isMedicalGuide = intent.extras.getBoolean(EXTRA_IS_MEDICAL_GUIDE, false)
-        setTitle(if (isMedicalGuide) R.string.title_medical_guide_map else R.string.title_own_network_map)
+        val isMedicalGuide = intent.extras?.getBoolean(EXTRA_IS_MEDICAL_GUIDE, false)
+        setTitle(if (isMedicalGuide == true) R.string.title_medical_guide_map else R.string.title_own_network_map)
 
         (mapsFragment as SupportMapFragment).getMapAsync(this)
     }
 
-    override fun onMapReady(map: GoogleMap?) {
+    override fun onMapReady(map: GoogleMap) {
         this.map = map
         presenter.onMapReady(intent.getParcelableArrayListExtra<PresentationEstablishmentLocation>(EXTRA_ESTABLISHMENTS))
     }

@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import br.com.domain.exception.MessageErrorException
@@ -63,8 +63,14 @@ class FavoritesActivity : BaseActivity(), FavoritesView, FavoritesAdapter.OnItem
         // todo fix favorites
         adapter = FavoritesAdapter(this)
         favoritesRecyclerView.adapter = adapter
-        val layoutManager = LinearLayoutManager(this)
-        favoritesRecyclerView.addItemDecoration(DividerItemDecoration(this, layoutManager.orientation))
+        val layoutManager =
+            LinearLayoutManager(this)
+        favoritesRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                this,
+                layoutManager.orientation
+            )
+        )
         favoritesRecyclerView.layoutManager = layoutManager
     }
 

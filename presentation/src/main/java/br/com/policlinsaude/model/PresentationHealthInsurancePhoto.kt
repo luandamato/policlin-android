@@ -16,9 +16,9 @@ data class PresentationHealthInsurancePhoto(var imgFrente:  String? = InvalidDat
                                             var ordem:      String? = InvalidData.UNINITIALIZED.getString()
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readString()) {
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty(),
+            parcel.readString().orEmpty()) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

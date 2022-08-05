@@ -1,7 +1,7 @@
 package br.com.policlinsaude.units.view
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -56,7 +56,8 @@ class UnitsFragment : BaseFragmentWithInject(), UnitsAdapter.OnItemClickListener
      //   adapter.setEstablishments((arguments!!.getParcelableArray(EXTRA_ESTABLISHMENTS_UNITS) as Array<PresentationEstablishment>).toMutableList(),
      //           (arguments!!.getParcelableArray(EXTRA_QUALIFICATIONS_UNITS) as Array<PresentationQualification>).toMutableList())
 
-        recyclerViewUnitsFrag.layoutManager = LinearLayoutManager(context)
+        recyclerViewUnitsFrag.layoutManager =
+            LinearLayoutManager(context)
         recyclerViewUnitsFrag.adapter = adapter
     }
 
@@ -65,7 +66,7 @@ class UnitsFragment : BaseFragmentWithInject(), UnitsAdapter.OnItemClickListener
         navigator.goToDetails(establishment)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
+    /*override fun onSaveInstanceState(outState: Bundle) {
         // do nothing
-    }
+    }*/
 }

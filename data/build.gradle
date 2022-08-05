@@ -3,20 +3,21 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
 
-
 HashMap<String, String> baseDependencies = rootProject.ext.dependencies
 HashMap<String, String> testDependencies = rootProject.ext.testDependencies
 HashMap<String, String> application = rootProject.ext.application
 HashMap<String, String> versions = rootProject.ext.versions
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
     defaultConfig {
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode application.versionCode
         versionName application.versionName
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
@@ -24,7 +25,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '27.0.3'
+
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
 }
 
 kapt {

@@ -2,49 +2,63 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
+apply plugin: 'com.google.gms.google-services'
 
 HashMap<String, String> baseDependencies = rootProject.ext.dependencies
 HashMap<String, String> application = rootProject.ext.application
 HashMap<String, String> versions = rootProject.ext.versions
 
 android {
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
+
     signingConfigs {
         config {
-            keyAlias 'policlin-saude'
-            keyPassword 'FjbnNhLT1oMKf7hyWKS9'
-            storeFile file('C:/Users/Andrei/Dropbox/Projetos Android Studio/policlin-saude-smith/keystore/keystore.jks')
-            storePassword 'FjbnNhLT1oMKf7hyWKS9'
+            storeFile file(RELEASE_STORE_FILE)
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+            storePassword RELEASE_STORE_PASSWORD
+
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
     }
-    compileSdkVersion 27
+
     defaultConfig {
         applicationId application.applicationId
-        minSdkVersion 19
-        targetSdkVersion 27
-        versionName '1.20'
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode application.versionCode
+        versionName application.versionName
+
         multiDexEnabled true
-        signingConfig signingConfigs.config
-        versionCode 21
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
+
     buildTypes {
         release {
+            multiDexEnabled true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
             zipAlignEnabled true
             versionNameSuffix '1.1'
         }
+
         debug {
             signingConfig signingConfigs.config
-            proguardFile '/Users/felipedc/Projetos/em-desenvolvimento/Policlin/policlin-saude/presentation/proguard-rules.pro'
+            proguardFile 'proguard-rules.pro'
             zipAlignEnabled true
             versionNameSuffix '1.1'
         }
     }
-    buildToolsVersion '27.0.3'
-    productFlavors {
+
+    productFlavors {}
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -87,6 +101,9 @@ dependencies {
     implementation baseDependencies.multidex
     implementation baseDependencies.multidex
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation platform('com.google.firebase:firebase-bom:30.0.1')
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
 }
 
 

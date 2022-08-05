@@ -56,6 +56,8 @@ object JsonMedicalGuideListResponseMapper {
                 state = jsonEstablishment.state ?: InvalidData.UNINITIALIZED.getString(),
                 phoneOne = jsonEstablishment.phoneOne ?: InvalidData.UNINITIALIZED.getString(),
                 phoneTwo = jsonEstablishment.phoneTwo ?: InvalidData.UNINITIALIZED.getString(),
+                typePhoneOne =  jsonEstablishment.typePhoneOne ?: InvalidData.UNINITIALIZED.getString(),
+                typePhoneTwo =  jsonEstablishment.typePhoneTwo ?: InvalidData.UNINITIALIZED.getString(),
                 latitude = jsonEstablishment.latitude ?: InvalidData.UNINITIALIZED.getString(),
                 longitude = jsonEstablishment.longitude
                         ?: InvalidData.UNINITIALIZED.getString(),

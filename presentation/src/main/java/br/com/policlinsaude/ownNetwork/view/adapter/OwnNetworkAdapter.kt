@@ -1,6 +1,6 @@
 package br.com.policlinsaude.ownNetwork.view.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,12 +35,12 @@ class OwnNetworkAdapter(private val onItemClickListener: OnItemClickListener)
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == TYPE_ITEM) {
-            OwnNetworkViewHolder(LayoutInflater.from(parent?.context)
+            OwnNetworkViewHolder(LayoutInflater.from(parent.context)
                     .inflate(R.layout.list_item_own_network, parent, false))
         } else {
-            MedicalGuideListAdapter.MedicalGuideListFooterViewHolder(LayoutInflater.from(parent?.context)
+            MedicalGuideListAdapter.MedicalGuideListFooterViewHolder(LayoutInflater.from(parent.context)
                     .inflate(R.layout.custom_view_info_medical_guide_list, parent, false), qualifications)
         }
     }

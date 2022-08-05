@@ -81,6 +81,7 @@ class PersonalDataFragment : BaseFragment(), Step {
         val calendar = Calendar.getInstance()
         calendar.time = person.birthday
         setDateAtEditText(editTextBirthday, calendar)
+        editTextMothersName.setText(person.mothersName)
         editTextPhone.setText(person.phone)
         editTextEmail.setText(person.email)
         editTextConfirmEmail.setText(person.email)
@@ -99,7 +100,6 @@ class PersonalDataFragment : BaseFragment(), Step {
                 Patterns.EMAIL_ADDRESS, getString(R.string.text_email_invalid))
         awesomeValidation.addValidation(editTextConfirmEmail,
                 Patterns.EMAIL_ADDRESS, getString(R.string.text_email_invalid))
-
         awesomeValidation.addValidation(editTextPhone,
                 REGEX_MIN_PHONE, getString(R.string.text_phone_invalid))
 
@@ -122,6 +122,7 @@ class PersonalDataFragment : BaseFragment(), Step {
             person.birthday = getDateFromEditText(editTextBirthday)
             person.phone = phone
             person.email = editTextEmail.text.toString()
+            person.mothersName = editTextMothersName.text.toString()
             presenter.setPresentationPerson(person)
             return null
         }

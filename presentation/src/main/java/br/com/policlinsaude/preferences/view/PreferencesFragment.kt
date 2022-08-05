@@ -4,7 +4,7 @@ package br.com.policlinsaude.preferences.view
 import android.Manifest
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View

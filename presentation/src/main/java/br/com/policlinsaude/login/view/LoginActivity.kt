@@ -1,18 +1,16 @@
 package br.com.policlinsaude.login.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.text.Html
-import android.text.InputType
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import br.com.domain.exception.MessageErrorException
-import br.com.policlinsaude.BuildConfig
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.IntentHelper
@@ -20,6 +18,15 @@ import br.com.policlinsaude.login.presenter.LoginPresenter
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
+import android.telephony.TelephonyManager
+
+import android.os.Build
+import android.provider.Settings
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
+import java.util.*
+
 
 class LoginActivity : BaseActivity(), LoginView {
 
@@ -57,7 +64,6 @@ class LoginActivity : BaseActivity(), LoginView {
     override fun onPersonNotFound() {
         addValidationFields()
         setOnClickListeners()
-        //setupDebug()
     }
 
     private fun addValidationFields() {
@@ -71,9 +77,7 @@ class LoginActivity : BaseActivity(), LoginView {
 
     private fun setOnClickListeners() {
         buttonEnter.setOnClickListener {
-            if (awesomeValidation.validate()) {
-                presenter.clickedButtonEnter()
-            }
+            getToken()
         }
         buttonForgotPassword.setOnClickListener {
             presenter.clickedButtonForgotPassword()
@@ -92,26 +96,28 @@ class LoginActivity : BaseActivity(), LoginView {
         textViewMsgWhenEntering.setOnClickListener {
             presenter.clickedLink()
         }
-
-
     }
 
+    @SuppressLint("MissingPermission", "HardwareIds")
+    private fun getToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("Token Failed", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
 
+            // Get new FCM registration token
+            val token = task.result
 
-    /*      switch ( event.getAction() ) {
-                case MotionEvent.ACTION_DOWN:
-                   editText.setInputType(InputType.TYPE_CLASS_TEXT);
-                break;
-                case MotionEvent.ACTION_UP:
-                    editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                break;
-                }
-                return true;
-    * */
+            if (awesomeValidation.validate()) {
+                presenter.clickedButtonEnter(token)
+            }
+        })
+    }
 
     override fun showDialogError(it: Throwable) {
         val listener = {
-            presenter.clickedButtonEnter()
+            getToken()
         }
         showDialogTryAgain(listenerPositiveButton = listener,
                 message = if (it is MessageErrorException) it.message!! else "")

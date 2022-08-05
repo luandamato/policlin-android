@@ -11,4 +11,5 @@ data class PresentationPerson(var name: String = InvalidData.UNINITIALIZED.getSt
                               var password: String = InvalidData.UNINITIALIZED.getString(),
                               var codePlan: String = InvalidData.UNINITIALIZED.getString(),
                               var photo: String = InvalidData.UNINITIALIZED.getString(),
+                              var mothersName: String = InvalidData.UNINITIALIZED.getString(),
                               var plan: PresentationPlan = PresentationPlan())

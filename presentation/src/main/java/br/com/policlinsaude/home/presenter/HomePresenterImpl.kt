@@ -1,9 +1,15 @@
 package br.com.policlinsaude.home.presenter
 
+import br.com.domain.model.UserConnected
+import br.com.domain.usecase.DoLogoffUseCase
 import br.com.domain.usecase.GetBannersUseCase
 import br.com.domain.usecase.GetCurrentPersonUseCase
+import br.com.domain.usecase.GetValidationUserConnectedUseCase
+import br.com.domain.usecase.requestvalues.GetValidationUserConnectedRV
+import br.com.domain.usecase.requestvalues.RecoverPasswordRV
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.home.view.HomeView
+import br.com.policlinsaude.preferences.navigator.PreferencesNavigator
 import io.reactivex.rxkotlin.subscribeBy
 
 /**
@@ -11,7 +17,10 @@ import io.reactivex.rxkotlin.subscribeBy
  */
 class HomePresenterImpl(private val view: HomeView,
                         private val getCurrentPersonUseCase: GetCurrentPersonUseCase,
-                        private val getBannersUseCase: GetBannersUseCase) : HomePresenter {
+                        private val getBannersUseCase: GetBannersUseCase,
+                        private val getValidationUserConnected: GetValidationUserConnectedUseCase,
+                        private val doLogoffUseCase: DoLogoffUseCase
+) : HomePresenter {
 
     override fun onViewAttached() {
         getCurrentPerson()
@@ -54,5 +63,28 @@ class HomePresenterImpl(private val view: HomeView,
 
     override fun onMenuClickedAsGuest() {
         view.showLoginDialog()
+    }
+
+    override fun onValidateConnectedUser(registration: String, order: String) {
+        val data = GetValidationUserConnectedRV(registration = registration, order = order)
+        UseCaseHandler.execute(getValidationUserConnected,data)
+            .subscribeBy(
+                onNext = {
+                    if(it.codAcao == 5)
+                        onLogout(it)
+                }
+            )
+    }
+
+    private fun onLogout(data: UserConnected) {
+        UseCaseHandler.execute(doLogoffUseCase)
+            .subscribeBy(
+                onComplete = {
+                    view.showUserNotConnectedDialog(data)
+                },
+                onError = {
+                    it.printStackTrace()
+                }
+            )
     }
 }

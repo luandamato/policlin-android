@@ -17,6 +17,7 @@ object PresentationPersonMapper {
         presentationPerson.birthday = person.birthday
         presentationPerson.codePlan = person.codePlan
         presentationPerson.photo = person.photo
+        presentationPerson.mothersName = person.mothersName
         return presentationPerson
     }
 
@@ -33,6 +34,7 @@ object PresentationPersonMapper {
         person.birthday = presentationPerson.birthday
         person.codePlan = presentationPerson.codePlan
         person.photo = presentationPerson.photo
+        person.mothersName = presentationPerson.mothersName
         return person
     }
 }

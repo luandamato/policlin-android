@@ -1,9 +1,9 @@
 package br.com.policlinsaude.core.base
 
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
@@ -12,6 +12,7 @@ import br.com.policlinsaude.core.helper.DialogHelper
 import br.com.policlinsaude.core.helper.InvalidData
 import com.basgeekball.awesomevalidation.AwesomeValidation
 import com.basgeekball.awesomevalidation.ValidationStyle
+import com.google.firebase.FirebaseApp
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerAppCompatActivity
@@ -25,6 +26,7 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         performDependencyInjection()
         awesomeValidation = AwesomeValidation(ValidationStyle.BASIC)
+        FirebaseApp.initializeApp(this);
         super.onCreate(savedInstanceState)
     }
 
@@ -43,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         item?.let {
             when (item.itemId) {
                 android.R.id.home -> {

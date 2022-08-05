@@ -18,6 +18,7 @@ interface MedicalGuideDetailsView {
     fun setFavorited(favorited: Boolean)
     fun showRemoveFavoriteSuccessMessage()
     fun showSelectPhones(phoneOne: String, phoneTwo: String)
+    fun showSelectWhats(phoneOne: String, phoneTwo: String)
     fun showWithoutNetworkDialog()
     fun execGetFavorites()
     fun saveFavoritesInPrefs(favorites: List<PresentationEstablishment>)

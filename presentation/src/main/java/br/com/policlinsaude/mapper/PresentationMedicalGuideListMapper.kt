@@ -49,6 +49,8 @@ object PresentationMedicalGuideListMapper {
                     state = domain.state,
                     phoneOne = domain.phoneOne,
                     phoneTwo = domain.phoneTwo,
+                    typePhoneOne = domain.typePhoneOne,
+                    typePhoneTwo = domain.typePhoneTwo,
                     latitude = domain.latitude,
                     longitude = domain.longitude,
                     distance = domain.distance,

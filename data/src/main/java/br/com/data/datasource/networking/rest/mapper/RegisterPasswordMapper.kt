@@ -25,7 +25,7 @@ object RegisterPasswordMapper {
         json.acceptTerm = 1
         json.birthday = DateHelper.getStringFromDate(DateHelper.FORMAT_DATE_YYYYMMDD, person.birthday)
         json.avatar = person.photo
-
+        json.mothersName = person.mothersName
         return json
     }
 }
