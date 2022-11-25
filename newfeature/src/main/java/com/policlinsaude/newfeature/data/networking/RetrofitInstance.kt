@@ -15,22 +15,22 @@ class RetrofitInstance (
 ) {
 
     companion object {
-
+        const val API_NOTIFICATION = "http://policlinsaude.com.br/mapp/api/"
         private const val API_URL : String = "http://policlinsaude.com.br/apiapp/"
         private const val PLATFORM = "plataforma"
         private const val PLATFORM_ANDROID = "A"
         private const val VERSION = "versao"
-        private const val VERSION_ANDROID = "10.1.1"
+        private const val VERSION_ANDROID = "1.34.1"
 
     }
 
-    fun <T> create(service: Class<T>, interceptors: List<Interceptor> = emptyList(), certificate: List<String> = emptyList()): T {
+    fun <T> create(service: Class<T>, baseUrl: String = API_URL, interceptors: List<Interceptor> = emptyList(), certificate: List<String> = emptyList()): T {
 
-        val host = getHost(API_URL)
+        val host = getHost(baseUrl)
         val client = getClient(host, interceptors, certificate)
 
         return Retrofit.Builder()
-            .baseUrl(API_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(providesGson()))
             .client(client)
             .build()

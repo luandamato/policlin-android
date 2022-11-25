@@ -4,17 +4,22 @@
 
     <application>
         <activity
-            android:name=".features.extractor.ui.activities.FactorExtractorActivity"
+            android:name=".features.notifications.ui.activities.NotificationActivity"
             android:exported="false"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".features.extractor.ui.activities.FactorExtractorActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".features.coparticipation.ui.activities.ResearchCoParticipationActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".features.tickets.ui.activities.TicketsActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

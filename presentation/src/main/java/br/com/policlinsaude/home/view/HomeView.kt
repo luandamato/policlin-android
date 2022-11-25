@@ -17,4 +17,5 @@ interface HomeView {
     fun showBannerLoading()
     fun hideBannerLoading()
     fun showButtons(buttons: ValidateButtons)
+    fun showUpdateDialog(throwable: Throwable)
 }

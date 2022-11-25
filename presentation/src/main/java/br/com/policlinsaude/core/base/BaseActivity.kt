@@ -69,6 +69,15 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 listenerPositiveButton = listenerPositiveButton, message = message)
     }
 
+    fun showDialogUpdateApp(
+        message: String = InvalidData.UNINITIALIZED.getString()
+    ) {
+        DialogHelper.showUpdateDialog(
+            context = this,
+            message = message,
+        )
+    }
+
     fun showToast(@StringRes message: Int) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }

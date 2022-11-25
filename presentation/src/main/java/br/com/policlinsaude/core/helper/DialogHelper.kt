@@ -1,6 +1,8 @@
 package br.com.policlinsaude.core.helper
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import br.com.policlinsaude.R
@@ -55,9 +57,7 @@ object DialogHelper {
     fun showDialogTryAgain(context: Context, listenerPositiveButton: () -> Unit = { },
                            message: String = InvalidData.UNINITIALIZED.getString()) {
         with(context) {
-            var dismissListener: () -> Unit = {
-
-            }
+            var dismissListener: () -> Unit = {}
 
             val dialog = showDialog(context = context, title = getString(R.string.title_error_oops),
                     message = if (message.isEmpty()) getString(R.string.msg_error_unknown) else message,
@@ -84,6 +84,36 @@ object DialogHelper {
                 message,
                 context.getString(R.string.text_ok),
                 null)
+    }
+
+    fun showUpdateDialog(
+        context: Context,
+        message: String = InvalidData.UNINITIALIZED.getString()
+    ) {
+        showDialog(
+            context,
+            context.getString(R.string.title_error_oops),
+            message,
+            context.getString(R.string.text_ok),
+            null,
+            listenerPositiveButton = {
+                try {
+                    context.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("market://details?id=${context.packageName}")
+                        )
+                    )
+                } catch (e: Exception) {
+                    context.startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://play.google.com/store/apps/details?id=${context.packageName}")
+                        )
+                    )
+                }
+            },
+        )
     }
 
 }

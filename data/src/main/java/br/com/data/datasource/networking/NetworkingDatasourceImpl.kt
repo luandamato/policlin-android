@@ -26,7 +26,11 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
             .flatMap {
                 if (validateMsgIsSuccess(it.msgInternal)
                         || it.user == null || it.token == null) {
-                    Flowable.error(MessageErrorException(it.msgExternal ?: ""))
+                    if(it.actionCode == 450) {
+                        Flowable.error(MessageErrorException("${it.actionCode}-${it.msgExternal}"))
+                    } else {
+                        Flowable.error(MessageErrorException(it.msgExternal ?: ""))
+                    }
                 } else {
                     Flowable.just(Pair(JsonUserResponseMapper.transform(it.user), it.token))
                 }

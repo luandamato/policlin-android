@@ -1,7 +1,7 @@
 ext {
     application = [
-            versionCode  : 33,
-            versionName  : "1.33",
+            versionCode  : 35,
+            versionName  : "1.35",
             applicationId: "br.com.policlinsaude"
     ]
 

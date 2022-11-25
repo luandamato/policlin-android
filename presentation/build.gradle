@@ -45,14 +45,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
             zipAlignEnabled true
-            versionNameSuffix '1.1'
+            versionNameSuffix '.1'
         }
 
         debug {
             signingConfig signingConfigs.config
             proguardFile 'proguard-rules.pro'
             zipAlignEnabled true
-            versionNameSuffix '1.1'
+            versionNameSuffix '.1'
         }
     }
 

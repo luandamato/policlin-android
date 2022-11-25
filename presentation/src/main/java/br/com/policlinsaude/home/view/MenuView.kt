@@ -10,5 +10,6 @@ interface MenuView {
     fun setupGuest()
     fun showError(throwable: Throwable)
     fun showLoginDialog()
+    fun showUpdateDialog(throwable: Throwable)
     fun showUserNotConnectedDialog(message: String)
 }

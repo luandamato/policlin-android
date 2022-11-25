@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "br.com.policlinsaude",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "properties": [],
+      "versionCode": 35,
+      "versionName": "1.35.1",
+      "enabled": true,
+      "outputFile": "presentation-release.apk"
+    }
+  ]
+}

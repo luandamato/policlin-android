@@ -141,6 +141,13 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
                 { presenter.onLoginClicked() })
     }
 
+    override fun showUpdateDialog(throwable: Throwable) {
+        DialogHelper.showUpdateDialog(
+            this,
+            throwable.message.orEmpty()
+        )
+    }
+
     override fun showUserNotConnectedDialog(message: String) {
         DialogHelper.showDialog(
             this,
@@ -159,6 +166,11 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
 
         toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        toggle.apply {
+            isDrawerIndicatorEnabled = true
+            isDrawerSlideAnimationEnabled = true
+            setHomeAsUpIndicator(R.drawable.ic_menu)
+        }
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
         toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
