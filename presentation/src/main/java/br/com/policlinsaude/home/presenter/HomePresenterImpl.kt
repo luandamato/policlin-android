@@ -69,7 +69,10 @@ class HomePresenterImpl(private val view: HomeView,
         UseCaseHandler.execute(getValidationUserConnected,data)
             .subscribeBy(
                 onNext = {
-                    if(it.codAcao == 5)
+                    if(it.codAcao == 450)
+                        view.showUpdateDialog(Throwable(it.msgExterna.orEmpty()))
+
+                    else if(it.codAcao == 5)
                         onLogout(it)
                 }
             )

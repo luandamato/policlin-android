@@ -1,5 +1,6 @@
 package br.com.policlinsaude.home.view
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
@@ -9,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import br.com.domain.model.Banner
 import br.com.domain.model.Person
 import br.com.domain.model.UserConnected
@@ -24,11 +26,15 @@ import br.com.policlinsaude.home.view.model.PresentationHomeOptionEnum
 import br.com.policlinsaude.preferences.presenter.PreferencesPresenter
 import com.policlinsaude.newfeature.features.coparticipation.ui.activities.ResearchCoParticipationActivity
 import com.policlinsaude.newfeature.features.extractor.ui.activities.FactorExtractorActivity
+import com.policlinsaude.newfeature.features.incometax.ui.activities.IncomeTaxActivity
+import com.policlinsaude.newfeature.features.notifications.ui.activities.NotificationActivity
 import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.app_bar_home.*
+import kotlinx.android.synthetic.main.app_bar_home.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -36,6 +42,8 @@ import javax.inject.Inject
 class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickListener {
 
     private var isCoPartFM: Boolean = false
+
+    lateinit var toolbar: Toolbar
 
     companion object {
         private const val CO_PART_FM = "fm"
@@ -64,14 +72,24 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        val toolbar: Toolbar = view.findViewById(R.id.toolbar)
+        toolbar = view.findViewById(R.id.toolbar)
         val nameTextView: TextView = view.findViewById(R.id.person_name_text_view)
 
         (activity as MenuActivity).setupFragmentToolbar(toolbar, null)
-        (activity as MenuActivity).toggle.drawerArrowDrawable.gapSize = 12.0f
+        (activity as MenuActivity).toggle.apply {
+            drawerArrowDrawable.gapSize = 10.0f
+        }
+
         if ((activity as MenuActivity).isGuest) {
             nameTextView.setText(R.string.text_guest)
         }
+
+        toolbar.apply {
+            navigationIcon = ContextCompat.getDrawable(requireContext(),  R.drawable.ic_menu)
+        }
+
+        //activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.Bordo)
+
         return view
     }
 
@@ -105,6 +123,10 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
         homeAdapter.setup(PresentationHomeOptionEnum.values().toMutableList())
         presenter.onValidateButtons()
         presenter.onViewAttached()
+
+        alert_menu.setOnClickListener {
+            startActivity(Intent(context, NotificationActivity::class.java))
+        }
 
     }
 
@@ -162,11 +184,24 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     startActivity(intent)
                 }
             }
+
+            PresentationHomeOptionEnum.INCOME_TAX -> {
+                if ((activity as MenuActivity).isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    val intent = Intent(context, IncomeTaxActivity::class.java)
+                    startActivity(intent)
+                }
+            }
         }
     }
 
     override fun showLoginDialog() {
         (activity as MenuView).showLoginDialog()
+    }
+
+    override fun showUpdateDialog(throwable: Throwable) {
+        (activity as MenuActivity).showUpdateDialog(throwable)
     }
 
     override fun showUserNotConnectedDialog(item: UserConnected) {
@@ -189,6 +224,9 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
 
             if (buttons.copartFM.isEmpty())
                 homeAdapter.removeExtracts()
+
+            if(!buttons.IR)
+                homeAdapter.removeIncomeTax()
 
             isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
         }

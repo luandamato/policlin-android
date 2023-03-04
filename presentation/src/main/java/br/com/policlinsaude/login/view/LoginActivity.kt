@@ -119,8 +119,14 @@ class LoginActivity : BaseActivity(), LoginView {
         val listener = {
             getToken()
         }
-        showDialogTryAgain(listenerPositiveButton = listener,
-                message = if (it is MessageErrorException) it.message!! else "")
+        if(it.message?.contains("450-") == true) {
+            val message = it.message?.split("-").orEmpty()
+            showDialogUpdateApp(message = message[1])
+        } else {
+            showError(
+                message = it.message.orEmpty()
+            )
+        }
     }
 
     override fun showLoginLoading() {

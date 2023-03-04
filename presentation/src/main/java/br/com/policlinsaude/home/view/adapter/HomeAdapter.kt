@@ -54,6 +54,18 @@ class HomeAdapter(
         } catch (e: Exception) {}
     }
 
+    fun removeIncomeTax() {
+        try {
+            list?.let {
+                it.remove(PresentationHomeOptionEnum.INCOME_TAX)
+            }
+
+            list = list
+            notifyDataSetChanged()
+
+        } catch (e: Exception) {}
+    }
+
     fun setup(items: MutableList<PresentationHomeOptionEnum>) {
         list?.clear()
         list?.addAll(items)

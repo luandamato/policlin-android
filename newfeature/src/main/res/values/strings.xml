@@ -33,6 +33,8 @@
     <string name="factor_extractor_clean_filter">Limpar Filtro</string>
     <string name="factor_extractor_empty_filter"><![CDATA[Por favor, selecione o <b>Ano</b> e <b>Mês</b> desejado]]></string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="select_all">Selecionar tudo</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
