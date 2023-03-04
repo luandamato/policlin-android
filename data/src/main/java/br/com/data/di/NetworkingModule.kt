@@ -24,7 +24,7 @@ class NetworkingModule {
         private const val PLATFORM = "plataforma"
         private const val PLATFORM_ANDROID = "A"
         private const val VERSION = "versao"
-        private const val VERSION_ANDROID = "1.34.1"
+        private const val VERSION_ANDROID = "1.41.0"
 
     }
 

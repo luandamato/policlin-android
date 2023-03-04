@@ -5,6 +5,7 @@ import com.policlinsaude.newfeature.features.coparticipation.data.repositories.C
 import com.policlinsaude.newfeature.features.coparticipation.data.repositories.CoParticipationRepositoryImpl
 import com.policlinsaude.newfeature.features.coparticipation.ui.viewmodels.CoParticipationViewModel
 import com.policlinsaude.newfeature.features.extractor.ui.viewmodels.FactorExtractorViewModel
+import com.policlinsaude.newfeature.features.incometax.ui.viewmodels.IncomeTaxViewModel
 import com.policlinsaude.newfeature.features.notifications.ui.viewmodels.NotificationViewModel
 import com.policlinsaude.newfeature.features.tickets.ui.viewmodels.TicketViewModel
 import com.policlinsaude.newfeature.utils.SharedPreferences
@@ -30,4 +31,6 @@ val appModules = module {
     viewModel { FactorExtractorViewModel(get(), get()) }
 
     viewModel { NotificationViewModel(get(), get()) }
+
+    viewModel { IncomeTaxViewModel(get(), get()) }
 }

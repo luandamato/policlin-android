@@ -4,10 +4,12 @@
 
     <application>
         <activity
+            android:name=".features.incometax.ui.activities.IncomeTaxActivity"
+            android:exported="false" />
+        <activity
             android:name=".features.notifications.ui.activities.NotificationActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".features.extractor.ui.activities.FactorExtractorActivity"
             android:exported="false"

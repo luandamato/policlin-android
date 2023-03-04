@@ -26,6 +26,7 @@ import br.com.policlinsaude.home.view.model.PresentationHomeOptionEnum
 import br.com.policlinsaude.preferences.presenter.PreferencesPresenter
 import com.policlinsaude.newfeature.features.coparticipation.ui.activities.ResearchCoParticipationActivity
 import com.policlinsaude.newfeature.features.extractor.ui.activities.FactorExtractorActivity
+import com.policlinsaude.newfeature.features.incometax.ui.activities.IncomeTaxActivity
 import com.policlinsaude.newfeature.features.notifications.ui.activities.NotificationActivity
 import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
 import io.reactivex.Observable
@@ -183,6 +184,15 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     startActivity(intent)
                 }
             }
+
+            PresentationHomeOptionEnum.INCOME_TAX -> {
+                if ((activity as MenuActivity).isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    val intent = Intent(context, IncomeTaxActivity::class.java)
+                    startActivity(intent)
+                }
+            }
         }
     }
 
@@ -214,6 +224,9 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
 
             if (buttons.copartFM.isEmpty())
                 homeAdapter.removeExtracts()
+
+            if(!buttons.IR)
+                homeAdapter.removeIncomeTax()
 
             isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
         }

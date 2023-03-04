@@ -11,8 +11,8 @@
       "type": "SINGLE",
       "filters": [],
       "properties": [],
-      "versionCode": 35,
-      "versionName": "1.35.1",
+      "versionCode": 41,
+      "versionName": "1.41.0",
       "enabled": true,
       "outputFile": "presentation-release.apk"
     }
