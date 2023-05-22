@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fillViewport="true"
+    tools:context=".features.guidAuthorizer.ui.fragments.BeneficiaryDataFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Primary.Text.Style.Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="24dp"
+                android:textSize="15sp"
+                android:text="Dados do beneficiário" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Primary.Text.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_2"
+                        android:textSize="12sp"
+                        android:text="Matícula" />
+
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:id="@+id/textview_matricula"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/Bordo"
+                        android:textSize="13sp"
+                        tools:text="10106014" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Primary.Text.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_2"
+                        android:textSize="12sp"
+                        android:text="Ordem" />
+
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:id="@+id/textview_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/Bordo"
+                        android:textSize="13sp"
+                        tools:text="0" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_2"
+                    android:textSize="12sp"
+                    android:text="Beneficiário" />
+
+                <TextView
+                    style="@style/Primary.Text.Style.Bold"
+                    android:id="@+id/textview_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp"
+                    tools:text="ADRIANE SANTANA FERNANDES" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_2"
+                    android:textSize="12sp"
+                    android:text="Telefone" />
+
+                <TextView
+                    android:id="@+id/textview_telephone"
+                    style="@style/Primary.Text.Style.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_2"
+                    android:textSize="12sp"
+                    android:text="Email" />
+
+                <TextView
+                    android:id="@+id/textview_email"
+                    style="@style/Primary.Text.Style.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_2"
+                    android:textSize="12sp"
+                    android:text="Semana Gestacional" />
+
+                <TextView
+                    android:id="@+id/seman_gest"
+                    style="@style/Primary.Text.Style.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:id="@+id/divider_guide_authorization"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="24dp"
+            android:background="@color/divider" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Primary.Text.Style.Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="24dp"
+                android:textSize="15sp"
+                android:text="Dados da Solicitação" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_2"
+                    android:textSize="12sp"
+                    android:text="Nº de protocolo" />
+
+                <TextView
+                    style="@style/Primary.Text.Style.Bold"
+                    android:id="@+id/textview_protocol"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp"
+                    tools:text="41123 123213 412421" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_2"
+                    android:textSize="12sp"
+                    android:text="Referente COVID-19" />
+
+                <TextView
+                    style="@style/Primary.Text.Style.Bold"
+                    android:id="@+id/textview_covid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp"
+                    tools:text="Não" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="24dp"
+            android:background="@color/divider" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="28dp"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Primary.Text.Style.Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_marginHorizontal="24dp"
+                android:textSize="15sp"
+                android:text="Dados do Atendimento" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Primary.Text.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_2"
+                        android:textSize="12sp"
+                        android:text="Agendado" />
+
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:id="@+id/textview_agend"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/Bordo"
+                        android:textSize="13sp"
+                        tools:text="Sim" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/linear_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Primary.Text.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black_2"
+                        android:textSize="12sp"
+                        android:text="Data" />
+
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:id="@+id/textview_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/Bordo"
+                        android:textSize="13sp"
+                        tools:text="20/03/2022" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_2"
+                    android:textSize="12sp"
+                    android:text="Cidade" />
+
+                <TextView
+                    style="@style/Primary.Text.Style.Bold"
+                    android:id="@+id/textview_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp"
+                    tools:text="São José dos Campos" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_2"
+                    android:textSize="12sp"
+                    android:text="Prestador" />
+
+                <TextView
+                    style="@style/Primary.Text.Style.Bold"
+                    android:id="@+id/textview_prestador"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp"
+                    tools:text="Policlin" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.core.widget.NestedScrollView>

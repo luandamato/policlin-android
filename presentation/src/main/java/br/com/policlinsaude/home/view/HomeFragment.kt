@@ -26,6 +26,7 @@ import br.com.policlinsaude.home.view.model.PresentationHomeOptionEnum
 import br.com.policlinsaude.preferences.presenter.PreferencesPresenter
 import com.policlinsaude.newfeature.features.coparticipation.ui.activities.ResearchCoParticipationActivity
 import com.policlinsaude.newfeature.features.extractor.ui.activities.FactorExtractorActivity
+import com.policlinsaude.newfeature.features.guidAuthorizer.ui.activities.GuideAuthorizerActivity
 import com.policlinsaude.newfeature.features.incometax.ui.activities.IncomeTaxActivity
 import com.policlinsaude.newfeature.features.notifications.ui.activities.NotificationActivity
 import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
@@ -193,6 +194,16 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     startActivity(intent)
                 }
             }
+
+
+            PresentationHomeOptionEnum.GUIDE_AUTHORIZER -> {
+                if ((activity as MenuActivity).isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    val intent = Intent(context, GuideAuthorizerActivity::class.java)
+                    startActivity(intent)
+                }
+            }
         }
     }
 
@@ -218,17 +229,21 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
     }
 
     override fun showButtons(buttons: ValidateButtons) {
-        if (!(activity as MenuActivity).isGuest) {
-            if (!buttons.boleto)
-                homeAdapter.removeTicket()
+        if(activity != null) {
+            if(activity is MenuActivity) {
+                if (!(activity as MenuActivity).isGuest) {
+                    if (!buttons.boleto)
+                        homeAdapter.removeTicket()
 
-            if (buttons.copartFM.isEmpty())
-                homeAdapter.removeExtracts()
+                    if (buttons.copartFM.isEmpty())
+                        homeAdapter.removeExtracts()
 
-            if(!buttons.IR)
-                homeAdapter.removeIncomeTax()
+                    if(!buttons.IR)
+                        homeAdapter.removeIncomeTax()
 
-            isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
+                    isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
+                }
+            }
         }
     }
 

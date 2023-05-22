@@ -13,10 +13,6 @@ import com.policlinsaude.newfeature.databinding.ActivityTicketsBinding
 import com.policlinsaude.newfeature.features.extractor.ui.viewmodels.FactorExtractorViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import android.widget.TextView
-
-
-
-
 class FactorExtractorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFactorExtractorBinding
@@ -40,7 +36,7 @@ class FactorExtractorActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, config)
 
         binding.factorExtractorToolbar.toolbar.setupWithNavController(navController)
-        (binding.factorExtractorToolbar.toolbar.getChildAt(0) as TextView).textSize = 16f
+        (binding.factorExtractorToolbar.toolbar.getChildAt(0) as TextView).textSize = 14f
     }
 
     fun showBackButton() {

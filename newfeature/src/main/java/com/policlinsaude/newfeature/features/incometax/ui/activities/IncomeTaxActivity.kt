@@ -29,7 +29,7 @@ class IncomeTaxActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, config)
 
         binding.irToolbar.toolbar.setupWithNavController(navController)
-        (binding.irToolbar.toolbar.getChildAt(0) as TextView).textSize = 16f
+        (binding.irToolbar.toolbar.getChildAt(0) as TextView).textSize = 14f
     }
 
     fun showBackButton() {

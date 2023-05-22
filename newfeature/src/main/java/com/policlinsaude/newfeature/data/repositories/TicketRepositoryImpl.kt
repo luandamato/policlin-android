@@ -1,7 +1,10 @@
 package com.policlinsaude.newfeature.data.repositories
 
+import com.policlinsaude.newfeature.data.models.UserModel
 import com.policlinsaude.newfeature.data.networking.RetrofitInstance
 import com.policlinsaude.newfeature.data.services.TicketService
+import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerRequestModel
+import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerResponseModel
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxBodyModel
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxResponseModel
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketBodyModel
@@ -28,5 +31,4 @@ class TicketRepositoryImpl: TicketRepository {
             }
         }
     }
-
 }

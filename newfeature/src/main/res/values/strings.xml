@@ -32,8 +32,20 @@
     <string name="factor_extractor_filter">Filtrar</string>
     <string name="factor_extractor_clean_filter">Limpar Filtro</string>
     <string name="factor_extractor_empty_filter"><![CDATA[Por favor, selecione o <b>Ano</b> e <b>Mês</b> desejado]]></string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="select_all">Selecionar tudo</string>
+
+
+    <!-- GUIDE AUTHORIZER -->
+    <string name="title_activity_guide_authorizer">GuideAuthorizerActivity</string>
+    <string name="guide_authorizer">Autorizador de Guias</string>
+    <string name="guide_authorizer_request_exam">Solicitação de Exame e Procedimentos</string>
+    <string name="previous">Previous</string>
+    <string name="guide_authorizer_new_request">Nova Solicitação</string>
+    <string name="guide_authorizer_send">Enviar Solicitação</string>
+    <string name="beneficiary_data">Dados do Beneficiário</string>
+    <string name="request_data">Dados da Solicitação</string>
+    <string name="text_input_email">Insira seu e-mail</string>
+    <string name="confirm">Confirmar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

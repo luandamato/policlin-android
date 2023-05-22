@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_2"
+                android:textSize="12sp"
+                android:text="Já agendou *" />
+
+            <TextView
+                android:id="@+id/textview_schedule"
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@color/Branco"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableTint="@color/Bordo"
+                android:hint="Selecione"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Cinza_Claro"
+                android:textSize="12sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linear_schedule"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_2"
+                android:textSize="12sp"
+                android:text="Data do Atendimento" />
+
+            <TextView
+                android:id="@+id/textview_service_data"
+                style="@style/Primary.Text.Style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/background_spinner"
+                android:drawableEnd="@drawable/ic_arrow_down"
+                android:drawableTint="@color/Bordo"
+                android:hint="Selecione"
+                android:padding="8dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/Cinza_Claro"
+                android:textSize="12sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_2"
+            android:textSize="12sp"
+            android:text="Cidade de Atendimento *" />
+
+        <TextView
+            android:id="@+id/textview_city_selected"
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@color/Branco"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:drawableTint="@color/Bordo"
+            android:hint="Selecione a cidade"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Cinza_Claro"
+            android:textSize="12sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linear_other_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical"
+        tools:visibility="visible">
+
+        <TextView
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_2"
+            android:textSize="12sp"
+            android:text="Outra cidade" />
+
+        <EditText
+            style="@style/Primary.Text.Style.Bold"
+            android:id="@+id/editCidade"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawablePadding="8dp"
+            android:hint="Digite o nome da cidade"
+            android:inputType="textEmailAddress"
+            android:textSize="13sp"
+            android:textColor="@color/Bordo" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linear_service_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical"
+        tools:visibility="visible">
+
+        <TextView
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_2"
+            android:textSize="12sp"
+            android:text="Prestador (Local do atendimento)" />
+
+        <EditText
+            style="@style/Primary.Text.Style.Bold"
+            android:id="@+id/editServiceLocation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawablePadding="8dp"
+            android:hint="Digite o nome do local"
+            android:inputType="textEmailAddress"
+            android:textSize="13sp"
+            android:textColor="@color/Bordo" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

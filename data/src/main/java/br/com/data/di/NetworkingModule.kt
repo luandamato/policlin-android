@@ -20,7 +20,7 @@ class NetworkingModule {
 
     companion object {
 
-        private const val API_URL : String = "http://policlinsaude.com.br/mapp/api/"
+        private const val API_URL : String = "http://policlinsaude.com.br/mapp2/api/"
         private const val PLATFORM = "plataforma"
         private const val PLATFORM_ANDROID = "A"
         private const val VERSION = "versao"
@@ -56,7 +56,9 @@ class NetworkingModule {
                 requestBuilder.header(VERSION, VERSION_ANDROID)
                 chain.proceed(requestBuilder.build())
             }
-            .connectTimeout(30, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS) // write timeout
+            .readTimeout(60, TimeUnit.SECONDS) // read timeout
             .build()
 
     @Provides

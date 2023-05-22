@@ -1,0 +1,15 @@
+<resources>
+  <style name="Theme.Policlinsaudesmith.NoActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+    <item name="android:textSize">12sp</item>
+</style>
+
+  <style name="Theme.Policlinsaudesmith.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <item name="android:textSize">10sp</item>
+  </style>
+
+  <style name="Theme.Policlinsaudesmith.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+    <item name="android:textSize">10sp</item>
+  </style>
+</resources>

@@ -6,7 +6,8 @@
                 android:color="@color/Bordo" />
 
             <corners
-                android:radius="4dp" />
+                android:radius="6dp" />
+
 
         </shape>
     </item>
@@ -17,7 +18,7 @@
                 android:color="@color/Bordo_10" />
 
             <corners
-                android:radius="4dp" />
+                android:radius="6dp" />
 
         </shape>
     </item>

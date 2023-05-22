@@ -5,6 +5,7 @@ import com.policlinsaude.newfeature.features.coparticipation.data.repositories.C
 import com.policlinsaude.newfeature.features.coparticipation.data.repositories.CoParticipationRepositoryImpl
 import com.policlinsaude.newfeature.features.coparticipation.ui.viewmodels.CoParticipationViewModel
 import com.policlinsaude.newfeature.features.extractor.ui.viewmodels.FactorExtractorViewModel
+import com.policlinsaude.newfeature.features.guidAuthorizer.ui.viewmodels.GuideAuthorizerViewModel
 import com.policlinsaude.newfeature.features.incometax.ui.viewmodels.IncomeTaxViewModel
 import com.policlinsaude.newfeature.features.notifications.ui.viewmodels.NotificationViewModel
 import com.policlinsaude.newfeature.features.tickets.ui.viewmodels.TicketViewModel
@@ -24,6 +25,8 @@ val appModules = module {
 
     single<NotificationRepository> { NotificationRepositoryImpl() }
 
+    single <GuideRepository> { GuideRepositoryImpl() }
+
     viewModel { TicketViewModel(get(), get()) }
 
     viewModel { CoParticipationViewModel(get(), get()) }
@@ -33,4 +36,6 @@ val appModules = module {
     viewModel { NotificationViewModel(get(), get()) }
 
     viewModel { IncomeTaxViewModel(get(), get()) }
+
+    viewModel { GuideAuthorizerViewModel(get(), get()) }
 }

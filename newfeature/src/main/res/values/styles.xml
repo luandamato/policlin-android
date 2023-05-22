@@ -20,4 +20,11 @@
         <item name="android:dropDownHorizontalOffset">26dp</item>
         <item name="android:dropDownVerticalOffset">4dp</item>
     </style>
+
+    <style name="Primary.TextInputLayout.Light.Style" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColorHint">@color/Bordo</item>
+        <item name="colorControlNormal">@color/Bordo</item>
+        <item name="colorControlActivated">@color/Bordo</item>
+        <item name="colorControlHighlight">@color/Bordo</item>
+    </style>
 </resources>

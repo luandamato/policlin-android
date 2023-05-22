@@ -45,7 +45,7 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
 
         try {
-            (toolbar.getChildAt(0) as TextView).textSize = 16f
+            (toolbar.getChildAt(0) as TextView).textSize = 14f
         } catch (e: Exception) {}
     }
 

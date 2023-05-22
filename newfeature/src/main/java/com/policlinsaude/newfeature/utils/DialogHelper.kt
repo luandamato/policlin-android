@@ -23,7 +23,8 @@ object DialogHelper {
     }
 
     fun showDialog(context: Context, title: String, message: String,
-                   messagePositiveButton: String? = "", messageNegativeButton: String? = "",
+                   messagePositiveButton: String? = "",
+                   messageNegativeButton: String? = "",
                    listenerPositiveButton: () -> Unit = { },
                    listenerNegativeButton: (() -> Unit)? = { },
                    onDismiss: (() -> Unit)? = { }): AlertDialog {
@@ -44,7 +45,7 @@ object DialogHelper {
             }
 
             setCancelable(false)
-            setOnDismissListener({ onDismiss?.invoke() })
+            setOnDismissListener { onDismiss?.invoke() }
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.setCancelable(false)

@@ -6,7 +6,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface FactorExtractorService {
-
     @POST("rest/apiExtratoCoparticipacao")
     suspend fun postFactorExtractor(
         @Body body: FactorExtractorBodyModel
