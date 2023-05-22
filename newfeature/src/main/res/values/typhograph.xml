@@ -5,33 +5,40 @@
         <item name="android:textAlignment">center</item>
         <!--<item name="android:minHeight">@dimen/primary_button_height</item>-->
         <item name="android:textAppearance">@style/Primary.Button.Text.Style</item>
+        <item name="fontFamily">@font/inter_bold</item>
     </style>
 
     <style name="Primary.Button.Text.Style" parent="Base.TextAppearance.AppCompat.Button">
         <item name="android:textColor">@color/primaryButtonText</item>
+        <item name="fontFamily">@font/inter_bold</item>
     </style>
 
     <style name="Primary.Text.Style" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/primaryButtonText</item>
         <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/inter_regular</item>
     </style>
 
     <style name="Primary.Text.Style.Bold">
         <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/inter_bold</item>
     </style>
 
 
     <style name="Secondary.Text.Style" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/secondaryText</item>
         <item name="android:textSize">13sp</item>
+        <item name="fontFamily">@font/inter_regular</item>
     </style>
 
     <style name="Secondary.Text.Style.Bold">
         <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/inter_bold</item>
     </style>
 
     <style name="Primary.Text.Ligt.Style" parent="Primary.Text.Style">
         <item name="android:textColor">@color/lightText</item>
+        <item name="fontFamily">@font/inter_regular</item>
     </style>
 
 </resources>

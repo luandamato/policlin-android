@@ -53,4 +53,11 @@
     <color name="Laranja">#FB9E14</color>
     <color name="Laranja_10">#16FB9E14</color>
 
+
+    <color name="enviado">#31C719</color>
+    <color name="em_analise">#f5d505</color>
+    <color name="finalizado">#005fd4</color>
+    <color name="aguardando_resposta">#f07d11</color>
+    <color name="respondido">#5a24b3</color>
+    <color name="cancelado">#ff0000</color>
 </resources>

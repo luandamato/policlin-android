@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".features.guidAuthorizer.ui.fragments.BeneficiaryDataFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_2"
+            android:textSize="12sp"
+            android:text="Referente ao teste de COVID-19 *" />
+
+        <TextView
+            android:id="@+id/textview_schedule"
+            style="@style/Primary.Text.Style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:background="@color/Branco"
+            android:drawableEnd="@drawable/ic_arrow_down"
+            android:drawableTint="@color/Bordo"
+            android:hint="Selecione"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/Cinza_Claro"
+            android:textSize="12sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

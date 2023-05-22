@@ -6,23 +6,35 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 enum class DateFormats(val format: String) {
-    DATE_HOUR_BR("yyyy-MM-dd"),
+    DATE_HOUR_BR("yyyy-MM-dd'T'HH:mm:SS"),
+    DATE_BR("yyyy-MM-dd"),
     DD_MM_YYYY("dd/MM/yyyy"),
-    MM_YYYY("MM/yyyy")
+    MM_YYYY("MM/yyyy"),
+    HH_MM_SS("HH:mm:ss"),
 }
 
 
 fun String.toMMYYYY(): String {
-    val parser = SimpleDateFormat(DateFormats.DATE_HOUR_BR.format, Locale("pt", "BR"))
+    val parser = SimpleDateFormat(DateFormats.DATE_BR.format, Locale("pt", "BR"))
     val formatter = SimpleDateFormat(DateFormats.MM_YYYY.format, Locale("pt", "BR"))
 
     return formatter.format(parser.parse(this))
 }
 
 fun String.toDDMMYYYY(): String {
-    val parser = SimpleDateFormat(DateFormats.DATE_HOUR_BR.format, Locale("pt", "BR"))
-    val formatter = SimpleDateFormat(DateFormats.DD_MM_YYYY.format, Locale("pt", "BR"))
+    return try {
+        val parser = SimpleDateFormat(DateFormats.DATE_BR.format, Locale("pt", "BR"))
+        val formatter = SimpleDateFormat(DateFormats.DD_MM_YYYY.format, Locale("pt", "BR"))
 
+        return formatter.format(parser.parse(this))
+    } catch (e: java.lang.Exception) {
+        this
+    }
+}
+
+fun String.toHHMMSS(): String {
+    val parser = SimpleDateFormat(DateFormats.DATE_HOUR_BR.format, Locale("pt", "BR"))
+    val formatter = SimpleDateFormat(DateFormats.HH_MM_SS.format, Locale("pt", "BR"))
     return formatter.format(parser.parse(this))
 }
 

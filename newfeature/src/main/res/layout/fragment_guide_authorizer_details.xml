@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScroolView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fillViewport="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/consulting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_error"
+                        android:tint="@color/Bordo"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        style="@style/Primary.Text.Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:gravity="end"
+                        android:paddingVertical="10dp"
+                        android:text="Consultar prazos"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/resume"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_file_ok"
+                        android:tint="@color/Bordo"
+                        tools:ignore="ContentDescription" />
+
+                    <TextView
+                        style="@style/Primary.Text.Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:paddingVertical="10dp"
+                        android:text="Resumo"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title_status"
+                    style="@style/Primary.Text.Style.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dados da Solicitação"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    tools:text="Status da Solicitação Nº WEB 24868" />
+
+                <TextView
+                    android:id="@+id/description_status"
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dados da Solicitação"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp"
+                    tools:text="Finalizado aberto Resumo da solicitação" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:id="@+id/divider_guide_authorization"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="24dp"
+                android:background="@color/divider" />
+
+            <com.policlinsaude.newfeature.features.guidAuthorizer.components.Accordion
+                android:id="@+id/accordion_guide_authorizer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cAccordionText="Acesse suas Guias">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_guide"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/adapter_guide" />
+
+            </com.policlinsaude.newfeature.features.guidAuthorizer.components.Accordion>
+
+            <TextView
+                android:id="@+id/description_observable"
+                style="@style/Primary.Text.Style.Bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Dados da Solicitação"
+                android:textColor="@color/Bordo"
+                android:textSize="15sp"
+                tools:text="Observação: Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
+
+            <View
+                android:id="@+id/divider_request"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/divider" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/linear_request"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="24dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@id/imageview_right_request"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        style="@style/Primary.Text.Style.Bold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dados da solicitação"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        tools:text="Dados da solicitação " />
+
+                    <TextView
+                        android:id="@+id/descriptionProtocol"
+                        style="@style/Primary.Text.Style"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dados da Solicitação"
+                        android:textColor="@color/Bordo"
+                        android:textSize="13sp"
+                        tools:text="41659598 559595 5959 595" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <ImageView
+                    android:id="@+id/imageview_right_request"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_arrow_down"
+                    android:tint="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@id/linear_request"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/linear_request" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/divider_pictures"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="24dp"
+                android:background="@color/divider" />
+
+
+            <com.policlinsaude.newfeature.features.guidAuthorizer.components.Accordion
+                android:id="@+id/accordion_pictures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cAccordionText="Anexos">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_pictures"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:spanCount="10"
+                    tools:listitem="@layout/adapter_picture" />
+
+            </com.policlinsaude.newfeature.features.guidAuthorizer.components.Accordion>
+
+
+            <View
+                android:id="@+id/divider_questions"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="24dp"
+                android:background="@color/divider" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linear_questions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Primary.Text.Style.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Perguntas da Operadora"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_asks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:spanCount="3"
+                    tools:listitem="@layout/adapter_question_and_answer" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar_tickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+</FrameLayout>
+

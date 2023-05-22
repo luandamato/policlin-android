@@ -31,7 +31,7 @@ class TicketsActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, config)
 
         binding.ticketToolbar.toolbar.setupWithNavController(navController)
-        (binding.ticketToolbar.toolbar.getChildAt(0) as TextView).textSize = 16f
+        (binding.ticketToolbar.toolbar.getChildAt(0) as TextView).textSize = 14f
     }
 
     fun showBackButton() {

@@ -70,8 +70,8 @@
                     app:cardCornerRadius="4dp">
 
                     <TextView
-                        style="@style/Primary.Text.Style"
                         android:id="@+id/textview_fe_month"
+                        style="@style/Primary.Text.Style"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -79,10 +79,10 @@
                         android:drawableEnd="@drawable/ic_arrow_down"
                         android:drawableTint="@color/Bordo"
                         android:gravity="center"
-                        android:padding="8dp"
                         android:hint="@string/factor_extractor_select_month"
-                        android:textColorHint="@color/Cinza_Claro"
+                        android:padding="8dp"
                         android:textColor="@color/black"
+                        android:textColorHint="@color/Cinza_Claro"
                         android:textSize="12sp" />
 
                 </androidx.cardview.widget.CardView>

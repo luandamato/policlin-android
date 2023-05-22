@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:theme="@style/AppTheme" >
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView_income_tax"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/consulting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_error"
+                    android:tint="@color/Bordo"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:gravity="end"
+                    android:paddingVertical="10dp"
+                    android:text="Informações do Autorizador"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+           <androidx.appcompat.widget.LinearLayoutCompat
+               android:layout_width="match_parent"
+               android:layout_height="0dp"
+               android:layout_weight="1"
+               android:orientation="vertical">
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/recyclerview"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:scrollbars="none"
+                   app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                   app:spanCount="2"
+                   tools:listitem="@layout/adapter_guide_authorizer" />
+
+           </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <Button
+                style="@style/Primary.Button.Style"
+                android:id="@+id/button_process_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/button_secondary_old"
+                android:text="@string/guide_authorizer_new_request"
+                android:textAllCaps="false"
+                android:textColor="@color/lightText" />
+
+            <Button
+                android:id="@+id/button_cancel_guideAuthorizer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_secondary_old"
+                android:text="Cancelar Solicitação"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+    <TextView
+        style="@style/Primary.Text.Style"
+        android:id="@+id/textview_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:text="Não foi encontrado nenhum Autorizador de Guia." />
+
+</FrameLayout>

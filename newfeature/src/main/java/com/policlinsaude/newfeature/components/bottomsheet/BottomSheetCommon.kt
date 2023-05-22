@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -14,9 +15,13 @@ class BottomSheetCommon(
     val title: String = "",
     val description: String = "",
     val buttonTitle: String? = null,
+    val buttonCancel: String? = null,
     var list: MutableList<String> = arrayListOf(),
     var onClickListenerNext: ((listener: String?) -> Unit) = {},
     var onClickListenerClean: (() -> Unit) = {},
+    var onItemSelected: ((item: String?) -> Unit) = {},
+    var isVisibleClearFilter: Boolean? = true,
+    var isVisibleButtonApply: Boolean? = true
 ): BottomSheetDialogFragment() {
 
     private var _binding: BottomSheetCommonBinding? = null
@@ -42,13 +47,24 @@ class BottomSheetCommon(
 
     private fun setupView() {
         with(binding) {
-            textviewTitle.text = title
-            textviewDescription.text = description
-            textviewNext.text = buttonTitle ?: context?.getString(R.string.apply)
+            textviewTitle.apply {
+                text = title
+                isVisible = title.isNotEmpty()
+            }
+            textviewDescription.apply {
+                text = description
+                isVisible = description.isNotEmpty()
+            }
+            textviewNext. text = buttonTitle ?: context?.getString(R.string.apply)
+            cleanFilters.text = buttonCancel
+            next.isVisible = isVisibleButtonApply ?: true
+            cleanFilters.isVisible = isVisibleClearFilter ?: false
+
             recyclerView.adapter = adapter
             adapter.update(list)
             adapter.onSelectItemListener = {
                 itemSelected = it
+                onItemSelected.invoke(it)
             }
         }
 

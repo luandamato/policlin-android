@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="32dp"
+        android:orientation="horizontal">
+
+        <CheckBox
+            style="@style/Primary.Text.Style.Bold"
+            android:id="@+id/guideAuthorizer_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="0dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            android:buttonTint="@color/Bordo"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textview_number"
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/textview_name"
+                    app:layout_constraintEnd_toStartOf="@id/textview_date"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:text="Número WEB: 132555" />
+
+                <TextView
+                    android:id="@+id/textview_date"
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:gravity="end"
+                    tools:text="10/10/2023"
+                    app:layout_constraintStart_toStartOf="@id/textview_status"
+                    app:layout_constraintTop_toTopOf="@id/textview_number"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/textview_name"
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="@id/textview_status"
+                    app:layout_constraintEnd_toStartOf="@id/textview_status"
+                    app:layout_constraintStart_toStartOf="@id/textview_number"
+                    app:layout_constraintTop_toBottomOf="@id/textview_number"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:text="ADRIANE SANTANA FERNANDES" />
+
+                <TextView
+                    android:id="@+id/textview_status"
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="4dp"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="4dp"
+                    android:background="@color/Laranja"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    tools:text="EM ANÁLISE"
+                    app:layout_constraintTop_toBottomOf="@id/textview_date"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/Cinza_10" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+

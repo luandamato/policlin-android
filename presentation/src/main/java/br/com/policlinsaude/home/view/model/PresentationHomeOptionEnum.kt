@@ -12,4 +12,5 @@ enum class PresentationHomeOptionEnum(@DrawableRes val drawable: Int) {
     FACTOR_EXTRACTOR(R.drawable.factor_extractor),
     RESEARCH_VALUES_CO_PARTICIPATION(R.drawable.research_coparticipation_values),
     INCOME_TAX(R.drawable.income_tax),
+    GUIDE_AUTHORIZER(R.drawable.autorizador_guia),
 } 

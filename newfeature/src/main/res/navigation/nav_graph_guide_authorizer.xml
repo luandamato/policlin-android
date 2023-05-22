@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/guide_authorizer_fragment">
+
+    <fragment
+        android:id="@+id/guide_authorizer_fragment"
+        android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.GuideAuthorizerFragment"
+        android:label="@string/guide_authorizer"
+        tools:layout="@layout/fragment_guide_authorizer" >
+
+        <argument
+            android:name="isFromActivity"
+            android:defaultValue="false"
+            app:nullable="false"
+            app:argType="boolean"/>
+
+        <action
+            android:id="@+id/guide_authorizer_to_process_request"
+            app:destination="@+id/process_request_fragment" />
+
+        <action
+            android:id="@+id/guide_authorizer_to_request_guide_authorizer_details"
+            app:destination="@+id/request_guide_authorizer_details" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/process_request_fragment"
+        android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.ProcessRequestFragment"
+        android:label="@string/guide_authorizer_request_exam"
+        tools:layout="@layout/fragment_process_request" >
+
+        <action
+            android:id="@+id/process_request_to_beneficiary_data_fragment"
+            app:destination="@+id/beneficiary_data_fragment" />
+
+        <action
+            android:id="@+id/process_request_to_request_data_fragment"
+            app:destination="@+id/request_data_fragment" />
+
+        <action
+            android:id="@+id/process_request_to_service_location_data_fragment"
+            app:destination="@+id/service_location_data_fragment" />
+
+        <action
+            android:id="@+id/process_request_to_request_deadlines_fragment"
+            app:destination="@+id/request_deadlines" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/beneficiary_data_fragment"
+        android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.BeneficiaryDataFragment"
+        android:label="@string/beneficiary_data"
+        tools:layout="@layout/fragment_process_request" />
+
+    <fragment
+        android:id="@+id/service_location_data_fragment"
+        android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.GuideAuthorizerDetailsFragment"
+        android:label="@string/request_data"
+        tools:layout="@layout/fragment_service_location_data" />
+
+    <fragment
+        android:id="@+id/request_deadlines"
+        android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.ResponseDeadlinesFragment"
+        android:label="Consultar Prazos"
+        tools:layout="@layout/fragment_request_data" />
+
+    <fragment
+        android:id="@+id/request_guide_authorizer_details"
+        android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.GuideAuthorizerDetailsFragment"
+        android:label="Detalhes"
+        tools:layout="@layout/fragment_guide_authorizer_details">
+
+        <argument
+            android:name="numberWeb"
+            app:nullable="false"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/to_request_deadlines_fragment"
+            app:destination="@+id/request_deadlines" />
+
+        <action
+            android:id="@+id/to_request_request_details"
+            app:destination="@+id/request_details" />
+
+        <action
+            android:id="@+id/to_questions_details"
+            app:destination="@+id/questions_details" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/request_details"
+        android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.ProcessRequestDetailFragment"
+        android:label="Detalhes da solicitação"
+        tools:layout="@layout/fragment_request_data" />
+
+    <fragment
+        android:id="@+id/questions_details"
+        android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.AnswerQuestionsFragment"
+        android:label="Detalhe"
+        tools:layout="@layout/fragment_request_data">
+
+        <argument
+            android:name="numberWeb"
+            app:nullable="false"
+            app:argType="string" />
+
+    </fragment>
+
+
+</navigation>
