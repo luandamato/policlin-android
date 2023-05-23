@@ -5,6 +5,8 @@ import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAut
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerResponseModel
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxBodyModel
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxResponseModel
+import com.policlinsaude.newfeature.features.scheduleCentral.models.ScheduleCentralBodyModel
+import com.policlinsaude.newfeature.features.scheduleCentral.models.ScheduleCentralResponseModel
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketBodyModel
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketModel
 import retrofit2.Response
@@ -23,4 +25,9 @@ interface TicketService {
     suspend fun getIR(
         @Body token: IncomeTaxBodyModel
     ): Response<IncomeTaxResponseModel>
+
+    @POST("rest/apiGetDadosCentral")
+    suspend fun getCentralAgendamento(
+        @Body token: ScheduleCentralBodyModel
+    ): Response<ScheduleCentralResponseModel>
 }

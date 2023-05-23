@@ -8,6 +8,7 @@ import com.policlinsaude.newfeature.features.extractor.ui.viewmodels.FactorExtra
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.viewmodels.GuideAuthorizerViewModel
 import com.policlinsaude.newfeature.features.incometax.ui.viewmodels.IncomeTaxViewModel
 import com.policlinsaude.newfeature.features.notifications.ui.viewmodels.NotificationViewModel
+import com.policlinsaude.newfeature.features.scheduleCentral.ui.viewmodels.ScheduleCentralViewModel
 import com.policlinsaude.newfeature.features.tickets.ui.viewmodels.TicketViewModel
 import com.policlinsaude.newfeature.utils.SharedPreferences
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -38,4 +39,6 @@ val appModules = module {
     viewModel { IncomeTaxViewModel(get(), get()) }
 
     viewModel { GuideAuthorizerViewModel(get(), get()) }
+
+    viewModel { ScheduleCentralViewModel(get(), get()) }
 }

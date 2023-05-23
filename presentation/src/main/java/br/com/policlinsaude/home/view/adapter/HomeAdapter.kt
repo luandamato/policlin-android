@@ -66,6 +66,18 @@ class HomeAdapter(
         } catch (e: Exception) {}
     }
 
+    fun removeIncomeSchedule() {
+        try {
+            list?.let {
+                it.remove(PresentationHomeOptionEnum.SCHEDULE)
+            }
+
+            list = list
+            notifyDataSetChanged()
+
+        } catch (e: Exception) {}
+    }
+
     fun setup(items: MutableList<PresentationHomeOptionEnum>) {
         list?.clear()
         list?.addAll(items)

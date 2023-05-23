@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import br.com.policlinsaude.R
 
 enum class PresentationHomeOptionEnum(@DrawableRes val drawable: Int) {
+    SCHEDULE(R.drawable.central_agendamento),
     MEDICAL_GUIDE(R.drawable.medical_guide),
     HEALTH_INSURANCE(R.drawable.health_insurance),
     TICKET(R.drawable.tickets),
