@@ -5,6 +5,7 @@ class ValidateButtons(
     val copartFM: String,
     val codAcao: Int,
     val IR: Boolean,
+    val central: Boolean,
     val msgInterna: String,
     val msgExterna: String
 )

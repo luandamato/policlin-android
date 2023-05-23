@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/factor_extractor_nav_graph"
+    app:startDestination="@id/incomeTaxFragment">
+
+    <fragment
+        android:id="@+id/incomeTaxFragment"
+        android:label="Central de Agendamento"
+        android:name="com.policlinsaude.newfeature.features.scheduleCentral.ui.fragments.ScheduleCentralFragment"
+        tools:layout="@layout/fragment_schedule_central" />
+
+</navigation>

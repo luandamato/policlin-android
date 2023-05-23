@@ -29,6 +29,7 @@ import com.policlinsaude.newfeature.features.extractor.ui.activities.FactorExtra
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.activities.GuideAuthorizerActivity
 import com.policlinsaude.newfeature.features.incometax.ui.activities.IncomeTaxActivity
 import com.policlinsaude.newfeature.features.notifications.ui.activities.NotificationActivity
+import com.policlinsaude.newfeature.features.scheduleCentral.ui.activities.ScheduleCentralActivity
 import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -204,6 +205,15 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     startActivity(intent)
                 }
             }
+
+            PresentationHomeOptionEnum.SCHEDULE -> {
+                if ((activity as MenuActivity).isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    val intent = Intent(context, ScheduleCentralActivity::class.java)
+                    startActivity(intent)
+                }
+            }
         }
     }
 
@@ -240,6 +250,9 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
 
                     if(!buttons.IR)
                         homeAdapter.removeIncomeTax()
+
+                    if(!buttons.central)
+                        homeAdapter.removeIncomeSchedule()
 
                     isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
                 }
