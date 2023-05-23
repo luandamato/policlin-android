@@ -35,7 +35,7 @@ class PreferencesDatasourceImpl(context: Context) : PreferencesDatasource {
     }
 
     override fun putBoolean(key: String, value: Boolean): Completable {
-        return Completable.create({ e ->
+        return Completable.create { e ->
             if (key.isEmpty()) {
                 e.onError(Throwable("Preference key must not be null"))
             }
@@ -44,7 +44,7 @@ class PreferencesDatasourceImpl(context: Context) : PreferencesDatasource {
             edit.apply()
 
             e.onComplete()
-        })
+        }
     }
 
     override fun getBoolean(key: String, defaultValue: Boolean): Flowable<Boolean> {
@@ -60,7 +60,7 @@ class PreferencesDatasourceImpl(context: Context) : PreferencesDatasource {
     }
 
     override fun removeToken(): Completable {
-        return Completable.create({ e ->
+        return Completable.create { e ->
             val token = preferences.getString(PREFERENCES_TOKEN, "")
             if (token.isNullOrEmpty()) e.onComplete()
 
@@ -69,6 +69,6 @@ class PreferencesDatasourceImpl(context: Context) : PreferencesDatasource {
             edit.apply()
 
             e.onComplete()
-        })
+        }
     }
 }

@@ -20,10 +20,10 @@ class RepositoryImpl(private val networkingDatasource: NetworkingDatasource,
     override fun getCurrentPerson(): Flowable<Person> = preferencesDatasource.getToken()
             .flatMap { token ->
                 networkingDatasource.getPerson(token)
-                        .firstOrError()
-                        .doOnSuccess({ it -> realmDatasource.savePerson(it, token) })
-                        .toFlowable()
-                        .onErrorResumeNext(realmDatasource.getPersonByToken(token))
+                    .firstOrError()
+                    .doOnSuccess { it -> realmDatasource.savePerson(it, token) }
+                    .toFlowable()
+                    .onErrorResumeNext(realmDatasource.getPersonByToken(token))
             }
 
     override fun recoverPassword(register: String, order: String, email: String): Completable = networkingDatasource

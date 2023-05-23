@@ -266,15 +266,23 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
     override fun onValidateUserConnected(registration: String, order: String): Flowable<UserConnected> {
         return networkingService.validateUserConnected(registration, order)
             .flatMap {
-                Flowable.just(it)
-        }
+                if (validateMsgIsSuccess(it.msgInterna)) {
+                    Flowable.error(MessageErrorException(it.msgExterna ?: ""))
+                } else {
+                    Flowable.just(it)
+                }
+            }
     }
 
     override fun onValidateButtons(token: String): Flowable<ValidateButtons> {
 
         return networkingService.validateButtons(body = ValidateButtonBody(token = token))
             .flatMap {
-                Flowable.just(it)
+                if (validateMsgIsSuccess(it.msgInterna)) {
+                    Flowable.error(MessageErrorException(it.msgExterna ?: ""))
+                } else {
+                    Flowable.just(it)
+                }
             }
     }
 

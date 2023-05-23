@@ -264,10 +264,11 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
         autoScrollObservable = Observable.intervalRange(1, Long.MAX_VALUE, 0, 5, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-        autoScrollDisposable = autoScrollObservable?.subscribe({ _ ->
-            val nextItem = if (viewPager.currentItem + 1 == viewPager.adapter?.count || viewPager.adapter?.count == 0) 0 else viewPager.currentItem + 1
+        autoScrollDisposable = autoScrollObservable?.subscribe { _ ->
+            val nextItem =
+                if (viewPager.currentItem + 1 == viewPager.adapter?.count || viewPager.adapter?.count == 0) 0 else viewPager.currentItem + 1
             viewPager.setCurrentItem(nextItem, true)
-        })
+        }
     }
 
     override fun showBannerLoading() {

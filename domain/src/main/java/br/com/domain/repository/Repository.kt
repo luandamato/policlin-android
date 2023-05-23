@@ -11,7 +11,6 @@ interface Repository {
     fun registerPassword(person: Person, plan: Plan): Flowable<String>
     fun getToken(): Flowable<String>
     fun getCurrentPerson(): Flowable<Person>
-    //fun getHealthInsurancePhoto(): Flowable<String>
     fun getHealthInsurancePhoto(): Flowable<HealthInsurancePhotoList>
     fun getMedicalGuideOptions(): Flowable<MedicalGuideOptions>
     fun getMedicalGuideList(codePlan: Int, codeCity: Int, codeSpecialityService: Int,

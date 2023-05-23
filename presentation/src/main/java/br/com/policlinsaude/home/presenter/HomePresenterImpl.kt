@@ -2,6 +2,7 @@ package br.com.policlinsaude.home.presenter
 
 import android.os.UserHandle
 import br.com.domain.model.UserConnected
+import br.com.domain.model.ValidateButtons
 import br.com.domain.usecase.*
 import br.com.domain.usecase.requestvalues.GetValidationUserConnectedRV
 import br.com.domain.usecase.requestvalues.RecoverPasswordRV
@@ -74,6 +75,8 @@ class HomePresenterImpl(private val view: HomeView,
 
                     else if(it.codAcao == 5)
                         onLogout(it)
+                }, onError = {
+                    it.printStackTrace()
                 }
             )
     }
@@ -83,7 +86,10 @@ class HomePresenterImpl(private val view: HomeView,
             .subscribeBy(
                 onNext = {
                     view.showButtons(it)
-                },
+                }, onError = {
+                    view.showButtons(ValidateButtons())
+                    it.printStackTrace()
+                }
             )
     }
 
