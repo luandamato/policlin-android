@@ -15,8 +15,8 @@ class RetrofitInstance (
 ) {
 
     companion object {
-        const val API_NOTIFICATION = "http://policlinsaude.com.br/mapp2/api/"
-        private const val API_URL : String = "http://policlinsaude.com.br/apiapp_prot/"
+        const val API_NOTIFICATION = "http://policlinsaude.com.br/mapp/api/"
+        private const val API_URL : String = "http://policlinsaude.com.br/apiapp/"
         private const val PLATFORM = "plataforma"
         private const val PLATFORM_ANDROID = "A"
         private const val VERSION = "versao"
@@ -34,7 +34,6 @@ class RetrofitInstance (
             .client(client)
             .build()
             .create(service)
-
     }
 
     private fun getHost(url: String): String {

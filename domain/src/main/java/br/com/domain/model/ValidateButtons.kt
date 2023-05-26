@@ -6,6 +6,7 @@ class ValidateButtons(
     val codAcao: Int = -1,
     val IR: Boolean = false,
     val central: Boolean = false,
+    val autorizador: Boolean = false,
     val msgInterna: String = "",
     val msgExterna: String = ""
 )

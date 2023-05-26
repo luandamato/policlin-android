@@ -78,6 +78,18 @@ class HomeAdapter(
         } catch (e: Exception) {}
     }
 
+    fun removeAuthorizer() {
+        try {
+            list?.let {
+                it.remove(PresentationHomeOptionEnum.GUIDE_AUTHORIZER)
+            }
+
+            list = list
+            notifyDataSetChanged()
+
+        } catch (e: Exception) {}
+    }
+
     fun setup(items: MutableList<PresentationHomeOptionEnum>) {
         list?.clear()
         list?.addAll(items)

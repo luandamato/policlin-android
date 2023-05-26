@@ -254,6 +254,9 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     if(!buttons.central)
                         homeAdapter.removeIncomeSchedule()
 
+                    if(!buttons.autorizador)
+                        homeAdapter.removeAuthorizer()
+
                     isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
                 }
             }
