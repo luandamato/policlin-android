@@ -1,4 +1,4 @@
-package com.policlinsaude.newfeature.features.scheduleCentral.ui.activities
+package com.policlinsaude.newfeature.features.ScheduleCentral.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,6 +26,7 @@ class ScheduleCentralActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, config)
 
+//        binding.centralToolbar.toolbar.setupWithNavController(navController)
         (binding.centralToolbar.toolbar.getChildAt(0) as TextView).textSize = 16f
     }
 

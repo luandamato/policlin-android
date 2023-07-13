@@ -1,4 +1,4 @@
-package com.policlinsaude.newfeature.features.scheduleCentral.ui.viewmodels
+package com.policlinsaude.newfeature.features.incometax.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.policlinsaude.newfeature.data.networking.ServerErrorResponse
 import com.policlinsaude.newfeature.data.networking.ViewModelResponse
 import com.policlinsaude.newfeature.data.repositories.TicketRepository
-import com.policlinsaude.newfeature.features.scheduleCentral.models.ScheduleCentralBodyModel
-import com.policlinsaude.newfeature.features.scheduleCentral.models.ScheduleCentralResponseModel
+import com.policlinsaude.newfeature.features.incometax.data.models.ScheduleCentralBodyModel
+import com.policlinsaude.newfeature.features.incometax.data.models.ScheduleCentralResponseModel
 import com.policlinsaude.newfeature.utils.SharedPreferences
 import kotlinx.coroutines.launch
 

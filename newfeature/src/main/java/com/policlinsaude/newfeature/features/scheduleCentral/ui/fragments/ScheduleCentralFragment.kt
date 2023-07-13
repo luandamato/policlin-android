@@ -1,4 +1,4 @@
-package com.policlinsaude.newfeature.features.scheduleCentral.ui.fragments
+package com.policlinsaude.newfeature.features.ScheduleCentral.ui.fragments
 
 import android.content.Intent
 import android.net.Uri
@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
 import com.policlinsaude.newfeature.databinding.FragmentScheduleCentralBinding
-import com.policlinsaude.newfeature.features.scheduleCentral.ui.activities.ScheduleCentralActivity
-import com.policlinsaude.newfeature.features.scheduleCentral.ui.viewmodels.ScheduleCentralViewModel
+import com.policlinsaude.newfeature.features.ScheduleCentral.ui.activities.ScheduleCentralActivity
+import com.policlinsaude.newfeature.features.incometax.ui.viewmodels.ScheduleCentralViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ScheduleCentralFragment : Fragment() {
