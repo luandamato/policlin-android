@@ -24,12 +24,13 @@ import br.com.policlinsaude.home.view.adapter.HomeAdapter
 import br.com.policlinsaude.home.view.adapter.HomePageAdapter
 import br.com.policlinsaude.home.view.model.PresentationHomeOptionEnum
 import br.com.policlinsaude.preferences.presenter.PreferencesPresenter
+import com.policlinsaude.newfeature.features.ScheduleCentral.ui.activities.ScheduleCentralActivity
+import com.policlinsaude.newfeature.features.Token.ui.TokenActivity
 import com.policlinsaude.newfeature.features.coparticipation.ui.activities.ResearchCoParticipationActivity
 import com.policlinsaude.newfeature.features.extractor.ui.activities.FactorExtractorActivity
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.activities.GuideAuthorizerActivity
 import com.policlinsaude.newfeature.features.incometax.ui.activities.IncomeTaxActivity
 import com.policlinsaude.newfeature.features.notifications.ui.activities.NotificationActivity
-import com.policlinsaude.newfeature.features.scheduleCentral.ui.activities.ScheduleCentralActivity
 import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -211,6 +212,15 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     presenter.onMenuClickedAsGuest()
                 } else {
                     val intent = Intent(context, ScheduleCentralActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+
+            PresentationHomeOptionEnum.SERVICE_TOKEN -> {
+                if ((activity as MenuActivity).isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    val intent = Intent(context, TokenActivity::class.java)
                     startActivity(intent)
                 }
             }

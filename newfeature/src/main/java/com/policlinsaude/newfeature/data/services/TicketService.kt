@@ -1,12 +1,14 @@
 package com.policlinsaude.newfeature.data.services
 
 import com.policlinsaude.newfeature.data.models.UserModel
+import com.policlinsaude.newfeature.features.Token.models.TokenBodyModel
+import com.policlinsaude.newfeature.features.Token.models.TokenResponseModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerRequestModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerResponseModel
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxBodyModel
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxResponseModel
-import com.policlinsaude.newfeature.features.scheduleCentral.models.ScheduleCentralBodyModel
-import com.policlinsaude.newfeature.features.scheduleCentral.models.ScheduleCentralResponseModel
+import com.policlinsaude.newfeature.features.incometax.data.models.ScheduleCentralBodyModel
+import com.policlinsaude.newfeature.features.incometax.data.models.ScheduleCentralResponseModel
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketBodyModel
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketModel
 import retrofit2.Response
@@ -30,4 +32,9 @@ interface TicketService {
     suspend fun getCentralAgendamento(
         @Body token: ScheduleCentralBodyModel
     ): Response<ScheduleCentralResponseModel>
+
+    @POST("rest/apiTokenAtendimento")
+    suspend fun getToken(
+        @Body token: TokenBodyModel
+    ): Response<TokenResponseModel>
 }

@@ -1,4 +1,5 @@
 package com.policlinsaude.newfeature.features.Token.models
 
-class TokenBodyModel {
-}
+class TokenBodyModel (
+    var token: String = ""
+)

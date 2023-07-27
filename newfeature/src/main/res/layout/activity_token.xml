@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TokenActivity" />
+    android:orientation="vertical"
+    tools:theme="@style/AppTheme" >
+
+    <include
+        android:id="@+id/token_toolbar"
+        layout="@layout/toolbar" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_token"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/token_nav_graph"  />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
