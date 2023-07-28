@@ -1,37 +1,47 @@
-package com.policlinsaude.newfeature.features.Token.ui.ui.main
+package com.policlinsaude.newfeature.features.Token.ui.ui.freagments
 
 import android.animation.ObjectAnimator
-import android.content.Intent
-import android.net.Uri
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
+import com.policlinsaude.newfeature.R
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
 import com.policlinsaude.newfeature.databinding.FragmentTokenBinding
 import com.policlinsaude.newfeature.features.Token.ui.TokenActivity
+import com.policlinsaude.newfeature.features.Token.ui.TokenViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TokenFragment : Fragment() {
     private var tempoRestante = 60
     private lateinit var binding: FragmentTokenBinding
+    private var timer: CountDownTimer? = null
 
-    private val viewModel: TokenViewModel by viewModel()
+    private val viewModel by sharedViewModel<TokenViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTokenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.setDefaultUser()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        timer?.cancel()
         setupViews()
         setupObservables()
         setupListeners()
+        verifyDependets()
 
     }
 
@@ -39,10 +49,18 @@ class TokenFragment : Fragment() {
         (activity as TokenActivity).showBackButton()
     }
 
+    private fun verifyDependets(){
+        binding.linearBeneficiaryData.isVisible = false
+        viewModel.onGetDependents()
+    }
+
     private fun setupListeners() {
         with(binding) {
             btnToken.setOnClickListener {
                 viewModel.onGetData()
+            }
+            linearBeneficiaryData.setOnClickListener {
+                findNavController().navigate(R.id.request_to_beneficiary_data_fragment)
             }
 
         }
@@ -64,6 +82,20 @@ class TokenFragment : Fragment() {
                     }
                 }
             }
+            userSelected.observe(viewLifecycleOwner){
+                binding.textviewName.text = it
+            }
+            dependets.observe(viewLifecycleOwner) {
+                when(it.getResponseStatus()) {
+                    ViewModelResponseStatus.RUNNING -> showLoading()
+
+                    ViewModelResponseStatus.SUCCESS -> {
+                        hideLoading()
+                         !it.getData()?.listaBeneficiario.isNullOrEmpty()
+                        binding.linearBeneficiaryData.isVisible = !it.getData()?.listaBeneficiario.isNullOrEmpty() && it.getData()?.listaBeneficiario!!.count() > 1
+                    }
+                }
+            }
         }
     }
 
@@ -76,11 +108,11 @@ class TokenFragment : Fragment() {
         binding.progressBar.progress = time
 
         tempoRestante = time
-        val timer = object: CountDownTimer((time * 1000).toLong(), 1000) {
+        timer = object: CountDownTimer((time * 1000).toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {updateTime()}
             override fun onFinish() {configureWithoutToken()}
         }
-        timer.start()
+        timer?.start()
     }
 
     private fun formatTime(seconds: Int): String{
@@ -103,6 +135,7 @@ class TokenFragment : Fragment() {
         binding.lblTokenDisponivel.setText("Sem Token disponível")
         binding.lblTimer.setText("")
         binding.btnToken.visibility = View.VISIBLE
+        timer?.cancel()
     }
 
 

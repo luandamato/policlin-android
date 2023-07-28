@@ -5,7 +5,7 @@
     android:id="@+id/token"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.Token.ui.ui.main.TokenFragment">
+    tools:context=".features.Token.ui.ui.freagments.TokenFragment">
 
 
     <androidx.core.widget.NestedScrollView
@@ -20,6 +20,54 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_margin="20dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linear_beneficiary_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingBottom="24dp"
+                android:paddingVertical="25dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/Primary.Text.Style"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/beneficiary_data"
+                        android:textColor="@color/Bordo"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/imageview"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/ic_arrow_right"
+                        app:tint="@color/black" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textview_name"
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:visibility="visible"
+                    tools:text="ADRIANE SANTANA FERNANDES" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
             <TextView

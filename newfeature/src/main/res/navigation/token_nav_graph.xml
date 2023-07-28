@@ -3,12 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/factor_extractor_nav_graph"
-    app:startDestination="@id/incomeTaxFragment">
+    app:startDestination="@id/tokenFragment">
 
     <fragment
-        android:id="@+id/incomeTaxFragment"
+        android:id="@+id/tokenFragment"
         android:label="Token de Atendimento"
-        android:name="com.policlinsaude.newfeature.features.Token.ui.ui.main.TokenFragment"
-        tools:layout="@layout/fragment_token" />
+        android:name="com.policlinsaude.newfeature.features.Token.ui.ui.freagments.TokenFragment"
+        tools:layout="@layout/fragment_token">
+
+        <action
+            android:id="@+id/request_to_beneficiary_data_fragment"
+            app:destination="@+id/dependet_data_fragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/dependet_data_fragment"
+        android:name="com.policlinsaude.newfeature.features.Token.ui.ui.freagments.TokenBeneficiarioFragment"
+        android:label="@string/beneficiary_data"
+        tools:layout="@layout/fragment_token_beneficiario" />
 
 </navigation>

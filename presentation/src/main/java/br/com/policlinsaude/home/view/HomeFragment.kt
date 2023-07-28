@@ -267,6 +267,9 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     if(!buttons.autorizador)
                         homeAdapter.removeAuthorizer()
 
+                    if(!buttons.gerarToken)
+                        homeAdapter.removeToken()
+
                     isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
                 }
             }

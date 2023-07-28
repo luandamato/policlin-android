@@ -2,7 +2,10 @@ package com.policlinsaude.newfeature.data.repositories
 
 import com.policlinsaude.newfeature.data.models.UserModel
 import com.policlinsaude.newfeature.data.networking.RetrofitInstance
+import com.policlinsaude.newfeature.data.services.GuideService
 import com.policlinsaude.newfeature.data.services.TicketService
+import com.policlinsaude.newfeature.features.Token.models.BeneficiariosRequestModel
+import com.policlinsaude.newfeature.features.Token.models.BeneficiariosResponseModel
 import com.policlinsaude.newfeature.features.Token.models.TokenBodyModel
 import com.policlinsaude.newfeature.features.Token.models.TokenResponseModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerRequestModel
@@ -50,6 +53,24 @@ class TicketRepositoryImpl: TicketRepository {
             makeRequest {
                 RetrofitInstance().create(TicketService::class.java)
                     .getToken(token)
+            }
+        }
+    }
+
+    override suspend fun onGetDependents(token: BeneficiariosRequestModel): BeneficiariosResponseModel {
+        return coroutineScope {
+            makeRequest {
+                RetrofitInstance().create(TicketService::class.java)
+                    .onGetDependents(token)
+            }
+        }
+    }
+
+    override suspend fun onGetProfile(token: String, verify: Int): UserModel {
+        return coroutineScope {
+            makeRequest {
+                RetrofitInstance().create(GuideService::class.java, baseUrl = RetrofitInstance.API_NOTIFICATION)
+                    .getPerson(token, verify)
             }
         }
     }

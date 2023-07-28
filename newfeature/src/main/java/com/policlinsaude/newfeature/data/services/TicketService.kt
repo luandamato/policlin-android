@@ -1,6 +1,8 @@
 package com.policlinsaude.newfeature.data.services
 
 import com.policlinsaude.newfeature.data.models.UserModel
+import com.policlinsaude.newfeature.features.Token.models.BeneficiariosRequestModel
+import com.policlinsaude.newfeature.features.Token.models.BeneficiariosResponseModel
 import com.policlinsaude.newfeature.features.Token.models.TokenBodyModel
 import com.policlinsaude.newfeature.features.Token.models.TokenResponseModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerRequestModel
@@ -37,4 +39,9 @@ interface TicketService {
     suspend fun getToken(
         @Body token: TokenBodyModel
     ): Response<TokenResponseModel>
+
+    @POST("rest/apiListaBeneficiario")
+    suspend fun onGetDependents(
+        @Body token: BeneficiariosRequestModel
+    ): Response<BeneficiariosResponseModel>
 }

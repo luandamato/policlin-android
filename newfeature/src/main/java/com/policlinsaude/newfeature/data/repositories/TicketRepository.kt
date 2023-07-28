@@ -1,6 +1,8 @@
 package com.policlinsaude.newfeature.data.repositories
 
 import com.policlinsaude.newfeature.data.models.UserModel
+import com.policlinsaude.newfeature.features.Token.models.BeneficiariosRequestModel
+import com.policlinsaude.newfeature.features.Token.models.BeneficiariosResponseModel
 import com.policlinsaude.newfeature.features.Token.models.TokenBodyModel
 import com.policlinsaude.newfeature.features.Token.models.TokenResponseModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerRequestModel
@@ -21,5 +23,9 @@ interface TicketRepository {
     suspend fun onGetScheduleCentral(token: ScheduleCentralBodyModel): ScheduleCentralResponseModel
 
     suspend fun onGetToken(token: TokenBodyModel): TokenResponseModel
+
+    suspend fun onGetDependents(token: BeneficiariosRequestModel): BeneficiariosResponseModel
+
+    suspend fun onGetProfile(token: String, verify: Int): UserModel
 
 }

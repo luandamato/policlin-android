@@ -1,7 +1,7 @@
 package com.policlinsaude.newfeature.di
 
 import com.policlinsaude.newfeature.data.repositories.*
-import com.policlinsaude.newfeature.features.Token.ui.ui.main.TokenViewModel
+import com.policlinsaude.newfeature.features.Token.ui.TokenViewModel
 import com.policlinsaude.newfeature.features.coparticipation.data.repositories.CoParticipationRepository
 import com.policlinsaude.newfeature.features.coparticipation.data.repositories.CoParticipationRepositoryImpl
 import com.policlinsaude.newfeature.features.coparticipation.ui.viewmodels.CoParticipationViewModel

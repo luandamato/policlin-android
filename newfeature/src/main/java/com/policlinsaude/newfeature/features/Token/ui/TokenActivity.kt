@@ -8,10 +8,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.policlinsaude.newfeature.R
 import com.policlinsaude.newfeature.databinding.ActivityTokenBinding
-import com.policlinsaude.newfeature.features.Token.ui.ui.main.TokenFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TokenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTokenBinding
+    private val viewModel: TokenViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
