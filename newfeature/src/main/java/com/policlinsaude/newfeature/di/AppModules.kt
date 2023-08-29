@@ -5,6 +5,7 @@ import com.policlinsaude.newfeature.features.Token.ui.TokenViewModel
 import com.policlinsaude.newfeature.features.coparticipation.data.repositories.CoParticipationRepository
 import com.policlinsaude.newfeature.features.coparticipation.data.repositories.CoParticipationRepositoryImpl
 import com.policlinsaude.newfeature.features.coparticipation.ui.viewmodels.CoParticipationViewModel
+import com.policlinsaude.newfeature.features.deleteUser.ui.ViewModel.DeleteUserViewModel
 import com.policlinsaude.newfeature.features.extractor.ui.viewmodels.FactorExtractorViewModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.viewmodels.GuideAuthorizerViewModel
 import com.policlinsaude.newfeature.features.incometax.ui.viewmodels.IncomeTaxViewModel
@@ -44,4 +45,6 @@ val appModules = module {
     viewModel { ScheduleCentralViewModel(get(), get()) }
 
     viewModel { TokenViewModel(get(), get()) }
+
+    viewModel { DeleteUserViewModel(get(), get()) }
 }

@@ -5,8 +5,8 @@ import com.policlinsaude.newfeature.features.Token.models.BeneficiariosRequestMo
 import com.policlinsaude.newfeature.features.Token.models.BeneficiariosResponseModel
 import com.policlinsaude.newfeature.features.Token.models.TokenBodyModel
 import com.policlinsaude.newfeature.features.Token.models.TokenResponseModel
-import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerRequestModel
-import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerResponseModel
+import com.policlinsaude.newfeature.features.deleteUser.model.DeleteUserRequest
+import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.ComumModel
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxBodyModel
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxResponseModel
 import com.policlinsaude.newfeature.features.incometax.data.models.ScheduleCentralBodyModel
@@ -27,5 +27,9 @@ interface TicketRepository {
     suspend fun onGetDependents(token: BeneficiariosRequestModel): BeneficiariosResponseModel
 
     suspend fun onGetProfile(token: String, verify: Int): UserModel
+
+    suspend fun deleteUser(token: DeleteUserRequest): ComumModel
+
+    suspend fun logout(token: DeleteUserRequest): ComumModel
 
 }

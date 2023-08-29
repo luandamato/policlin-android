@@ -168,7 +168,7 @@ interface NetworkingService {
 
     @POST("")
     fun validateButtons(
-        @Url url: String = "http://policlinsaude.com.br/apiapp/rest/apiAcessoBotoes",
+        @Url url: String = "http://policlinsaude.com.br/apiapp_prot/rest/apiAcessoBotoes",
         @Body body: ValidateButtonBody
     ): Flowable<ValidateButtons>
 

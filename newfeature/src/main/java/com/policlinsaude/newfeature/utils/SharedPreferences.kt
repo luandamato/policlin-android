@@ -10,6 +10,12 @@ class SharedPreferences(val context: Context) {
         return preferences.getString(PREFERENCES_TOKEN, "").toString()
     }
 
+    fun removeToken(){
+        val edit = preferences.edit()
+        edit.putString(PREFERENCES_TOKEN, "")
+        edit.apply()
+    }
+
     companion object {
         private const val PREFERENCES_NAME = "POLICLIN_SAUDE"
         private const val PREFERENCES_TOKEN = "token"

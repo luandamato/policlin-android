@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notification_nav_graph"
+    app:startDestination="@id/deleteUserFragment">
+
+    <fragment
+        android:id="@+id/deleteUserFragment"
+        android:label="@string/delete_profile_title"
+        android:name="com.policlinsaude.newfeature.features.deleteUser.ui.Fragment.DeleteUserFragment" />
+
+</navigation>

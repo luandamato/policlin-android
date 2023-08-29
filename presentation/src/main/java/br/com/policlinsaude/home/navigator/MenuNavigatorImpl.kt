@@ -15,6 +15,7 @@ import br.com.policlinsaude.perfil.view.PerfilFragment
 import br.com.policlinsaude.preferences.view.PreferencesFragment
 import br.com.policlinsaude.units.view.UnitsActivity
 import br.com.policlinsaude.units.view.UnitsFragment
+import com.policlinsaude.newfeature.features.Token.ui.TokenActivity
 
 class MenuNavigatorImpl(private val activity: MenuActivity,
                         private val fragmentManager: FragmentManager

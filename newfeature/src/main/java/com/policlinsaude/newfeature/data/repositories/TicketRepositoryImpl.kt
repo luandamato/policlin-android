@@ -8,8 +8,8 @@ import com.policlinsaude.newfeature.features.Token.models.BeneficiariosRequestMo
 import com.policlinsaude.newfeature.features.Token.models.BeneficiariosResponseModel
 import com.policlinsaude.newfeature.features.Token.models.TokenBodyModel
 import com.policlinsaude.newfeature.features.Token.models.TokenResponseModel
-import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerRequestModel
-import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerResponseModel
+import com.policlinsaude.newfeature.features.deleteUser.model.DeleteUserRequest
+import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.ComumModel
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxBodyModel
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxResponseModel
 import com.policlinsaude.newfeature.features.incometax.data.models.ScheduleCentralBodyModel
@@ -71,6 +71,24 @@ class TicketRepositoryImpl: TicketRepository {
             makeRequest {
                 RetrofitInstance().create(GuideService::class.java, baseUrl = RetrofitInstance.API_NOTIFICATION)
                     .getPerson(token, verify)
+            }
+        }
+    }
+
+    override suspend fun deleteUser(token: DeleteUserRequest): ComumModel {
+        return coroutineScope {
+            makeRequest {
+                RetrofitInstance().create(TicketService::class.java)
+                    .deleteUser(token)
+            }
+        }
+    }
+
+    override suspend fun logout(token: DeleteUserRequest): ComumModel {
+        return coroutineScope {
+            makeRequest {
+                RetrofitInstance().create(TicketService::class.java, baseUrl = RetrofitInstance.API_NOTIFICATION)
+                    .logout(token)
             }
         }
     }

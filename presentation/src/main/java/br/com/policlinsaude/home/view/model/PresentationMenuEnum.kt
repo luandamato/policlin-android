@@ -12,6 +12,7 @@ enum class PresentationMenuEnum(@StringRes val title: Int,
 
     HOME(R.string.title_home, R.drawable.ic_home_big),
     PROFILE(R.string.title_perfil, R.drawable.ic_profile),
+    DELETE(R.string.title_delete_user, R.drawable.ic_trash),
     PREFERENCES(R.string.title_preferences, R.drawable.ic_preferencias),
     INFORMATION(R.string.title_information, R.drawable.ic_informacoes),
     UNITIES(R.string.title_unities, R.drawable.ic_action_unidades),

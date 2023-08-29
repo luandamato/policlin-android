@@ -117,7 +117,7 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        recyclerView.visibility = View.GONE
         recyclerView.adapter = homeAdapter
         recyclerView.layoutManager =
             GridLayoutManager(context, 2)
@@ -273,6 +273,7 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
                 }
             }
+            recyclerView.visibility = View.VISIBLE
         }
     }
 

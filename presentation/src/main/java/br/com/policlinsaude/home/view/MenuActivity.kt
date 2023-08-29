@@ -20,6 +20,7 @@ import br.com.policlinsaude.home.navigator.MenuNavigator
 import br.com.policlinsaude.home.presenter.MenuPresenter
 import br.com.policlinsaude.home.view.adapter.MenuAdapter
 import br.com.policlinsaude.home.view.model.PresentationMenuEnum
+import com.policlinsaude.newfeature.features.deleteUser.ui.Activity.DeleteUserActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -188,6 +189,14 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
                     presenter.onMenuClickedAsGuest()
                 } else {
                     menuNavigator.goToPerfil()
+                }
+            }
+            PresentationMenuEnum.DELETE -> {
+                if (isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    val intent = Intent(this, DeleteUserActivity::class.java)
+                    startActivity(intent)
                 }
             }
             PresentationMenuEnum.PREFERENCES -> {

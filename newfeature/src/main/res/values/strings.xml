@@ -46,8 +46,17 @@
     <string name="request_data">Dados da Solicitação</string>
     <string name="text_input_email">Insira seu e-mail</string>
     <string name="confirm">Confirmar</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Delete Profile Activity Screen-->
+    <string name="delete_profile_title">Excluir Cadastro</string>
+    <string name="delete_profile_subtitle">Todos os dados do seu cadastro serão excluidos permanentemente.</string>
+    <string name="delete_profile_information">Ao clicar no botão excluir, seu cadastro no App Policlin Saúde e PIN-SS (Portal de Informação do Beneficiário de Saúde Suplementar) será excluído e você perderá acesso às funcionalidades após a exclusão.</string>
+    <string name="delete_profile_button">Excluir</string>
+    <string name="delete_profile_button_cancel">Não</string>
+    <string name="delete_profile_button_modal">Sim</string>
+    <string name="delete_profile_title_modal">Confirmar Exclusão</string>
+    <string name="delete_profile_modal_title"> Essa ação excluirá o seu cadastro no App  e PIN-SS, Deseja continuar?</string>
+    <string name="delete_profile_deleted">Seus dados foram excluídos</string>
 
 
 </resources>
