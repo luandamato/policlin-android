@@ -2,7 +2,9 @@ package br.com.policlinsaude.home.view
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
@@ -21,9 +23,12 @@ import br.com.policlinsaude.home.presenter.MenuPresenter
 import br.com.policlinsaude.home.view.adapter.MenuAdapter
 import br.com.policlinsaude.home.view.model.PresentationMenuEnum
 import com.policlinsaude.newfeature.features.deleteUser.ui.Activity.DeleteUserActivity
+import com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.ProcessRequestFragment
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 import kotlinx.android.synthetic.main.toolbar.*
+import pl.aprilapps.easyphotopicker.EasyImage
+import java.io.File
 import javax.inject.Inject
 
 class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListener {
@@ -196,7 +201,7 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
                     presenter.onMenuClickedAsGuest()
                 } else {
                     val intent = Intent(this, DeleteUserActivity::class.java)
-                    startActivity(intent)
+                    startActivityForResult(intent, 123)
                 }
             }
             PresentationMenuEnum.PREFERENCES -> {
@@ -222,6 +227,18 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
             }
 
 
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (resultCode) {
+            RESULT_OK -> {
+                when (requestCode) {
+                    123 -> {
+                        finish()
+                    }
+                }
+            }
         }
     }
 }

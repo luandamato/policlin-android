@@ -1,5 +1,6 @@
 package com.policlinsaude.newfeature.features.deleteUser.ui.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -61,12 +62,26 @@ class DeleteUserFragment : Fragment() {
                     ViewModelResponseStatus.RUNNING -> showLoading()
                     ViewModelResponseStatus.SUCCESS -> {
                         hideLoading()
-                        activity?.moveTaskToBack(true)
-                        activity?.finish()
                         viewModel.removeToken()
+                        showDeleted()
                     }
                 }
             }
+        }
+    }
+
+    private fun showDeleted(){
+        context?.let {
+            DialogHelper.showDialog(it,
+                R.string.delete_profile_deleted,
+                R.string.delete_profile_deleted_modal,
+                R.string.text_ok, null,
+                { close() })
+        }
+    }
+    private fun close(){
+        (activity as DeleteUserActivity).let {
+            it.deleted()
         }
     }
 
@@ -84,15 +99,13 @@ class DeleteUserFragment : Fragment() {
 
     private fun showLoading() {
         with(binding) {
-//            view_schedule_central.alpha = .1F
-//            progress_bar_schedule_central.visibility = View.VISIBLE
+            loadingContainerDelete.visibility = View.VISIBLE
         }
     }
 
     private fun hideLoading() {
         with(binding) {
-//            view_schedule_central.alpha = 1F
-//            progress_bar_schedule_central.visibility = View.GONE
+            loadingContainerDelete.visibility = View.GONE
         }
     }
 

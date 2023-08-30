@@ -1,5 +1,6 @@
 package com.policlinsaude.newfeature.features.deleteUser.ui.Activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
@@ -34,5 +35,11 @@ class DeleteUserActivity : AppCompatActivity() {
         binding.deleteUserToolbar.toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+    }
+
+    fun deleted(){
+        val returnIntent = Intent()
+        setResult(RESULT_OK, returnIntent)
+        finish()
     }
 }

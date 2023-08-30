@@ -117,6 +117,7 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loading_container_home.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
         recyclerView.adapter = homeAdapter
         recyclerView.layoutManager =
@@ -274,6 +275,7 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                 }
             }
             recyclerView.visibility = View.VISIBLE
+            loading_container_home.visibility = View.GONE
         }
     }
 
