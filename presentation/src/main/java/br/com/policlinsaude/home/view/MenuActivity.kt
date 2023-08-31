@@ -1,6 +1,7 @@
 package br.com.policlinsaude.home.view
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -61,6 +62,7 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
         setupFragmentToolbar(toolbar, null)
 
         setSelectedItem(PresentationMenuEnum.HOME)
+        setupListeners()
         getCurrentPerson()
     }
 
@@ -184,6 +186,24 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
         drawer_layout.addDrawerListener(toggle)
     }
 
+    fun setupListeners(){
+        sair.setOnClickListener {
+            DialogHelper.showDialog(this,
+                R.string.title_logoff,
+                R.string.text_logoff_confirmation,
+                R.string.global_yes,
+                R.string.action_cancel,
+                { logout() })
+        }
+    }
+    private fun logout(){
+        val preferences = this.getSharedPreferences("POLICLIN_SAUDE", Context.MODE_PRIVATE)
+        val edit = preferences.edit()
+        edit.putString("token", "")
+        edit.apply()
+        presenter.onLogoutConfirmed()
+    }
+
     private fun setSelectedItem(item: PresentationMenuEnum) {
         when (item) {
             PresentationMenuEnum.HOME -> {
@@ -194,14 +214,6 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
                     presenter.onMenuClickedAsGuest()
                 } else {
                     menuNavigator.goToPerfil()
-                }
-            }
-            PresentationMenuEnum.DELETE -> {
-                if (isGuest) {
-                    presenter.onMenuClickedAsGuest()
-                } else {
-                    val intent = Intent(this, DeleteUserActivity::class.java)
-                    startActivityForResult(intent, 123)
                 }
             }
             PresentationMenuEnum.PREFERENCES -> {
@@ -224,6 +236,14 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
             }
             PresentationMenuEnum.TELEFONECID -> {
                 menuNavigator.goToCallIntent()
+            }
+            PresentationMenuEnum.LOGOUT -> {
+                DialogHelper.showDialog(this,
+                    R.string.title_logoff,
+                    R.string.text_logoff_confirmation,
+                    R.string.global_yes,
+                    R.string.action_cancel,
+                    { logout() })
             }
 
 

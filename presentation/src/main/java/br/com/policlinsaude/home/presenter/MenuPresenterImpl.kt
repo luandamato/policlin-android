@@ -7,6 +7,7 @@ import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.home.navigator.MenuNavigator
 import br.com.policlinsaude.home.view.MenuView
 import io.reactivex.rxkotlin.subscribeBy
+import java.util.prefs.Preferences
 
 /**
  * Created by lmiyagi on 3/19/18.
@@ -38,6 +39,10 @@ class MenuPresenterImpl(private val navigator: MenuNavigator,
     }
 
     override fun onLoginClicked() {
+        navigator.goToLogin()
+    }
+
+    override fun onLogoutConfirmed() {
         navigator.goToLogin()
     }
 }

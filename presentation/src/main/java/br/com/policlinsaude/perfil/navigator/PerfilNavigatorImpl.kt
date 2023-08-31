@@ -12,6 +12,7 @@ import br.com.policlinsaude.R
 import br.com.policlinsaude.editPhone.view.EditPhoneActivity
 import br.com.policlinsaude.editPassword.view.EditPasswordActivity
 import br.com.policlinsaude.perfil.view.PerfilFragment
+import com.policlinsaude.newfeature.features.deleteUser.ui.Activity.DeleteUserActivity
 import pl.aprilapps.easyphotopicker.EasyImage
 
 /**
@@ -34,13 +35,8 @@ class PerfilNavigatorImpl(private val fragment: PerfilFragment) : PerfilNavigato
         fragment.startActivity(Intent(fragment.context, EditPasswordActivity::class.java))
     }
 
-
-
-
-
-
-
-
-
+    override fun goToDelete() {
+        fragment.startActivityForResult(Intent(fragment.context, DeleteUserActivity::class.java), 123)
+    }
 
 }

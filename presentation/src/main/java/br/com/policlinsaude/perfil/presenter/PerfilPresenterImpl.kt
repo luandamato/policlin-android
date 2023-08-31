@@ -71,4 +71,8 @@ class PerfilPresenterImpl(private val getCurrentPersonUseCase: GetCurrentPersonU
     override fun onEditPasswordClicked() {
         navigator.goToEditPassword()
     }
+
+    override fun onDeleteClicked() {
+        navigator.goToDelete()
+    }
 }

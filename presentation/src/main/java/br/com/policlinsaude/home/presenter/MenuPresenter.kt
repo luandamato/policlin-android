@@ -10,4 +10,5 @@ interface MenuPresenter : Serializable {
     fun getCurrentPerson()
     fun onMenuClickedAsGuest()
     fun onLoginClicked()
+    fun onLogoutConfirmed()
 }

@@ -298,6 +298,40 @@
                         android:textColor="@color/disabledText"
                         tools:text="123456/1" />
                 </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/deleteAccountContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:text="@string/delete_profile_title"
+                        android:textColor="@color/secondaryText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableEnd="@drawable/ic_arrow_right"
+                        android:drawablePadding="12dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="12dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:textColor="@color/secondaryText"
+                        tools:text="" />
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

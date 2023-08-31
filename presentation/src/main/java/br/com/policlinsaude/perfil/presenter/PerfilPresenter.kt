@@ -7,4 +7,5 @@ interface PerfilPresenter {
     fun onImagePickError()
     fun onEditPhoneClicked()
     fun onEditPasswordClicked()
+    fun onDeleteClicked()
 }

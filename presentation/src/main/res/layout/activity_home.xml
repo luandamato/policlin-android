@@ -46,7 +46,32 @@
                 android:dividerHeight="1dp"
                 android:padding="32dp"
                 tools:listitem="@layout/list_item_menu" />
+
+            <LinearLayout
+                android:id="@+id/sair"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="20dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_logout"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/text_logoff"
+                    android:textColor="@color/white"
+                    android:textSize="17dp"
+                    android:layout_marginHorizontal="20dp"/>
+
+            </LinearLayout>
+
         </LinearLayout>
+
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -74,7 +74,7 @@ class DeleteUserFragment : Fragment() {
         context?.let {
             DialogHelper.showDialog(it,
                 R.string.delete_profile_deleted,
-                R.string.delete_profile_deleted_modal,
+                R.string.string_empty,
                 R.string.text_ok, null,
                 { close() })
         }

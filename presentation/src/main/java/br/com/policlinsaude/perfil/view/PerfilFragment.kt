@@ -22,6 +22,8 @@ import java.io.File
 import java.lang.Exception
 import javax.inject.Inject
 import android.media.ExifInterface
+import androidx.appcompat.app.AppCompatActivity
+import com.policlinsaude.newfeature.features.deleteUser.ui.Activity.DeleteUserActivity
 
 
 class PerfilFragment : BaseFragmentWithInject(), PerfilView {
@@ -66,30 +68,19 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == AppCompatActivity.RESULT_OK && requestCode == 123){
+            val returnIntent = Intent()
+            activity?.setResult(AppCompatActivity.RESULT_OK, returnIntent)
+            activity?.finish()
+        }
         EasyImage.handleActivityResult(requestCode, resultCode, data, activity, object : EasyImage.Callbacks {
-
-
             override fun onImagePicked(imageFile: File?, source: EasyImage.ImageSource?, type: Int) {
-             //   if (source == EasyImage.ImageSource.CAMERA && imageFile != null) {
-                    Log.e("TESTE", "Dentro de onImagePicked")
+                //ajuste de rotação de imagem devido ao problema de posição de sensor dependendo do fabricante
+                val rotation = applyRotationIfNeeded(imageFile!!)
 
-                    //ajuste de rotação de imagem devido ao problema de posição de sensor dependendo do fabricante
-                    val rotation = applyRotationIfNeeded(imageFile!!)
-                    Log.e("TESTE", "Dentro de onImagePicked - valor de rotation: " + rotation)
-
-
-                    imageFile?.let {
-                        presenter.onImagePicked(it.toBase64(500, rotation))
-                    }
-              //  }
-            /*    else {
-                    Log.e("TESTE", "onImagePicked == NULL")
-                    imageFile?.let {
-                        presenter.onImagePicked(it.toBase64(500, 0))
-                    }
-                }*/
-
-
+                imageFile?.let {
+                    presenter.onImagePicked(it.toBase64(500, rotation))
+                }
             }
 
             override fun onImagePickerError(e: Exception?, source: EasyImage.ImageSource?, type: Int) {
@@ -152,6 +143,9 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
         }
         imageView.setOnClickListener {
             presenter.onAvatarChangeClicked()
+        }
+        deleteAccountContainer.setOnClickListener {
+            presenter.onDeleteClicked()
         }
     }
 

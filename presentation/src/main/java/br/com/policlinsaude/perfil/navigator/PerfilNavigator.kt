@@ -7,4 +7,5 @@ interface PerfilNavigator {
     fun goToImagePicker()
     fun goToEditPhone()
     fun goToEditPassword()
+    fun goToDelete()
 }
