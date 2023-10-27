@@ -9,6 +9,9 @@ class SharedPreferences(val context: Context) {
     fun getToken(): String {
         return preferences.getString(PREFERENCES_TOKEN, "").toString()
     }
+    fun getSelecaoBeneficiarioAtiva(): Boolean {
+        return preferences.getBoolean(PREFERENCES_SELECAO, false)
+    }
 
     fun removeToken(){
         val edit = preferences.edit()
@@ -19,5 +22,6 @@ class SharedPreferences(val context: Context) {
     companion object {
         private const val PREFERENCES_NAME = "POLICLIN_SAUDE"
         private const val PREFERENCES_TOKEN = "token"
+        private const val PREFERENCES_SELECAO = "selecaoBeneficiarioAutorizador"
     }
 }

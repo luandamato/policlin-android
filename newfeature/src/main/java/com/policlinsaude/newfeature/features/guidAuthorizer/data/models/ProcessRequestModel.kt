@@ -13,10 +13,11 @@ data class ProcessRequestModel(
 
 data class ProcessRequestItemModel(
     var interlocutor: String = "",
+    var ordem: Int = 0,
     var telefone: String = "",
     var email: String = "",
     var semanaGestacional: Int = 0,
-    var referenteCOVID: String = "",
+    var referenteCOVID: String = "Não",
     var agendado: String = "",
     var dataAtendimento: String = "",
     var prestador: String = "",

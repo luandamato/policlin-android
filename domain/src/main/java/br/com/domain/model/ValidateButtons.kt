@@ -5,6 +5,7 @@ class ValidateButtons(
     val copartFM: String = "",
     val codAcao: Int = -1,
     val IR: Boolean = false,
+    val selecaoBeneficiarioAutorizador: Boolean = false,
     val central: Boolean = false,
     val gerarToken: Boolean = false,
     val autorizador: Boolean = false,

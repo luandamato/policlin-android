@@ -21,7 +21,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/linear"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="18dp"
                 tools:layout_editor_absoluteX="0dp"
@@ -121,30 +121,30 @@
                     android:layout_height="1dp"
                     android:background="@color/Cinza_10" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/linear_request_service"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="24dp"
-                    android:paddingVertical="24dp">
+<!--                <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                    android:id="@+id/linear_request_service"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:paddingHorizontal="24dp"-->
+<!--                    android:paddingVertical="24dp">-->
 
-                    <TextView
-                        style="@style/Primary.Text.Style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Dados da Solicitação"
-                        android:textColor="@color/Bordo"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+<!--                    <TextView-->
+<!--                        style="@style/Primary.Text.Style"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Dados da Solicitação"-->
+<!--                        android:textColor="@color/Bordo"-->
+<!--                        android:textSize="16sp"-->
+<!--                        android:textStyle="bold" />-->
 
-                    <include
-                        android:id="@+id/request_data_include"
-                        layout="@layout/fragment_request_data"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+<!--                    <include-->
+<!--                        android:id="@+id/request_data_include"-->
+<!--                        layout="@layout/fragment_request_data"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content" />-->
 
-                </androidx.appcompat.widget.LinearLayoutCompat>
+<!--                </androidx.appcompat.widget.LinearLayoutCompat>-->
 
                 <View
                     android:layout_width="match_parent"
@@ -195,7 +195,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3dp"
                         android:src="@drawable/ic_error"
-                        android:tint="@color/Bordo" />
+                        android:tint="@color/Bordo"
+                        tools:ignore="UseAppTint" />
 
                     <TextView
                         style="@style/Primary.Text.Style"

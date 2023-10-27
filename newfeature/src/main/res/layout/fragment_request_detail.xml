@@ -129,6 +129,33 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/black_2"
                     android:textSize="12sp"
+                    android:text="Interlocutor" />
+
+                <TextView
+                    style="@style/Primary.Text.Style.Bold"
+                    android:id="@+id/textview_interlocutor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/Bordo"
+                    android:textSize="13sp"
+                    tools:text="ADRIANE SANTANA FERNANDES" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="28dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_2"
+                    android:textSize="12sp"
                     android:text="Telefone" />
 
                 <TextView
@@ -244,32 +271,32 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginHorizontal="28dp"
-                android:orientation="vertical">
+<!--            <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="12dp"-->
+<!--                android:layout_marginHorizontal="28dp"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    style="@style/Primary.Text.Style"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black_2"
-                    android:textSize="12sp"
-                    android:text="Referente COVID-19" />
+<!--                <TextView-->
+<!--                    style="@style/Primary.Text.Style"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textColor="@color/black_2"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:text="Referente COVID-19" />-->
 
-                <TextView
-                    style="@style/Primary.Text.Style.Bold"
-                    android:id="@+id/textview_covid"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="2dp"
-                    android:textColor="@color/Bordo"
-                    android:textSize="13sp"
-                    tools:text="Não" />
+<!--                <TextView-->
+<!--                    style="@style/Primary.Text.Style.Bold"-->
+<!--                    android:id="@+id/textview_covid"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_marginTop="2dp"-->
+<!--                    android:textColor="@color/Bordo"-->
+<!--                    android:textSize="13sp"-->
+<!--                    tools:text="Não" />-->
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+<!--            </androidx.appcompat.widget.LinearLayoutCompat>-->
         </androidx.appcompat.widget.LinearLayoutCompat>
 
         <View

@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
+import androidx.navigation.fragment.findNavController
 import com.policlinsaude.newfeature.R
 import com.policlinsaude.newfeature.data.models.UserModel
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
 import com.policlinsaude.newfeature.databinding.FragmentBeneficiaryDataBinding
+import com.policlinsaude.newfeature.features.Token.models.BeneficiarioModel
+import com.policlinsaude.newfeature.features.guidAuthorizer.ui.activities.GuideAuthorizerActivity
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.viewmodels.GuideAuthorizerViewModel
 import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -30,6 +33,8 @@ class BeneficiaryDataFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as GuideAuthorizerActivity).showButtonEdit(false)
+        (activity as GuideAuthorizerActivity).showButtonCancel(false)
         viewModel.onGetUser()
         setupObservables()
         setupListeners()
@@ -48,34 +53,49 @@ class BeneficiaryDataFragment : Fragment() {
 
             buttonConfirm.setOnClickListener {
                 viewModel.setUserProcessRequest(
-                    name = textviewName.text.toString(),
+                    name = textviewInterlocutor.text.toString(),
                     phone = editTextPhoneNumber.text.toString(),
                     emailuser = editTextEmail.text.toString(),
-                    semGes = if(editTextSemGest.text.isNullOrEmpty()) 0 else editTextSemGest.text.toString().toInt()
+                    semGes = if(editTextSemGest.text.isNullOrEmpty()) 0 else editTextSemGest.text.toString().toInt(),
+                    pOrdem = textviewOrder.text.toString().toInt()
                 )
-                requireActivity().onBackPressed()
+                findNavController().popBackStack()
+                if (!viewModel.processInialized){
+                    findNavController().navigate(GuideAuthorizerFragmentDirections.navigateToRequest())
+                }
             }
         }
     }
 
     private fun setupViews(user: UserModel?) {
+        val beneficiario = viewModel.beneficiario
         with(binding) {
             editTextEmail.setText(user?.email)
             editTextPhoneNumber.setText(user?.phone)
-            textviewMatricula.text = user?.register
-            textviewOrder.text = user?.order
-            textviewName.text = user?.name
+            textviewInterlocutor.text = user?.name
+            textviewMatricula.text = beneficiario?.matricula
+            textviewOrder.text = beneficiario?.ordem
+            textviewName.text = beneficiario?.Nome_Beneficiario
         }
     }
 
     private fun setupObservables() {
         with(viewModel) {
             user.observe(viewLifecycleOwner) {
-                when(it.getResponseStatus()) {
+                when (it.getResponseStatus()) {
                     ViewModelResponseStatus.RUNNING -> showLoading()
                     ViewModelResponseStatus.SUCCESS -> {
                         hideLoading()
-                        it?.getData()?.let { data -> setupViews(data) }
+                        it?.getData()?.let { data ->
+                            if (viewModel.beneficiario == null || viewModel.beneficiario?.Nome_Beneficiario.isNullOrEmpty()) {
+                                viewModel.beneficiario = BeneficiarioModel(
+                                    data?.register!!,
+                                    data?.order!!,
+                                    data?.name!!
+                                )
+                            }
+                            setupViews(data)
+                        }
                     }
                     ViewModelResponseStatus.FAILED -> hideLoading()
                 }

@@ -12,6 +12,9 @@ import com.policlinsaude.newfeature.data.models.UserModel
 import com.policlinsaude.newfeature.data.networking.ServerErrorResponse
 import com.policlinsaude.newfeature.data.networking.ViewModelResponse
 import com.policlinsaude.newfeature.data.repositories.GuideRepository
+import com.policlinsaude.newfeature.features.Token.models.BeneficiarioModel
+import com.policlinsaude.newfeature.features.Token.models.BeneficiariosRequestModel
+import com.policlinsaude.newfeature.features.Token.models.BeneficiariosResponseModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.*
 import com.policlinsaude.newfeature.utils.SharedPreferences
 import kotlinx.coroutines.launch
@@ -24,6 +27,7 @@ class GuideAuthorizerViewModel(
 ): ViewModel() {
 
     var isFromActivity: Boolean = false
+    var processInialized: Boolean = false
 
     private var token: String = preferences.getToken()
 
@@ -66,6 +70,9 @@ class GuideAuthorizerViewModel(
     private val _responseSendAnswerAttachment: MutableLiveData<ViewModelResponse<ComumModel, ServerErrorResponse>> = MutableLiveData()
     val sendAnswerAttachment: LiveData<ViewModelResponse<ComumModel, ServerErrorResponse>> get() = _responseSendAnswerAttachment
 
+    private val _dependets: MutableLiveData<ViewModelResponse<BeneficiariosResponseModel, ServerErrorResponse>> = MutableLiveData()
+    val dependets: LiveData<ViewModelResponse<BeneficiariosResponseModel, ServerErrorResponse>> get() = _dependets
+
     var guideAuthorizerSelected: MutableLiveData<MutableList<GuideAuthorizerItemsModel>> = MutableLiveData(arrayListOf())
 
     var processRequestModel: ProcessRequestModel = ProcessRequestModel()
@@ -76,6 +83,7 @@ class GuideAuthorizerViewModel(
     var attachmentQuestion: MutableList<PictureSave> = mutableListOf()
 
     var questionsAndAnswers: GuideAuthorizerQuestionsItemsModel = GuideAuthorizerQuestionsItemsModel()
+    var beneficiario: BeneficiarioModel? = null
 
     fun attachmentResponseJPG(bitmap: Bitmap?, format: String, file: File?): PictureSave {
 
@@ -124,7 +132,7 @@ class GuideAuthorizerViewModel(
         guideAuthorizerSelected.value?.remove(item)
     }
 
-    fun setUserProcessRequest(name: String?, phone: String?, emailuser: String? ,semGes: Int) {
+    fun setUserProcessRequest(name: String?, phone: String?, emailuser: String? ,semGes: Int, pOrdem: Int) {
         processRequestModel.apply {
             token
             sdtAutCabecalho.apply {
@@ -132,6 +140,7 @@ class GuideAuthorizerViewModel(
                 telefone = phone.orEmpty()
                 email = emailuser.orEmpty()
                 semanaGestacional = semGes
+                ordem = pOrdem
             }
         }
     }
@@ -189,6 +198,28 @@ class GuideAuthorizerViewModel(
                 )
             } catch (e: ServerErrorResponse) {
                 _responseGuideAuthorizer.postValue(viewModelResponse.setError(e))
+            }
+        }
+    }
+    fun isListBeneficiaryEnable(): Boolean{
+        return preferences.getSelecaoBeneficiarioAtiva()
+    }
+    fun setUser(nome: String, matricula: String, ordem: String){
+        this.beneficiario = BeneficiarioModel(matricula, ordem, nome)
+    }
+
+    fun onGetDependents() {
+        viewModelScope.launch {
+            val viewModelResponse = ViewModelResponse<BeneficiariosResponseModel, ServerErrorResponse>()
+            try {
+                _dependets.postValue(viewModelResponse)
+                _dependets.postValue(
+                    viewModelResponse.setData(
+                        repository.onGetDependents(BeneficiariosRequestModel(token = token))
+                    )
+                )
+            } catch (e: ServerErrorResponse) {
+                _dependets.postValue(viewModelResponse.setError(e))
             }
         }
     }
@@ -451,6 +482,5 @@ class GuideAuthorizerViewModel(
     fun onClearRequest() {
         fotos = mutableListOf()
         processRequestModel = ProcessRequestModel()
-        _responseUser.postValue(null)
     }
 }

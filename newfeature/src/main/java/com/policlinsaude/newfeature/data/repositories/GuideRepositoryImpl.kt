@@ -4,6 +4,9 @@ import com.policlinsaude.newfeature.data.models.UserModel
 import com.policlinsaude.newfeature.data.networking.RetrofitInstance
 import com.policlinsaude.newfeature.data.networking.RetrofitInstance.Companion.API_NOTIFICATION
 import com.policlinsaude.newfeature.data.services.GuideService
+import com.policlinsaude.newfeature.data.services.TicketService
+import com.policlinsaude.newfeature.features.Token.models.BeneficiariosRequestModel
+import com.policlinsaude.newfeature.features.Token.models.BeneficiariosResponseModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.*
 import com.policlinsaude.newfeature.utils.makeRequest
 import kotlinx.coroutines.coroutineScope
@@ -123,6 +126,15 @@ class GuideRepositoryImpl: GuideRepository {
             makeRequest {
                 RetrofitInstance().create(GuideService::class.java, baseUrl = API_NOTIFICATION)
                     .sendAnswerAttachment(body)
+            }
+        }
+    }
+
+    override suspend fun onGetDependents(token: BeneficiariosRequestModel): BeneficiariosResponseModel {
+        return coroutineScope {
+            makeRequest {
+                RetrofitInstance().create(TicketService::class.java)
+                    .onGetDependents(token)
             }
         }
     }

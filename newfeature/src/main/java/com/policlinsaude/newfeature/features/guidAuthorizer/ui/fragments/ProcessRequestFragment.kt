@@ -11,6 +11,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.os.ParcelFileDescriptor
@@ -65,10 +66,16 @@ class ProcessRequestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.onGetCities()
+        viewModel.processInialized = true
         setupViews()
         setupListeners()
         setupObservables()
         verifyButtonEnabled()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupViews()
     }
 
     @SuppressLint("SetTextI18n")
@@ -78,10 +85,10 @@ class ProcessRequestFragment : Fragment() {
             recyclerViewIncomeTax.adapter = adapter
             viewModel.processRequestModel.sdtAutCabecalho.let {
                 textviewName.apply {
-                    text = "${viewModel.user.value?.getData()?.register.orEmpty()} ${viewModel.user.value?.getData()?.order.orEmpty()} ${it.interlocutor}"
+                    text = "${viewModel.beneficiario?.matricula} ${viewModel.beneficiario?.ordem} ${viewModel.beneficiario?.Nome_Beneficiario}"
                     isVisible = it.interlocutor.isNotEmpty()
                 }
-                requestDataInclude.textviewSchedule.text = it.referenteCOVID
+//                requestDataInclude.textviewSchedule.text = it.referenteCOVID
                 serviceLocationInclude.apply {
                     textviewSchedule.text = it.agendado
                     textviewServiceData.apply {
@@ -101,8 +108,7 @@ class ProcessRequestFragment : Fragment() {
         (activity as GuideAuthorizerActivity).showButtonCancel(false)
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object: OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                viewModel.onClearRequest()
-                findNavController().popBackStack()
+                onBack()
             }
         })
     }
@@ -110,7 +116,19 @@ class ProcessRequestFragment : Fragment() {
     private fun setupListeners() {
         with(binding) {
             linearBeneficiaryData.setOnClickListener {
-                findNavController().navigate(R.id.process_request_to_beneficiary_data_fragment)
+                if (viewModel.isListBeneficiaryEnable()){
+                    viewModel.dependets.let {
+                        if (!it.value?.getData()?.listaBeneficiario.isNullOrEmpty() && it.value?.getData()?.listaBeneficiario?.size!! > 1){
+                            findNavController().navigate(R.id.beneficiary_list_fragment)
+                        }
+                        else{
+                            findNavController().navigate(R.id.beneficiary_data_fragment)
+                        }
+                    }
+                }
+                else{
+                    findNavController().navigate(R.id.beneficiary_data_fragment)
+                }
             }
 
             buttonPicture.setOnClickListener {
@@ -120,11 +138,13 @@ class ProcessRequestFragment : Fragment() {
             adapter.setOnClickListener {
                 viewModel.attachmentResponse.remove(it)
                 adapter.update(viewModel.attachmentResponse)
+
+                verifyButtonEnabled()
             }
 
-            requestDataInclude.textviewSchedule.setOnClickListener {
-                bottomSheetRequestData()
-            }
+//            requestDataInclude.textviewSchedule.setOnClickListener {
+//                bottomSheetRequestData()
+//            }
 
             serviceLocationInclude.apply {
                 textviewSchedule.setOnClickListener {
@@ -238,29 +258,31 @@ class ProcessRequestFragment : Fragment() {
     }
 
     private fun onBack() {
+        viewModel.processInialized = false
         viewModel.isFromActivity = true
+        viewModel.onClearRequest()
         findNavController().popBackStack()
     }
 
-    private fun bottomSheetRequestData() {
-        BottomSheetCommon(
-            title = "Selecione Referente ao teste de COVID-19",
-            list = arrayListOf("Sim", "Não"),
-            buttonTitle = "Confirmar",
-            buttonCancel = "Cancelar",
-            onClickListenerNext = { item ->
-                item?.let {
-                    with(binding) {
-                        requestDataInclude.textviewSchedule.text = item
-                        viewModel.setRequestData(item)
-                    }
-                }
-                verifyButtonEnabled()
-            },
-            onClickListenerClean = {
-            }
-        ).show(childFragmentManager, TicketsFragment.OPEN_BOTTOM_SHEET_YEAR)
-    }
+//    private fun bottomSheetRequestData() {
+//        BottomSheetCommon(
+//            title = "Selecione Referente ao teste de COVID-19",
+//            list = arrayListOf("Sim", "Não"),
+//            buttonTitle = "Confirmar",
+//            buttonCancel = "Cancelar",
+//            onClickListenerNext = { item ->
+//                item?.let {
+//                    with(binding) {
+//                        requestDataInclude.textviewSchedule.text = item
+//                        viewModel.setRequestData(item)
+//                    }
+//                }
+//                verifyButtonEnabled()
+//            },
+//            onClickListenerClean = {
+//            }
+//        ).show(childFragmentManager, TicketsFragment.OPEN_BOTTOM_SHEET_YEAR)
+//    }
 
     private fun bottomSheetPicture() {
         val bottomSheetCommon = BottomSheetCommon()
@@ -370,9 +392,9 @@ class ProcessRequestFragment : Fragment() {
                 "image/*"
             )
             val intent = Intent()
-            intent.type = "image/*,application/pdf"
+            intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-            intent.putExtra(Intent.EXTRA_MIME_TYPES, ACCEPT_MIME_TYPES)
+//            intent.putExtra(Intent.EXTRA_MIME_TYPES, ACCEPT_MIME_TYPES)
             startActivityForResult(
                 Intent.createChooser(intent, "Selecione a foto ou documento"),
                 REQUEST_CODE_G4ALLERY
@@ -381,6 +403,14 @@ class ProcessRequestFragment : Fragment() {
     }
 
     private fun checkPermissionsGallery() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            requestPermissionAfterTiramissu()
+        }else{
+            requestPermissionBeforeTiramissu()
+        }
+    }
+
+    private fun requestPermissionBeforeTiramissu() {
         when {
             ContextCompat.checkSelfPermission(
                 requireContext(), READ_EXTERNAL_STORAGE
@@ -388,13 +418,40 @@ class ProcessRequestFragment : Fragment() {
 
             shouldShowRequestPermissionRationale(READ_EXTERNAL_STORAGE) -> {
                 ActivityCompat.requestPermissions(
-                    requireActivity(), arrayOf(READ_EXTERNAL_STORAGE), REQUEST_PERMISSION_CODE_GALLERY
+                    requireActivity(),
+                    arrayOf(READ_EXTERNAL_STORAGE),
+                    REQUEST_PERMISSION_CODE_GALLERY
                 )
             }
 
             else -> {
                 ActivityCompat.requestPermissions(
-                    requireActivity(), arrayOf(READ_EXTERNAL_STORAGE), REQUEST_PERMISSION_CODE_GALLERY
+                    requireActivity(),
+                    arrayOf(READ_EXTERNAL_STORAGE),
+                    REQUEST_PERMISSION_CODE_GALLERY
+                );
+            }
+        }
+    }
+    private fun requestPermissionAfterTiramissu() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(), READ_MEDIA_IMAGES
+            ) == PackageManager.PERMISSION_GRANTED -> openGallery()
+
+            shouldShowRequestPermissionRationale(READ_MEDIA_IMAGES) -> {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(READ_MEDIA_IMAGES),
+                    REQUEST_PERMISSION_CODE_GALLERY
+                )
+            }
+
+            else -> {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(READ_MEDIA_IMAGES),
+                    REQUEST_PERMISSION_CODE_GALLERY
                 );
             }
         }

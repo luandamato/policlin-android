@@ -15,6 +15,7 @@ data class GuideAuthorizerResponseItemModel(
     val matricula: String = "",
     val ordem: Int = 0,
     val interlocutor: String = "",
+    val nome: String = "",
     val telefone: String = "",
     val email: String = "",
     val semanaGestacional: Int = 0,

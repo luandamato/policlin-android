@@ -40,6 +40,7 @@ import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.app_bar_home.view.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.concurrent.TimeUnit
+import java.util.prefs.Preferences
 import javax.inject.Inject
 
 class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickListener {
@@ -272,11 +273,19 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                         homeAdapter.removeToken()
 
                     isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
+                    saveSelectionBeneficiaryEnable(buttons.selecaoBeneficiarioAutorizador)
                 }
             }
             recyclerView.visibility = View.VISIBLE
             loading_container_home.visibility = View.GONE
         }
+    }
+
+    private fun saveSelectionBeneficiaryEnable(enable: Boolean){
+        val preferences = activity?.getSharedPreferences("POLICLIN_SAUDE", Context.MODE_PRIVATE)
+        val edit = preferences?.edit()
+        edit?.putBoolean("selecaoBeneficiarioAutorizador", enable)
+        edit?.apply()
     }
 
     private fun setupAutoScroll() {

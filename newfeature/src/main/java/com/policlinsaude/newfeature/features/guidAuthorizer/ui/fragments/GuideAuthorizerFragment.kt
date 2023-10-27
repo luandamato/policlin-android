@@ -58,7 +58,7 @@ class GuideAuthorizerFragment : Fragment() {
             }
 
             buttonProcessRequest.setOnClickListener {
-                findNavController().navigate(GuideAuthorizerFragmentDirections.guideAuthorizerToProcessRequest())
+                navigateToNewRequest()
             }
 
             buttonCancelGuideAuthorizer.setOnClickListener {
@@ -69,6 +69,15 @@ class GuideAuthorizerFragment : Fragment() {
             consulting.setOnClickListener {
                 context?.openBrowser("https://policlinsaude.com.br/infoAutorizador.html")
             }
+        }
+    }
+
+    private fun navigateToNewRequest(){
+        if (viewModel.isListBeneficiaryEnable()){
+            viewModel.onGetDependents()
+        }
+        else{
+            findNavController().navigate(GuideAuthorizerFragmentDirections.navigateToBeneficiaryData())
         }
     }
 
@@ -111,6 +120,24 @@ class GuideAuthorizerFragment : Fragment() {
                         adapter.isShowCheckbox(false)
                         viewModel.guidAuthorizerSelectedClean()
                         viewModel.onGetListGuideAuthorizer()
+                    }
+                    else -> hideLoading()
+                }
+            }
+
+            dependets.observe(viewLifecycleOwner){
+                when(it.getResponseStatus()) {
+                    ViewModelResponseStatus.RUNNING -> showLoading()
+                    ViewModelResponseStatus.SUCCESS -> {
+                        hideLoading()
+                        it.getData()?.let { dependets ->
+                            if (dependets.listaBeneficiario.isNullOrEmpty() || dependets.listaBeneficiario.size <= 1){
+                                findNavController().navigate(GuideAuthorizerFragmentDirections.navigateToBeneficiaryData())
+                            }
+                            else{
+                                findNavController().navigate(GuideAuthorizerFragmentDirections.navigateToBeneficiaryList())
+                            }
+                        }
                     }
                     else -> hideLoading()
                 }

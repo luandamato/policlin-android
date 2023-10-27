@@ -47,14 +47,15 @@ class ProcessRequestDetailFragment: Fragment() {
         }
 
         with(binding) {
-            textviewName.text = request?.interlocutor
+            textviewName.text = request?.nome
+            textviewInterlocutor.text = request?.interlocutor
             textviewMatricula.text = request?.matricula
             textviewOrder.text = request?.ordem.toString()
             textviewEmail.text = request?.email
             textviewTelephone.text = request?.telefone
             semanGest.text = request?.semanaGestacional.toString()
             textviewProtocol.text = request?.protocolo
-            textviewCovid.text = if(request?.referenteCOVID?.lowercase() == "s") "Sim" else "Não"
+//            textviewCovid.text = if(request?.referenteCOVID?.lowercase() == "s") "Sim" else "Não"
             textviewAgend.text = if(request?.agendado?.lowercase() == "s") "Sim" else "Não"
             if(request?.agendado?.lowercase() == "s") {
                 textviewDate.text = if(request?.dataAtendimento.isNullOrEmpty()) "--" else request?.dataAtendimento?.toDDMMYYYY()

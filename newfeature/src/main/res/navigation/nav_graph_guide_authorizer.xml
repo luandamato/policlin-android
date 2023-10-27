@@ -18,7 +18,15 @@
             app:argType="boolean"/>
 
         <action
-            android:id="@+id/guide_authorizer_to_process_request"
+            android:id="@+id/navigate_to_beneficiary_data"
+            app:destination="@+id/beneficiary_data_fragment" />
+
+        <action
+            android:id="@+id/navigate_to_beneficiary_list"
+            app:destination="@+id/beneficiary_list_fragment" />
+
+        <action
+            android:id="@+id/navigate_to_request"
             app:destination="@+id/process_request_fragment" />
 
         <action
@@ -34,12 +42,12 @@
         tools:layout="@layout/fragment_process_request" >
 
         <action
-            android:id="@+id/process_request_to_beneficiary_data_fragment"
+            android:id="@+id/navigate_to_beneficiary_data"
             app:destination="@+id/beneficiary_data_fragment" />
 
         <action
-            android:id="@+id/process_request_to_request_data_fragment"
-            app:destination="@+id/request_data_fragment" />
+            android:id="@+id/navigate_to_beneficiary_list"
+            app:destination="@+id/beneficiary_list_fragment" />
 
         <action
             android:id="@+id/process_request_to_service_location_data_fragment"
@@ -55,7 +63,23 @@
         android:id="@+id/beneficiary_data_fragment"
         android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.BeneficiaryDataFragment"
         android:label="@string/beneficiary_data"
-        tools:layout="@layout/fragment_process_request" />
+        tools:layout="@layout/fragment_process_request">
+        <action
+            android:id="@+id/navigate_to_request"
+            app:destination="@+id/process_request_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/beneficiary_list_fragment"
+        android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.AuthorizerBeneficiaryListFragment"
+        android:label="@string/beneficiary_data"
+        tools:layout="@layout/fragment_authorizer_beneficiary_list">
+
+        <action
+            android:id="@+id/navigate_to_beneficiary_data"
+            app:destination="@+id/beneficiary_data_fragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/service_location_data_fragment"

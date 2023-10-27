@@ -20,7 +20,7 @@ class RetrofitInstance (
         private const val PLATFORM = "plataforma"
         private const val PLATFORM_ANDROID = "A"
         private const val VERSION = "versao"
-        private const val VERSION_ANDROID = "1.49.0"
+        private const val VERSION_ANDROID = "1.50.0"
     }
 
     fun <T> create(service: Class<T>, baseUrl: String = API_URL, interceptors: List<Interceptor> = emptyList(), certificate: List<String> = emptyList()): T {
