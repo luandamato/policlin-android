@@ -1,5 +1,6 @@
 package br.com.policlinsaude.login.presenter
 
+import android.os.Build
 import br.com.data.exception.PreferenceNotFoundException
 import br.com.data.exception.RealmNotFoundException
 import br.com.domain.usecase.DoLoginUseCase
@@ -46,7 +47,8 @@ class LoginPresenterImpl(private val navigator: LoginNavigator,
     }
 
     override fun clickedButtonEnter(firebaseToken: String) {
-        val doLoginRV = DoLoginRV(register = view.getRegister(), order = view.getOrder(), password = view.getPassword(), firebaseToken = firebaseToken)
+        val version = Build.VERSION.RELEASE
+        val doLoginRV = DoLoginRV(register = view.getRegister(), order = view.getOrder(), password = view.getPassword(), firebaseToken = firebaseToken, osVersion = version)
         UseCaseHandler.execute(doLoginUseCase, doLoginRV)
                 .doOnSubscribe {
                     view.showLoginLoading()

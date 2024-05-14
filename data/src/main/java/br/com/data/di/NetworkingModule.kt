@@ -20,12 +20,11 @@ class NetworkingModule {
 
     companion object {
 
-        private const val API_URL : String = "http://policlinsaude.com.br/mapp2/api/"
+        private const val API_URL : String = "http://policlinsaude.com.br/mapp/api/"
         private const val PLATFORM = "plataforma"
         private const val PLATFORM_ANDROID = "A"
         private const val VERSION = "versao"
-        private const val VERSION_ANDROID = "1.41.0"
-
+        private const val VERSION_ANDROID = "1.60.4"
     }
 
 

@@ -5,7 +5,7 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 
 interface Repository {
-    fun doLogin(register: String, order: String, password: String, firebaseToken: String): Completable
+    fun doLogin(register: String, order: String, password: String, firebaseToken: String, osVersion: String): Completable
     fun doLogoff(): Completable
     fun recoverPassword(register: String, order: String, email: String): Completable
     fun registerPassword(person: Person, plan: Plan): Flowable<String>

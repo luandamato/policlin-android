@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/incomeTaxFragment"
-        android:label="Central de Agendamento"
+        android:label="Central de Informação"
         android:name="com.policlinsaude.newfeature.features.ScheduleCentral.ui.fragments.ScheduleCentralFragment"
         tools:layout="@layout/fragment_schedule_central" />
 

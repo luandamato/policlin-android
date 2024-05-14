@@ -26,45 +26,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginBottom="20dp">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnPhone"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="36dp"
-                android:background="@drawable/button_secondary_old"
-                android:text="FALE COM A CENTRAL"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:layout_weight="1"
+                android:src="@drawable/fale_com_a_central"
+                android:backgroundTint="@color/transparent"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnEmail"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/button_primary"
-                android:text="AGENDAMENTO POR E-MAIL"
-                android:textAllCaps="false"
-                android:textColor="@color/Bordo" />
+                android:layout_weight="1"
+                android:src="@drawable/agendamento_por_e_mail"
+                android:backgroundTint="@color/transparent" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnWpp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/button_secondary_old"
-                android:text="AGENDAMENTO NO WHATSAPP"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white" />
+                android:layout_weight="1"
+                android:src="@drawable/agendamento_via_whatsapp"
+                android:backgroundTint="@color/transparent"/>
 
         </LinearLayout>
 

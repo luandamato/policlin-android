@@ -29,8 +29,8 @@ class RepositoryImpl(private val networkingDatasource: NetworkingDatasource,
     override fun recoverPassword(register: String, order: String, email: String): Completable = networkingDatasource
             .recoverPassword(register = register, order = order, email = email)
 
-    override fun doLogin(register: String, order: String, password: String, firebaseToken: String): Completable = networkingDatasource
-            .doLogin(register = register, order = order, password = password, firebaseToken = firebaseToken)
+    override fun doLogin(register: String, order: String, password: String, firebaseToken: String, osVersion: String): Completable = networkingDatasource
+            .doLogin(register = register, order = order, password = password, firebaseToken = firebaseToken, osVersion = osVersion)
             .flatMapCompletable {
                 realmDatasource.savePerson(it.first, it.second)
                         .andThen(preferencesDatasource.saveToken(it.second))
@@ -138,8 +138,9 @@ class RepositoryImpl(private val networkingDatasource: NetworkingDatasource,
                 networkingDatasource.removeFromFavorites(establishment, it)
             }
 
-    override fun validateUserConnected(registration: String, order: String)
-        : Flowable<UserConnected> = networkingDatasource.onValidateUserConnected(registration, order)
+    override fun validateUserConnected(registration: String, order: String): Flowable<UserConnected> = preferencesDatasource.getToken()
+        .flatMap {networkingDatasource.onValidateUserConnected(registration, order, it) }
+
 
     override fun validateButtons(): Flowable<ValidateButtons>
         = preferencesDatasource.getToken().onErrorReturnItem("")

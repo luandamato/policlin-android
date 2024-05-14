@@ -1,5 +1,6 @@
 package br.com.data.datasource.networking
 
+import android.os.Build
 import android.util.Log
 import br.com.data.datasource.networking.rest.NetworkingService
 import br.com.data.datasource.networking.rest.mapper.*
@@ -22,7 +23,7 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
                 }
             }
 
-    override fun doLogin(register: String, order: String, password: String, firebaseToken: String): Flowable<Pair<Person, String>> = networkingService.login(register = register, order = order, password = password, firebaseToken = firebaseToken)
+    override fun doLogin(register: String, order: String, password: String, firebaseToken: String, osVersion: String): Flowable<Pair<Person, String>> = networkingService.login(register = register, order = order, password = password, firebaseToken = firebaseToken, osVersion = osVersion)
             .flatMap {
                 if (validateMsgIsSuccess(it.msgInternal)
                         || it.user == null || it.token == null) {
@@ -263,10 +264,11 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
                 }
     }
 
-    override fun onValidateUserConnected(registration: String, order: String): Flowable<UserConnected> {
-        return networkingService.validateUserConnected(registration, order)
+    override fun onValidateUserConnected(registration: String, order: String, token: String): Flowable<UserConnected> {
+        val version = Build.VERSION.RELEASE
+        return networkingService.validateUserConnected(registration, order, token, version)
             .flatMap {
-                if (validateMsgIsSuccess(it.msgInterna)) {
+                if (!validateMsgIsSuccess(it.msgInterna)) {
                     Flowable.error(MessageErrorException(it.msgExterna ?: ""))
                 } else {
                     Flowable.just(it)

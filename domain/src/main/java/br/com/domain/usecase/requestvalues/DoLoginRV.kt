@@ -7,6 +7,7 @@ data class DoLoginRV(
     val register: String = InvalidData.UNINITIALIZED.getString(),
     val order: String = InvalidData.UNINITIALIZED.getString(),
     val password: String = InvalidData.UNINITIALIZED.getString(),
-    val firebaseToken: String = InvalidData.UNINITIALIZED.getString()
+    val firebaseToken: String = InvalidData.UNINITIALIZED.getString(),
+    val osVersion: String = InvalidData.UNINITIALIZED.getString()
 )
     : BaseRequestValues

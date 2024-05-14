@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.pdf.PdfDocument
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
@@ -181,7 +182,33 @@ class AnswerQuestionsFragment : Fragment() {
         }.show(childFragmentManager, TicketsFragment.OPEN_BOTTOM_SHEET_YEAR)
     }
 
+
+    private fun openGallery() {
+        try {
+            val ACCEPT_MIME_TYPES = arrayOf(
+                "application/pdf",
+                "image/*"
+            )
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+//            intent.putExtra(Intent.EXTRA_MIME_TYPES, ACCEPT_MIME_TYPES)
+            startActivityForResult(
+                Intent.createChooser(intent, "Selecione a foto ou documento"),
+                REQUEST_CODE_G4ALLERY
+            )
+        } catch (e: Exception) { }
+    }
+
     private fun checkPermissionsGallery() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+            requestPermissionAfterTiramissu()
+        }else{
+            requestPermissionBeforeTiramissu()
+        }
+    }
+
+    private fun requestPermissionBeforeTiramissu() {
         when {
             ContextCompat.checkSelfPermission(
                 requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE
@@ -189,14 +216,39 @@ class AnswerQuestionsFragment : Fragment() {
 
             shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
                 ActivityCompat.requestPermissions(
-                    requireActivity(), arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    requireActivity(),
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                     ProcessRequestFragment.REQUEST_PERMISSION_CODE_GALLERY
                 )
             }
 
             else -> {
                 ActivityCompat.requestPermissions(
-                    requireActivity(), arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    requireActivity(),
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    ProcessRequestFragment.REQUEST_PERMISSION_CODE_GALLERY
+                );
+            }
+        }
+    }
+    private fun requestPermissionAfterTiramissu() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(), Manifest.permission.READ_MEDIA_IMAGES
+            ) == PackageManager.PERMISSION_GRANTED -> openGallery()
+
+            shouldShowRequestPermissionRationale(Manifest.permission.READ_MEDIA_IMAGES) -> {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
+                    ProcessRequestFragment.REQUEST_PERMISSION_CODE_GALLERY
+                )
+            }
+
+            else -> {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.READ_MEDIA_IMAGES),
                     ProcessRequestFragment.REQUEST_PERMISSION_CODE_GALLERY
                 );
             }
@@ -227,26 +279,6 @@ class AnswerQuestionsFragment : Fragment() {
     private fun openCamera() {
         try {
             EasyImage.openCamera(this@AnswerQuestionsFragment, REQUEST_CODE_CAMERA)
-        } catch (e: Exception) { }
-    }
-
-    private fun openGallery() {
-        try {
-
-            val ACCEPT_MIME_TYPES = arrayOf(
-                "application/pdf",
-                "image/*"
-            )
-            val intent = Intent()
-            intent.type = "image/*,application/pdf"
-            intent.action = Intent.ACTION_GET_CONTENT
-            intent.putExtra(Intent.EXTRA_MIME_TYPES, ACCEPT_MIME_TYPES)
-            startActivityForResult(
-                Intent.createChooser(intent, "Selecione a foto ou documento"),
-                REQUEST_CODE_G4ALLERY
-            )
-
-
         } catch (e: Exception) { }
     }
 

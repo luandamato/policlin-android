@@ -15,7 +15,8 @@ interface NetworkingService {
     fun login(@Field("matricula") register: String = InvalidData.UNINITIALIZED.getString(),
               @Field("ordem") order: String = InvalidData.UNINITIALIZED.getString(),
               @Field("senha") password: String = InvalidData.UNINITIALIZED.getString(),
-              @Field("firebaseToken") firebaseToken: String = InvalidData.UNINITIALIZED.getString()
+              @Field("firebaseToken") firebaseToken: String = InvalidData.UNINITIALIZED.getString(),
+              @Header("verOS") osVersion: String = InvalidData.UNINITIALIZED.getString()
     ): Flowable<JsonLoginResponse>
 
 
@@ -155,6 +156,7 @@ interface NetworkingService {
                             @Field("_Tipo") type: String): Flowable<JsonRemoveFromFavoritesResponse>
 
     @GET("MAPP_RetornaRedeUnidades")
+
   // @GET("MAPP_RetornaRedePropria")
     fun getUnits(@Query("token") token: String? = null): Flowable<JsonUnitsResponse>
 
@@ -163,12 +165,14 @@ interface NetworkingService {
     @POST("MAPP_ValidaBeneficiario")
     fun validateUserConnected(
         @Field("matricula") registration: String,
-        @Field("ordem") order: String
+        @Field("ordem") order: String,
+        @Field("token") token: String = InvalidData.UNINITIALIZED.getString(),
+        @Header("verOS") osVersion: String = InvalidData.UNINITIALIZED.getString()
     ): Flowable<UserConnected>
 
     @POST("")
     fun validateButtons(
-        @Url url: String = "http://policlinsaude.com.br/apiapp_prot/rest/apiAcessoBotoes",
+        @Url url: String = "http://policlinsaude.com.br/apiapp/rest/apiAcessoBotoes",
         @Body body: ValidateButtonBody
     ): Flowable<ValidateButtons>
 

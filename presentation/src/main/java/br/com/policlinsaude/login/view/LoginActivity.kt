@@ -126,7 +126,7 @@ class LoginActivity : BaseActivity(), LoginView {
         val listener = {
             getToken()
         }
-        if(it.message?.contains("450-") == true) {
+        if(it.message?.contains("450") == true) {
             val message = it.message?.split("-").orEmpty()
             showDialogUpdateApp(message = message[1])
         } else {

@@ -16,7 +16,8 @@ class DoLoginUseCase(private val repository: Repository) :
                 register = requestValues.register,
                 order = requestValues.order,
                 password = requestValues.password,
-                firebaseToken = requestValues.firebaseToken
+                firebaseToken = requestValues.firebaseToken,
+                osVersion = requestValues.osVersion
             ).toFlowable()
         }
         return Flowable.error(RequestValuesNotImplementedException(this.javaClass.name))

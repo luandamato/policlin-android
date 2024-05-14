@@ -20,6 +20,7 @@
     <color name="white">#FFFFFF</color>
     <color name="white_1">#e5e5e5</color>
     <color name="white_2">#F7F7F7</color>
+    <color name="transparent">#00000000</color>
 
     <color name="green_1">#2F862F</color>
 

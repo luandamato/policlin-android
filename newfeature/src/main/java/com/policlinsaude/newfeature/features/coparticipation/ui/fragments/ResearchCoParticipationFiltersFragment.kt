@@ -195,7 +195,7 @@ class ResearchCoParticipationFiltersFragment : Fragment() {
     private fun bottomSheetComboOne(codes: MutableList<String>) {
         BottomSheetCommon(
             title = "Código",
-            description = "Escolha o mês um dos grupos abaixo",
+            description = "Escolha um dos grupos abaixo",
             list = codes,
             onClickListenerNext = {
                 binding.textviewRcpSelectCode.text = it
@@ -213,7 +213,7 @@ class ResearchCoParticipationFiltersFragment : Fragment() {
     private fun bottomSheetComboTwo(codes: MutableList<String>) {
         BottomSheetCommon(
             title = "Grupo de Coparticipação",
-            description = "Escolha o mês um dos grupos abaixo",
+            description = "Escolha um dos grupos abaixo",
             list = codes,
             onClickListenerNext = {
                 binding.textviewRcpSelectGroupParticipation.text = it
@@ -231,7 +231,7 @@ class ResearchCoParticipationFiltersFragment : Fragment() {
     private fun bottomSheetComboThree(codes: MutableList<String>) {
         BottomSheetCommon(
             title = "Descrição do Grupo Coparticipação",
-            description = "Escolha o mês um dos grupos abaixo",
+            description = "Escolha um dos grupos abaixo",
             list = codes,
             onClickListenerNext = {
                 binding.textviewRcpSelectDescriptionGroupParticipation.text = it
