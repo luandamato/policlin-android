@@ -25,9 +25,14 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
 
     override fun doLogin(register: String, order: String, password: String, firebaseToken: String, osVersion: String): Flowable<Pair<Person, String>> = networkingService.login(register = register, order = order, password = password, firebaseToken = firebaseToken, osVersion = osVersion)
             .flatMap {
-                if (validateMsgIsSuccess(it.msgInternal)
-                        || it.user == null || it.token == null) {
-                    if(it.actionCode == 450) {
+                val atualizacaoStatus = intArrayOf(450, 455)
+                val update = !atualizacaoStatus.contains(it.actionCode ?: 0)
+
+                val teste = validateMsgIsSuccess(it.msgInternal)
+                val test = it.user == null || it.token == null
+
+                if ((validateMsgIsSuccess(it.msgInternal) && update) || it.user == null || it.token == null) {
+                    if(it.actionCode == 450 || it.actionCode == 455) {
                         Flowable.error(MessageErrorException("${it.actionCode}-${it.msgExternal}"))
                     } else {
                         Flowable.error(MessageErrorException(it.msgExternal ?: ""))

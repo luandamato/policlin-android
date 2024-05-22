@@ -71,8 +71,8 @@ class HomePresenterImpl(private val view: HomeView,
             .subscribeBy(
                 onNext = {
                     when (it.codAcao){
-                        450 -> view.showUpdateDialog(Throwable(it.msgExterna.orEmpty()))
-                        455 -> view.showUpdateDialog(Throwable(it.msgExterna.orEmpty()))
+                        450 -> view.showUpdateDialog(Throwable(it.msgExterna.orEmpty()), false)
+                        455 -> view.showUpdateDialog(Throwable(it.msgExterna.orEmpty()), true)
                         5 -> onLogout(it)
                     }
                 }, onError = {

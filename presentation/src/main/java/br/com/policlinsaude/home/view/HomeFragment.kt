@@ -46,7 +46,7 @@ import javax.inject.Inject
 class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickListener {
 
     private var isCoPartFM: Boolean = false
-
+    private var forceUpdate: Boolean = false
     lateinit var toolbar: Toolbar
 
     companion object {
@@ -143,6 +143,16 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
     }
 
     override fun onItemClick(option: PresentationHomeOptionEnum) {
+        if (forceUpdate){
+            if (option == PresentationHomeOptionEnum.HEALTH_INSURANCE){
+                if ((activity as MenuActivity).isGuest) {
+                    presenter.onMenuClickedAsGuest()
+                } else {
+                    homeNavigator.goToHealthInsurancePhoto()
+                }
+            }
+            return
+        }
         when (option) {
             PresentationHomeOptionEnum.MEDICAL_GUIDE -> homeNavigator.goToMedicalGuideOptions()
             PresentationHomeOptionEnum.HEALTH_INSURANCE -> {
@@ -233,7 +243,8 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
         (activity as MenuView).showLoginDialog()
     }
 
-    override fun showUpdateDialog(throwable: Throwable) {
+    override fun showUpdateDialog(throwable: Throwable, force: Boolean) {
+        forceUpdate = force
         (activity as MenuActivity).showUpdateDialog(throwable)
     }
 
