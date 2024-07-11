@@ -2,6 +2,7 @@ package br.com.policlinsaude.home.presenter
 
 import br.com.data.exception.PreferenceNotFoundException
 import br.com.data.exception.RealmNotFoundException
+import br.com.domain.usecase.DoLogoffUseCase
 import br.com.domain.usecase.GetCurrentPersonUseCase
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.home.navigator.MenuNavigator
@@ -14,6 +15,7 @@ import java.util.prefs.Preferences
  */
 class MenuPresenterImpl(private val navigator: MenuNavigator,
                         private val getCurrentPersonUseCase: GetCurrentPersonUseCase,
+                        private val doLogoffUseCase: DoLogoffUseCase,
                         private val view: MenuView) : MenuPresenter {
 
     override fun getCurrentPerson() {
@@ -43,6 +45,14 @@ class MenuPresenterImpl(private val navigator: MenuNavigator,
     }
 
     override fun onLogoutConfirmed() {
-        navigator.goToLogin()
+        UseCaseHandler.execute(doLogoffUseCase)
+            .subscribeBy(
+                onComplete = {
+                    navigator.goToLogin()
+                },
+                onError = {
+                    it.printStackTrace()
+                }
+            )
     }
 }

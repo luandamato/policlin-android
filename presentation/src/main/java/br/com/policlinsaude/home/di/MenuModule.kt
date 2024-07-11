@@ -1,5 +1,7 @@
 package br.com.policlinsaude.home.di
 
+import br.com.domain.repository.Repository
+import br.com.domain.usecase.DoLogoffUseCase
 import br.com.domain.usecase.GetCurrentPersonUseCase
 import br.com.policlinsaude.home.navigator.MenuNavigator
 import br.com.policlinsaude.home.navigator.MenuNavigatorImpl
@@ -20,11 +22,15 @@ class MenuModule {
     @Provides
     fun provideMenuPresenter(navigator: MenuNavigator,
                              getCurrentPersonUseCase: GetCurrentPersonUseCase,
+                             doLogoffUseCase: DoLogoffUseCase,
                              view: MenuView)
-            : MenuPresenter = MenuPresenterImpl(navigator, getCurrentPersonUseCase, view)
+            : MenuPresenter = MenuPresenterImpl(navigator, getCurrentPersonUseCase,doLogoffUseCase, view)
 
 
     @Provides
     fun provideNavigator(menuActivity: MenuActivity)
             : MenuNavigator = MenuNavigatorImpl(menuActivity, menuActivity.supportFragmentManager)
+    @Provides
+    fun provideDoLogoff(repository: Repository)
+            : DoLogoffUseCase = DoLogoffUseCase(repository)
 }

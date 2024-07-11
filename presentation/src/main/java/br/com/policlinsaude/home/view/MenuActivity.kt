@@ -197,10 +197,10 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
         }
     }
     private fun logout(){
-        val preferences = this.getSharedPreferences("POLICLIN_SAUDE", Context.MODE_PRIVATE)
-        val edit = preferences.edit()
-        edit.putString("token", "")
-        edit.apply()
+//        val preferences = this.getSharedPreferences("POLICLIN_SAUDE", Context.MODE_PRIVATE)
+//        val edit = preferences.edit()
+//        edit.putString("token", "")
+//        edit.apply()
         presenter.onLogoutConfirmed()
     }
 

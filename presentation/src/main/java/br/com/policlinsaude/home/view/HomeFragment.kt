@@ -151,6 +151,7 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     homeNavigator.goToHealthInsurancePhoto()
                 }
             }
+            showUpdateDialog(Throwable("É obrigatória a atualização do app"), true)
             return
         }
         when (option) {

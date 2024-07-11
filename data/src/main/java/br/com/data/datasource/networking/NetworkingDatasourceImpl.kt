@@ -28,9 +28,6 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
                 val atualizacaoStatus = intArrayOf(450, 455)
                 val update = !atualizacaoStatus.contains(it.actionCode ?: 0)
 
-                val teste = validateMsgIsSuccess(it.msgInternal)
-                val test = it.user == null || it.token == null
-
                 if ((validateMsgIsSuccess(it.msgInternal) && update) || it.user == null || it.token == null) {
                     if(it.actionCode == 450 || it.actionCode == 455) {
                         Flowable.error(MessageErrorException("${it.actionCode}-${it.msgExternal}"))

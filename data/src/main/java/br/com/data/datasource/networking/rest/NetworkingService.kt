@@ -1,6 +1,7 @@
 package br.com.data.datasource.networking.rest
 
 import br.com.data.datasource.networking.rest.model.*
+import br.com.data.di.NetworkingModule
 import br.com.data.helper.InvalidData
 import br.com.domain.model.UserConnected
 import br.com.domain.model.ValidateButtonBody
@@ -16,7 +17,9 @@ interface NetworkingService {
               @Field("ordem") order: String = InvalidData.UNINITIALIZED.getString(),
               @Field("senha") password: String = InvalidData.UNINITIALIZED.getString(),
               @Field("firebaseToken") firebaseToken: String = InvalidData.UNINITIALIZED.getString(),
-              @Header("verOS") osVersion: String = InvalidData.UNINITIALIZED.getString()
+              @Header("verOS") osVersion: String = "13",
+              @Header("plataforma") plataforma: String = "A",
+              @Header("versao") versao: String = "1.60.6"
     ): Flowable<JsonLoginResponse>
 
 
@@ -167,7 +170,9 @@ interface NetworkingService {
         @Field("matricula") registration: String,
         @Field("ordem") order: String,
         @Field("token") token: String = InvalidData.UNINITIALIZED.getString(),
-        @Header("verOS") osVersion: String = InvalidData.UNINITIALIZED.getString()
+        @Header("verOS") osVersion: String = "13",
+        @Header("plataforma") plataforma: String = "A",
+        @Header("versao") versao: String = "1.60.6"
     ): Flowable<UserConnected>
 
     @POST("")
