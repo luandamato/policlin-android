@@ -21,6 +21,7 @@ import com.policlinsaude.newfeature.features.extractor.ui.viewmodels.FactorExtra
 import com.policlinsaude.newfeature.features.tickets.ui.fragments.TicketsFragment
 import com.policlinsaude.newfeature.utils.DateMapper
 import com.policlinsaude.newfeature.utils.DialogHelper
+import com.policlinsaude.newfeature.utils.SharedPreferences
 import com.policlinsaude.newfeature.utils.toCurrencyBRL
 import com.policlinsaude.newfeature.utils.toMonths
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -41,6 +42,7 @@ class FactorExtractorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.onGetFactorsExtractorsYears()
+        viewModel.onGetUser()
         setupViews()
         setupListeners()
         setupObservables()
@@ -104,7 +106,9 @@ class FactorExtractorFragment : Fragment() {
                                 showEmptyFilter()
                             } else {
                                 showListData()
-                                binding.textviewTotalValue.text = it.getData()?.valorTotal?.toCurrencyBRL()
+                                binding.textviewTotalValue.text = it.getData()?.valorGeral?.toCurrencyBRL()
+                                binding.textviewTotalDep.text = it.getData()?.valorTotalDep?.toCurrencyBRL()
+                                binding.textviewTotalMat.text = it.getData()?.valorTotal?.toCurrencyBRL()
                                 adapter.update(it.getData()?.extratoCopart ?: arrayListOf())
                                 showCleanButton()
                             }
@@ -115,6 +119,16 @@ class FactorExtractorFragment : Fragment() {
                     else -> {
                         hideLoading()
                     }
+                }
+            }
+            user.observe(viewLifecycleOwner) {
+                when(it.getResponseStatus()) {
+                    ViewModelResponseStatus.RUNNING -> showLoading()
+                    ViewModelResponseStatus.SUCCESS -> {
+                        hideLoading()
+                        binding.lblMatricula.text = "${it.getData()?.register}-${it.getData()?.order}"
+                    }
+                    else -> hideLoading()
                 }
             }
 

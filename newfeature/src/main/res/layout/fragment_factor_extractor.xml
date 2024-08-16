@@ -209,25 +209,93 @@
                 android:orientation="horizontal"
                 android:background="@drawable/background_green_radius_2">
 
-                <TextView
-                    style="@style/Primary.Text.Style"
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/Branco"
-                    android:textSize="11sp"
-                    android:text="Valor total:" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textview_total_value"
-                    style="@style/Primary.Text.Style.Bold"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            style="@style/Primary.Text.Style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/Branco"
+                            android:textSize="11sp"
+                            android:text="Valor total da Matrícula: " />
+                        <TextView
+                            android:id="@+id/lbl_matricula"
+                            style="@style/Primary.Text.Style"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/Branco"
+                            android:textSize="10sp"
+                            android:text="12345-00" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/Primary.Text.Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/Branco"
+                        android:textSize="11sp"
+                        android:layout_marginTop="5dp"
+                        android:text="Valor dos Demais Dependentes:" />
+
+                    <TextView
+                        style="@style/Primary.Text.Style"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/Branco"
+                        android:textSize="11sp"
+                        android:layout_marginTop="5dp"
+                        android:text="Valor total:" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:textColor="@color/Branco"
-                    android:textSize="11sp"
-                    tools:text="R$ 30,00" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textview_total_mat"
+                        style="@style/Primary.Text.Style.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/Branco"
+                        android:textSize="11sp"
+                        tools:text="R$ 30,00" />
+
+                    <TextView
+                        android:id="@+id/textview_total_dep"
+                        style="@style/Primary.Text.Style.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/Branco"
+                        android:layout_marginTop="5dp"
+                        android:textSize="11sp"
+                        tools:text="R$ 30,00" />
+
+                    <TextView
+                        android:id="@+id/textview_total_value"
+                        style="@style/Primary.Text.Style.Bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/Branco"
+                        android:layout_marginTop="5dp"
+                        android:textSize="11sp"
+                        tools:text="R$ 30,00" />
+
+
+                </LinearLayout>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

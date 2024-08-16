@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.policlinsaude.newfeature.data.models.UserModel
 import com.policlinsaude.newfeature.data.networking.ServerErrorResponse
 import com.policlinsaude.newfeature.data.networking.ViewModelResponse
 import com.policlinsaude.newfeature.data.repositories.FactorExtractorRepository
@@ -35,6 +36,9 @@ class FactorExtractorViewModel(
     private val _responseMonths: MutableLiveData<ViewModelResponse<FactorExtractorMonthsModel, ServerErrorResponse>> = MutableLiveData()
     val months: LiveData<ViewModelResponse<FactorExtractorMonthsModel, ServerErrorResponse>> get() = _responseMonths
 
+    private val _responseUser: MutableLiveData<ViewModelResponse<UserModel, ServerErrorResponse>> = MutableLiveData()
+    val user: LiveData<ViewModelResponse<UserModel, ServerErrorResponse>> get() = _responseUser
+
     fun onGetFactorsExtractors() {
         viewModelScope.launch {
             val viewModelResponse = ViewModelResponse<FactorExtractorModel, ServerErrorResponse>()
@@ -47,6 +51,22 @@ class FactorExtractorViewModel(
                 )
             } catch (e: ServerErrorResponse) {
                 _responseExtractor.postValue(viewModelResponse.setError(e))
+            }
+        }
+    }
+
+    fun onGetUser() {
+        viewModelScope.launch {
+            val viewModelResponse = ViewModelResponse<UserModel, ServerErrorResponse>()
+            try {
+                _responseUser.postValue(viewModelResponse)
+                _responseUser.postValue(
+                    viewModelResponse.setData(
+                        repository.onGetProfile(token = token, verify = 1)
+                    )
+                )
+            } catch (e: ServerErrorResponse) {
+                _responseUser.postValue(viewModelResponse.setError(e))
             }
         }
     }

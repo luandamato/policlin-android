@@ -6,6 +6,8 @@ import kotlinx.parcelize.Parcelize
 data class FactorExtractorModel(
     val extratoCopart: ArrayList<FactorExtractorDetailModel> = arrayListOf(),
     val codAcao: Int = 0,
+    val valorTotalDep: String? = "",
+    val valorGeral: String? = "",
     val valorTotal: String? = "",
     val msgInterna: String = "",
     val msgExterna: String = "",

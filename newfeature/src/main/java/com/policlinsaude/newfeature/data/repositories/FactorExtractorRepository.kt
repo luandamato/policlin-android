@@ -1,5 +1,6 @@
 package com.policlinsaude.newfeature.data.repositories
 
+import com.policlinsaude.newfeature.data.models.UserModel
 import com.policlinsaude.newfeature.features.extractor.data.models.*
 
 interface FactorExtractorRepository {
@@ -9,5 +10,7 @@ interface FactorExtractorRepository {
     suspend fun onGetYearsExtractor(): FactorExtractorYearsModel
 
     suspend fun onGetMonthsExtractor(body: FactorExtractorMonthsBody): FactorExtractorMonthsModel
+
+    suspend fun onGetProfile(token: String, verify: Int): UserModel
 
 }
