@@ -2,6 +2,7 @@ package com.policlinsaude.newfeature.data.networking
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.policlinsaude.newfeature.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -20,7 +21,7 @@ class RetrofitInstance (
         private const val PLATFORM = "plataforma"
         private const val PLATFORM_ANDROID = "A"
         private const val VERSION = "versao"
-        private const val VERSION_ANDROID = "1.60.2"
+        private const val VERSION_ANDROID = BuildConfig.VERSION_NAME
     }
 
     fun <T> create(service: Class<T>, baseUrl: String = API_URL, interceptors: List<Interceptor> = emptyList(), certificate: List<String> = emptyList()): T {

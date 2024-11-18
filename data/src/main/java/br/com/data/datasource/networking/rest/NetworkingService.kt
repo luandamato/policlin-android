@@ -1,5 +1,6 @@
 package br.com.data.datasource.networking.rest
 
+import br.com.data.BuildConfig
 import br.com.data.datasource.networking.rest.model.*
 import br.com.data.di.NetworkingModule
 import br.com.data.helper.InvalidData
@@ -19,7 +20,7 @@ interface NetworkingService {
               @Field("firebaseToken") firebaseToken: String = InvalidData.UNINITIALIZED.getString(),
               @Header("verOS") osVersion: String = "13",
               @Header("plataforma") plataforma: String = "A",
-              @Header("versao") versao: String = "1.60.6"
+              @Header("versao") versao: String = BuildConfig.VERSION_NAME
     ): Flowable<JsonLoginResponse>
 
 
@@ -172,7 +173,7 @@ interface NetworkingService {
         @Field("token") token: String = InvalidData.UNINITIALIZED.getString(),
         @Header("verOS") osVersion: String = "13",
         @Header("plataforma") plataforma: String = "A",
-        @Header("versao") versao: String = "1.60.6"
+        @Header("versao") versao: String = BuildConfig.VERSION_NAME
     ): Flowable<UserConnected>
 
     @POST("")

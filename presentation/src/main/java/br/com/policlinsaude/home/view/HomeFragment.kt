@@ -250,6 +250,11 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
     }
 
     override fun showUserNotConnectedDialog(item: UserConnected) {
+        val sharedPreferences = context?.getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        editor?.putString("photosPref", "")
+        editor?.putString("photoVersoPref", "")
+        editor?.apply()
         (activity as MenuView).showUserNotConnectedDialog(item.msgExterna.orEmpty())
     }
 

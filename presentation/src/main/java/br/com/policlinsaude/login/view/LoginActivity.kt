@@ -2,6 +2,7 @@ package br.com.policlinsaude.login.view
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -71,6 +72,15 @@ class LoginActivity : BaseActivity(), LoginView {
     override fun onPersonNotFound() {
         addValidationFields()
         setOnClickListeners()
+        removeCarteirinha()
+    }
+
+    private fun removeCarteirinha() {
+        val sharedPreferences = getSharedPreferences("myPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("photosPref", "")
+        editor.putString("photoVersoPref", "")
+        editor.apply()
     }
 
     private fun addValidationFields() {

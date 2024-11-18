@@ -1,5 +1,6 @@
 package br.com.data.di
 
+import br.com.data.BuildConfig
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -24,7 +25,7 @@ class NetworkingModule {
         private const val PLATFORM = "plataforma"
         private const val PLATFORM_ANDROID = "A"
         private const val VERSION = "versao"
-        private const val VERSION_ANDROID = "1.60.4"
+        private const val VERSION_ANDROID = BuildConfig.VERSION_NAME
     }
 
 
