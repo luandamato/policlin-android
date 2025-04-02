@@ -16,7 +16,7 @@ ext {
     daggerVersion = '2.16'
     rxVersion = '2.1.9'
     rxkotlinVersion = '2.1.0'
-    kotlinVersion = '1.3.10'
+    kotlinVersion = '1.7.21'
     realmVersion = '10.4.0'
     rxAndroidVersion = "2.0.1"
     gradleVersion = "3.0.1"
@@ -27,12 +27,12 @@ ext {
     gsonVersion = '2.8.2'
     materialStepperVersion = '4.3.1'
     awesomeValidationVersion = '4.0'
-    pageIndicatorViewVersion = '1.0.0'
-    inputMaskVersion = '2.3.0'
+    pageIndicatorViewVersion = '1.0.3'
+    inputMaskVersion = '5.0.0'
     multidexVersion = '1.0.0'
     usefulviewsVersion = '2.3.6'
     circleImageViewVersion = '2.2.0'
-    flexBoxLayoutVersion = '0.3.2'
+    flexBoxLayoutVersion = '3.0.0'
     servicesVersion = '18.0.0'
     reactiveLocationVersion = '2.1@aar'
     dexterVersion = '4.2.0'
@@ -79,7 +79,7 @@ ext {
             gson                     : "com.google.code.gson:gson:$gsonVersion",
 
             circle_image_view        : "de.hdodenhof:circleimageview:$circleImageViewVersion",
-            flex_box_layout          : "com.google.android:flexbox:$flexBoxLayoutVersion",
+            flex_box_layout          : "com.google.android.flexbox:flexbox:$flexBoxLayoutVersion",
 
             google_location          : "com.google.android.gms:play-services-location:$servicesVersion",
             reactive_location        : "pl.charmas.android:android-reactive-location2:$reactiveLocationVersion",
