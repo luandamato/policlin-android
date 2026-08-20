@@ -22,7 +22,7 @@
 <!--    </queries>-->
 
     <application
-        android:name=".core.application.PoliclinSaudeApplication"
+        android:name="br.com.policlinsaude.AppDelegate"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
@@ -31,7 +31,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".login.view.LoginActivity"
+            android:name=".ui.activities.login.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden"
             android:exported="true">
@@ -41,54 +41,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".forgotPassword.view.ForgotPasswordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".notHasPassword.view.NotHasPasswordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".home.view.MenuActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".healthInsurancePhoto.view.HealthInsurancePhotoActivity"
-            android:label="@string/title_health_insurance"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".medicalGuideOptions.view.MedicalGuideOptionsActivity"
-            android:label="@string/title_medical_guide"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".medicalGuideList.view.MedicalGuideListActivity"
-            android:label="@string/title_medical_guide_list"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".medicalGuideDetails.view.MedicalGuideDetailsActivity"
-            android:label="@string/title_medical_guide_details"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ownNetwork.view.OwnNetworkActivity"
-            android:label="@string/title_own_network"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".favorites.view.FavoritesActivity"
-            android:label="@string/title_favorites"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".editPassword.view.EditPasswordActivity"
-            android:label="@string/title_edit_password"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".editPhone.view.EditPhoneActivity"
-            android:label="@string/title_edit_phone"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".map.view.MapsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".units.view.UnitsActivity"
-            android:label="@string/title_unities"
-            android:screenOrientation="portrait" />
+
+        <!-- TODO: All legacy activities below - rewrite using new architecture in ui/activities/{feature}/ -->
+        <!--
+        See deprecated/ folder for old implementations to reference while rewriting.
+        -->
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

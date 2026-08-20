@@ -1,0 +1,14 @@
+package br.com.policlinsaude.ui.legacy.healthInsurancePhoto.view
+
+import br.com.domain.model.HealthInsurancePhoto
+import br.com.domain.model.HealthInsurancePhotoList
+
+interface HealthInsurancePhotoView {
+    fun showLoading()
+    fun hideLoading()
+    //fun showImage(photo: String)
+    fun showImage(photoListFull: HealthInsurancePhotoList)
+    fun showDialogError(it: Throwable)
+    fun showImageVerse(photo: String?)
+    fun showWithoutNetworkDialog()
+}

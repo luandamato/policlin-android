@@ -76,6 +76,7 @@
     <string name="title_social_name">Razão Social</string>
     <string name="title_perfil">Perfil</string>
     <string name="title_delete_user">Excluir Cadastro</string>
+    <string name="delete_profile_title">Excluir Cadastro</string>
     <string name="title_preferences">Preferências</string>
     <string name="title_tutorial">Tutorial</string>
     <string name="title_unities">Unidades Policlin Saúde</string>

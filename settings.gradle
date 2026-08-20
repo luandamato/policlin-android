@@ -1,2 +1,1 @@
-include ':presentation', ':data', ':domain'
-include ':newfeature'
+include ':presentation'

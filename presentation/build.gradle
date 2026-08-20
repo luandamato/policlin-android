@@ -1,8 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-android-extensions'
-    id 'kotlin-kapt'
     id 'com.google.gms.google-services'
 }
 
@@ -11,8 +9,9 @@ HashMap<String, String> application = rootProject.ext.application
 HashMap<String, String> versions = rootProject.ext.versions
 
 android {
-    compileSdkVersion versions.compileSdk
+    compileSdk versions.compileSdk
     buildToolsVersion versions.buildTools
+    namespace "br.com.policlinsaude"
 
     signingConfigs {
         config {
@@ -27,11 +26,11 @@ android {
     }
 
     defaultConfig {
-        applicationId versions.applicationId
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
+        applicationId application.applicationId
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
         versionName application.versionName
-        versionCode versions.versionCode
+        versionCode application.versionCode
 
         multiDexEnabled true
 
@@ -59,69 +58,94 @@ android {
     productFlavors {}
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        viewBinding true
+        dataBinding true
     }
 }
 
-
-kapt {
-    generateStubs = true
-}
-
 dependencies {
-    api project(':domain')
-    api project(':data')
-    implementation project(":newfeature")
-    implementation baseDependencies.recycler_view
+    // Kotlin
     implementation baseDependencies.kotlin_std_lib
-    implementation baseDependencies.dagger2
-    implementation baseDependencies.dagger2_android_support
-    kapt baseDependencies.dagger2_compiler
-    kapt baseDependencies.dagger2_android_processor
-    implementation baseDependencies.rx_java
-    implementation baseDependencies.rx_android
-    implementation baseDependencies.rx_kotlin
+    implementation baseDependencies.coroutines
+    implementation baseDependencies.coroutines_android
+
+    // AndroidX & Material
     implementation baseDependencies.app_compat
     implementation baseDependencies.card_view
     implementation baseDependencies.constraint_layout
     implementation baseDependencies.support_design
     implementation baseDependencies.support_annotations
-    implementation baseDependencies.material_stepper
-    implementation baseDependencies.awesome_validation
-    implementation baseDependencies.page_indicator_view
-    implementation baseDependencies.input_mask
-    implementation baseDependencies.circle_image_view
-    implementation baseDependencies.flex_box_layout
-    implementation baseDependencies.google_location
-    implementation baseDependencies.reactive_location
-    implementation baseDependencies.dexter
-    implementation baseDependencies.easy_image
+    implementation baseDependencies.recycler_view
+    implementation baseDependencies.multidex
+
+    // Lifecycle & MVVM
+    implementation baseDependencies.lifecycle_runtime
+    implementation baseDependencies.lifecycle_viewmodel
+    implementation baseDependencies.lifecycle_livedata
+
+    // Navigation
+    implementation baseDependencies.navigation_fragment
+    implementation baseDependencies.navigation_ui
+
+    // Networking
+    implementation baseDependencies.retrofit
+    implementation baseDependencies.retrofit_adapter_rxjava
+    implementation baseDependencies.retrofit_converter_gson
+    implementation baseDependencies.logging_interceptor
+    implementation baseDependencies.gson
+
+    // Reactive
+    implementation baseDependencies.rx_java
+    implementation baseDependencies.rx_android
+    implementation baseDependencies.rx_kotlin
+
+    // Database
+//    implementation baseDependencies.room_runtime
+//    kapt baseDependencies.room_compiler
+//    implementation baseDependencies.room_ktx
+
+    // Image Loading
     implementation baseDependencies.glide
-    implementation baseDependencies.google_maps
-    annotationProcessor baseDependencies.glide_compiler
+    implementation baseDependencies.circle_image_view
+
+    // UI Libraries
+    implementation baseDependencies.flex_box_layout
+    implementation baseDependencies.awesome_validation
+
     implementation 'com.github.arcadefire:nice-spinner:1.3.1'
-    implementation baseDependencies.multidex
-    implementation baseDependencies.multidex
-    implementation 'com.google.code.gson:gson:2.8.2'
 
-    //Firebase
-    implementation platform('com.google.firebase:firebase-bom:30.0.1')
-    implementation 'com.google.firebase:firebase-messaging'
-    implementation 'com.google.firebase:firebase-analytics'
+    // Location & Maps
+    implementation baseDependencies.google_location
+    implementation baseDependencies.google_maps
 
-    //Koin
-    implementation "io.insert-koin:koin-android:$koin_version"
-    implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"
-    testImplementation "io.insert-koin:koin-test:$koin_version"
+    // Permissions
+    implementation baseDependencies.dexter
 
-    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+    // Image Picking
+    implementation baseDependencies.easy_image
 
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
+
+    // Testing
+    testImplementation baseDependencies.junit
+    testImplementation baseDependencies.mockito
+    testImplementation baseDependencies.mockito_kotlin
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
-
-
-
