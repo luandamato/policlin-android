@@ -1,0 +1,238 @@
+<resources>
+
+    <string name="app_name">Policlin Saúde</string>
+    <string name="string_empty"></string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+
+    <!-- TICKETS -->
+    <string name="ticket_filter">Filtro</string>
+    <string name="ticket_history_opened">Histórico dos boletos em aberto</string>
+    <string name="ticket_button_see_details">VER DETALHE</string>
+    <string name="ticket_value">Valor</string>
+    <string name="ticket_due">Vencimento</string>
+    <string name="ticket_paid">Pago</string>
+    <string name="ticket_open">Em Aberto</string>
+    <string name="ticket_year_month">Ano / Mês</string>
+    <string name="ticket_year">Ano</string>
+
+    <string name="ticket_detail_due">Vencimento %s</string>
+    <string name="ticket_details_copy_code">Código de barras copiado com sucesso</string>
+    <string name="ticket_detail_code_payment">Código de barra para pagamento:</string>
+    <string name="ticket_detail_button_copy_code">Copiar Código de Barras</string>
+    <string name="ticket_detail_see_document">Ver PDF</string>
+
+    <!-- ERROR -->
+    <string name="title_error_oops">Oops!</string>
+    <string name="text_ok">OK</string>
+
+    <!-- FACTOR EXTRACTOR -->
+    <string name="factor_extractor_select_month">Mês</string>
+    <string name="factor_extractor_select_year">Ano</string>
+    <string name="next">Próximo</string>
+    <string name="apply">Aplicar</string>
+    <string name="clean_filter">Limpar Filtro</string>
+    <string name="ticket_detail_copy_code">Código Copiado</string>
+    <string name="factor_extractor_filter">Filtrar</string>
+    <string name="factor_extractor_clean_filter">Limpar Filtro</string>
+    <string name="factor_extractor_empty_filter"><![CDATA[Por favor, selecione o <b>Ano</b> e <b>Mês</b> desejado]]></string>
+    <string name="select_all">Selecionar tudo</string>
+
+    <!-- GUIDE AUTHORIZER -->
+    <string name="title_activity_guide_authorizer">GuideAuthorizerActivity</string>
+    <string name="guide_authorizer">Autorizador de Guias</string>
+    <string name="guide_authorizer_request_exam">Solicitação de Exame e Procedimentos</string>
+    <string name="previous">Anterior</string>
+    <string name="guide_authorizer_new_request">Nova Solicitação</string>
+    <string name="guide_authorizer_send">Enviar Solicitação</string>
+    <string name="beneficiary_data">Dados do Beneficiário</string>
+    <string name="request_data">Dados da Solicitação</string>
+    <string name="text_input_email">Insira seu e-mail</string>
+    <string name="confirm">Confirmar</string>
+
+    <!--Delete Profile Activity Screen-->
+    <string name="delete_profile_title">Excluir Cadastro</string>
+    <string name="delete_profile_subtitle">Todos os dados do seu cadastro serão excluidos permanentemente.</string>
+    <string name="delete_profile_information">Ao clicar no botão excluir, seu cadastro no App Policlin Saúde e PIN-SS (Portal de Informação do Beneficiário de Saúde Suplementar) será excluído e você perderá acesso às funcionalidades após a exclusão.</string>
+    <string name="delete_profile_button">Excluir</string>
+    <string name="delete_profile_button_cancel">Não</string>
+    <string name="delete_profile_button_modal">Sim</string>
+    <string name="delete_profile_title_modal">Confirmar Exclusão</string>
+    <string name="delete_profile_modal_title"> Essa ação excluirá o seu cadastro no App  e PIN-SS, Deseja continuar?</string>
+    <string name="delete_profile_deleted">Cadastro excluído com sucesso!</string>
+    <string name="delete_profile_deleted_modal">Você poderá se cadastrar novamente caso permaneça como beneficiário.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Manifest Strings -->
+    <string name="title_health_insurance">Plano de Saúde</string>
+    <string name="title_medical_guide">Guia Médico</string>
+    <string name="title_medical_guide_list">Lista Guia Médico</string>
+    <string name="title_medical_guide_details">Detalhes Guia Médico</string>
+    <string name="title_own_network">Rede Própria</string>
+    <string name="title_favorites">Favoritos</string>
+    <string name="title_edit_password">Alterar Senha</string>
+    <string name="title_edit_phone">Alterar Telefone</string>
+    <string name="title_unities">Unidades</string>
+    <string name="maps_key">CHAVE_MAPS</string>
+
+    <!-- Missing Strings from layouts -->
+    <string name="title_new_password">Nova Senha</string>
+    <string name="title_confirm_password">Confirmar Senha</string>
+    <string name="text_send">Enviar</string>
+    <string name="text_new_phone">Novo Telefone</string>
+    <string name="msg_instruction_recover_password">Insira os dados para recuperar sua senha</string>
+    <string name="text_register">Registro</string>
+    <string name="text_order">Ordem</string>
+    <string name="action_recover_password">Recuperar Senha</string>
+    <string name="action_back">Voltar</string>
+    <string name="text_logoff">Sair</string>
+    <string name="title_client_area">Área do Cliente</string>
+    <string name="text_password">Senha</string>
+    <string name="action_forgot_password">Esqueci minha senha</string>
+    <string name="action_not_has_password">Não tenho senha</string>
+    <string name="global_enter">Entrar</string>
+    <string name="action_i_am_not_client">Não sou cliente</string>
+    <string name="msg_when_entering_you_allow">Ao entrar, você concorda com nossos termos</string>
+    <string name="text_plans">Planos</string>
+    <string name="text_plan">Plano</string>
+    <string name="text_city">Cidade</string>
+    <string name="text_speciality">Especialidade</string>
+
+    <!-- Missing resources reported in errors -->
+    <string name="text_sort_by_proximity">Ordenar por proximidade</string>
+    <string name="global_search">Buscar</string>
+    <string name="text_clean_fields">Limpar campos</string>
+    <string name="msg_welcome">Bem-vindo</string>
+    <string name="msg_choiche_bellow_options">Escolha uma das opções abaixo</string>
+    <string name="action_i_am_client">Sou cliente</string>
+    <string name="action_next">Próximo</string>
+    <string name="action_create">Criar</string>
+
+    <!-- UI Components -->
+    <string name="msg_information_about_icon_and_qualification">Informações sobre ícones e qualificações</string>
+    <string name="text_add_photo">Adicionar Foto</string>
+    <string name="msg_password_needs">Sua senha deve conter pelo menos 6 caracteres</string>
+    <string name="text_confirm_password">Confirmar Senha</string>
+    <string name="title_tutorial">Tutorial</string>
+    <string name="text_review_tutorial_screens">Rever telas de tutorial</string>
+    <string name="title_about">Sobre</string>
+    <string name="title_version">Versão</string>
+    <string name="title_privacy_policy">Política de Privacidade</string>
+    <string name="title_terms_of_use">Termos de Uso</string>
+    <string name="text_policlin_rights">© Policlin Saúde. Todos os direitos reservados.</string>
+    <string name="title_health_policlin">Policlin Saúde</string>
+    <string name="title_policlin_group">Grupo Policlin</string>
+    <string name="title_cib">CIB</string>
+    <string name="title_ombudsman">Ouvidoria</string>
+    <string name="title_contact_phones">Telefones de Contato</string>
+    <string name="title_abramge">Abramge</string>
+    <string name="title_ans">ANS</string>
+
+    <!-- Profile, Personal and Plan Data -->
+    <string name="msg_click_at_image">Clique na imagem para alterar</string>
+    <string name="msg_edit_register">Editar Cadastro</string>
+    <string name="text_name">Nome</string>
+    <string name="text_email">E-mail</string>
+    <string name="text_phone">Telefone</string>
+    <string name="text_password_placeholder">********</string>
+    <string name="text_cpf">CPF</string>
+    <string name="text_birthday">Data de Nascimento</string>
+    <string name="text_register_and_order">Registro / Ordem</string>
+    <string name="msg_personal_data_top">Dados Pessoais</string>
+    <string name="text_mothers_name">Nome da Mãe</string>
+    <string name="msg_mothers_name">Nome da Mãe</string>
+    <string name="text_confirm_email">Confirmar E-mail</string>
+    <string name="msg_confirm_email">Confirmar E-mail</string>
+    <string name="text_contract">Contrato</string>
+    <string name="text_accept_terms">Aceito os termos</string>
+    <string name="text_select_preferences">Selecione suas preferências</string>
+
+    <!-- Preferences -->
+    <string name="title_preferences">Preferências</string>
+    <string name="text_preferences_notifications">Notificações</string>
+    <string name="text_preferences_location">Localização</string>
+
+    <!-- Medical Guide / Lists -->
+    <string name="msg_more_details">Mais detalhes</string>
+    <string name="text_km">km</string>
+    <string name="msg_type_establishment">Tipo de Estabelecimento</string>
+
+    <!-- Filters -->
+    <string name="text_filters_advanced">Filtros avançados</string>
+    <string name="title_address">Endereço</string>
+    <string name="title_neighborhood">Bairro</string>
+    <string name="title_zipcode">CEP</string>
+    <string name="title_professional_class">Classe Profissional</string>
+    <string name="title_number_on_the_board">Número no Conselho</string>
+    <string name="title_prof_fantasy_company">Nome Fantasia / Empresa</string>
+    <string name="title_cnpj">CNPJ</string>
+    <string name="title_phones">Telefones</string>
+    <string name="title_speciality">Especialidade</string>
+    <string name="title_kind_of_service">Tipo de Serviço</string>
+    <string name="title_type_establishment_filter">Tipo de Estabelecimento</string>
+    <string name="title_qualifications">Qualificações</string>
+
+    <!-- Menu Strings -->
+    <string name="action_info">Informação</string>
+    <string name="title_home">Início</string>
+    <string name="title_perfil">Perfil</string>
+    <string name="title_information">Informações</string>
+    <string name="title_links">Links</string>
+    <string name="title_telefonecid">Telefones Úteis</string>
+    <string name="action_settings">Configurações</string>
+
+    <!-- Navigation Drawer -->
+    <string name="navigation_drawer_open">Abrir menu</string>
+    <string name="navigation_drawer_close">Fechar menu</string>
+
+    <!-- Dialogs and Success/Error Messages -->
+    <string name="title_success">Sucesso</string>
+    <string name="title_exit">Sair</string>
+    <string name="title_login">Login</string>
+    <string name="title_logoff">Sair</string>
+    <string name="text_field_required">Campo obrigatório</string>
+    <string name="text_email_sent">E-mail enviado com sucesso</string>
+    <string name="text_email_invalid">E-mail inválido</string>
+    <string name="text_phone_invalid">Telefone inválido</string>
+    <string name="text_image_pick_error">Erro ao selecionar imagem</string>
+    <string name="text_image_chooser_title">Selecionar Imagem</string>
+    <string name="text_permissions_needed">Permissões necessárias</string>
+    <string name="text_location_not_enabled">Localização não habilitada</string>
+    <string name="title_no_internet_connection">Sem conexão com a internet</string>
+    <string name="text_no_internet_favorites">Sem conexão para carregar favoritos</string>
+    <string name="text_edit_password_success">Senha alterada com sucesso</string>
+    <string name="text_edit_phone_success">Telefone alterado com sucesso</string>
+    <string name="text_avatar_change_success">Avatar alterado com sucesso</string>
+    <string name="msg_unexpected_error">Ocorreu um erro inesperado</string>
+    <string name="msg_error_unknown">Erro desconhecido</string>
+    <string name="action_try_again">Tentar novamente</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="global_yes">Sim</string>
+    <string name="text_guest">Visitante</string>
+    <string name="text_logoff_confirmation">Deseja realmente sair?</string>
+    <string name="text_exit_confirmation">Deseja sair do aplicativo?</string>
+    <string name="text_photo_needed">Foto necessária</string>
+    <string name="text_min_and_max_password">A senha deve ter entre 6 e 12 caracteres</string>
+    <string name="text_two_password_invalid">As senhas não coincidem</string>
+
+    <!-- Formatting Strings -->
+    <string name="text_date">%1$02d/%2$02d/%3$04d</string>
+    <string name="text_version">Versão %s</string>
+    <string name="text_register_and_order_number">Registro/Ordem: %1$s / %2$s</string>
+    <string name="text_person_home_title">Olá, %1$s\nPlano: %2$s</string>
+
+    <!-- URLs -->
+    <string name="url_policlin">https://www.policlinsaude.com.br</string>
+    <string name="url_cib">https://www.policlinsaude.com.br/cib</string>
+    <string name="url_ans">http://www.ans.gov.br</string>
+    <string name="url_abramge">https://www.abramge.com.br</string>
+    <string name="url_ombudsman">https://www.policlinsaude.com.br/ouvidoria</string>
+    <string name="url_contact_phones">https://www.policlinsaude.com.br/contato</string>
+    <string name="url_policlin_group">https://www.grupopoliclin.com.br</string>
+    <string name="url_privacy_policy">https://www.policlinsaude.com.br/politica-de-privacidade</string>
+    <string name="url_terms">https://www.policlinsaude.com.br/termos-de-uso</string>
+
+    <!-- Map Specific Strings -->
+    <string name="title_medical_guide_map">Mapa do Guia Médico</string>
+    <string name="title_own_network_map">Mapa da Rede Própria</string>
+
+</resources>

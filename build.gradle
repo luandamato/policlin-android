@@ -1,31 +1,10 @@
-buildscript {
-    apply from: 'configs.gradle'
+plugins {
+    id 'com.android.application' version '8.11.1' apply false
+    id 'com.android.library' version '8.11.1' apply false
 
-    repositories {
-        google()
-        jcenter()
-        maven { url "https://jitpack.io" }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.1'
-        classpath "io.realm:realm-gradle-plugin:$realmVersion"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
-        classpath 'com.google.gms:google-services:4.3.10'
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
-    }
-}
+    id 'org.jetbrains.kotlin.android' version '2.2.21' apply false
+    id 'org.jetbrains.kotlin.kapt' version '2.2.21' apply false
 
-allprojects {
-    repositories {
-        google()
-        jcenter()
-        maven { url "https://jitpack.io" }
-        maven {
-            url "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
+    id 'com.google.gms.google-services' version '4.4.2' apply false
+    id 'com.google.firebase.crashlytics' version '3.0.3' apply false
 }
