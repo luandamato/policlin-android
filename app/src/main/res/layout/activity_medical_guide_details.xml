@@ -11,7 +11,9 @@
         android:background="@color/white_2"
         android:orientation="vertical">
 
-        <include layout="@layout/toolbar" />
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
         <FrameLayout
             android:layout_width="match_parent"

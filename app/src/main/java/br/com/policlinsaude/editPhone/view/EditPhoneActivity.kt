@@ -45,11 +45,21 @@ class EditPhoneActivity : BaseActivity(), EditPhoneView {
     }
 
     private fun setMasks() {
-        MaskUtils.applyMaskToView(MaskUtils.PHONE, binding.phoneTextView, object : MaskedTextChangedListener.ValueListener {
-            override fun onTextChanged(maskFilled: Boolean, extractedValue: String) {
-                phone = extractedValue
+        MaskUtils.applyMaskToView(
+            MaskUtils.PHONE,
+            binding.phoneTextView,
+            object : MaskedTextChangedListener.ValueListener {
+
+                override fun onTextChanged(
+                    maskFilled: Boolean,
+                    extractedValue: String,
+                    formattedValue: String,
+                    tailPlaceholder: String
+                ) {
+                    phone = extractedValue
+                }
             }
-        })
+        )
     }
 
     override fun closeView() {

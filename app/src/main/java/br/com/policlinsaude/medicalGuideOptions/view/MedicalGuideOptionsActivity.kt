@@ -145,7 +145,7 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
         showMedicalGuideOptions(PresentationMedicalGuideOptions(), null)
         presenter.getLocationPreference()
 
-        setupToolbar()
+        setupToolbar(binding.toolbar.toolbar)
         setOnClickListeners()
     }
 

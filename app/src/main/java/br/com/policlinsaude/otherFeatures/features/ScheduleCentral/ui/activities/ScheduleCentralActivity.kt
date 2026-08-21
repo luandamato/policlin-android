@@ -6,8 +6,8 @@ import android.widget.TextView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.ActivityScheduleCentralBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.ActivityScheduleCentralBinding
 
 class ScheduleCentralActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScheduleCentralBinding

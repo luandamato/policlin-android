@@ -52,17 +52,37 @@ class PersonalDataFragment : BaseFragment() {
     }
 
     private fun addMaskToFields() {
-        MaskUtils.applyMaskToView(MaskUtils.PHONE, binding.editTextPhone, object : MaskedTextChangedListener.ValueListener {
-            override fun onTextChanged(maskFilled: Boolean, extractedValue: String) {
-                phone = extractedValue
-            }
-        })
+        MaskUtils.applyMaskToView(
+            MaskUtils.PHONE,
+            binding.editTextPhone,
+            object : MaskedTextChangedListener.ValueListener {
 
-        MaskUtils.applyMaskToView(MaskUtils.CPF, binding.editTextCpf, object : MaskedTextChangedListener.ValueListener {
-            override fun onTextChanged(maskFilled: Boolean, extractedValue: String) {
-                cpf = extractedValue
+                override fun onTextChanged(
+                    maskFilled: Boolean,
+                    extractedValue: String,
+                    formattedValue: String,
+                    tailPlaceholder: String
+                ) {
+                    phone = extractedValue
+                }
             }
-        })
+        )
+
+        MaskUtils.applyMaskToView(
+            MaskUtils.CPF,
+            binding.editTextCpf,
+            object : MaskedTextChangedListener.ValueListener {
+
+                override fun onTextChanged(
+                    maskFilled: Boolean,
+                    extractedValue: String,
+                    formattedValue: String,
+                    tailPlaceholder: String
+                ) {
+                    phone = extractedValue
+                }
+            }
+        )
 
         MaskUtils.applyMaskToView(MaskUtils.DATE, binding.editTextBirthday, null)
     }

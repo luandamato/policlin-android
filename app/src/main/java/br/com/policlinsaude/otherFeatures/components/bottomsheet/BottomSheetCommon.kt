@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.BottomSheetCommonBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.BottomSheetCommonBinding
 
 class BottomSheetCommon(
     val title: String = "",

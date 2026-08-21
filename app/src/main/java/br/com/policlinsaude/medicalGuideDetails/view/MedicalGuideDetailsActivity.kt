@@ -80,7 +80,7 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
        execGetFavorites()
 
-        setupToolbar(binding.toolbar)
+        setupToolbar(binding.toolbar.toolbar)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager =
             LinearLayoutManager(this)

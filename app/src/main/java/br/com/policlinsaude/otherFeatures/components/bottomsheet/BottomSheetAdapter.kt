@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.BottomSheetItemBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.BottomSheetItemBinding
 
 class BottomSheetAdapter (
     private val context: Context,

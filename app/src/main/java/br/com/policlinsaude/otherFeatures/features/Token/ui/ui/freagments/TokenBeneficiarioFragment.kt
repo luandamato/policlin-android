@@ -7,20 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.policlinsaude.newfeature.R
+import br.com.policlinsaude.databinding.FragmentTokenBeneficiarioBinding
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentTokenBeneficiarioBinding
 import com.policlinsaude.newfeature.features.Token.models.BeneficiarioModel
 import com.policlinsaude.newfeature.features.Token.ui.TokenActivity
 import com.policlinsaude.newfeature.features.Token.ui.TokenViewModel
 import com.policlinsaude.newfeature.features.Token.ui.adapters.DependetAdapter
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
+
 class TokenBeneficiarioFragment : Fragment() {
     private lateinit var binding: FragmentTokenBeneficiarioBinding
     private val adapter by lazy { DependetAdapter() }
 
-    private val viewModel by sharedViewModel<TokenViewModel>()
+    private val viewModel by sharedViewModel<TokenViewModel>(owner = { requireActivity() })
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentTokenBeneficiarioBinding.inflate(inflater, container, false)

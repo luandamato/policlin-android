@@ -154,7 +154,7 @@
     <!-- Medical Guide / Lists -->
     <string name="msg_more_details">Mais detalhes</string>
     <string name="text_km">km</string>
-    <string name="msg_type_establishment">Tipo de Estabelecimento</string>
+    <string name="msg_type_establishment">Tipo de Estabelecimento: %s</string>
 
     <!-- Filters -->
     <string name="text_filters_advanced">Filtros avançados</string>
@@ -234,6 +234,7 @@
     <!-- Map Specific Strings -->
     <string name="title_medical_guide_map">Mapa do Guia Médico</string>
     <string name="title_own_network_map">Mapa da Rede Própria</string>
+    <string name="title_permissions_needed">Conceda as permissões para continuar</string>
 
     <!-- MIGRATED / MISSING STRINGS -->
     <string name="title_advise">Aviso</string>
@@ -267,5 +268,8 @@
     <string name="text_two_email_invalid">Os e-mails não coincidem</string>
     <string name="text_date_invalid">Data inválida</string>
     <string name="text_must_accept_terms">Você deve aceitar os termos de uso</string>
+
+    <string name="msg_speciality">Especialidade: %s</string>
+    <string name="msg_address_format">Endereço: %s, %s, %s, %s, %s, %s, %s</string>
 
 </resources>

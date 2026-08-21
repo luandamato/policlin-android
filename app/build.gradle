@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId 'br.com.policlinsaude'
 
-        minSdk 23
+        minSdk 24
         targetSdk 35
 
         versionCode 61
@@ -233,7 +233,7 @@ dependencies {
     // KOIN
     // ============================================================
 
-    implementation 'io.insert-koin:koin-android:4.1.0'
+    implementation 'io.insert-koin:koin-android:3.4.0'
 
 
     // ============================================================
@@ -251,15 +251,14 @@ dependencies {
     // ============================================================
 
     implementation 'com.basgeekball:awesome-validation:4.3'
-    implementation 'com.redmadrobot:input-mask-android:7.2.4'
+    implementation 'com.redmadrobot:input-mask-android:7.2.6'
 
 
     // ============================================================
     // CIRCULAR IMAGE VIEW
     // ============================================================
 
-    implementation 'com.mikhaellopez:circularimageview:4.3.1'
-
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     // ============================================================
     // OUTRAS BIBLIOTECAS EXISTENTES

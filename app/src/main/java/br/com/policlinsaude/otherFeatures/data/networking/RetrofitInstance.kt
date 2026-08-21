@@ -1,8 +1,8 @@
 package com.policlinsaude.newfeature.data.networking
 
+import androidx.multidex.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.policlinsaude.newfeature.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

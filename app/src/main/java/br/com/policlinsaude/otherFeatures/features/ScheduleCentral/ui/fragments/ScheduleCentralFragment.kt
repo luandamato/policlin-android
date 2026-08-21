@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import br.com.policlinsaude.databinding.FragmentScheduleCentralBinding
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentScheduleCentralBinding
 import com.policlinsaude.newfeature.features.ScheduleCentral.ui.activities.ScheduleCentralActivity
 import com.policlinsaude.newfeature.features.incometax.ui.viewmodels.ScheduleCentralViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -78,6 +78,8 @@ class ScheduleCentralFragment : Fragment() {
                             }
                         }
                     }
+
+                    else -> {}
                 }
             }
         }
