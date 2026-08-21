@@ -235,4 +235,37 @@
     <string name="title_medical_guide_map">Mapa do Guia Médico</string>
     <string name="title_own_network_map">Mapa da Rede Própria</string>
 
+    <!-- MIGRATED / MISSING STRINGS -->
+    <string name="title_advise">Aviso</string>
+    <string name="text_no_internet_short">Sem internet</string>
+    <string name="text_no_internet_no_photo">Sem conexão para carregar foto</string>
+    <string name="text_login">Login</string>
+    <string name="title_delete_user">Excluir Usuário</string>
+    <string name="url_privacy">https://www.policlinsaude.com.br/politica-de-privacidade</string>
+    <string name="text_nothing_to_show">Corrigir texto migração</string>
+    <string name="text_favorite_success">Adicionado aos favoritos</string>
+    <string name="text_remove_favorite_success">Removido dos favoritos</string>
+    <string name="text_no_internet">Sem conexão com a internet</string>
+    <string name="title_social_name">Razão Social</string>
+    <string name="title_type_establishment">Tipo de Estabelecimento</string>
+    <string name="msg_address_details_format">%1$s, %2$s - %3$s</string>
+    <string name="title_city">Cidade</string>
+    <string name="msg_city_details_format">%1$s - %2$s</string>
+    <string name="text_empty_medical_guide">Nenhum estabelecimento encontrado para os filtros selecionados.</string>
+    <string name="url_custom_infos">https://www.policlinsaude.com.br</string>
+    <string name="msg_information_about_icon_and_qualification_and_link">Informações sobre ícones e qualificações. Clique aqui para saber mais.</string>
+    <string name="text_distance">Distância: %.2f km</string>
+    <string name="text_select">Selecionar</string>
+    <string name="text_location_missing_gps_off">O GPS está desligado. Por favor, habilite-o.</string>
+    <string name="text_location_missing_error">Não foi possível obter sua localização.</string>
+    <string name="text_few_options">Você selecionou poucos filtros. A busca pode demorar ou retornar muitos resultados. Deseja continuar?</string>
+    <string name="title_few_options">Poucos Filtros</string>
+    <string name="title_personal_data">Dados Pessoais</string>
+    <string name="title_plan_data">Dados do Plano</string>
+    <string name="title_create_password">Criar Senha</string>
+    <string name="text_cpf_invalid">CPF inválido</string>
+    <string name="text_two_email_invalid">Os e-mails não coincidem</string>
+    <string name="text_date_invalid">Data inválida</string>
+    <string name="text_must_accept_terms">Você deve aceitar os termos de uso</string>
+
 </resources>
