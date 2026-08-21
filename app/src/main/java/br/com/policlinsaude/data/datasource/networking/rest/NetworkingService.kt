@@ -1,14 +1,15 @@
-package br.com.data.datasource.networking.rest
+package br.com.policlinsaude.data.datasource.networking.rest
 
-import br.com.data.BuildConfig
-import br.com.data.datasource.networking.rest.model.*
-import br.com.data.di.NetworkingModule
-import br.com.data.helper.InvalidData
+import androidx.multidex.BuildConfig
+import br.com.policlinsaude.data.datasource.networking.rest.model.*
+import br.com.policlinsaude.data.di.NetworkingModule
+import br.com.policlinsaude.data.helper.InvalidData
 import br.com.policlinsaude.domain.model.UserConnected
 import br.com.policlinsaude.domain.model.ValidateButtonBody
 import br.com.policlinsaude.domain.model.ValidateButtons
 import io.reactivex.Flowable
 import retrofit2.http.*
+import android.os.Build
 
 interface NetworkingService {
 
@@ -18,7 +19,7 @@ interface NetworkingService {
               @Field("ordem") order: String = InvalidData.UNINITIALIZED.getString(),
               @Field("senha") password: String = InvalidData.UNINITIALIZED.getString(),
               @Field("firebaseToken") firebaseToken: String = InvalidData.UNINITIALIZED.getString(),
-              @Header("verOS") osVersion: String = "13",
+              @Header("verOS") osVersion: String = Build.VERSION.RELEASE,
               @Header("plataforma") plataforma: String = "A",
               @Header("versao") versao: String = BuildConfig.VERSION_NAME
     ): Flowable<JsonLoginResponse>
@@ -171,7 +172,7 @@ interface NetworkingService {
         @Field("matricula") registration: String,
         @Field("ordem") order: String,
         @Field("token") token: String = InvalidData.UNINITIALIZED.getString(),
-        @Header("verOS") osVersion: String = "13",
+        @Header("verOS") osVersion: String = Build.VERSION.RELEASE,
         @Header("plataforma") plataforma: String = "A",
         @Header("versao") versao: String = BuildConfig.VERSION_NAME
     ): Flowable<UserConnected>

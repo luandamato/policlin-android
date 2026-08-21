@@ -1,8 +1,8 @@
-package br.com.data.datasource.networking.rest.mapper
+package br.com.policlinsaude.data.datasource.networking.rest.mapper
 
 import android.util.Log
-import br.com.data.datasource.networking.rest.model.JsonOwnNetworkResponse
-import br.com.data.datasource.networking.rest.model.JsonUnitsResponse
+import br.com.policlinsaude.data.datasource.networking.rest.model.JsonOwnNetworkResponse
+import br.com.policlinsaude.data.datasource.networking.rest.model.JsonUnitsResponse
 import br.com.policlinsaude.domain.model.Establishment
 import br.com.policlinsaude.domain.model.OwnNetworkList
 import br.com.policlinsaude.domain.model.UnitsList

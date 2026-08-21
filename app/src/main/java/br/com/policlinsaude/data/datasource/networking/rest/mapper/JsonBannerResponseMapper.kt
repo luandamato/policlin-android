@@ -1,8 +1,8 @@
-package br.com.data.datasource.networking.rest.mapper
+package br.com.policlinsaude.data.datasource.networking.rest.mapper
 
-import br.com.data.datasource.networking.rest.model.JsonBannerResponse
-import br.com.data.datasource.networking.rest.model.JsonGetBannersResponse
-import br.com.data.helper.InvalidData
+import br.com.policlinsaude.data.datasource.networking.rest.model.JsonBannerResponse
+import br.com.policlinsaude.data.datasource.networking.rest.model.JsonGetBannersResponse
+import br.com.policlinsaude.data.helper.InvalidData
 import br.com.policlinsaude.domain.model.Banner
 
 object JsonBannerResponseMapper {

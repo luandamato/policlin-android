@@ -1,7 +1,7 @@
-package br.com.data.datasource.networking.rest.mapper
+package br.com.policlinsaude.data.datasource.networking.rest.mapper
 
-import br.com.data.datasource.networking.rest.model.JsonRegisterPasswordBody
-import br.com.data.helper.DateHelper
+import br.com.policlinsaude.data.datasource.networking.rest.model.JsonRegisterPasswordBody
+import br.com.policlinsaude.data.helper.DateHelper
 import br.com.policlinsaude.domain.model.Person
 import br.com.policlinsaude.domain.model.Plan
 
@@ -17,7 +17,7 @@ object RegisterPasswordMapper {
         json.cpf = person.cpf
         json.contract = plan.contract
         json.email = person.email
-        json.name = person.name.toUpperCase()
+        json.name = person.name.uppercase()
         json.codeAreaPhone = person.getCodeArea()
         json.phone = person.getPhoneWithoutCodeArea()
         json.validationRegistration = DateHelper.getStringFromDate(DateHelper.FORMAT_DATE_YYYYMMDD, plan.validationRegister)

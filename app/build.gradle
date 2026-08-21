@@ -246,6 +246,13 @@ dependencies {
 
     implementation 'com.github.romandanylyk:PageIndicatorView:1.0.1'
 
+    // ============================================================
+    // VALIDATION
+    // ============================================================
+
+    implementation 'com.basgeekball:awesome-validation:4.3'
+    implementation 'com.redmadrobot:input-mask-android:7.2.4'
+
 
     // ============================================================
     // CIRCULAR IMAGE VIEW

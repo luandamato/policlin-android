@@ -1,11 +1,11 @@
-package br.com.data.datasource.networking
+package br.com.policlinsaude.data.datasource.networking
 
 import android.os.Build
 import android.util.Log
-import br.com.data.datasource.networking.rest.NetworkingService
-import br.com.data.datasource.networking.rest.mapper.*
-import br.com.data.datasource.networking.rest.model.JsonUnitsResponse
-import br.com.data.helper.DateHelper
+import br.com.policlinsaude.data.datasource.networking.rest.NetworkingService
+import br.com.policlinsaude.data.datasource.networking.rest.mapper.*
+import br.com.policlinsaude.data.datasource.networking.rest.model.JsonUnitsResponse
+import br.com.policlinsaude.data.helper.DateHelper
 import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.domain.model.*
 import io.reactivex.Completable

@@ -22,6 +22,12 @@ object MaskUtils {
     }
 
     fun applyMaskToString(mask: String, text: String): String {
-        return Mask(mask).apply(CaretString(text, text.length), false).formattedText.string
+        return Mask(mask).apply(
+            CaretString(
+                string = text,
+                caretPosition = text.length,
+                caretGravity = CaretString.CaretGravity.FORWARD(false)
+            )
+        ).formattedText.string
     }
 }

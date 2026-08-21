@@ -4,47 +4,43 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.LocationManager
 import br.com.policlinsaude.medicalGuideOptions.presenter.model.PresentationLocation
-import com.google.android.gms.location.LocationRequest
 import io.reactivex.Single
-import pl.charmas.android.reactivelocation2.ReactiveLocationProvider
 import java.util.concurrent.TimeUnit
+import com.google.android.gms.location.LocationServices
 
 
 /**
  * Created by lmiyagi on 3/23/18.
  */
 object LocationHelper {
-
     const val DEFAULT_STATIC_MAP_HEIGHT = 150
     const val DEFAULT_STATIC_MAP_WIDTH = 600
     const val DEFAULT_STATIC_ZOOM = 0.1
 
     @SuppressLint("MissingPermission")
     fun getCurrentLocation(context: Context): Single<PresentationLocation> {
-    /*    if (!isGPSEnabled(context)) {
-            return Single.error(LocationNotEnabledException())
-        }*/
+        val client = LocationServices.getFusedLocationProviderClient(context)
 
-        val request = LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setMaxWaitTime(10)
-                .setNumUpdates(1)
-                .setInterval(1000)
-
-        val latitude =  "-23.1963833".toDouble()
-        val longitude = "-45.8959785".toDouble()
-
-
-        val locationProvider = ReactiveLocationProvider(context)
-        return locationProvider.getUpdatedLocation(request)
-                .timeout(10, TimeUnit.SECONDS)
-                .firstOrError()
-                .map {
-                    PresentationLocation(it.latitude, it.longitude)
-                   // PresentationLocation(latitude, longitude)
+        return Single.create { emitter ->
+            client.lastLocation
+                .addOnSuccessListener { location ->
+                    if (location != null) {
+                        emitter.onSuccess(
+                            PresentationLocation(
+                                location.latitude,
+                                location.longitude
+                            )
+                        )
+                    } else {
+                        emitter.onError(
+                            LocationNotEnabledException()
+                        )
+                    }
                 }
-
-
+                .addOnFailureListener { error ->
+                    emitter.onError(error)
+                }
+        }
     }
 
     private fun isGPSEnabled(context: Context): Boolean {

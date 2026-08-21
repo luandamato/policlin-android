@@ -3,7 +3,7 @@ package br.com.policlinsaude.data
 import br.com.policlinsaude.data.datasource.networking.NetworkingDatasource
 import br.com.policlinsaude.data.datasource.preferences.PreferencesDatasource
 import br.com.policlinsaude.domain.AppConstants
-import br.com.policlinsaude.model.*
+import br.com.policlinsaude.domain.model.*
 import br.com.policlinsaude.domain.repository.Repository
 import br.com.policlinsaude.domain.model.Person
 import br.com.policlinsaude.domain.model.Plan

@@ -1,8 +1,8 @@
-package br.com.data.datasource.networking.rest.mapper
+package br.com.policlinsaude.data.datasource.networking.rest.mapper
 
 import android.util.Log
-import br.com.data.datasource.networking.rest.model.*
-import br.com.data.helper.InvalidData
+import br.com.policlinsaude.data.datasource.networking.rest.model.*
+import br.com.policlinsaude.data.helper.InvalidData
 import br.com.policlinsaude.domain.model.*
 
 object JsonMedicalGuideListResponseMapper {

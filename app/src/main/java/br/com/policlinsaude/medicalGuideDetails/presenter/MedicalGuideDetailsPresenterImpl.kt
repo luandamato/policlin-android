@@ -2,8 +2,8 @@ package br.com.policlinsaude.medicalGuideDetails.presenter
 
 import android.content.Context
 import android.util.Log
-import br.com.data.datasource.networking.CheckInternetConnection
-import br.com.data.exception.PreferenceNotFoundException
+import br.com.policlinsaude.data.datasource.networking.CheckInternetConnection
+import br.com.policlinsaude.data.exception.PreferenceNotFoundException
 import br.com.policlinsaude.domain.usecase.AddToFavoriteUseCase
 import br.com.policlinsaude.domain.usecase.GetPlansUseCase
 import br.com.policlinsaude.domain.usecase.RemoveFromFavoritesUseCase

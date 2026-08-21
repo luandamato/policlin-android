@@ -1,8 +1,8 @@
-package br.com.data.datasource.networking.rest.mapper
+package br.com.policlinsaude.data.datasource.networking.rest.mapper
 
-import br.com.data.datasource.networking.rest.model.JsonMedicalGuidePlanResponse
-import br.com.data.datasource.networking.rest.model.JsonMedicalGuidePlansResponse
-import br.com.data.helper.InvalidData
+import br.com.policlinsaude.data.datasource.networking.rest.model.JsonMedicalGuidePlanResponse
+import br.com.policlinsaude.data.datasource.networking.rest.model.JsonMedicalGuidePlansResponse
+import br.com.policlinsaude.data.helper.InvalidData
 import br.com.policlinsaude.domain.model.MedicalGuidePlan
 
 /**

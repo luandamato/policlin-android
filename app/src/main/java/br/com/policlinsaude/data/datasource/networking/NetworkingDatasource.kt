@@ -1,4 +1,4 @@
-package br.com.data.datasource.networking
+package br.com.policlinsaude.data.datasource.networking
 
 import br.com.policlinsaude.domain.model.*
 import io.reactivex.Completable

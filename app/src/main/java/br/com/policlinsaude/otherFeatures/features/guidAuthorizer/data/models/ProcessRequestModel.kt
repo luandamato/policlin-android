@@ -2,7 +2,6 @@ package com.policlinsaude.newfeature.features.guidAuthorizer.data.models
 
 import android.graphics.Bitmap
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 import java.io.File
 import java.util.Base64
 
@@ -26,7 +25,6 @@ data class ProcessRequestItemModel(
     var cidadeAtendimento: String = "",
 )
 
-@Parcelize
 data class ProcessRequestPhotosModel(
     val token: String = "",
     val numeroWEB: String = "",
@@ -35,15 +33,14 @@ data class ProcessRequestPhotosModel(
     val perguntaID: Int? = null,
     val extensao: String = "",
     //val sdtAutAnexo: ProcessRequestPhotosItemModel = ProcessRequestPhotosItemModel()
-) : Parcelable
+)
 
-@Parcelize
 data class ProcessRequestPhotosItemModel(
     val arquivo: String? = null,
     val observacao: String? = "",
     val perguntaID: Int? = null,
     val extensao: String = "",
-): Parcelable
+)
 
 data class ProcessResponsePhotosModel(
     val codAcao: Int = -1,
@@ -51,10 +48,9 @@ data class ProcessResponsePhotosModel(
     val msgInterna: String = ""
 )
 
-@Parcelize
 data class PictureSave(
     val bitmap: Bitmap? = null,
     val format: String = "",
     val base64: String? = "",
     val file: File? = null
-): Parcelable
+)

@@ -1,14 +1,14 @@
 package br.com.policlinsaude.core.base
 
 import android.os.Bundle
-import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
-import br.com.policlinsaude.core.application.PoliclinSaudeApplication
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import br.com.policlinsaude.core.helper.DialogHelper
 import br.com.policlinsaude.core.helper.InvalidData
 import com.basgeekball.awesomevalidation.AwesomeValidation
@@ -16,57 +16,76 @@ import com.basgeekball.awesomevalidation.ValidationStyle
 import com.google.firebase.FirebaseApp
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
-import kotlinx.android.synthetic.main.toolbar.*
-import java.lang.Exception
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 
-abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
+abstract class BaseActivity : AppCompatActivity(), HasAndroidInjector {
 
     lateinit var awesomeValidation: AwesomeValidation
 
+    private lateinit var androidInjector: DispatchingAndroidInjector<Any>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         performDependencyInjection()
-        awesomeValidation = AwesomeValidation(ValidationStyle.BASIC)
-        FirebaseApp.initializeApp(this);
+
         super.onCreate(savedInstanceState)
+
+        awesomeValidation = AwesomeValidation(ValidationStyle.BASIC)
+
+        FirebaseApp.initializeApp(this)
     }
 
     private fun performDependencyInjection() {
         AndroidInjection.inject(this)
     }
 
-    fun setupToolbar(){
+    override fun androidInjector(): AndroidInjector<Any> {
+        return androidInjector
+    }
+
+    protected fun setupToolbar(toolbar: Toolbar) {
         setSupportActionBar(toolbar)
-        supportActionBar?.let {
-            with(it){
-                setDisplayHomeAsUpEnabled(true)
-                setHomeButtonEnabled(true)
-            }
+
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
         }
 
         try {
-            (toolbar.getChildAt(0) as TextView).textSize = 14f
-        } catch (e: Exception) {}
+            (toolbar.getChildAt(0) as? TextView)?.textSize = 14f
+        } catch (e: Exception) {
+            Log.w(
+                "BaseActivity",
+                "Não foi possível configurar o tamanho do título",
+                e
+            )
+        }
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        item?.let {
-            when (item.itemId) {
-                android.R.id.home -> {
-                    onBackPressed()
-                    Log.d("FILTRO", "BACKPRESSED: onBackPressed()")
-                    return true
-                }else -> {}
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                Log.d(
+                    "BaseActivity",
+                    "BACKPRESSED: OnBackPressedDispatcher"
+                )
+                true
             }
+
+            else -> super.onOptionsItemSelected(item)
         }
-        return super.onOptionsItemSelected(item)
     }
 
-    fun showDialogTryAgain(listenerPositiveButton: ()-> Unit,
-                     message: String = InvalidData.UNINITIALIZED.getString()){
-        DialogHelper.showDialogTryAgain(context = this,
-                listenerPositiveButton = listenerPositiveButton, message = message)
+    fun showDialogTryAgain(
+        listenerPositiveButton: () -> Unit,
+        message: String = InvalidData.UNINITIALIZED.getString()
+    ) {
+        DialogHelper.showDialogTryAgain(
+            context = this,
+            listenerPositiveButton = listenerPositiveButton,
+            message = message
+        )
     }
 
     fun showDialogUpdateApp(
@@ -74,7 +93,7 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
     ) {
         DialogHelper.showUpdateDialog(
             context = this,
-            message = message,
+            message = message
         )
     }
 
@@ -82,11 +101,9 @@ abstract class BaseActivity : AppCompatActivity(), HasSupportFragmentInjector {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    fun showError(message: String = InvalidData.UNINITIALIZED.getString()) {
+    fun showError(
+        message: String = InvalidData.UNINITIALIZED.getString()
+    ) {
         DialogHelper.showErrorDialog(this, message)
     }
-
-    override fun supportFragmentInjector(): AndroidInjector<Fragment>
-            = (application as PoliclinSaudeApplication).fragmentInjector
-
 }

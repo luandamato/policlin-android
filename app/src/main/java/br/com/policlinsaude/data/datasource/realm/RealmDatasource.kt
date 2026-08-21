@@ -1,4 +1,4 @@
-package br.com.data.datasource.realm
+package br.com.policlinsaude.data.datasource.realm
 
 import br.com.policlinsaude.domain.model.Person
 import io.reactivex.Completable

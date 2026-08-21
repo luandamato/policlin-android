@@ -1,4 +1,4 @@
-package br.com.data.datasource.networking.rest.model
+package br.com.policlinsaude.data.datasource.networking.rest.model
 
 import com.google.gson.annotations.SerializedName
 

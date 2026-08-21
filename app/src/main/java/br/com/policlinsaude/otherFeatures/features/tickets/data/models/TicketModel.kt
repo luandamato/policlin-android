@@ -1,7 +1,6 @@
 package com.policlinsaude.newfeature.features.tickets.data.models
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 
 data class TicketModel(
     val sdtBoleto: ArrayList<TicketDetail> = arrayListOf(),
@@ -10,7 +9,6 @@ data class TicketModel(
     val msgExterna: String? = null,
 )
 
-@Parcelize
 data class TicketDetail(
     val nossoNumero: String? = null,
     val vencimento: String? = null,
@@ -18,4 +16,4 @@ data class TicketDetail(
     val linhaDigitavel: String? = null,
     val link: String? = null,
     val valor: String? = null
-): Parcelable
+)

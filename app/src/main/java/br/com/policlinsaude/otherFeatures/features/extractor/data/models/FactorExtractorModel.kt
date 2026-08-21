@@ -1,7 +1,6 @@
 package com.policlinsaude.newfeature.features.extractor.data.models
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 
 data class FactorExtractorModel(
     val extratoCopart: ArrayList<FactorExtractorDetailModel> = arrayListOf(),
@@ -19,7 +18,6 @@ data class FactorExtractorDetailModel(
     val itens: ArrayList<FactorExtractorDetailItemsModel> = arrayListOf(),
 )
 
-@Parcelize
 data class FactorExtractorDetailItemsModel(
     val tabela: Int = 0,
     val codigo: String = "",
@@ -28,4 +26,4 @@ data class FactorExtractorDetailItemsModel(
     val valor: String = "",
     val copartCod: Int = 0,
     val copartDes: String
-): Parcelable
+)

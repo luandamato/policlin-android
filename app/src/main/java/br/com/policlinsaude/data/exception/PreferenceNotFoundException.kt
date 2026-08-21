@@ -1,4 +1,4 @@
-package br.com.data.exception
+package br.com.policlinsaude.data.exception
 
 /**
  * Created by lmiyagi on 3/23/18.

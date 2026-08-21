@@ -1,8 +1,8 @@
 package br.com.policlinsaude.core.di
 
 import android.app.Application
-import br.com.data.di.DataModule
-import br.com.data.di.NetworkingModule
+import br.com.policlinsaude.data.di.DataModule
+import br.com.policlinsaude.data.di.NetworkingModule
 import br.com.policlinsaude.core.application.PoliclinSaudeApplication
 import dagger.BindsInstance
 import dagger.Component

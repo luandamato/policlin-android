@@ -1,6 +1,6 @@
-package br.com.data.datasource.networking.rest.model
+package br.com.policlinsaude.data.datasource.networking.rest.model
 
-import br.com.data.helper.InvalidData
+import br.com.policlinsaude.data.helper.InvalidData
 import com.google.gson.annotations.SerializedName
 
 

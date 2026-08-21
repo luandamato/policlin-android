@@ -83,7 +83,7 @@ class MedicalGuideDetailsAdapter(
         if (caller != "Units") {
             list.add(Pair(context.getString(R.string.title_social_name),
                     presentationEstablishment.socialName))
-            list.add(Pair(context.getString(R.string.title_cnpj).toUpperCase(),
+            list.add(Pair(context.getString(R.string.title_cnpj).uppercase(),
                     presentationEstablishment.cnpj))
             list.add(Pair(context.getString(R.string.title_type_establishment),
                     presentationEstablishment.type))

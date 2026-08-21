@@ -1,6 +1,6 @@
 package br.com.policlinsaude.data.di
 
-import br.com.policlinsaude.BuildConfig
+import androidx.multidex.BuildConfig
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
