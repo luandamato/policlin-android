@@ -1,7 +1,6 @@
 package br.com.policlinsaude.medicalGuideOptions.view
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -9,43 +8,34 @@ import android.content.SharedPreferences
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.Html
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import br.com.policlinsaude.domain.exception.MessageErrorException
-import br.com.policlinsaude.domain.helper.InvalidData
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.policlinsaude.R
-
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.*
+import br.com.policlinsaude.databinding.ActivityMedicalGuideOptionsBinding
+import br.com.policlinsaude.domain.exception.MessageErrorException
+import br.com.policlinsaude.domain.helper.InvalidData
 import br.com.policlinsaude.medicalGuideOptions.presenter.MedicalGuideOptionsPresenter
 import br.com.policlinsaude.model.*
 import br.com.policlinsaude.qualificationInfo.QualificationFilterAdapter
+import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import dagger.android.AndroidInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.activity_medical_guide_options.*
-import kotlinx.android.synthetic.main.custom_view_info_medical_guide_list_units.*
-import kotlinx.android.synthetic.main.view_filters.*
-import java.text.ParseException
 import javax.inject.Inject
-import java.util.logging.Level.SEVERE
 
-
-
-
-class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
+class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView {
 
     companion object {
-
         fun start(activity: Activity) {
             val intent = Intent(activity, MedicalGuideOptionsActivity::class.java)
             activity.startActivity(intent)
@@ -59,25 +49,19 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
     private lateinit var cities: MutableList<PresentationCityOptions>
     private lateinit var specialities: MutableList<PresentationSpecialityServiceOptions>
 
-    //Andre Inicio
-    private  var pressed: Boolean = false // controle exibicao Filtro Avançado
-    private  var isLocationActive: Boolean = false // controle exibicao Filtro Avançado
+    private var pressed: Boolean = false
+    private var isLocationActive: Boolean = false
 
-    private lateinit var professionalClass:  MutableList<PresentationProfessionalClass>
-    private lateinit var serviceType:  MutableList<PresentationServiceType>
+    private lateinit var professionalClass: MutableList<PresentationProfessionalClass>
+    private lateinit var serviceType: MutableList<PresentationServiceType>
     private lateinit var establishmentType: MutableList<PresentationEstablishmentType>
     private lateinit var qualificationsForFilter: MutableList<PresentationQualificationForFilter>
 
-    //Armazenar filtro antes de ir para o Guia
     private var EMPTY = ""
     private var myPreferences = "myPrefs"
-
-    //05/01/2018
     private var PLAN = "plan"
-    //------
     private var CITIES = "cities"
     private var SPECIALITY = "specialty"
-
     private var ADDRESS = "address"
     private var NEIGHBORHOOD = "neighborhood"
     private var ZIPCODE = "zipcode"
@@ -100,25 +84,22 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
     private var CBD = "cbM"
     private var CBM = "cbN"
 
-    //Andre - controle de mascaras
     private var zipcodeMask: TextWatcher? = null
     private var cnpjMask: TextWatcher? = null
     private var phoneMask: TextWatcher? = null
 
     private lateinit var sharedPreferences: SharedPreferences
-
     lateinit var adapter: QualificationFilterAdapter
 
-    //Andre
+    private lateinit var binding: ActivityMedicalGuideOptionsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("FILTRO", "no ONCREATE")
-
         sharedPreferences = getSharedPreferences(myPreferences, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        editor.putInt(PLAN,0)
-        editor.putInt(CITIES,0)
-        editor.putInt(SPECIALITY,0)
+        editor.putInt(PLAN, 0)
+        editor.putInt(CITIES, 0)
+        editor.putInt(SPECIALITY, 0)
         editor.putInt(PROFESSIONAL_CLASS, 0)
         editor.putInt(SERVICE_TYPE, 0)
         editor.putInt(ESTABLISHMENT_TYPE, 0)
@@ -139,79 +120,55 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
         editor.putString(PROF_FANTASY, EMPTY)
         editor.putString(CNPJ, EMPTY)
         editor.putString(PHONES, EMPTY)
-
         editor.apply()
 
-        setContentView(R.layout.activity_medical_guide_options)
+        binding = ActivityMedicalGuideOptionsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         AndroidInjection.inject(this)
 
-        infoTextViewLink.setOnClickListener { IntentHelper.openUrlInBrowser(this, getString(R.string.url_custom_infos)) }
+        binding.viewFilters.infoTextViewLink.setOnClickListener {
+            IntentHelper.openUrlInBrowser(this, getString(R.string.url_custom_infos))
+        }
 
-        val infoTextView = infoTextViewLink.findViewById<TextView>(R.id.infoTextViewLink)
-        infoTextView.setText(Html.fromHtml(getString(R.string.msg_information_about_icon_and_qualification_and_link)), TextView.BufferType.SPANNABLE)
+        binding.viewFilters.infoTextViewLink.setText(
+            Html.fromHtml(getString(R.string.msg_information_about_icon_and_qualification_and_link)),
+            TextView.BufferType.SPANNABLE
+        )
 
+        zipcodeMask = MascaraAndre.Mask.mask("#####-###", binding.viewFilters.zipcodeFilterTextView)
+        cnpjMask = MascaraAndre.Mask.mask("##.###.###/####-##", binding.viewFilters.cnpjFilterTextView)
+        binding.viewFilters.cnpjFilterTextView.addTextChangedListener(cnpjMask)
 
-        zipcodeMask = MascaraAndre.Mask.mask("#####-###", zipcode_filter_text_view)
-     // zipcode_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("#####-###", zipcode_filter_text_view))
-      //  zipcode_filter_text_view.addTextChangedListener(zipcodeMask)
-
-        cnpjMask = MascaraAndre.Mask.mask("##.###.###/####-##", cnpj_filter_text_view)
-     //   cnpj_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("###.###.###/####-##", cnpj_filter_text_view))
-        cnpj_filter_text_view.addTextChangedListener(cnpjMask)
-
-        phoneMask = MascaraAndre.Mask.mask("(##) ####-####", phones_filter_text_view)
-       // phones_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("(##) ####-####", phones_filter_text_view))
-        phones_filter_text_view.addTextChangedListener(phoneMask)
+        phoneMask = MascaraAndre.Mask.mask("(##) ####-####", binding.viewFilters.phonesFilterTextView)
+        binding.viewFilters.phonesFilterTextView.addTextChangedListener(phoneMask)
 
         showMedicalGuideOptions(PresentationMedicalGuideOptions(), null)
-
         presenter.getLocationPreference()
 
-
-
-
-      //  cnpjMask = Mask.insert("##.###.###/####-##", cnpj_filter_text_view)
-     //   zipcodeMask = Mask.insert("#####-###", zipcode_filter_text_view)
-     //   phoneMask = Mask.insert("(##)####-####",phones_filter_text_view)
-   //     cnpj_filter_text_view.addTextChangedListener(cnpjMask)
-     //   zipcode_filter_text_view.addTextChangedListener(zipcodeMask)
-     //   phones_filter_text_view.addTextChangedListener(phoneMask)
-
-        Log.d("MASCARA", "no ONCREATE")
-
         setupToolbar()
-
         setOnClickListeners()
     }
 
-    fun showSnackFeedback(message : String, isValid : Boolean, view : View){
-        val snackbar : Snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
-        var v : View = snackbar.view
+    fun showSnackFeedback(message: String, isValid: Boolean, view: View) {
+        val snackbar: Snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+        val v: View = snackbar.view
         if (isValid)
             v.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_green_dark))
         else
             v.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_red_dark))
-
         snackbar.show()
     }
 
-
     override fun onStart() {
         super.onStart()
-        Log.d("MASCARA", "no ONSTART - valor de zipcode: "+ sharedPreferences.getString(ZIPCODE, EMPTY))
-        zipcode_filter_text_view.removeTextChangedListener(zipcodeMask)
-        zipcode_filter_text_view.setText(sharedPreferences.getString(ZIPCODE, EMPTY))
+        binding.viewFilters.zipcodeFilterTextView.removeTextChangedListener(zipcodeMask)
+        binding.viewFilters.zipcodeFilterTextView.setText(sharedPreferences.getString(ZIPCODE, EMPTY))
 
-        cnpj_filter_text_view.removeTextChangedListener(cnpjMask)
-        cnpj_filter_text_view.setText(sharedPreferences.getString(CNPJ, EMPTY))
+        binding.viewFilters.cnpjFilterTextView.removeTextChangedListener(cnpjMask)
+        binding.viewFilters.cnpjFilterTextView.setText(sharedPreferences.getString(CNPJ, EMPTY))
 
-
-        phones_filter_text_view.removeTextChangedListener(phoneMask)
-        phones_filter_text_view.setText(sharedPreferences.getString(PHONES, EMPTY))
-
-
-
-
+        binding.viewFilters.phonesFilterTextView.removeTextChangedListener(phoneMask)
+        binding.viewFilters.phonesFilterTextView.setText(sharedPreferences.getString(PHONES, EMPTY))
 
         presenter.getMedicalGuideOptions()
     }
@@ -219,269 +176,182 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
     override fun askForPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Dexter.withActivity(this)
-                    .withPermissions(Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION)
-                    .withListener(object : BaseMultiplePermissionsListener() {
-                        override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                            report?.let {
-                                if (it.areAllPermissionsGranted()) {
-                                    presenter.onPermissionsGranted()
-                                } else {
-                                    presenter.onPermissionsDenied(it.isAnyPermissionPermanentlyDenied)
-                                }
+                .withPermissions(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+                .withListener(object : BaseMultiplePermissionsListener() {
+                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                        report?.let {
+                            if (it.areAllPermissionsGranted()) {
+                                presenter.onPermissionsGranted()
+                            } else {
+                                presenter.onPermissionsDenied(it.isAnyPermissionPermanentlyDenied)
                             }
                         }
-                    })
-                    .check()
+                    }
+                })
+                .check()
         } else {
             presenter.onPermissionsGranted()
         }
     }
 
     private fun setOnClickListeners() {
-        buttonSearch.setOnClickListener {
-
-
-        var maskValidation = true
-
-
+        binding.buttonSearch.setOnClickListener {
+            var maskValidation = true
             if (awesomeValidation.validate()) {
-
-                if ((cnpj_filter_text_view.length() > 0 ) && (cnpj_filter_text_view.length() < 18 )) {
-                    showSnackFeedback("Campo CNPJ incompleto!", false, cnpj_filter_text_view)
-                    maskValidation = false
-
-                }
-
-                if ((zipcode_filter_text_view.length() > 0 ) && (zipcode_filter_text_view.length() < 9 )) {
-                    showSnackFeedback("Campo CEP incompleto!", false, cnpj_filter_text_view)
+                if ((binding.viewFilters.cnpjFilterTextView.length() > 0) && (binding.viewFilters.cnpjFilterTextView.length() < 18)) {
+                    showSnackFeedback("Campo CNPJ incompleto!", false, binding.viewFilters.cnpjFilterTextView)
                     maskValidation = false
                 }
-
-                if ((phones_filter_text_view.length() > 0 ) && (phones_filter_text_view.length() < 8 )) {
-                    showSnackFeedback("Campo Telefone incompleto!", false, cnpj_filter_text_view)
+                if ((binding.viewFilters.zipcodeFilterTextView.length() > 0) && (binding.viewFilters.zipcodeFilterTextView.length() < 9)) {
+                    showSnackFeedback("Campo CEP incompleto!", false, binding.viewFilters.cnpjFilterTextView)
+                    maskValidation = false
+                }
+                if ((binding.viewFilters.phonesFilterTextView.length() > 0) && (binding.viewFilters.phonesFilterTextView.length() < 8)) {
+                    showSnackFeedback("Campo Telefone incompleto!", false, binding.viewFilters.cnpjFilterTextView)
                     maskValidation = false
                 }
 
-                var numOptionsSelected: Int = 0
-
+                var numOptionsSelected = 0
                 val editor = sharedPreferences.edit()
 
-                //Andre
-
-                val plan = plans[spinnerPlan.selectedIndex]
-                if (!(spinnerPlan.selectedIndex == 0) ){
+                val plan = plans[binding.spinnerPlan.selectedIndex]
+                if (!(binding.spinnerPlan.selectedIndex == 0)) {
                     numOptionsSelected++
-                    editor.putInt(PLAN, spinnerPlan.selectedIndex)
-
-                }
-                Log.d("MEDICALGUIDELISTOPTIONS","Plano:--" + plan+"--")
-
-
-                val city = cities[spinnerCity.selectedIndex]
-                if (!(spinnerCity.selectedIndex == 0)) {
-                    numOptionsSelected++
-                    editor.putInt(CITIES, spinnerCity.selectedIndex)
-
-                }
-                Log.d("MEDICALGUIDELISTOPTIONS","Cidade: " + city + " indice da combo: " + spinnerCity.selectedIndex )
-
-                val speciality = specialities[spinnerSpeciality.selectedIndex]
-                if (!(spinnerSpeciality.selectedIndex == 0)){
-                    numOptionsSelected++
-                    editor.putInt(SPECIALITY, spinnerSpeciality.selectedIndex)
-
-
+                    editor.putInt(PLAN, binding.spinnerPlan.selectedIndex)
                 }
 
-                Log.d("MEDICALGUIDELISTOPTIONS","Especialidade: " + speciality +  " indice da combo: " + spinnerSpeciality.selectedIndex)
-
-                val orderByDistance = order_by_distance_check_box.isChecked
-            /*    if (order_by_distance_check_box.isChecked)  numOptionsSelected++
-                */
-
-                val professionalClass  = professionalClass[spinnerProfessionalClass.selectedIndex]
-                if (!(spinnerProfessionalClass.selectedIndex == 0)) {
+                val city = cities[binding.spinnerCity.selectedIndex]
+                if (!(binding.spinnerCity.selectedIndex == 0)) {
                     numOptionsSelected++
-                    editor.putInt(PROFESSIONAL_CLASS, spinnerProfessionalClass.selectedIndex)
-                 }
-
-
-                val serviceType = serviceType[spinnerServiceType.selectedIndex]
-                if (!(spinnerServiceType.selectedIndex == 0))  {
-                    numOptionsSelected++
-                    editor.putInt(SERVICE_TYPE, spinnerServiceType.selectedIndex)
+                    editor.putInt(CITIES, binding.spinnerCity.selectedIndex)
                 }
 
-                val establishmentType = establishmentType[spinnerEstablishmentType.selectedIndex]
-                if (!(spinnerEstablishmentType.selectedIndex == 0))  {
+                val speciality = specialities[binding.spinnerSpeciality.selectedIndex]
+                if (!(binding.spinnerSpeciality.selectedIndex == 0)) {
                     numOptionsSelected++
-                    editor.putInt(ESTABLISHMENT_TYPE, spinnerEstablishmentType.selectedIndex)
+                    editor.putInt(SPECIALITY, binding.spinnerSpeciality.selectedIndex)
                 }
-               // Log.d("MEDICALGUIDELISTOPTIONS","Total ate especialiade: " + numOptionsSelected)
 
-                //demais campos do filtro
+                val professionalClass = professionalClass[binding.viewFilters.spinnerProfessionalClass.selectedIndex]
+                if (!(binding.viewFilters.spinnerProfessionalClass.selectedIndex == 0)) {
+                    numOptionsSelected++
+                    editor.putInt(PROFESSIONAL_CLASS, binding.viewFilters.spinnerProfessionalClass.selectedIndex)
+                }
 
-                //endereço
-                val address_filter      =  if (addressplan_filter_text_view.text.equals(InvalidData.UNINITIALIZED.getString())) null else  addressplan_filter_text_view.text.toString()  //Andre
+                val serviceType = serviceType[binding.viewFilters.spinnerServiceType.selectedIndex]
+                if (!(binding.viewFilters.spinnerServiceType.selectedIndex == 0)) {
+                    numOptionsSelected++
+                    editor.putInt(SERVICE_TYPE, binding.viewFilters.spinnerServiceType.selectedIndex)
+                }
+
+                val establishmentType = establishmentType[binding.viewFilters.spinnerEstablishmentType.selectedIndex]
+                if (!(binding.viewFilters.spinnerEstablishmentType.selectedIndex == 0)) {
+                    numOptionsSelected++
+                    editor.putInt(ESTABLISHMENT_TYPE, binding.viewFilters.spinnerEstablishmentType.selectedIndex)
+                }
+
+                val address_filter = if (binding.viewFilters.addressplanFilterTextView.text.equals(InvalidData.UNINITIALIZED.getString())) null else binding.viewFilters.addressplanFilterTextView.text.toString()
                 if (address_filter != "") {
                     numOptionsSelected++
                     editor.putString(ADDRESS, address_filter)
                 }
-               // Log.d("MEDICALGUIDELISTOPTIONS","Valor de address_filter: " + address_filter)
-               // Log.d("MEDICALGUIDELISTOPTIONS","Total ate especialiade: " + numOptionsSelected)
-                val neighborhood_filter =  if (neighborhood_filter_text_view.text.equals(InvalidData.UNINITIALIZED.getString())) null else  neighborhood_filter_text_view.text.toString()  //Andre
+                val neighborhood_filter = if (binding.viewFilters.neighborhoodFilterTextView.text.equals(InvalidData.UNINITIALIZED.getString())) null else binding.viewFilters.neighborhoodFilterTextView.text.toString()
                 if (neighborhood_filter != "") {
                     numOptionsSelected++
                     editor.putString(NEIGHBORHOOD, neighborhood_filter)
                 }
-
-                var zipcode_filter      =  if (zipcode_filter_text_view.text.equals(InvalidData.UNINITIALIZED.getString())) null else  zipcode_filter_text_view.text.toString()  //Andre
+                val zipcode_filter = if (binding.viewFilters.zipcodeFilterTextView.text.equals(InvalidData.UNINITIALIZED.getString())) null else binding.viewFilters.zipcodeFilterTextView.text.toString()
                 if (zipcode_filter != "") {
                     numOptionsSelected++
-                   // if (zipcode_filter != null) {
-                    //  zipcode_filter =  zipcode_filter.replace("-","")
-                        editor.putString(ZIPCODE, zipcode_filter)
-                        Log.e("ZIPCODE", "valor armazenado; " + zipcode_filter)
-                  //  }
-
+                    editor.putString(ZIPCODE, zipcode_filter)
                 }
-
-                val number_on_the_board_filter =  if (number_on_the_board_filter_text_view.text.equals(InvalidData.UNINITIALIZED.getString())) null else  number_on_the_board_filter_text_view.text.toString()  //Andre
+                val number_on_the_board_filter = if (binding.viewFilters.numberOnTheBoardFilterTextView.text.equals(InvalidData.UNINITIALIZED.getString())) null else binding.viewFilters.numberOnTheBoardFilterTextView.text.toString()
                 if (number_on_the_board_filter != "") {
                     numOptionsSelected++
                     editor.putString(NUMBER_ON_THE_BOARD, number_on_the_board_filter)
                 }
-
-                val prof_fantasy_fliter =  if (prof_fantasy_company_filter_text_view.text.equals(InvalidData.UNINITIALIZED.getString())) null else  prof_fantasy_company_filter_text_view.text.toString()  //Andre
+                val prof_fantasy_fliter = if (binding.viewFilters.profFantasyCompanyFilterTextView.text.equals(InvalidData.UNINITIALIZED.getString())) null else binding.viewFilters.profFantasyCompanyFilterTextView.text.toString()
                 if (prof_fantasy_fliter != "") {
                     numOptionsSelected++
                     editor.putString(PROF_FANTASY, prof_fantasy_fliter)
                 }
-
-                val cnpj_filter =  if (cnpj_filter_text_view.text.equals(InvalidData.UNINITIALIZED.getString())) null else  cnpj_filter_text_view.text.toString()  //Andre
+                val cnpj_filter = if (binding.viewFilters.cnpjFilterTextView.text.equals(InvalidData.UNINITIALIZED.getString())) null else binding.viewFilters.cnpjFilterTextView.text.toString()
                 if (cnpj_filter != "") {
                     numOptionsSelected++
                     editor.putString(CNPJ, cnpj_filter)
                 }
-
-                val phones_filter =  if (phones_filter_text_view.text.equals(InvalidData.UNINITIALIZED.getString())) null else  phones_filter_text_view.text.toString()  //Andre
+                val phones_filter = if (binding.viewFilters.phonesFilterTextView.text.equals(InvalidData.UNINITIALIZED.getString())) null else binding.viewFilters.phonesFilterTextView.text.toString()
                 if (phones_filter != "") {
                     numOptionsSelected++
                     editor.putString(PHONES, phones_filter)
                 }
-                var qualificationsSearch = ""
 
-                if (cbA.isChecked) {
+                var qualificationsSearch = ""
+                if (binding.viewFilters.cbA.isChecked) {
                     qualificationsSearch = "A"
                     editor.putInt(CBA, 1)
-                }else editor.putInt(CBA, 0)
-
-                if ((cbN.isChecked) && (qualificationsSearch.isNotEmpty())){
-                    qualificationsSearch = qualificationsSearch +";N"
-                }
-                if (cbN.isChecked) {
-                    qualificationsSearch = "N"
+                } else editor.putInt(CBA, 0)
+                if (binding.viewFilters.cbN.isChecked) {
+                    qualificationsSearch = if (qualificationsSearch.isEmpty()) "N" else "$qualificationsSearch;N"
                     editor.putInt(CBN, 1)
                 } else editor.putInt(CBN, 0)
-
-                if ((cbP.isChecked) && (qualificationsSearch.isNotEmpty())){
-                    qualificationsSearch = qualificationsSearch +";P"
-                }
-                if (cbP.isChecked){
-                    qualificationsSearch = "P"
+                if (binding.viewFilters.cbP.isChecked) {
+                    qualificationsSearch = if (qualificationsSearch.isEmpty()) "P" else "$qualificationsSearch;P"
                     editor.putInt(CBP, 1)
                 } else editor.putInt(CBP, 0)
-
-                if ((cbR.isChecked) && (qualificationsSearch.isNotEmpty())){
-                    qualificationsSearch = qualificationsSearch +";R"
-                 }
-                if (cbR.isChecked){
-                    qualificationsSearch = "R"
+                if (binding.viewFilters.cbR.isChecked) {
+                    qualificationsSearch = if (qualificationsSearch.isEmpty()) "R" else "$qualificationsSearch;R"
                     editor.putInt(CBR, 1)
                 } else editor.putInt(CBR, 0)
-
-                if ((cbE.isChecked) && (qualificationsSearch.isNotEmpty())){
-                    qualificationsSearch = qualificationsSearch +";E"
-                }
-                if (cbE.isChecked){
-                    qualificationsSearch = "E"
+                if (binding.viewFilters.cbE.isChecked) {
+                    qualificationsSearch = if (qualificationsSearch.isEmpty()) "E" else "$qualificationsSearch;E"
                     editor.putInt(CBE, 1)
                 } else editor.putInt(CBE, 0)
-
-                if ((cbQ.isChecked) && (qualificationsSearch.isNotEmpty())){
-                    qualificationsSearch = qualificationsSearch +";Q"
-                }
-                if (cbQ.isChecked){
-                    qualificationsSearch = "Q"
+                if (binding.viewFilters.cbQ.isChecked) {
+                    qualificationsSearch = if (qualificationsSearch.isEmpty()) "Q" else "$qualificationsSearch;Q"
                     editor.putInt(CBQ, 1)
                 } else editor.putInt(CBQ, 0)
-
-                if ((cbG.isChecked) && (qualificationsSearch.isNotEmpty())){
-                    qualificationsSearch = qualificationsSearch +";G"
-                }
-                if (cbG.isChecked){
-                    qualificationsSearch = "G"
+                if (binding.viewFilters.cbG.isChecked) {
+                    qualificationsSearch = if (qualificationsSearch.isEmpty()) "G" else "$qualificationsSearch;G"
                     editor.putInt(CBG, 1)
                 } else editor.putInt(CBG, 0)
-
-                if ((cbI.isChecked) && (qualificationsSearch.isNotEmpty())){
-                    qualificationsSearch = qualificationsSearch +";I"
-                }
-                if (cbI.isChecked){
-                    qualificationsSearch = "I"
+                if (binding.viewFilters.cbI.isChecked) {
+                    qualificationsSearch = if (qualificationsSearch.isEmpty()) "I" else "$qualificationsSearch;I"
                     editor.putInt(CBI, 1)
-                 } else editor.putInt(CBI, 0)
-
-                if ((cbD.isChecked) && (qualificationsSearch.isNotEmpty())){
-                }
-                if (cbD.isChecked){
-                    qualificationsSearch = "D"
+                } else editor.putInt(CBI, 0)
+                if (binding.viewFilters.cbD.isChecked) {
+                    qualificationsSearch = if (qualificationsSearch.isEmpty()) "D" else "$qualificationsSearch;D"
                     editor.putInt(CBD, 1)
                 } else editor.putInt(CBD, 0)
-
-                if ((cbM.isChecked) && (qualificationsSearch.isNotEmpty())){
-                    qualificationsSearch = qualificationsSearch +";M"
-                 }
-                if (cbM.isChecked) {
-                    qualificationsSearch = "M"
+                if (binding.viewFilters.cbM.isChecked) {
+                    qualificationsSearch = if (qualificationsSearch.isEmpty()) "M" else "$qualificationsSearch;M"
                     editor.putInt(CBM, 1)
                 } else editor.putInt(CBN, 0)
 
-                Log.d("MEDICALGUIDELISTOPTIONS","QUALIFICADORES: " + qualificationsSearch)
-
-                //Andre ----- fim
-                Log.d("MEDICALGUIDELISTOPTIONS","Opções selecionadas: " + numOptionsSelected)
-                Log.d("MEDICALGUIDELISTOPTIONS","Phones: " + phones_filter)
-                Log.d("MEDICALGUIDELISTOPTIONS","Nome em fantasy: " + prof_fantasy_fliter)
-
-
                 editor.apply()
-
-                if (numOptionsSelected < 3){
-
+                if (numOptionsSelected < 3) {
                     showDialogFewOptions(plan, city, speciality, isLocationActive, professionalClass, serviceType, establishmentType,
-                            address_filter, neighborhood_filter, zipcode_filter, number_on_the_board_filter,prof_fantasy_fliter, cnpj_filter, phones_filter, qualificationsSearch)
-                }
-                else if (maskValidation){
-                    //presenter.clickedButtonSearch(plan, city, speciality, orderByDistance, professionalClass, serviceType, establishmentType,
+                        address_filter, neighborhood_filter, zipcode_filter, number_on_the_board_filter, prof_fantasy_fliter, cnpj_filter, phones_filter, qualificationsSearch)
+                } else if (maskValidation) {
                     presenter.clickedButtonSearch(plan, city, speciality, isLocationActive, professionalClass, serviceType, establishmentType,
-                            address_filter, neighborhood_filter, zipcode_filter, number_on_the_board_filter,prof_fantasy_fliter, cnpj_filter, phones_filter, qualificationsSearch)
+                        address_filter, neighborhood_filter, zipcode_filter, number_on_the_board_filter, prof_fantasy_fliter, cnpj_filter, phones_filter, qualificationsSearch)
                 }
             }
         }
 
-        buttonCleanFields.setOnClickListener {
+        binding.buttonCleanFields.setOnClickListener {
             presenter.clickedButtonCleanFields()
         }
 
-        filters_text_view.setOnClickListener{
+        binding.viewFilters.filtersTextView.setOnClickListener {
             pressed = !pressed
             presenter.onAdvancedFilterClicked(pressed)
-
         }
 
-        order_by_distance_check_box.setOnCheckedChangeListener { _, checked ->
+        binding.orderByDistanceCheckBox.setOnCheckedChangeListener { _, checked ->
             presenter.onOrderByDistanceChanged(checked)
             if (checked) {
                 askForPermissions()
@@ -494,420 +364,270 @@ class MedicalGuideOptionsActivity : BaseActivity(), MedicalGuideOptionsView{
             presenter.getMedicalGuideOptions()
         }
         showDialogTryAgain(listenerPositiveButton = listener,
-                message = if (it is MessageErrorException) it.message!! else "")
+            message = if (it is MessageErrorException) it.message!! else "")
     }
 
     override fun showLoading() {
-        login_progressbar.visibility = View.VISIBLE
+        binding.loginProgressbar.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        login_progressbar.visibility = View.GONE
+        binding.loginProgressbar.visibility = View.GONE
     }
 
     override fun selectAllSpinnerToDefault() {
-        spinnerSpeciality.selectedIndex = 0
-        spinnerCity.selectedIndex = 0
-        spinnerPlan.selectedIndex = 0
-        spinnerEstablishmentType.selectedIndex = 0
-        spinnerServiceType.selectedIndex = 0
-        spinnerProfessionalClass.selectedIndex = 0
-        cbA.isChecked = false
-        cbN.isChecked = false
-        cbP.isChecked = false
-        cbR.isChecked = false
-        cbE.isChecked = false
-        cbQ.isChecked = false
-        cbG.isChecked = false
-        cbI.isChecked = false
-        cbD.isChecked = false
-        cbM.isChecked = false
-        zipcode_filter_text_view.text = null
-        addressplan_filter_text_view.text = null
-        neighborhood_filter_text_view.text = null
-        number_on_the_board_filter_text_view.text = null
-        prof_fantasy_company_filter_text_view.text = null
-        cnpj_filter_text_view.text = null
-        phones_filter_text_view.text = null
+        binding.spinnerSpeciality.selectedIndex = 0
+        binding.spinnerCity.selectedIndex = 0
+        binding.spinnerPlan.selectedIndex = 0
+        binding.viewFilters.spinnerEstablishmentType.selectedIndex = 0
+        binding.viewFilters.spinnerServiceType.selectedIndex = 0
+        binding.viewFilters.spinnerProfessionalClass.selectedIndex = 0
+        binding.viewFilters.cbA.isChecked = false
+        binding.viewFilters.cbN.isChecked = false
+        binding.viewFilters.cbP.isChecked = false
+        binding.viewFilters.cbR.isChecked = false
+        binding.viewFilters.cbE.isChecked = false
+        binding.viewFilters.cbQ.isChecked = false
+        binding.viewFilters.cbG.isChecked = false
+        binding.viewFilters.cbI.isChecked = false
+        binding.viewFilters.cbD.isChecked = false
+        binding.viewFilters.cbM.isChecked = false
+        binding.viewFilters.zipcodeFilterTextView.text = null
+        binding.viewFilters.addressplanFilterTextView.text = null
+        binding.viewFilters.neighborhoodFilterTextView.text = null
+        binding.viewFilters.numberOnTheBoardFilterTextView.text = null
+        binding.viewFilters.profFantasyCompanyFilterTextView.text = null
+        binding.viewFilters.cnpjFilterTextView.text = null
+        binding.viewFilters.phonesFilterTextView.text = null
     }
 
-    override fun showAdvancedFilter(pressed: Boolean){
+    override fun showAdvancedFilter(pressed: Boolean) {
         if (pressed)
-            filters_details_container.visibility = View.VISIBLE
+            binding.viewFilters.filtersDetailsContainer.visibility = View.VISIBLE
         else
-            filters_details_container.visibility = View.GONE
+            binding.viewFilters.filtersDetailsContainer.visibility = View.GONE
     }
 
-    override fun showMedicalGuideOptions(presentationMedicalGuideOptions:
-                                         PresentationMedicalGuideOptions, userCodePlan: Int?) {
-
-        Log.d("FILTRO", "no showMedicalGuideOptions")
-
-
-
+    override fun showMedicalGuideOptions(
+        presentationMedicalGuideOptions: PresentationMedicalGuideOptions,
+        userCodePlan: Int?
+    ) {
         plans = mutableListOf(PresentationPlanOptions(description = getString(R.string.text_select)))
         plans.addAll(presentationMedicalGuideOptions.planOptions)
-        spinnerPlan.attachDataSource(plans)
+        binding.spinnerPlan.attachDataSource(plans)
 
-//Ajuste para usuario nao logado
-
-            var retPlan: Int = sharedPreferences.getInt(PLAN, 0)
-
-            Log.d("MEDICALGUIDELISTOPTIONS", "VALOR DE retPLAN: " + retPlan)
-
-            if (retPlan > 0) spinnerPlan.selectedIndex = retPlan
-
-
+        val retPlan = sharedPreferences.getInt(PLAN, 0)
+        if (retPlan > 0) binding.spinnerPlan.selectedIndex = retPlan
 
         userCodePlan?.let {
-            plans.forEachIndexed({ index, plan ->
+            plans.forEachIndexed { index, plan ->
                 if ((plan.codePlan == userCodePlan) && (retPlan == 0)) {
-                    spinnerPlan.selectedIndex = index
+                    binding.spinnerPlan.selectedIndex = index
                 }
-
-
-            })
+            }
         }
 
         cities = mutableListOf(PresentationCityOptions(description = getString(R.string.text_select)))
         cities.addAll(presentationMedicalGuideOptions.cityOptions)
-        spinnerCity.attachDataSource(cities)
+        binding.spinnerCity.attachDataSource(cities)
 
-        var retCities: Int = sharedPreferences.getInt(CITIES, 0)
-
-        Log.d("MEDICALGUIDELISTOPTIONS", "VALOR DE retCITIES: " + retCities)
-
-        if (retCities > 0) spinnerCity.selectedIndex = retCities
-
-
+        val retCities = sharedPreferences.getInt(CITIES, 0)
+        if (retCities > 0) binding.spinnerCity.selectedIndex = retCities
 
         specialities = mutableListOf(PresentationSpecialityServiceOptions(description = getString(R.string.text_select)))
         specialities.addAll(presentationMedicalGuideOptions.specialityServiceOptions)
-        spinnerSpeciality.attachDataSource(specialities)
+        binding.spinnerSpeciality.attachDataSource(specialities)
 
-        var retSpecialities: Int = sharedPreferences.getInt(SPECIALITY, 0)
+        val retSpecialities = sharedPreferences.getInt(SPECIALITY, 0)
+        if (retSpecialities > 0) binding.spinnerSpeciality.selectedIndex = retSpecialities
 
-        if (retSpecialities > 0) spinnerSpeciality.selectedIndex = retSpecialities
-
-
-        //Andre ------- inicio
         professionalClass = mutableListOf(PresentationProfessionalClass(descriptionProfessionalClass = getString(R.string.text_select)))
         professionalClass.addAll(presentationMedicalGuideOptions.professionalClassOptions)
-        spinnerProfessionalClass.attachDataSource(professionalClass)
-        var retProfessionalClass: Int = sharedPreferences.getInt(PROFESSIONAL_CLASS, 0)
-
-        if (retProfessionalClass > 0) spinnerProfessionalClass.selectedIndex = retProfessionalClass
+        binding.viewFilters.spinnerProfessionalClass.attachDataSource(professionalClass)
+        val retProfessionalClass = sharedPreferences.getInt(PROFESSIONAL_CLASS, 0)
+        if (retProfessionalClass > 0) binding.viewFilters.spinnerProfessionalClass.selectedIndex = retProfessionalClass
 
         serviceType = mutableListOf(PresentationServiceType(descriptionServiceType = getString(R.string.text_select)))
         serviceType.addAll(presentationMedicalGuideOptions.serviceTypeOptions)
-        spinnerServiceType.attachDataSource(serviceType)
-
-        var retServiceType: Int = sharedPreferences.getInt(SERVICE_TYPE, 0)
-        if (retServiceType > 0) spinnerServiceType.selectedIndex = retServiceType
-
-
+        binding.viewFilters.spinnerServiceType.attachDataSource(serviceType)
+        val retServiceType = sharedPreferences.getInt(SERVICE_TYPE, 0)
+        if (retServiceType > 0) binding.viewFilters.spinnerServiceType.selectedIndex = retServiceType
 
         establishmentType = mutableListOf(PresentationEstablishmentType(descriptionEstablishmentType = getString(R.string.text_select)))
         establishmentType.addAll(presentationMedicalGuideOptions.establishmentTypeOptions)
-        spinnerEstablishmentType.attachDataSource(establishmentType)
+        binding.viewFilters.spinnerEstablishmentType.attachDataSource(establishmentType)
+        val retEstablishmentType = sharedPreferences.getInt(ESTABLISHMENT_TYPE, 0)
+        if (retEstablishmentType > 0) binding.viewFilters.spinnerEstablishmentType.selectedIndex = retEstablishmentType
 
-        var retEstablishmentType: Int = sharedPreferences.getInt(ESTABLISHMENT_TYPE, 0)
-        if (retEstablishmentType > 0) spinnerEstablishmentType.selectedIndex = retEstablishmentType
-
-        addressplan_filter_text_view.setText(sharedPreferences.getString(ADDRESS, EMPTY))
-        neighborhood_filter_text_view.setText(sharedPreferences.getString(NEIGHBORHOOD, EMPTY))
-
-       //    zipcodeMask = MascaraAndre.Mask.mask("#####-###", zipcode_filter_text_view)
-// zipcode_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("#####-###", zipcode_filter_text_view))
- //  zipcode_filter_text_view.addTextChangedListener(zipcodeMask)
-
- //  cnpjMask = MascaraAndre.Mask.mask("###.###.###/####-##", cnpj_filter_text_view)
-//   cnpj_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("###.###.###/####-##", cnpj_filter_text_view))
-//   cnpj_filter_text_view.addTextChangedListener(cnpjMask)
-
-   //phoneMask = MascaraAndre.Mask.mask("(##) ####-####", phones_filter_text_view)
- //  phones_filter_text_view.addTextChangedListener(MascaraAndre.Mask.mask("(##) ####-####", phones_filter_text_view))
-  // phones_filter_text_view.addTextChangedListener(phoneMask)
-
-
-
-
-        //Andre controle de mascara quando recupera o filtro ------
-     //   zipcode_filter_text_view.removeTextChangedListener(MascaraAndre.Mask.mask("#####-###", zipcode_filter_text_view))
-     //   zipcode_filter_text_view.removeTextChangedListener(zipcodeMask)
-    //    zipcode_filter_text_view.setText(sharedPreferences.getString(ZIPCODE, EMPTY))
-    //    zipcode_filter_text_view.addTextChangedListener(zipcodeMask)
-
-      //  cnpj_filter_text_view.removeTextChangedListener(cnpjMask)
-     //   cnpj_filter_text_view.setText(sharedPreferences.getString(CNPJ, EMPTY))
-      //  cnpj_filter_text_view.addTextChangedListener(cnpjMask)
-
-       // phones_filter_text_view.removeTextChangedListener(phoneMask)
-       // phones_filter_text_view.setText(sharedPreferences.getString(PHONES, EMPTY))
-      //  phones_filter_text_view.addTextChangedListener(phoneMask)
-        //---------------
-        number_on_the_board_filter_text_view.setText(sharedPreferences.getString(NUMBER_ON_THE_BOARD, EMPTY))
-        prof_fantasy_company_filter_text_view.setText(sharedPreferences.getString(PROF_FANTASY, EMPTY))
-
-//----
-
-
-
-
-//        ----
-
+        binding.viewFilters.addressplanFilterTextView.setText(sharedPreferences.getString(ADDRESS, EMPTY))
+        binding.viewFilters.neighborhoodFilterTextView.setText(sharedPreferences.getString(NEIGHBORHOOD, EMPTY))
+        binding.viewFilters.numberOnTheBoardFilterTextView.setText(sharedPreferences.getString(NUMBER_ON_THE_BOARD, EMPTY))
+        binding.viewFilters.profFantasyCompanyFilterTextView.setText(sharedPreferences.getString(PROF_FANTASY, EMPTY))
 
         qualificationsForFilter = mutableListOf(PresentationQualificationForFilter())
         qualificationsForFilter.addAll(presentationMedicalGuideOptions.qualificationOptions)
 
-
-
-
-        //novo para legenda no filtro
-
-
         adapter = QualificationFilterAdapter(qualificationsForFilter)
+        binding.viewFilters.qualificationsFilterRecyclerView.adapter = adapter
+        binding.viewFilters.qualificationsFilterRecyclerView.layoutManager = LinearLayoutManager(this)
 
-
-        qualificationsFilterRecyclerView.adapter = adapter
-        qualificationsFilterRecyclerView.layoutManager =
-            LinearLayoutManager(this)
-
-        //-----------------------
-
-        for (qualifier in qualificationsForFilter){
-
-            if (qualifier.cod == "A"){
-                Log.d("Andre", "DENTRO DO CHECKBOX DO A: " + qualifier.imgQualificacao)
-               imgA.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
-               var retA = sharedPreferences.getInt(CBA, 0)
-                if (retA > 0 ) cbA.isChecked =  true
-
+        for (qualifier in qualificationsForFilter) {
+            when (qualifier.cod) {
+                "A" -> {
+                    binding.viewFilters.imgA.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
+                    if (sharedPreferences.getInt(CBA, 0) > 0) binding.viewFilters.cbA.isChecked = true
+                }
+                "N" -> {
+                    binding.viewFilters.imgN.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
+                    if (sharedPreferences.getInt(CBN, 0) > 0) binding.viewFilters.cbN.isChecked = true
+                }
+                "P" -> {
+                    binding.viewFilters.imgP.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
+                    if (sharedPreferences.getInt(CBP, 0) > 0) binding.viewFilters.cbP.isChecked = true
+                }
+                "R" -> {
+                    binding.viewFilters.imgR.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
+                    if (sharedPreferences.getInt(CBR, 0) > 0) binding.viewFilters.cbR.isChecked = true
+                }
+                "E" -> {
+                    binding.viewFilters.imgE.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
+                    if (sharedPreferences.getInt(CBE, 0) > 0) binding.viewFilters.cbE.isChecked = true
+                }
+                "Q" -> {
+                    binding.viewFilters.imgQ.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
+                    if (sharedPreferences.getInt(CBQ, 0) > 0) binding.viewFilters.cbQ.isChecked = true
+                }
+                "G" -> {
+                    binding.viewFilters.imgG.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
+                    if (sharedPreferences.getInt(CBG, 0) > 0) binding.viewFilters.cbG.isChecked = true
+                }
+                "I" -> {
+                    binding.viewFilters.imgI.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
+                    if (sharedPreferences.getInt(CBI, 0) > 0) binding.viewFilters.cbI.isChecked = true
+                }
+                "D" -> {
+                    binding.viewFilters.imgD.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
+                    if (sharedPreferences.getInt(CBD, 0) > 0) binding.viewFilters.cbD.isChecked = true
+                }
+                "M" -> {
+                    binding.viewFilters.imgM.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
+                    if (sharedPreferences.getInt(CBM, 0) > 0) binding.viewFilters.cbM.isChecked = true
+                }
             }
-            if (qualifier.cod == "N"){
-                Log.d("Andre", "DENTRO DO CHECKBOX DO N: " + qualifier.imgQualificacao)
-                imgN.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
-                var retN = sharedPreferences.getInt(CBN, 0)
-                if (retN > 0 ) cbN.isChecked =  true
-            }
-
-            if (qualifier.cod == "P"){
-                Log.d("Andre", "DENTRO DO CHECKBOX DO P: " + qualifier.imgQualificacao)
-                imgP.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
-                var retP = sharedPreferences.getInt(CBP, 0)
-                if (retP > 0 ) cbP.isChecked =  true
-
-            }
-            if (qualifier.cod == "R"){
-                Log.d("Andre", "DENTRO DO CHECKBOX DO R: " + qualifier.imgQualificacao)
-                imgR.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
-                var retR = sharedPreferences.getInt(CBR, 0)
-                if (retR > 0 ) cbR.isChecked =  true
-
-            }
-            if (qualifier.cod == "E"){
-                Log.d("Andre", "DENTRO DO CHECKBOX DO E: " + qualifier.imgQualificacao)
-                imgE.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
-                var retE = sharedPreferences.getInt(CBE, 0)
-                if (retE > 0 ) cbE.isChecked =  true
-
-            }
-            if (qualifier.cod == "Q"){
-                Log.d("Andre", "DENTRO DO CHECKBOX DO Q: " + qualifier.imgQualificacao)
-                imgQ.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
-                var retQ = sharedPreferences.getInt(CBQ, 0)
-                if (retQ > 0 ) cbQ.isChecked =  true
-
-            }
-
-            if (qualifier.cod == "G"){
-                Log.d("Andre", "DENTRO DO CHECKBOX DO G: " + qualifier.imgQualificacao)
-                imgG.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
-                var retG = sharedPreferences.getInt(CBG, 0)
-                if (retG > 0 ) cbG.isChecked =  true
-
-            }
-            if (qualifier.cod == "I"){
-                Log.d("Andre", "DENTRO DO CHECKBOX DO I: " + qualifier.imgQualificacao)
-                imgI.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
-                var retI = sharedPreferences.getInt(CBI, 0)
-                if (retI > 0 ) cbI.isChecked =  true
-
-            }
-            if (qualifier.cod == "D"){
-                Log.d("Andre", "DENTRO DO CHECKBOX DO D: " + qualifier.imgQualificacao)
-                imgD.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
-                var retD = sharedPreferences.getInt(CBD, 0)
-                if (retD > 0 ) cbD.isChecked =  true
-
-            }
-            if (qualifier.cod == "M"){
-                Log.d("Andre", "DENTRO DO CHECKBOX DO M: " + qualifier.imgQualificacao)
-                imgM.setImageBitmap(qualifier.imgQualificacao.getBitmapFromImage())
-                var retM = sharedPreferences.getInt(CBM, 0)
-                if (retM > 0 ) cbM.isChecked =  true
-
-            }
-
         }
-
-       Log.d("Andre", "Valor de lista de ProfessionalClass: " + presentationMedicalGuideOptions.professionalClassOptions.toString())
-
-        Log.d("Andre", "Valor de lista de Tipo de Serviço: " + presentationMedicalGuideOptions.serviceTypeOptions.toString())
-        Log.d("Andre", "Valor de lista de Tipo de Estabelecimento: " + presentationMedicalGuideOptions.establishmentTypeOptions.toString())
-        Log.d("Andre", "Valor de lista de QUALIFICAÇÔES " + presentationMedicalGuideOptions.qualificationOptions.toString())
     }
 
     override fun getCurrentLocation() {
         LocationHelper.getCurrentLocation(this)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeBy(
-                        onSuccess = {
-                            presenter.onLocationFetched(it)
-                            Log.d("Andre", "DENTRO de getCurrentLocation: --> "+ it)
-                        },
-                        onError = {
-                            it.printStackTrace()
-                            if (it is LocationHelper.LocationNotEnabledException) {
-                                presenter.onLocationNotEnabled()
-                            }
-                        }
-                )
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy(
+                onSuccess = {
+                    presenter.onLocationFetched(it)
+                },
+                onError = {
+                    it.printStackTrace()
+                    if (it is LocationHelper.LocationNotEnabledException) {
+                        presenter.onLocationNotEnabled()
+                    }
+                }
+            )
     }
 
     override fun showNeedPermissionsDialog(anyPermissionPermanentlyDenied: Boolean) {
-        DialogHelper.showDialog(this,
-                R.string.title_permissions_needed,
-                R.string.text_permissions_needed,
-                R.string.text_ok,
-                null)
-               // listenerPositiveButton = { presenter.onPermissionsNeedDialogOkClicked(anyPermissionPermanentlyDenied) },
-               // onDismiss = { presenter.onPermissionsNeedDialogOkClicked(anyPermissionPermanentlyDenied) })
+        DialogHelper.showDialog(
+            this,
+            R.string.title_permissions_needed,
+            R.string.text_permissions_needed,
+            R.string.text_ok,
+            null
+        )
     }
 
     override fun showLocationMissingError() {
-        DialogHelper.showDialog(this,
-                R.string.title_permissions_needed,
-                R.string.text_location_missing_gps_off,
-                R.string.text_ok,
-                null)//,
-               // listenerPositiveButton = {finish() })
-
-     /*   DialogHelper.showDialogTryAgain(this,
-                { askForPermissions() },
-               // getString(R.string.text_location_missing_error))
-                getString(R.string.text_location_missing_gps_off))*/
-
+        DialogHelper.showDialog(
+            this,
+            R.string.title_permissions_needed,
+            R.string.text_location_missing_gps_off,
+            R.string.text_ok,
+            null
+        )
     }
 
     override fun showLocationFetchErrorDialog() {
-        DialogHelper.showDialogTryAgain(this,
-                { askForPermissions() },
-                getString(R.string.text_location_missing_error))
+        DialogHelper.showDialogTryAgain(
+            this,
+            { askForPermissions() },
+            getString(R.string.text_location_missing_error)
+        )
     }
 
     override fun showLocationNotEnabledDialog() {
-        DialogHelper.showDialog(this,
-                R.string.title_error_oops,
-                R.string.text_location_not_enabled,
-                R.string.text_ok,
-                R.string.action_cancel,
-                { presenter.onLocationNotEnabledDialogOkClicked() })
-
+        DialogHelper.showDialog(
+            this,
+            R.string.title_error_oops,
+            R.string.text_location_not_enabled,
+            R.string.text_ok,
+            R.string.action_cancel,
+            { presenter.onLocationNotEnabledDialogOkClicked() })
     }
 
     override fun setLocationCheckbox(checked: Boolean) {
-        order_by_distance_check_box.isChecked = checked
+        binding.orderByDistanceCheckBox.isChecked = checked
     }
 
-
-    override fun showDialogFewOptions(plan: PresentationPlanOptions,
-                                      city: PresentationCityOptions,
-                                      speciality: PresentationSpecialityServiceOptions,
-                                      //orderByDistance: Boolean,
-                                      isLocationActive: Boolean,
-                                      professionalClass: PresentationProfessionalClass,
-                                      serviceType: PresentationServiceType,
-                                      establishmentType: PresentationEstablishmentType,
-                                      address_filter: String?,
-                                      neighborhood_filter: String?,
-                                      zipcode_filter: String?,
-                                      number_on_the_board_filter: String?,
-                                      prof_fantasy_fliter: String?,
-                                      cnpj_filter: String?,
-                                      phones_filter: String?, qualificationsSearch: String?){
-       DialogHelper.showDialog(this,
-                R.string.title_few_options,
-                R.string.text_few_options,
-                R.string.global_yes,
-                R.string.action_cancel,
-               { presenter.clickedButtonSearch(plan, city, speciality, isLocationActive, professionalClass, serviceType,
-                       establishmentType, address_filter, neighborhood_filter, zipcode_filter,
-                       number_on_the_board_filter,prof_fantasy_fliter, cnpj_filter, phones_filter, qualificationsSearch) }  )
-
-
+    override fun showDialogFewOptions(
+        plan: PresentationPlanOptions,
+        city: PresentationCityOptions,
+        speciality: PresentationSpecialityServiceOptions,
+        isLocationActive: Boolean,
+        professionalClass: PresentationProfessionalClass,
+        serviceType: PresentationServiceType,
+        establishmentType: PresentationEstablishmentType,
+        address_filter: String?,
+        neighborhood_filter: String?,
+        zipcode_filter: String?,
+        number_on_the_board_filter: String?,
+        prof_fantasy_fliter: String?,
+        cnpj_filter: String?,
+        phones_filter: String?,
+        qualificationsSearch: String?
+    ) {
+        DialogHelper.showDialog(
+            this,
+            R.string.title_few_options,
+            R.string.text_few_options,
+            R.string.global_yes,
+            R.string.action_cancel,
+            {
+                presenter.clickedButtonSearch(
+                    plan, city, speciality, isLocationActive, professionalClass, serviceType,
+                    establishmentType, address_filter, neighborhood_filter, zipcode_filter,
+                    number_on_the_board_filter, prof_fantasy_fliter, cnpj_filter, phones_filter, qualificationsSearch
+                )
+            })
     }
 
     override fun clickedLink() {
-
         IntentHelper.openUrlInBrowser(this, getString(R.string.url_custom_infos))
     }
 
     override fun setLocationActive(locationActive: Boolean) {
-        Log.d("Andre", "DENTRO do setLocationActive: locationActive --> " + locationActive)
-
-       isLocationActive = locationActive
-        Log.d("Andre", "DENTRO do setLocationActive: isLocationActive--> " + isLocationActive)
-
+        isLocationActive = locationActive
         if (isLocationActive) {
-
             askForPermissions()
-
-            Log.d("Andre", "isLocationActive esta ativo")
             if (!isGPSEnable())
                 showLocationMissingError()
-
-
-        } else  Log.d("Andre", "isLocationActive esta desativado")
+        }
     }
 
-    override fun isGPSEnable(): Boolean{
-
-       val  isOn:Boolean = (this.getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(LocationManager.GPS_PROVIDER)
-
-       if (isOn)  Log.d("Andre", "GPS LIGADO ")
-        else if (isOn)  Log.d("Andre", "GPS DESLIGADO ")
-
-        return (isOn)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        Log.d("MASCARA", "DENTRO do onRestoreInstanceState de MedicalguideOptionsActivity")
-
-      //  val myString:String = savedInstanceState!!.getString("MyString")
-      //  Log.d("FILTRO", "DENTRO do onRestoreInstanceState de MedicalguideOptionsActivity --> Valor de MyString: " + myString)
-    }
-
-
-    override fun onPause() {
-        super.onPause()
-        Log.d("MASCARA", "DENTRO do onPause de MedicalguideOptionsActivity --> ")
-
-
-
+    override fun isGPSEnable(): Boolean {
+        return (this.getSystemService(Context.LOCATION_SERVICE) as LocationManager).isProviderEnabled(LocationManager.GPS_PROVIDER)
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d("MASCARA", "DENTRO do onResume de MedicalguideOptionsActivity --> ")
-        zipcode_filter_text_view.addTextChangedListener(zipcodeMask)
-        cnpj_filter_text_view.addTextChangedListener(cnpjMask)
-        phones_filter_text_view.addTextChangedListener(phoneMask)
-
+        binding.viewFilters.zipcodeFilterTextView.addTextChangedListener(zipcodeMask)
+        binding.viewFilters.cnpjFilterTextView.addTextChangedListener(cnpjMask)
+        binding.viewFilters.phonesFilterTextView.addTextChangedListener(phoneMask)
     }
 }

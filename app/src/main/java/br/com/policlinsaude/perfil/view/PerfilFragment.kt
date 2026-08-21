@@ -1,11 +1,14 @@
 package br.com.policlinsaude.perfil.view
 
 import android.content.Intent
+import android.media.ExifInterface
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.util.Log
-import android.view.*
-import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.base.BaseFragmentWithInject
@@ -13,23 +16,18 @@ import br.com.policlinsaude.core.helper.DateHelper
 import br.com.policlinsaude.core.helper.MaskUtils
 import br.com.policlinsaude.core.helper.getBitmapFromImage
 import br.com.policlinsaude.core.helper.toBase64
+import br.com.policlinsaude.databinding.FragmentPerfilBinding
+import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.home.view.MenuActivity
 import br.com.policlinsaude.model.PresentationPerson
 import br.com.policlinsaude.perfil.presenter.PerfilPresenter
-import kotlinx.android.synthetic.main.fragment_perfil.*
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
-import java.lang.Exception
 import javax.inject.Inject
-import android.media.ExifInterface
-import androidx.appcompat.app.AppCompatActivity
-import com.policlinsaude.newfeature.features.deleteUser.ui.Activity.DeleteUserActivity
-
 
 class PerfilFragment : BaseFragmentWithInject(), PerfilView {
 
     companion object {
-
         fun newInstance(): PerfilFragment {
             return PerfilFragment()
         }
@@ -38,19 +36,26 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
     @Inject
     lateinit var presenter: PerfilPresenter
 
+    private var _binding: FragmentPerfilBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
+        _binding = FragmentPerfilBinding.inflate(inflater, container, false)
 
-        val view = inflater.inflate(R.layout.fragment_perfil, container, false)
-        val toolbar: Toolbar = view.findViewById(R.id.toolbar)
-
+        val toolbar: Toolbar = binding.root.findViewById(R.id.toolbar)
         (activity as MenuActivity).setupFragmentToolbar(toolbar, R.string.title_perfil)
 
-        return view
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item?.itemId == android.R.id.home) {
+        if (item.itemId == android.R.id.home) {
             (activity as? BaseActivity)?.onOptionsItemSelected(item)
             return true
         }
@@ -68,17 +73,15 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == AppCompatActivity.RESULT_OK && requestCode == 123){
+        if (resultCode == AppCompatActivity.RESULT_OK && requestCode == 123) {
             val returnIntent = Intent()
             activity?.setResult(AppCompatActivity.RESULT_OK, returnIntent)
             activity?.finish()
         }
         EasyImage.handleActivityResult(requestCode, resultCode, data, activity, object : EasyImage.Callbacks {
             override fun onImagePicked(imageFile: File?, source: EasyImage.ImageSource?, type: Int) {
-                //ajuste de rotação de imagem devido ao problema de posição de sensor dependendo do fabricante
-                val rotation = applyRotationIfNeeded(imageFile!!)
-
                 imageFile?.let {
+                    val rotation = applyRotationIfNeeded(it)
                     presenter.onImagePicked(it.toBase64(500, rotation))
                 }
             }
@@ -100,17 +103,21 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
 
     override fun set(person: PresentationPerson) {
         try {
-            imageView.setImageBitmap(person.photo.getBitmapFromImage())
+            binding.imageView.setImageBitmap(person.photo.getBitmapFromImage())
         } catch (e: Exception) {
             e.printStackTrace()
             // ignored
         }
-        nameTextView.text = person.name
-        emailTextView.text = person.email
-        phoneTextView.text = MaskUtils.applyMaskToString(MaskUtils.PHONE, person.phone)
-        cpfTextView.text = MaskUtils.applyMaskToString(MaskUtils.CPF, person.cpf)
-        registerAndOrderTextView.text = getString(R.string.text_register_and_order_number, person.plan.register.toInt(), person.plan.order.toInt())
-        birthdayTextView.text = DateHelper.getStringFromDate(DateHelper.FORMAT_DATE_DDMMYYYY, person.birthday)
+        binding.nameTextView.text = person.name
+        binding.emailTextView.text = person.email
+        binding.phoneTextView.text = MaskUtils.applyMaskToString(MaskUtils.PHONE, person.phone)
+        binding.cpfTextView.text = MaskUtils.applyMaskToString(MaskUtils.CPF, person.cpf)
+        binding.registerAndOrderTextView.text = getString(
+            R.string.text_register_and_order_number,
+            person.plan.register.toInt(),
+            person.plan.order.toInt()
+        )
+        binding.birthdayTextView.text = DateHelper.getStringFromDate(DateHelper.FORMAT_DATE_DDMMYYYY, person.birthday)
         (activity as MenuActivity).getCurrentPerson()
     }
 
@@ -119,11 +126,11 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
     }
 
     override fun showLoading() {
-        loadingView.visibility = View.VISIBLE
+        binding.loadingView.root.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        loadingView.visibility = View.GONE
+        binding.loadingView.root.visibility = View.GONE
     }
 
     override fun showAvatarChangedSuccess() {
@@ -131,37 +138,36 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
     }
 
     override fun showDialogError(throwable: Throwable) {
-        (activity as BaseActivity).showError(message = if (throwable is MessageErrorException) throwable.message!! else getString(R.string.msg_unexpected_error))
+        (activity as BaseActivity).showError(
+            message = if (throwable is MessageErrorException) throwable.message!! else getString(
+                R.string.msg_unexpected_error
+            )
+        )
     }
 
     private fun setClickListeners() {
-        phoneContainer.setOnClickListener {
+        binding.phoneContainer.setOnClickListener {
             presenter.onEditPhoneClicked()
         }
-        passwordContainer.setOnClickListener {
+        binding.passwordContainer.setOnClickListener {
             presenter.onEditPasswordClicked()
         }
-        imageView.setOnClickListener {
+        binding.imageView.setOnClickListener {
             presenter.onAvatarChangeClicked()
         }
-        deleteAccountContainer.setOnClickListener {
+        binding.deleteAccountContainer.setOnClickListener {
             presenter.onDeleteClicked()
         }
     }
 
-
     private fun applyRotationIfNeeded(imageFile: File): Int {
         val exif = ExifInterface(imageFile.absolutePath)
         val exifRotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
-        return when(exifRotation) {
+        return when (exifRotation) {
             ExifInterface.ORIENTATION_ROTATE_90 -> 90
             ExifInterface.ORIENTATION_ROTATE_180 -> 180
             ExifInterface.ORIENTATION_ROTATE_270 -> 270
             else -> 0
         }
     }
-
-
-
-
 }

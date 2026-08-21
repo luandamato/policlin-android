@@ -3,24 +3,21 @@ package br.com.policlinsaude.medicalGuideList.view
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import br.com.policlinsaude.domain.exception.MessageErrorException
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper
+import br.com.policlinsaude.databinding.ActivityMedicalGuideListBinding
+import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.medicalGuideList.presenter.MedicalGuideListPresenter
-import br.com.policlinsaude.medicalGuideList.view.adapter.CityLevelAdapter
 import br.com.policlinsaude.medicalGuideList.view.adapter.MedicalGuideListAdapter
 import br.com.policlinsaude.medicalGuideOptions.presenter.model.PresentationLocation
 import br.com.policlinsaude.model.*
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_medical_guide_list.*
-import kotlinx.android.synthetic.main.view_filters.*
-import kotlinx.android.synthetic.main.view_filters.view.*
 import javax.inject.Inject
 
 class MedicalGuideListActivity : BaseActivity(), MedicalGuideListView, MedicalGuideListAdapter.OnItemClickListener {
@@ -91,24 +88,27 @@ class MedicalGuideListActivity : BaseActivity(), MedicalGuideListView, MedicalGu
 
     lateinit var adapter: MedicalGuideListAdapter
 
+    private lateinit var binding: ActivityMedicalGuideListBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_medical_guide_list)
+        binding = ActivityMedicalGuideListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         AndroidInjection.inject(this)
 
-        setupToolbar()
+        setupToolbar(binding.toolbar.toolbar)
         adapter = MedicalGuideListAdapter(this)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager =
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager =
             LinearLayoutManager(this)
         setupOnClickListener()
         getMedicalGuideOptions()
     }
 
     private fun setupOnClickListener() {
-        view_filters.filters_text_view.setOnClickListener {
-            view_filters.filters_details_container.visibility =
-                    if (view_filters.filters_details_container.visibility == View.VISIBLE) {
+        binding.viewFilters.filtersTextView.setOnClickListener {
+            binding.viewFilters.filtersDetailsContainer.visibility =
+                    if (binding.viewFilters.filtersDetailsContainer.visibility == View.VISIBLE) {
                         View.GONE
                     } else {
                         View.VISIBLE
@@ -357,11 +357,11 @@ class MedicalGuideListActivity : BaseActivity(), MedicalGuideListView, MedicalGu
     }
 
     override fun showLoading() {
-        login_progressbar.visibility = View.VISIBLE
+        binding.loginProgressbar.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        login_progressbar.visibility = View.GONE
+        binding.loginProgressbar.visibility = View.GONE
     }
 
     override fun renderFiltersText(plan: String, city: String, speciality: String) {

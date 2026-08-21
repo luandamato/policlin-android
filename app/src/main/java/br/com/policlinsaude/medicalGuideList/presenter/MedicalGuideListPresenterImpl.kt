@@ -1,17 +1,16 @@
 package br.com.policlinsaude.medicalGuideList.presenter
 
 import android.util.Log
-import br.com.policlinsaude.domain.usecase.GetMedicalGuideListUseCase
-import br.com.policlinsaude.domain.usecase.requestvalues.MedicalGuideListRV
 import br.com.policlinsaude.core.helper.InvalidData
 import br.com.policlinsaude.core.helper.UseCaseHandler
+import br.com.policlinsaude.domain.usecase.GetMedicalGuideListUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.MedicalGuideListRV
 import br.com.policlinsaude.mapper.PresentationMedicalGuideListMapper
 import br.com.policlinsaude.medicalGuideList.navigator.MedicalGuideListNavigator
 import br.com.policlinsaude.medicalGuideList.view.MedicalGuideListView
 import br.com.policlinsaude.medicalGuideOptions.presenter.model.PresentationLocation
 import br.com.policlinsaude.model.*
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.view_filters.*
 
 class MedicalGuideListPresenterImpl(private val navigator: MedicalGuideListNavigator,
                                     private val getMedicalGuideListUseCase: GetMedicalGuideListUseCase,
@@ -220,7 +219,7 @@ class MedicalGuideListPresenterImpl(private val navigator: MedicalGuideListNavig
          }
         }
         //establishments?.let {
-        establishmentList?.let {
+        establishmentList.let {
             navigator.goToMaps(ArrayList(it))
         }
     }

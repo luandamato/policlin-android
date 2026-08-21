@@ -3,51 +3,49 @@ package br.com.policlinsaude.home.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.appcompat.widget.Toolbar
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import br.com.policlinsaude.R
+import br.com.policlinsaude.core.base.BaseFragmentWithInject
+import br.com.policlinsaude.databinding.FragmentHomeBinding
 import br.com.policlinsaude.domain.model.Banner
 import br.com.policlinsaude.domain.model.Person
 import br.com.policlinsaude.domain.model.UserConnected
 import br.com.policlinsaude.domain.model.ValidateButtons
-import br.com.policlinsaude.R
-import br.com.policlinsaude.core.base.BaseFragmentWithInject
-import br.com.policlinsaude.core.helper.DialogHelper
 import br.com.policlinsaude.home.navigator.HomeNavigator
 import br.com.policlinsaude.home.presenter.HomePresenter
 import br.com.policlinsaude.home.view.adapter.HomeAdapter
 import br.com.policlinsaude.home.view.adapter.HomePageAdapter
 import br.com.policlinsaude.home.view.model.PresentationHomeOptionEnum
-import br.com.policlinsaude.preferences.presenter.PreferencesPresenter
+import br.com.policlinsaude.otherFeatures.features.notifications.ui.activities.NotificationActivity
 import com.policlinsaude.newfeature.features.ScheduleCentral.ui.activities.ScheduleCentralActivity
 import com.policlinsaude.newfeature.features.Token.ui.TokenActivity
 import com.policlinsaude.newfeature.features.coparticipation.ui.activities.ResearchCoParticipationActivity
 import com.policlinsaude.newfeature.features.extractor.ui.activities.FactorExtractorActivity
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.activities.GuideAuthorizerActivity
 import com.policlinsaude.newfeature.features.incometax.ui.activities.IncomeTaxActivity
-import com.policlinsaude.newfeature.features.notifications.ui.activities.NotificationActivity
 import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.app_bar_home.*
-import kotlinx.android.synthetic.main.app_bar_home.view.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import java.util.concurrent.TimeUnit
-import java.util.prefs.Preferences
 import javax.inject.Inject
 
-class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickListener {
+class HomeFragment : BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickListener {
 
     private var isCoPartFM: Boolean = false
     private var forceUpdate: Boolean = false
     lateinit var toolbar: Toolbar
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         private const val CO_PART_FM = "fm"
@@ -60,6 +58,7 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
 
     @Inject
     lateinit var presenter: HomePresenter
+
     @Inject
     lateinit var homePageAdapter: HomePageAdapter
 
@@ -72,12 +71,12 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
     private var autoScrollObservable: Observable<Long>? = null
     private var autoScrollDisposable: Disposable? = null
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        toolbar = view.findViewById(R.id.toolbar)
-        val nameTextView: TextView = view.findViewById(R.id.person_name_text_view)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        toolbar = binding.appBarContainer.toolbar
+        val nameTextView: TextView = binding.appBarContainer.personNameTextView
 
         (activity as MenuActivity).setupFragmentToolbar(toolbar, null)
         (activity as MenuActivity).toggle.apply {
@@ -89,12 +88,15 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
         }
 
         toolbar.apply {
-            navigationIcon = ContextCompat.getDrawable(requireContext(),  R.drawable.ic_menu)
+            navigationIcon = ContextCompat.getDrawable(requireContext(), R.drawable.ic_menu)
         }
 
-        //activity?.window?.statusBarColor = ContextCompat.getColor(requireContext(), R.color.Bordo)
+        return binding.root
+    }
 
-        return view
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onResume() {
@@ -118,33 +120,32 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loading_container_home.visibility = View.VISIBLE
-        recyclerView.visibility = View.GONE
-        recyclerView.adapter = homeAdapter
-        recyclerView.layoutManager =
+        binding.loadingContainerHome.visibility = View.VISIBLE
+        binding.recyclerView.visibility = View.GONE
+        binding.recyclerView.adapter = homeAdapter
+        binding.recyclerView.layoutManager =
             GridLayoutManager(context, 2)
 
-        viewPager.adapter = homePageAdapter
+        binding.viewPager.adapter = homePageAdapter
         homeAdapter.setup(PresentationHomeOptionEnum.values().toMutableList())
         presenter.onValidateButtons()
         presenter.onViewAttached()
 
-        alert_menu.setOnClickListener {
+        binding.appBarContainer.alertMenu.setOnClickListener {
             startActivity(Intent(context, NotificationActivity::class.java))
         }
-
     }
 
     override fun renderPerson(person: Person) {
-        view?.findViewById<TextView>(R.id.person_name_text_view)?.text =
-                getString(R.string.text_person_home_title, person.name, person.descriptionPlan)
+        binding.appBarContainer.personNameTextView.text =
+            getString(R.string.text_person_home_title, person.name, person.descriptionPlan)
 
         presenter.onValidateConnectedUser(person.plan.register, person.plan.order)
     }
 
     override fun onItemClick(option: PresentationHomeOptionEnum) {
-        if (forceUpdate){
-            if (option == PresentationHomeOptionEnum.HEALTH_INSURANCE){
+        if (forceUpdate) {
+            if (option == PresentationHomeOptionEnum.HEALTH_INSURANCE) {
                 if ((activity as MenuActivity).isGuest) {
                     presenter.onMenuClickedAsGuest()
                 } else {
@@ -171,7 +172,6 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     homeNavigator.goToFavorites()
                 }
             }
-
             PresentationHomeOptionEnum.TICKET -> {
                 if ((activity as MenuActivity).isGuest) {
                     presenter.onMenuClickedAsGuest()
@@ -180,7 +180,6 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     startActivity(intent)
                 }
             }
-
             PresentationHomeOptionEnum.RESEARCH_VALUES_CO_PARTICIPATION -> {
                 if ((activity as MenuActivity).isGuest) {
                     presenter.onMenuClickedAsGuest()
@@ -190,7 +189,6 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     startActivity(intent)
                 }
             }
-
             PresentationHomeOptionEnum.FACTOR_EXTRACTOR -> {
                 if ((activity as MenuActivity).isGuest) {
                     presenter.onMenuClickedAsGuest()
@@ -200,7 +198,6 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     startActivity(intent)
                 }
             }
-
             PresentationHomeOptionEnum.INCOME_TAX -> {
                 if ((activity as MenuActivity).isGuest) {
                     presenter.onMenuClickedAsGuest()
@@ -209,8 +206,6 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     startActivity(intent)
                 }
             }
-
-
             PresentationHomeOptionEnum.GUIDE_AUTHORIZER -> {
                 if ((activity as MenuActivity).isGuest) {
                     presenter.onMenuClickedAsGuest()
@@ -219,7 +214,6 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     startActivity(intent)
                 }
             }
-
             PresentationHomeOptionEnum.SCHEDULE -> {
                 if ((activity as MenuActivity).isGuest) {
                     presenter.onMenuClickedAsGuest()
@@ -228,7 +222,6 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     startActivity(intent)
                 }
             }
-
             PresentationHomeOptionEnum.SERVICE_TOKEN -> {
                 if ((activity as MenuActivity).isGuest) {
                     presenter.onMenuClickedAsGuest()
@@ -264,12 +257,12 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
 
     override fun renderBanners(banners: List<Banner>) {
         homePageAdapter.setBanners(banners)
-        pageIndicatorView.count = banners.size
+        binding.pageIndicatorView.count = banners.size
     }
 
     override fun showButtons(buttons: ValidateButtons) {
-        if(activity != null) {
-            if(activity is MenuActivity) {
+        if (activity != null) {
+            if (activity is MenuActivity) {
                 if (!(activity as MenuActivity).isGuest) {
                     if (!buttons.boleto)
                         homeAdapter.removeTicket()
@@ -277,28 +270,28 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
                     if (buttons.copartFM.isEmpty())
                         homeAdapter.removeExtracts()
 
-                    if(!buttons.IR)
+                    if (!buttons.IR)
                         homeAdapter.removeIncomeTax()
 
-                    if(!buttons.central)
+                    if (!buttons.central)
                         homeAdapter.removeIncomeSchedule()
 
-                    if(!buttons.autorizador)
+                    if (!buttons.autorizador)
                         homeAdapter.removeAuthorizer()
 
-                    if(!buttons.gerarToken)
+                    if (!buttons.gerarToken)
                         homeAdapter.removeToken()
 
                     isCoPartFM = buttons.copartFM.lowercase() == CO_PART_FM
                     saveSelectionBeneficiaryEnable(buttons.selecaoBeneficiarioAutorizador)
                 }
             }
-            recyclerView.visibility = View.VISIBLE
-            loading_container_home.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.loadingContainerHome.visibility = View.GONE
         }
     }
 
-    private fun saveSelectionBeneficiaryEnable(enable: Boolean){
+    private fun saveSelectionBeneficiaryEnable(enable: Boolean) {
         val preferences = activity?.getSharedPreferences("POLICLIN_SAUDE", Context.MODE_PRIVATE)
         val edit = preferences?.edit()
         edit?.putBoolean("selecaoBeneficiarioAutorizador", enable)
@@ -307,20 +300,20 @@ class HomeFragment: BaseFragmentWithInject(), HomeView, HomeAdapter.OnItemClickL
 
     private fun setupAutoScroll() {
         autoScrollObservable = Observable.intervalRange(1, Long.MAX_VALUE, 0, 5, TimeUnit.SECONDS)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
         autoScrollDisposable = autoScrollObservable?.subscribe { _ ->
             val nextItem =
-                if (viewPager.currentItem + 1 == viewPager.adapter?.count || viewPager.adapter?.count == 0) 0 else viewPager.currentItem + 1
-            viewPager.setCurrentItem(nextItem, true)
+                if (binding.viewPager.currentItem + 1 == binding.viewPager.adapter?.count || binding.viewPager.adapter?.count == 0) 0 else binding.viewPager.currentItem + 1
+            binding.viewPager.setCurrentItem(nextItem, true)
         }
     }
 
     override fun showBannerLoading() {
-        bannerProgress.visibility = View.VISIBLE
+        binding.bannerProgress.visibility = View.VISIBLE
     }
 
     override fun hideBannerLoading() {
-        bannerProgress.visibility = View.GONE
+        binding.bannerProgress.visibility = View.GONE
     }
 }

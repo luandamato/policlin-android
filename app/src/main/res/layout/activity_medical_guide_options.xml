@@ -91,7 +91,9 @@
         android:layout_marginBottom="4dp"
         android:layout_marginTop="4dp"/>
 
-    <include layout="@layout/view_filters" />
+    <include
+        android:id="@+id/view_filters"
+        layout="@layout/view_filters" />
 
    <CheckBox
         android:id="@+id/order_by_distance_check_box"

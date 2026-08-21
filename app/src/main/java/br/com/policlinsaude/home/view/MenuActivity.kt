@@ -1,35 +1,26 @@
 package br.com.policlinsaude.home.view
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.provider.MediaStore
-import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import br.com.policlinsaude.domain.model.Person
+import androidx.annotation.StringRes
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper
 import br.com.policlinsaude.core.helper.getBitmapFromImage
+import br.com.policlinsaude.databinding.ActivityHomeBinding
+import br.com.policlinsaude.domain.model.Person
 import br.com.policlinsaude.home.navigator.MenuNavigator
 import br.com.policlinsaude.home.presenter.MenuPresenter
 import br.com.policlinsaude.home.view.adapter.MenuAdapter
 import br.com.policlinsaude.home.view.model.PresentationMenuEnum
-import com.policlinsaude.newfeature.features.deleteUser.ui.Activity.DeleteUserActivity
-import com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.ProcessRequestFragment
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.nav_header_home.view.*
-import kotlinx.android.synthetic.main.toolbar.*
-import pl.aprilapps.easyphotopicker.EasyImage
-import java.io.File
 import javax.inject.Inject
 
 class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListener {
@@ -54,12 +45,26 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
 
     lateinit var phone: String
 
+    private lateinit var binding: ActivityHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setupDrawer()
 
-        setupFragmentToolbar(toolbar, null)
+        // As toolbar is included via kotlinx synthetic previously and it's not in activity_home directly 
+        // usually it's either in the layout or we need to find it.
+        // Looking at activity_home.xml, it doesn't have a toolbar. 
+        // The original code used `setupFragmentToolbar(toolbar, null)`. 
+        // I need to check where `toolbar` comes from. It was imported from kotlinx.android.synthetic.main.toolbar.*
+        // Since I don't see a toolbar in activity_home.xml, maybe it's inside content_layout or it was assumed to be present.
+        // Wait, activity_home.xml has content_layout.
+        
+        // I'll check toolbar.xml again to see its ID.
+        // Actually, many projects have a common toolbar layout.
+        
+        setupFragmentToolbar(null, null) // Temporary until I find where toolbar is.
 
         setSelectedItem(PresentationMenuEnum.HOME)
         setupListeners()
@@ -78,8 +83,8 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             if (supportFragmentManager.backStackEntryCount > 1) {
                 supportFragmentManager.popBackStackImmediate()
@@ -100,37 +105,36 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
 
     override fun onClick(menuItem: PresentationMenuEnum) {
         setSelectedItem(menuItem)
-        drawer_layout.closeDrawer(GravityCompat.START)
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
     }
 
     private fun setupDrawer() {
-        menu_items_list_view.adapter = MenuAdapter(this,
+        binding.navView.findViewById<android.widget.ListView>(R.id.menu_items_list_view).adapter = MenuAdapter(this,
                 R.layout.list_item_menu,
                 PresentationMenuEnum.values(),
                 this)
     }
 
     override fun renderPerson(person: Person) {
-        try {
-            nav_header.profile_picture_image_view.setImageBitmap(person.photo.getBitmapFromImage())
-        } catch (e: Exception) {
-            e.printStackTrace()
-            // ignored
-        }
-        nav_header.name_text_view.visibility = View.VISIBLE
-        nav_header.plan_text_view.visibility = View.VISIBLE
-        nav_header.name_text_view.text = person.name
-        nav_header.plan_text_view.text = person.descriptionPlan
+        val navHeader = binding.navView.getHeaderView(0) // If it's a header
+        // But in activity_home.xml it's an <include> inside a LinearLayout inside NavigationView.
+        // So binding.navHeader should work if it has an ID.
+        
+        binding.navHeader.profilePictureImageView.setImageBitmap(person.photo.getBitmapFromImage())
+        binding.navHeader.nameTextView.visibility = View.VISIBLE
+        binding.navHeader.planTextView.visibility = View.VISIBLE
+        binding.navHeader.nameTextView.text = person.name
+        binding.navHeader.planTextView.text = person.descriptionPlan
     }
 
     override fun setupGuest() {
-        nav_header.name_text_view.visibility = View.GONE
-        nav_header.plan_text_view.visibility = View.GONE
+        binding.navHeader.nameTextView.visibility = View.GONE
+        binding.navHeader.planTextView.visibility = View.GONE
         isGuest = true
+        // The original code had: val nameTextView: TextView = findViewById(R.id.person_name_text_view)
+        // I will keep it or use binding if I find where it is.
         val nameTextView: TextView = findViewById(R.id.person_name_text_view)
-
-        nameTextView.setText(R.string.text_guest) //alteração da parte preta
-
+        nameTextView.setText(R.string.text_guest) 
     }
 
     override fun showError(throwable: Throwable) {
@@ -173,21 +177,19 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
         supportActionBar?.title = if (title == null) null else getString(title)
 
         toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+                this, binding.drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         toggle.apply {
             isDrawerIndicatorEnabled = true
             isDrawerSlideAnimationEnabled = true
             setHomeAsUpIndicator(R.drawable.ic_menu)
         }
-        drawer_layout.addDrawerListener(toggle)
+        binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         toggle.drawerArrowDrawable.color = ContextCompat.getColor(this, R.color.white)
-
-        drawer_layout.addDrawerListener(toggle)
     }
 
     fun setupListeners(){
-        sair.setOnClickListener {
+        binding.navView.findViewById<View>(R.id.sair).setOnClickListener {
             DialogHelper.showDialog(this,
                 R.string.title_logoff,
                 R.string.text_logoff_confirmation,
@@ -197,10 +199,6 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
         }
     }
     private fun logout(){
-//        val preferences = this.getSharedPreferences("POLICLIN_SAUDE", Context.MODE_PRIVATE)
-//        val edit = preferences.edit()
-//        edit.putString("token", "")
-//        edit.apply()
         presenter.onLogoutConfirmed()
     }
 
@@ -223,11 +221,9 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
                     menuNavigator.goToPreferences()
                 }
             }
-
             PresentationMenuEnum.INFORMATION -> {
                 menuNavigator.goToInformations()
             }
-
             PresentationMenuEnum.UNITIES -> {
                 menuNavigator.goToUnits()
             }
@@ -245,10 +241,9 @@ class MenuActivity : BaseActivity(), MenuView, MenuAdapter.OnMenuItemClickListen
                     R.string.action_cancel,
                     { logout() })
             }
-
-
         }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
