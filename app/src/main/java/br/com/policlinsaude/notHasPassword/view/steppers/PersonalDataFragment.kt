@@ -10,11 +10,11 @@ import br.com.policlinsaude.core.base.BaseFragment
 import br.com.policlinsaude.core.helper.InvalidData
 import br.com.policlinsaude.core.helper.MaskUtils
 import br.com.policlinsaude.core.helper.Validations
+import br.com.policlinsaude.databinding.FragmentPersonalDataBinding
 import br.com.policlinsaude.notHasPassword.presenter.NotHasPasswordPresenter
 import br.com.policlinsaude.notHasPassword.view.NotHasPasswordActivity
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import com.redmadrobot.inputmask.MaskedTextChangedListener
-import kotlinx.android.synthetic.main.fragment_personal_data.*
 import java.util.*
 
 class PersonalDataFragment : BaseFragment() {
@@ -32,10 +32,13 @@ class PersonalDataFragment : BaseFragment() {
     private var phone: String = InvalidData.UNINITIALIZED.getString()
     private var cpf: String = InvalidData.UNINITIALIZED.getString()
 
+    private lateinit var binding: FragmentPersonalDataBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
-        return inflater.inflate(R.layout.fragment_personal_data, container, false)
+        binding = FragmentPersonalDataBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,73 +52,73 @@ class PersonalDataFragment : BaseFragment() {
     }
 
     private fun addMaskToFields() {
-        MaskUtils.applyMaskToView(MaskUtils.PHONE, editTextPhone, object : MaskedTextChangedListener.ValueListener {
+        MaskUtils.applyMaskToView(MaskUtils.PHONE, binding.editTextPhone, object : MaskedTextChangedListener.ValueListener {
             override fun onTextChanged(maskFilled: Boolean, extractedValue: String) {
                 phone = extractedValue
             }
         })
 
-        MaskUtils.applyMaskToView(MaskUtils.CPF, editTextCpf, object : MaskedTextChangedListener.ValueListener {
+        MaskUtils.applyMaskToView(MaskUtils.CPF, binding.editTextCpf, object : MaskedTextChangedListener.ValueListener {
             override fun onTextChanged(maskFilled: Boolean, extractedValue: String) {
                 cpf = extractedValue
             }
         })
 
-        MaskUtils.applyMaskToView(MaskUtils.DATE, editTextBirthday, null)
+        MaskUtils.applyMaskToView(MaskUtils.DATE, binding.editTextBirthday, null)
     }
 
     private fun setOnClickListeners() {
-        birthdayCalendarButton.setOnClickListener {
-            showDatePicker(editTextBirthday)
+        binding.birthdayCalendarButton.setOnClickListener {
+            showDatePicker(binding.editTextBirthday)
         }
     }
 
     private fun setFields() {
         val person = presenter.getPresentationPerson()
-        editTextName.setText(person.name)
-        editTextCpf.setText(person.cpf)
+        binding.editTextName.setText(person.name)
+        binding.editTextCpf.setText(person.cpf)
         val calendar = Calendar.getInstance()
         calendar.time = person.birthday
-        setDateAtEditText(editTextBirthday, calendar)
-        editTextMothersName.setText(person.mothersName)
-        editTextPhone.setText(person.phone)
-        editTextEmail.setText(person.email)
-        editTextConfirmEmail.setText(person.email)
+        setDateAtEditText(binding.editTextBirthday, calendar)
+        binding.editTextMothersName.setText(person.mothersName)
+        binding.editTextPhone.setText(person.phone)
+        binding.editTextEmail.setText(person.email)
+        binding.editTextConfirmEmail.setText(person.email)
     }
 
     private fun addValidationFields() {
-        awesomeValidation.addValidation(editTextName,
+        awesomeValidation.addValidation(binding.editTextName,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextBirthday,
+        awesomeValidation.addValidation(binding.editTextBirthday,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextPhone,
+        awesomeValidation.addValidation(binding.editTextPhone,
                 RegexTemplate.TELEPHONE, getString(R.string.text_phone_invalid))
-        awesomeValidation.addValidation(editTextPhone,
+        awesomeValidation.addValidation(binding.editTextPhone,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextEmail,
+        awesomeValidation.addValidation(binding.editTextEmail,
                 Patterns.EMAIL_ADDRESS, getString(R.string.text_email_invalid))
-        awesomeValidation.addValidation(editTextConfirmEmail,
+        awesomeValidation.addValidation(binding.editTextConfirmEmail,
                 Patterns.EMAIL_ADDRESS, getString(R.string.text_email_invalid))
-        awesomeValidation.addValidation(editTextPhone,
+        awesomeValidation.addValidation(binding.editTextPhone,
                 REGEX_MIN_PHONE, getString(R.string.text_phone_invalid))
 
-        awesomeValidation.addValidation(editTextCpf, { value: String -> Validations.isValidCPF(value) || value.isEmpty() }, getString(R.string.text_cpf_invalid))
+        awesomeValidation.addValidation(binding.editTextCpf, { value: String -> Validations.isValidCPF(value) || value.isEmpty() }, getString(R.string.text_cpf_invalid))
 
-        awesomeValidation.addValidation(editTextConfirmEmail, editTextEmail, getString(R.string.text_two_email_invalid))
+        awesomeValidation.addValidation(binding.editTextConfirmEmail, binding.editTextEmail, getString(R.string.text_two_email_invalid))
 
-        awesomeValidation.addValidation(editTextBirthday,
+        awesomeValidation.addValidation(binding.editTextBirthday,
                 { value: String -> Validations.isValidDate(value) }, getString(R.string.text_date_invalid))
     }
 
     fun validateAndSave(): Boolean {
         if (awesomeValidation.validate()) {
             val person = presenter.getPresentationPerson()
-            person.name = editTextName.text.toString()
+            person.name = binding.editTextName.text.toString()
             person.cpf = cpf
-            person.birthday = getDateFromEditText(editTextBirthday)
+            person.birthday = getDateFromEditText(binding.editTextBirthday)
             person.phone = phone
-            person.email = editTextEmail.text.toString()
-            person.mothersName = editTextMothersName.text.toString()
+            person.email = binding.editTextEmail.text.toString()
+            person.mothersName = binding.editTextMothersName.text.toString()
             presenter.setPresentationPerson(person)
             return true
         }

@@ -13,6 +13,7 @@ import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper
 import br.com.policlinsaude.core.helper.LocationHelper
+import br.com.policlinsaude.databinding.ActivityMapsBinding
 import br.com.policlinsaude.map.presenter.MapsPresenter
 import br.com.policlinsaude.medicalGuideOptions.presenter.model.PresentationLocation
 import br.com.policlinsaude.model.PresentationEstablishmentLocation
@@ -27,7 +28,6 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.activity_maps.*
 import javax.inject.Inject
 
 
@@ -55,14 +55,18 @@ class MapsActivity : BaseActivity(), MapsView, OnMapReadyCallback {
 
     private var map: GoogleMap? = null
 
+    private lateinit var binding: ActivityMapsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_maps)
-        setupToolbar()
+
+        binding = ActivityMapsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupToolbar(binding.toolbar.toolbar)
         val isMedicalGuide = intent.extras?.getBoolean(EXTRA_IS_MEDICAL_GUIDE, false)
         setTitle(if (isMedicalGuide == true) R.string.title_medical_guide_map else R.string.title_own_network_map)
 
-        (mapsFragment as SupportMapFragment).getMapAsync(this)
+        (binding.mapsFragment as SupportMapFragment).getMapAsync(this)
     }
 
     override fun onMapReady(map: GoogleMap) {
@@ -72,11 +76,11 @@ class MapsActivity : BaseActivity(), MapsView, OnMapReadyCallback {
     }
 
     override fun showLoading() {
-        loadingView.visibility = View.VISIBLE
+        binding.loadingView.root.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        loadingView.visibility = View.GONE
+        binding.loadingView.root.visibility = View.GONE
     }
 
     override fun getCurrentLocation() {

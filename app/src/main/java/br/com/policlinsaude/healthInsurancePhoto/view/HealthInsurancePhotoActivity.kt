@@ -18,12 +18,12 @@ import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper
 import br.com.policlinsaude.core.helper.getBitmapFromImage
 import br.com.policlinsaude.core.helper.rotate
+import br.com.policlinsaude.databinding.ActivityHealthInsurancePhotoBinding
 import br.com.policlinsaude.healthInsurancePhoto.presenter.HealthInsurancePhotoPresenter
 import br.com.policlinsaude.healthInsurancePhoto.view.adapter.PhotoPageAdapter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_health_insurance_photo.*
 import java.lang.reflect.Type
 import javax.inject.Inject
 
@@ -56,10 +56,13 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
     private var isImageVerso: Boolean = false
 
+    private lateinit var binding: ActivityHealthInsurancePhotoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_health_insurance_photo)
+
+        binding = ActivityHealthInsurancePhotoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         AndroidInjection.inject(this)
 
         sharedPreferences = getSharedPreferences(myPreferences, Context.MODE_PRIVATE)
@@ -70,7 +73,7 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
         Log.d("CARTEIRINHA","VALOR DE photosPrefs: " + photosPref)
         Log.d("CARTEIRINHA","VALOR DE photoVErso: " + photoVersoPref)
         presenter.getImage(this)
-        setupToolbar()
+        setupToolbar(binding.toolbar)
     }
 
 
@@ -92,9 +95,9 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
         photoPageAdapter.setPhotos(photos)
 
-        pageIndicatorViewPhoto.count = photos.size
+        binding.pageIndicatorViewPhoto.count = photos.size
 
-        viewPagerPhoto.adapter = photoPageAdapter
+        binding.viewPagerPhoto.adapter = photoPageAdapter
 
         photoVerso = strPhotoVerso
 
@@ -107,14 +110,14 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
  //   override fun showLoading() { login_progressbar.visibility = View.VISIBLE
  //   }
-    override fun showLoading() { bannerProgressPhoto.visibility = View.VISIBLE
+    override fun showLoading() { binding.bannerProgressPhoto.visibility = View.VISIBLE
     }
 
 
  //   override fun hideLoading() { login_progressbar.visibility = View.GONE
  //   }
 
-    override fun hideLoading() { bannerProgressPhoto.visibility = View.GONE
+    override fun hideLoading() { binding.bannerProgressPhoto.visibility = View.GONE
           }
 
    // override fun showImage(photo: String) {
@@ -155,9 +158,9 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
       photoVerso = strPhotoVerso
 
-       pageIndicatorViewPhoto.count = photos.size
+       binding.pageIndicatorViewPhoto.count = photos.size
 
-       viewPagerPhoto.adapter = photoPageAdapter
+       binding.viewPagerPhoto.adapter = photoPageAdapter
        Log.d("CARTEIRINHA","PHOTO lista tamanho: " + photoListFull.listaimgFrente!!.size)
 
      //  imageView.setImageBitmap(photo.getBitmapFromImage()
@@ -179,8 +182,8 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
                     if (!isImageVerso){
 
-                        banners_containerPhoto.visibility = View.GONE
-                        imageViewVerso.visibility =  View.VISIBLE
+                        binding.bannersContainerPhoto.visibility = View.GONE
+                        binding.imageViewVerso.visibility =  View.VISIBLE
 
                         Log.d("CARTEIRINHA","FOTO DO VERSO: " + photoVerso)
                         presenter.onShowBackImageClicked(photoVerso)
@@ -190,8 +193,8 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
                     }
                     else {
-                        banners_containerPhoto.visibility = View.VISIBLE
-                        imageViewVerso.visibility =  View.GONE
+                        binding.bannersContainerPhoto.visibility = View.VISIBLE
+                        binding.imageViewVerso.visibility =  View.GONE
                         Log.d("CARTEIRINHA","FOTO DE FRENTE")
                         isImageVerso = false
                     }
@@ -209,7 +212,7 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
     override fun showImageVerse(photo: String?) {
 
-        imageViewVerso.setImageBitmap(photo?.getBitmapFromImage()?.rotate(90f))
+        binding.imageViewVerso.setImageBitmap(photo?.getBitmapFromImage()?.rotate(90f))
         Log.d("CARTEIRINHA","DENTRO de showImageVerse ")
     }
 
@@ -233,9 +236,9 @@ class HealthInsurancePhotoActivity : BaseActivity(), HealthInsurancePhotoView {
 
             photoPageAdapter.setPhotos(photos)
 
-            pageIndicatorViewPhoto.count = photos.size
+            binding.pageIndicatorViewPhoto.count = photos.size
 
-            viewPagerPhoto.adapter = photoPageAdapter
+            binding.viewPagerPhoto.adapter = photoPageAdapter
 
             DialogHelper.showDialog(this, getString(R.string.title_advise),
                     getString(R.string.text_no_internet_short),

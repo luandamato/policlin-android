@@ -15,9 +15,9 @@ import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.IntentHelper
+import br.com.policlinsaude.databinding.ActivityLoginBinding
 import br.com.policlinsaude.login.presenter.LoginPresenter
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
-import kotlinx.android.synthetic.main.activity_login.*
 import javax.inject.Inject
 import android.telephony.TelephonyManager
 
@@ -52,14 +52,17 @@ class LoginActivity : BaseActivity(), LoginView {
     lateinit var presenter: LoginPresenter
     private var hided: Boolean = true
 
+    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         presenter.checkHasToken()
 
-        val textViewMsgWhenEntering = findViewById<TextView>(R.id.textViewMsgWhenEntering)
-        textViewMsgWhenEntering.setText(Html.fromHtml(getString(R.string.msg_when_entering_you_allow)), TextView.BufferType.SPANNABLE)
+        binding.textViewMsgWhenEntering.setText(Html.fromHtml(getString(R.string.msg_when_entering_you_allow)), TextView.BufferType.SPANNABLE)
     }
 
     override fun onBackPressed() {
@@ -84,33 +87,33 @@ class LoginActivity : BaseActivity(), LoginView {
     }
 
     private fun addValidationFields() {
-        awesomeValidation.addValidation(editTextRegister,
+        awesomeValidation.addValidation(binding.editTextRegister,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextPassword,
+        awesomeValidation.addValidation(binding.editTextPassword,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextOrder,
+        awesomeValidation.addValidation(binding.editTextOrder,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
     }
 
     private fun setOnClickListeners() {
-        buttonEnter.setOnClickListener {
+        binding.buttonEnter.setOnClickListener {
             getToken()
         }
-        buttonForgotPassword.setOnClickListener {
+        binding.buttonForgotPassword.setOnClickListener {
             presenter.clickedButtonForgotPassword()
         }
-        buttonNotHasPassword.setOnClickListener {
+        binding.buttonNotHasPassword.setOnClickListener {
             presenter.clickedButtonNotHasPassword()
         }
-        buttonIamNotClient.setOnClickListener {
+        binding.buttonIamNotClient.setOnClickListener {
             presenter.clickedButtonIamNotClient()
         }
 
-        imgEye.setOnClickListener {
+        binding.imgEye.setOnClickListener {
             presenter.clickedEye()
         }
 
-        textViewMsgWhenEntering.setOnClickListener {
+        binding.textViewMsgWhenEntering.setOnClickListener {
             presenter.clickedLink()
         }
     }
@@ -147,49 +150,49 @@ class LoginActivity : BaseActivity(), LoginView {
     }
 
     override fun showLoginLoading() {
-        login_progressbar.visibility = View.VISIBLE
+        binding.loginProgressbar.visibility = View.VISIBLE
     }
 
     override fun hideLoginLoading() {
-        login_progressbar.visibility = View.GONE
+        binding.loginProgressbar.visibility = View.GONE
     }
 
-    override fun getRegister(): String = editTextRegister.text.toString()
+    override fun getRegister(): String = binding.editTextRegister.text.toString()
 
-    override fun getPassword(): String = editTextPassword.text.toString()
+    override fun getPassword(): String = binding.editTextPassword.text.toString()
 
-    override fun getOrder(): String = editTextOrder.text.toString()
+    override fun getOrder(): String = binding.editTextOrder.text.toString()
 
     override fun showButtonEnter() {
-        buttonEnter.visibility = View.VISIBLE
+        binding.buttonEnter.visibility = View.VISIBLE
     }
 
     override fun hideButtonEnter() {
-        buttonEnter.visibility = View.GONE
+        binding.buttonEnter.visibility = View.GONE
     }
 
     override fun showLoading() {
-        loading_container.visibility = View.VISIBLE
+        binding.loadingContainer.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        loading_container.visibility = View.GONE
+        binding.loadingContainer.visibility = View.GONE
     }
 
     override fun changeEye() {
 
         if (hided){
             Log.d("LOGIN","ESTAVA HIDED")
-            imgEye.setImageResource(R.drawable.ic_action_eye_open)
-            //editTextPassword.setInputType (InputType.TYPE_CLASS_TEXT)
-            editTextPassword.setTransformationMethod(null);
+            binding.imgEye.setImageResource(R.drawable.ic_action_eye_open)
+            //binding.editTextPassword.setInputType (InputType.TYPE_CLASS_TEXT)
+            binding.editTextPassword.setTransformationMethod(null);
             hided = false
         }
          else{
             Log.d("LOGIN","ESTAVA VISIBLE")
-            imgEye.setImageResource(R.drawable.ic_action_eye_closed)
-           // editTextPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
-            editTextPassword.setTransformationMethod(PasswordTransformationMethod())
+            binding.imgEye.setImageResource(R.drawable.ic_action_eye_closed)
+           // binding.editTextPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD)
+            binding.editTextPassword.setTransformationMethod(PasswordTransformationMethod())
             hided = true
         }
 

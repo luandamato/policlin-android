@@ -14,12 +14,12 @@ import br.com.policlinsaude.domain.model.HealthInsurancePhoto
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper
+import br.com.policlinsaude.databinding.ActivityFavoritesBinding
 import br.com.policlinsaude.favorites.adapter.FavoritesAdapter
 import br.com.policlinsaude.favorites.presenter.FavoritesPresenter
 import br.com.policlinsaude.model.PresentationEstablishment
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.android.synthetic.main.activity_favorites.*
 import javax.inject.Inject
 
 
@@ -42,14 +42,17 @@ class FavoritesActivity : BaseActivity(), FavoritesView, FavoritesAdapter.OnItem
     private var myPreferences = "myPrefs"
     private var FAVORITES = "favoritesPref"
 
+    private lateinit var binding: ActivityFavoritesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_favorites)
+
+        binding = ActivityFavoritesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences(myPreferences, Context.MODE_PRIVATE)
 
-        setupToolbar()
+        setupToolbar(binding.toolbar.toolbar)
 
         setupRecyclerView()
     }
@@ -62,16 +65,16 @@ class FavoritesActivity : BaseActivity(), FavoritesView, FavoritesAdapter.OnItem
     private fun setupRecyclerView() {
         // todo fix favorites
         adapter = FavoritesAdapter(this)
-        favoritesRecyclerView.adapter = adapter
+        binding.favoritesRecyclerView.adapter = adapter
         val layoutManager =
             LinearLayoutManager(this)
-        favoritesRecyclerView.addItemDecoration(
+        binding.favoritesRecyclerView.addItemDecoration(
             DividerItemDecoration(
                 this,
                 layoutManager.orientation
             )
         )
-        favoritesRecyclerView.layoutManager = layoutManager
+        binding.favoritesRecyclerView.layoutManager = layoutManager
     }
 
     override fun onItemClick(establishmentIndex: Int) {
@@ -83,11 +86,11 @@ class FavoritesActivity : BaseActivity(), FavoritesView, FavoritesAdapter.OnItem
     }
 
     override fun showLoading() {
-        loadingView.visibility = View.VISIBLE
+        binding.loadingView.root.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        loadingView.visibility = View.GONE
+        binding.loadingView.root.visibility = View.GONE
     }
 
     override fun showDialogError(throwable: Throwable, tryAgainAction: (() -> Unit)?) {

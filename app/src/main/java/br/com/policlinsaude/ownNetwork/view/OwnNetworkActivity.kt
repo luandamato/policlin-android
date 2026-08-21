@@ -11,11 +11,11 @@ import android.view.View
 import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
+import br.com.policlinsaude.databinding.ActivityOwnNetworkBinding
 import br.com.policlinsaude.model.PresentationEstablishment
 import br.com.policlinsaude.model.PresentationQualification
 import br.com.policlinsaude.ownNetwork.presenter.OwnNetworkPresenter
 import br.com.policlinsaude.ownNetwork.view.adapter.OwnNetworkPageAdapter
-import kotlinx.android.synthetic.main.activity_own_network.*
 import javax.inject.Inject
 
 class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
@@ -33,14 +33,18 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
     @Inject
     lateinit var adapter: OwnNetworkPageAdapter
 
+    private lateinit var binding: ActivityOwnNetworkBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_own_network)
 
-        setupToolbar()
+        binding = ActivityOwnNetworkBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        viewPager.adapter = adapter
-        tabs.setupWithViewPager(viewPager)
+        setupToolbar(binding.toolbar.toolbar)
+
+        binding.viewPager.adapter = adapter
+        binding.tabs.setupWithViewPager(binding.viewPager)
        // getOwnNetworks()
     }
 
@@ -81,7 +85,7 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
         item.let {
             when (item.itemId) {
                 R.id.action_map -> {
-                    presenter.onMapClicked(tabs.selectedTabPosition)
+                    presenter.onMapClicked(binding.tabs.selectedTabPosition)
                     return true
                 }
                 else -> {
@@ -98,11 +102,11 @@ class OwnNetworkActivity : BaseActivity(), OwnNetworkView {
     }
 
     override fun showLoading() {
-        login_progressbar.visibility = View.VISIBLE
+        binding.loginProgressbar.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        login_progressbar.visibility = View.GONE
+        binding.loginProgressbar.visibility = View.GONE
     }
 
 }

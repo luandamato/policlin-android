@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.helper.getBitmapFromImage
+import br.com.policlinsaude.databinding.ListItemUnitsBinding
 import br.com.policlinsaude.medicalGuideList.view.adapter.MedicalGuideListAdapter
 import br.com.policlinsaude.medicalGuideList.view.adapter.MedicalGuideQualificationAdapter
 import br.com.policlinsaude.model.PresentationEstablishment
@@ -14,8 +15,6 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import kotlinx.android.synthetic.main.list_item_own_network.view.*
-import kotlinx.android.synthetic.main.list_item_units.view.*
 
 class UnitsAdapter(private val onItemClickListener: OnItemClickListener)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -38,8 +37,9 @@ class UnitsAdapter(private val onItemClickListener: OnItemClickListener)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == TYPE_ITEM) {
-            UnitsViewHolder(LayoutInflater.from(parent.context)
-                    .inflate(R.layout.list_item_units, parent, false))
+            UnitsViewHolder(
+                ListItemUnitsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            )
         } else {
             MedicalGuideListAdapter.MedicalGuideListFooterViewHolder(LayoutInflater.from(parent.context)
                     .inflate(R.layout.custom_view_info_medical_guide_list_units, parent, false), qualifications)
@@ -69,37 +69,37 @@ class UnitsAdapter(private val onItemClickListener: OnItemClickListener)
         fun onItemClick(establishment: PresentationEstablishment)
     }
 
-    inner class UnitsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class UnitsViewHolder(private val binding: ListItemUnitsBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun format(establishment: PresentationEstablishment) {
-            val flexBoxLayoutManager = FlexboxLayoutManager(itemView.context)
+            val flexBoxLayoutManager = FlexboxLayoutManager(binding.root.context)
             flexBoxLayoutManager.flexDirection = FlexDirection.ROW
             flexBoxLayoutManager.flexWrap = FlexWrap.WRAP
             flexBoxLayoutManager.justifyContent = JustifyContent.FLEX_START
-            itemView.qualificationsRecyclerViewUnits.adapter = MedicalGuideQualificationAdapter(establishment.qualifications)
-            itemView.qualificationsRecyclerViewUnits.layoutManager = flexBoxLayoutManager
+            binding.qualificationsRecyclerViewUnits.adapter = MedicalGuideQualificationAdapter(establishment.qualifications)
+            binding.qualificationsRecyclerViewUnits.layoutManager = flexBoxLayoutManager
 
-            itemView.textViewNameUnits.text = establishment.title
-            itemView.textViewSubtitleUnits.text = establishment.subTitle
-            itemView.context.let {
-                itemView.textViewTypeEstablishmentUnits.text = it.getString(R.string.msg_type_establishment, establishment.type)
-                itemView.textViewTypeEstablishmentUnits.visibility = View.GONE
-                itemView.textViewAddressUnits.text = it.getString(R.string.msg_address_format, establishment.publicPlace,
+            binding.textViewNameUnits.text = establishment.title
+            binding.textViewSubtitleUnits.text = establishment.subTitle
+            binding.root.context.let {
+                binding.textViewTypeEstablishmentUnits.text = it.getString(R.string.msg_type_establishment, establishment.type)
+                binding.textViewTypeEstablishmentUnits.visibility = View.GONE
+                binding.textViewAddressUnits.text = it.getString(R.string.msg_address_format, establishment.publicPlace,
                         establishment.number, establishment.complement, establishment.neighborhood,
                         establishment.zipCode, establishment.city, establishment.state)
             }
-            itemView.textViewPhoneOneUnits.text = establishment.phoneOne
-            itemView.textViewPhoneTwoUnits.text = establishment.phoneTwo
-            itemView.textViewPhoneOneUnits.visibility = if (establishment.phoneOne.isEmpty()) View.GONE else View.VISIBLE
-            itemView.textViewPhoneTwoUnits.visibility = if (establishment.phoneTwo.isEmpty()) View.GONE else View.VISIBLE
-            itemView.establishmentContainerUnits.setOnClickListener {
+            binding.textViewPhoneOneUnits.text = establishment.phoneOne
+            binding.textViewPhoneTwoUnits.text = establishment.phoneTwo
+            binding.textViewPhoneOneUnits.visibility = if (establishment.phoneOne.isEmpty()) View.GONE else View.VISIBLE
+            binding.textViewPhoneTwoUnits.visibility = if (establishment.phoneTwo.isEmpty()) View.GONE else View.VISIBLE
+            binding.establishmentContainerUnits.setOnClickListener {
                 onItemClickListener.onItemClick(establishment)
             }
             try {
-                itemView.imageViewFrontUnits.setImageBitmap(establishment.photoFront.getBitmapFromImage())
-                itemView.imageViewFrontUnits.visibility = View.VISIBLE
+                binding.imageViewFrontUnits.setImageBitmap(establishment.photoFront.getBitmapFromImage())
+                binding.imageViewFrontUnits.visibility = View.VISIBLE
             } catch (exception: Exception) {
-                itemView.imageViewFront.visibility = View.INVISIBLE
+                binding.imageViewFrontUnits.visibility = View.INVISIBLE
             }
         }
     }

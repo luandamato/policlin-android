@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseFragmentWithInject
+import br.com.policlinsaude.databinding.FragmentOwnNetworkBinding
 import br.com.policlinsaude.model.PresentationEstablishment
 import br.com.policlinsaude.model.PresentationQualification
 import br.com.policlinsaude.ownNetwork.navigator.OwnNetworkNavigator
 import br.com.policlinsaude.ownNetwork.view.adapter.OwnNetworkAdapter
-import kotlinx.android.synthetic.main.fragment_own_network.*
 import javax.inject.Inject
 
 class OwnNetworkFragment : BaseFragmentWithInject(), OwnNetworkAdapter.OnItemClickListener {
@@ -39,9 +39,12 @@ class OwnNetworkFragment : BaseFragmentWithInject(), OwnNetworkAdapter.OnItemCli
     @Inject
     lateinit var navigator: OwnNetworkNavigator
 
+    private lateinit var binding: FragmentOwnNetworkBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_own_network, container, false)
+        binding = FragmentOwnNetworkBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,9 +53,9 @@ class OwnNetworkFragment : BaseFragmentWithInject(), OwnNetworkAdapter.OnItemCli
         adapter.setEstablishments((arguments!!.getParcelableArray(EXTRA_ESTABLISHMENTS) as Array<PresentationEstablishment>).toMutableList(),
                 (arguments!!.getParcelableArray(EXTRA_QUALIFICATIONS) as Array<PresentationQualification>).toMutableList())
 
-        recyclerView.layoutManager =
+        binding.recyclerView.layoutManager =
             LinearLayoutManager(context)
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
     }
 
     override fun onItemClick(establishment: PresentationEstablishment) {

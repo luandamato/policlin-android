@@ -10,10 +10,10 @@ import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseFragment
 import br.com.policlinsaude.core.helper.getBitmapFromImage
 import br.com.policlinsaude.core.helper.toBase64
+import br.com.policlinsaude.databinding.FragmentCreatePasswordBinding
 import br.com.policlinsaude.notHasPassword.presenter.NotHasPasswordPresenter
 import br.com.policlinsaude.notHasPassword.view.NotHasPasswordActivity
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
-import kotlinx.android.synthetic.main.fragment_create_password.*
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 import java.lang.Exception
@@ -28,9 +28,12 @@ class CreatePasswordFragment : BaseFragment() {
 
     private lateinit var presenter: NotHasPasswordPresenter
 
+    private lateinit var binding: FragmentCreatePasswordBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
-        return inflater.inflate(R.layout.fragment_create_password, container, false)
+        binding = FragmentCreatePasswordBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,7 +54,7 @@ class CreatePasswordFragment : BaseFragment() {
                     val image = it.toBase64(500,0)
                     presenter.onImagePicked(image)
                     if (!image.isNullOrEmpty()) {
-                        imageView.setImageBitmap(image!!.getBitmapFromImage())
+                        binding.imageView.setImageBitmap(image!!.getBitmapFromImage())
                     }
                 }
             }
@@ -72,34 +75,34 @@ class CreatePasswordFragment : BaseFragment() {
     }
 
     private fun setClickListener() {
-        imageView.setOnClickListener {
+        binding.imageView.setOnClickListener {
             EasyImage.openChooserWithGallery(this, getString(R.string.text_image_chooser_title), 0)
         }
     }
 
     private fun setFields() {
         val person = presenter.getPresentationPerson()
-        editTextPassword.setText(person.password)
-        editTextConfirmPassword.setText(person.password)
+        binding.editTextPassword.setText(person.password)
+        binding.editTextConfirmPassword.setText(person.password)
     }
 
     private fun addValidationFields() {
-        awesomeValidation.addValidation(editTextPassword,
+        awesomeValidation.addValidation(binding.editTextPassword,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextConfirmPassword,
+        awesomeValidation.addValidation(binding.editTextConfirmPassword,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
 
-        awesomeValidation.addValidation(editTextConfirmPassword,
+        awesomeValidation.addValidation(binding.editTextConfirmPassword,
                 REGEX_MIN_AND_MAX_LENGTH_PASSWORD, getString(R.string.text_min_and_max_password))
 
-        awesomeValidation.addValidation(editTextConfirmPassword, editTextPassword,
+        awesomeValidation.addValidation(binding.editTextConfirmPassword, binding.editTextPassword,
                 getString(R.string.text_two_password_invalid))
     }
 
     fun validateAndSave(): Boolean {
         if (awesomeValidation.validate()) {
             val person = presenter.getPresentationPerson()
-            person.password = editTextPassword.text.toString()
+            person.password = binding.editTextPassword.text.toString()
             presenter.setPresentationPerson(person)
             return true
         }

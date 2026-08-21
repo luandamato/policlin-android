@@ -10,9 +10,9 @@ import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper
 import br.com.policlinsaude.core.helper.InvalidData
 import br.com.policlinsaude.core.helper.MaskUtils
+import br.com.policlinsaude.databinding.ActivityEditPhoneBinding
 import br.com.policlinsaude.editPhone.presenter.EditPhonePresenter
 import com.redmadrobot.inputmask.MaskedTextChangedListener
-import kotlinx.android.synthetic.main.activity_edit_phone.*
 import javax.inject.Inject
 
 class EditPhoneActivity : BaseActivity(), EditPhoneView {
@@ -30,10 +30,14 @@ class EditPhoneActivity : BaseActivity(), EditPhoneView {
 
     private var phone: String = InvalidData.UNINITIALIZED.getString()
 
+    private lateinit var binding: ActivityEditPhoneBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_phone)
-        setupToolbar()
+
+        binding = ActivityEditPhoneBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupToolbar(binding.toolbar.toolbar)
 
         setValidations()
         setClickListener()
@@ -41,7 +45,7 @@ class EditPhoneActivity : BaseActivity(), EditPhoneView {
     }
 
     private fun setMasks() {
-        MaskUtils.applyMaskToView(MaskUtils.PHONE, phoneTextView, object : MaskedTextChangedListener.ValueListener {
+        MaskUtils.applyMaskToView(MaskUtils.PHONE, binding.phoneTextView, object : MaskedTextChangedListener.ValueListener {
             override fun onTextChanged(maskFilled: Boolean, extractedValue: String) {
                 phone = extractedValue
             }
@@ -53,11 +57,11 @@ class EditPhoneActivity : BaseActivity(), EditPhoneView {
     }
 
     override fun showLoading() {
-        loadingView.visibility = View.VISIBLE
+        binding.loadingView.root.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        loadingView.visibility = View.GONE
+        binding.loadingView.root.visibility = View.GONE
     }
 
     override fun showSuccessMessage() {
@@ -75,12 +79,12 @@ class EditPhoneActivity : BaseActivity(), EditPhoneView {
     }
 
     private fun setValidations() {
-        awesomeValidation.addValidation(phoneTextView,
+        awesomeValidation.addValidation(binding.phoneTextView,
                 REGEX_MIN_PHONE, getString(R.string.text_phone_invalid))
     }
 
     private fun setClickListener() {
-        sendButton.setOnClickListener {
+        binding.sendButton.setOnClickListener {
             checkFields()
         }
     }

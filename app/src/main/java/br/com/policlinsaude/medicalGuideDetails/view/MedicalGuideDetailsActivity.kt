@@ -26,6 +26,7 @@ import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper
 import br.com.policlinsaude.core.helper.LocationHelper
 import br.com.policlinsaude.core.helper.getBitmapFromImage
+import br.com.policlinsaude.databinding.ActivityMedicalGuideDetailsBinding
 import br.com.policlinsaude.medicalGuideDetails.presenter.FavoritesStorePrefsPresenter
 import br.com.policlinsaude.medicalGuideDetails.presenter.MedicalGuideDetailsPresenter
 import br.com.policlinsaude.medicalGuideDetails.view.adapter.MedicalGuideDetailsAdapter
@@ -34,8 +35,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_medical_guide_details.*
-import kotlinx.android.synthetic.main.list_item_medical_guide_details.*
 import javax.inject.Inject
 
 
@@ -68,20 +67,24 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
     private lateinit var sharedPreferences: SharedPreferences
 
+    private lateinit var binding: ActivityMedicalGuideDetailsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_medical_guide_details)
+
+        binding = ActivityMedicalGuideDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         AndroidInjection.inject(this)
 
         sharedPreferences = getSharedPreferences(myPreferences, Context.MODE_PRIVATE)
 
        execGetFavorites()
 
-        setupToolbar()
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager =
+        setupToolbar(binding.toolbar)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager =
             LinearLayoutManager(this)
-        recyclerView.addItemDecoration(
+        binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
                 this,
                 DividerItemDecoration.VERTICAL
@@ -96,19 +99,19 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
 
     private fun setupOnClickListeners() {
-        imageButtonFavorite.setOnClickListener {
+        binding.imageButtonFavorite.setOnClickListener {
             presenter.onFavoriteClicked(this)
         }
-        imageButtonPhone.setOnClickListener {
+        binding.imageButtonPhone.setOnClickListener {
             presenter.onPhoneClicked()
         }
-        imageButtonMap.setOnClickListener {
+        binding.imageButtonMap.setOnClickListener {
             presenter.onMapClicked()
         }
-        imageButtonShare.setOnClickListener {
+        binding.imageButtonShare.setOnClickListener {
             presenter.onShareClicked()
         }
-        plansTextView.setOnClickListener {
+        binding.plansTextView.setOnClickListener {
            presenter.onPlansClicked()
         }
     }
@@ -125,9 +128,9 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     @SuppressLint("NotifyDataSetChanged")
     override fun showMedicalGuideDetails(presentationEstablishment: PresentationEstablishment) {
         try {
-            imageViewFront.setImageBitmap(presentationEstablishment.photoFront.getBitmapFromImage())
-            //imageViewFront.scaleType = ImageView.ScaleType.FIT_XY
-            imageViewFront.scaleType = ImageView.ScaleType.CENTER_CROP
+            binding.imageViewFront.setImageBitmap(presentationEstablishment.photoFront.getBitmapFromImage())
+            //binding.imageViewFront.scaleType = ImageView.ScaleType.FIT_XY
+            binding.imageViewFront.scaleType = ImageView.ScaleType.CENTER_CROP
 
 
         } catch (exception: Exception) {
@@ -139,8 +142,8 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
                                 presentationEstablishment.latitude.replace(",", ".").toDouble(),
                                 presentationEstablishment.longitude.replace(",", ".").toDouble()))
                         .apply(RequestOptions().centerCrop().placeholder(R.drawable.logo))
-                        .into(imageViewFront)
-                imageViewFront.setOnClickListener {
+                        .into(binding.imageViewFront)
+                binding.imageViewFront.setOnClickListener {
                     presenter.onMapClicked()
                 }
             }
@@ -148,14 +151,14 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
         val caller = intent.getStringExtra(EXTRA_CALLER_ACTIVITY)
 
         when {
-            presentationEstablishment.typePhoneOne == "2" -> imageButtonWhatsApp.setOnClickListener { openWhatsApp() }
-            presentationEstablishment.typePhoneTwo == "2" -> imageButtonWhatsApp.setOnClickListener { openWhatsApp() }
-            else -> imageButtonWhatsApp.visibility = View.GONE
+            presentationEstablishment.typePhoneOne == "2" -> binding.imageButtonWhatsApp.setOnClickListener { openWhatsApp() }
+            presentationEstablishment.typePhoneTwo == "2" -> binding.imageButtonWhatsApp.setOnClickListener { openWhatsApp() }
+            else -> binding.imageButtonWhatsApp.visibility = View.GONE
         }
 
         if (caller == "Units"){
-            imageButtonFavorite.visibility = View.GONE
-            plansTextView.visibility = View.GONE
+            binding.imageButtonFavorite.visibility = View.GONE
+            binding.plansTextView.visibility = View.GONE
 //            textViewTitle.visibility = View.GONE
           //  textViewInfo.visibility = View.GONE
 
@@ -163,7 +166,7 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
 
 
 
-        title_text_view.text = presentationEstablishment.title
+        binding.titleTextView.text = presentationEstablishment.title
         adapter.setPresentationEstablishment(this, presentationEstablishment, caller.orEmpty())
         adapter.notifyDataSetChanged()
     }
@@ -185,11 +188,11 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     }
 
     override fun showPlansLoading() {
-        loading_container.visibility = View.VISIBLE
+        binding.loadingContainer.visibility = View.VISIBLE
     }
 
     override fun hidePlansLoading() {
-        loading_container.visibility = View.GONE
+        binding.loadingContainer.visibility = View.GONE
     }
 
     override fun showEmptyPlansDialog() {
@@ -200,11 +203,11 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     }
 
     override fun showLoading() {
-        loading_container.visibility = View.VISIBLE
+        binding.loadingContainer.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        loading_container.visibility = View.GONE
+        binding.loadingContainer.visibility = View.GONE
     }
 
     override fun showFavoriteSuccessMessage() {
@@ -221,7 +224,7 @@ class MedicalGuideDetailsActivity : BaseActivity(), MedicalGuideDetailsView {
     }
 
     override fun setFavorited(favorited: Boolean) {
-        imageButtonFavorite.setImageDrawable(ContextCompat.getDrawable(this, if (favorited) R.drawable.ic_favorite_full else R.drawable.ic_favorite))
+        binding.imageButtonFavorite.setImageDrawable(ContextCompat.getDrawable(this, if (favorited) R.drawable.ic_favorite_full else R.drawable.ic_favorite))
     }
 
     override fun showRemoveFavoriteSuccessMessage() {

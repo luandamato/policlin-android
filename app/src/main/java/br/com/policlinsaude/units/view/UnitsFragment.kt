@@ -6,13 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseFragmentWithInject
+import br.com.policlinsaude.databinding.FragmentUnitsBinding
 import br.com.policlinsaude.model.PresentationEstablishment
 import br.com.policlinsaude.model.PresentationQualification
 import br.com.policlinsaude.units.navigator.UnitsNavigator
 import br.com.policlinsaude.units.view.adapter.UnitsAdapter
-import kotlinx.android.synthetic.main.fragment_units.*
 import javax.inject.Inject
 
 class UnitsFragment : BaseFragmentWithInject(), UnitsAdapter.OnItemClickListener {
@@ -38,27 +37,22 @@ class UnitsFragment : BaseFragmentWithInject(), UnitsAdapter.OnItemClickListener
     @Inject
     lateinit var navigator: UnitsNavigator
 
+    private lateinit var binding: FragmentUnitsBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
 
-     //   val view = inflater.inflate(R.layout.fragment_units, container, false)
-     //   val toolbar: Toolbar = view.findViewById(R.id.toolbar)
-
-      //  (activity as MenuActivity).setupFragmentToolbar(toolbar, R.string.title_unities)
-
         Log.d("UNIDADES","onCreateView do UnitsFragment" )
-        return inflater.inflate(R.layout.fragment_units, container, false)
+        binding = FragmentUnitsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-     //   adapter.setEstablishments((arguments!!.getParcelableArray(EXTRA_ESTABLISHMENTS_UNITS) as Array<PresentationEstablishment>).toMutableList(),
-     //           (arguments!!.getParcelableArray(EXTRA_QUALIFICATIONS_UNITS) as Array<PresentationQualification>).toMutableList())
-
-        recyclerViewUnitsFrag.layoutManager =
+        binding.recyclerViewUnitsFrag.layoutManager =
             LinearLayoutManager(context)
-        recyclerViewUnitsFrag.adapter = adapter
+        binding.recyclerViewUnitsFrag.adapter = adapter
     }
 
     override fun onItemClick(establishment: PresentationEstablishment) {

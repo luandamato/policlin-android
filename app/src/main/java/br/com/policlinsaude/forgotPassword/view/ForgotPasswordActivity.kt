@@ -9,10 +9,10 @@ import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper
+import br.com.policlinsaude.databinding.ActivityForgotPasswordBinding
 import br.com.policlinsaude.forgotPassword.presenter.ForgotPasswordPresenter
 import com.basgeekball.awesomevalidation.utility.RegexTemplate
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_forgot_password.*
 import javax.inject.Inject
 
 class ForgotPasswordActivity : BaseActivity(), ForgotPasswordView {
@@ -28,9 +28,13 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordView {
     @Inject
     lateinit var presenter: ForgotPasswordPresenter
 
+    private lateinit var binding: ActivityForgotPasswordBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_forgot_password)
+
+        binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         AndroidInjection.inject(this)
         setOnClickListeners()
 
@@ -38,23 +42,23 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordView {
     }
 
     private fun addValidationFields() {
-        awesomeValidation.addValidation(editTextRegister,
+        awesomeValidation.addValidation(binding.editTextRegister,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextOrder,
+        awesomeValidation.addValidation(binding.editTextOrder,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
-        awesomeValidation.addValidation(editTextEmail
+        awesomeValidation.addValidation(binding.editTextEmail
                 , Patterns.EMAIL_ADDRESS, getString(R.string.text_email_invalid))
-        awesomeValidation.addValidation(editTextEmail,
+        awesomeValidation.addValidation(binding.editTextEmail,
                 RegexTemplate.NOT_EMPTY, getString(R.string.text_field_required))
     }
 
     private fun setOnClickListeners() {
-        buttonRecoverPassword.setOnClickListener {
+        binding.buttonRecoverPassword.setOnClickListener {
             if (awesomeValidation.validate()) {
                 presenter.clickedButtonRecoverPassword()
             }
         }
-        buttonBack.setOnClickListener {
+        binding.buttonBack.setOnClickListener {
             presenter.clickedButtonBack()
         }
     }
@@ -68,26 +72,26 @@ class ForgotPasswordActivity : BaseActivity(), ForgotPasswordView {
     }
 
     override fun showLoading() {
-        loadingView.visibility = View.VISIBLE
+        binding.loadingView.root.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        loadingView.visibility = View.GONE
+        binding.loadingView.root.visibility = View.GONE
     }
 
     override fun showButtonRecoverPassword() {
-        buttonRecoverPassword.visibility = View.VISIBLE
+        binding.buttonRecoverPassword.visibility = View.VISIBLE
     }
 
     override fun hideButtonRecoverPassword() {
-        buttonRecoverPassword.visibility = View.GONE
+        binding.buttonRecoverPassword.visibility = View.GONE
     }
 
-    override fun getEmail(): String = editTextEmail.text.toString()
+    override fun getEmail(): String = binding.editTextEmail.text.toString()
 
-    override fun getRegister(): String = editTextRegister.text.toString()
+    override fun getRegister(): String = binding.editTextRegister.text.toString()
 
-    override fun getOrder(): String = editTextOrder.text.toString()
+    override fun getOrder(): String = binding.editTextOrder.text.toString()
 
     override fun showEmailSentDialog() {
         DialogHelper.showDialog(context = this,

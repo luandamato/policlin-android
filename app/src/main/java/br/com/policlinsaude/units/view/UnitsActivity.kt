@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
+import br.com.policlinsaude.databinding.ActivityUnitsBinding
 import br.com.policlinsaude.model.PresentationEstablishment
 import br.com.policlinsaude.model.PresentationQualification
 import br.com.policlinsaude.units.presenter.UnitsPresenter
 import br.com.policlinsaude.units.view.adapter.UnitsAdapter
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_units.*
 import javax.inject.Inject
 
 class UnitsActivity : BaseActivity(), UnitsView, UnitsAdapter.OnItemClickListener {
@@ -36,16 +36,20 @@ class UnitsActivity : BaseActivity(), UnitsView, UnitsAdapter.OnItemClickListene
    // @Inject //Lista
     lateinit var adapter: UnitsAdapter
 
+    private lateinit var binding: ActivityUnitsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_units)
+
+        binding = ActivityUnitsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         AndroidInjection.inject(this)//Lista
 
-        setupToolbar()
+        setupToolbar(binding.toolbar.toolbar)
 
         adapter = UnitsAdapter(this)
-        recyclerViewUnits.adapter = adapter
-        recyclerViewUnits.layoutManager =
+        binding.recyclerViewUnits.adapter = adapter
+        binding.recyclerViewUnits.layoutManager =
             LinearLayoutManager(this)
 
         getUnits()
@@ -99,11 +103,11 @@ class UnitsActivity : BaseActivity(), UnitsView, UnitsAdapter.OnItemClickListene
     }
 
     override fun showLoading() {
-        login_progressbarunits.visibility = View.VISIBLE
+        binding.loginProgressbarunits.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        login_progressbarunits.visibility = View.GONE
+        binding.loginProgressbarunits.visibility = View.GONE
     }
 
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.helper.getBitmapFromImage
+import br.com.policlinsaude.databinding.ListItemOwnNetworkBinding
 import br.com.policlinsaude.medicalGuideList.view.adapter.MedicalGuideListAdapter
 import br.com.policlinsaude.medicalGuideList.view.adapter.MedicalGuideQualificationAdapter
 import br.com.policlinsaude.model.PresentationEstablishment
@@ -14,7 +15,6 @@ import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
-import kotlinx.android.synthetic.main.list_item_own_network.view.*
 
 class OwnNetworkAdapter(private val onItemClickListener: OnItemClickListener)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -37,8 +37,9 @@ class OwnNetworkAdapter(private val onItemClickListener: OnItemClickListener)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == TYPE_ITEM) {
-            OwnNetworkViewHolder(LayoutInflater.from(parent.context)
-                    .inflate(R.layout.list_item_own_network, parent, false))
+            OwnNetworkViewHolder(
+                ListItemOwnNetworkBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            )
         } else {
             MedicalGuideListAdapter.MedicalGuideListFooterViewHolder(LayoutInflater.from(parent.context)
                     .inflate(R.layout.custom_view_info_medical_guide_list, parent, false), qualifications)
@@ -69,36 +70,36 @@ class OwnNetworkAdapter(private val onItemClickListener: OnItemClickListener)
         fun onItemClick(establishment: PresentationEstablishment)
     }
 
-    inner class OwnNetworkViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class OwnNetworkViewHolder(private val binding: ListItemOwnNetworkBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun format(establishment: PresentationEstablishment) {
-            val flexBoxLayoutManager = FlexboxLayoutManager(itemView.context)
+            val flexBoxLayoutManager = FlexboxLayoutManager(binding.root.context)
             flexBoxLayoutManager.flexDirection = FlexDirection.ROW
             flexBoxLayoutManager.flexWrap = FlexWrap.WRAP
             flexBoxLayoutManager.justifyContent = JustifyContent.FLEX_START
-            itemView.qualificationsRecyclerView.adapter = MedicalGuideQualificationAdapter(establishment.qualifications)
-            itemView.qualificationsRecyclerView.layoutManager = flexBoxLayoutManager
+            binding.qualificationsRecyclerView.adapter = MedicalGuideQualificationAdapter(establishment.qualifications)
+            binding.qualificationsRecyclerView.layoutManager = flexBoxLayoutManager
 
-            itemView.textViewName.text = establishment.title
-            itemView.textViewSubtitle.text = establishment.subTitle
-            itemView.context.let {
-                itemView.textViewTypeEstablishment.text = it.getString(R.string.msg_type_establishment, establishment.type)
-                itemView.textViewAddress.text = it.getString(R.string.msg_address_format, establishment.publicPlace,
+            binding.textViewName.text = establishment.title
+            binding.textViewSubtitle.text = establishment.subTitle
+            binding.root.context.let {
+                binding.textViewTypeEstablishment.text = it.getString(R.string.msg_type_establishment, establishment.type)
+                binding.textViewAddress.text = it.getString(R.string.msg_address_format, establishment.publicPlace,
                         establishment.number, establishment.complement, establishment.neighborhood,
                         establishment.zipCode, establishment.city, establishment.state)
             }
-            itemView.textViewPhoneOne.text = establishment.phoneOne
-            itemView.textViewPhoneTwo.text = establishment.phoneTwo
-            itemView.textViewPhoneOne.visibility = if (establishment.phoneOne.isEmpty()) View.GONE else View.VISIBLE
-            itemView.textViewPhoneTwo.visibility = if (establishment.phoneTwo.isEmpty()) View.GONE else View.VISIBLE
-            itemView.establishmentContainer.setOnClickListener {
+            binding.textViewPhoneOne.text = establishment.phoneOne
+            binding.textViewPhoneTwo.text = establishment.phoneTwo
+            binding.textViewPhoneOne.visibility = if (establishment.phoneOne.isEmpty()) View.GONE else View.VISIBLE
+            binding.textViewPhoneTwo.visibility = if (establishment.phoneTwo.isEmpty()) View.GONE else View.VISIBLE
+            binding.establishmentContainer.setOnClickListener {
                 onItemClickListener.onItemClick(establishment)
             }
             try {
-                itemView.imageViewFront.setImageBitmap(establishment.photoFront.getBitmapFromImage())
-                itemView.imageViewFront.visibility = View.VISIBLE
+                binding.imageViewFront.setImageBitmap(establishment.photoFront.getBitmapFromImage())
+                binding.imageViewFront.visibility = View.VISIBLE
             } catch (exception: Exception) {
-                itemView.imageViewFront.visibility = View.INVISIBLE
+                binding.imageViewFront.visibility = View.INVISIBLE
             }
 
         }
