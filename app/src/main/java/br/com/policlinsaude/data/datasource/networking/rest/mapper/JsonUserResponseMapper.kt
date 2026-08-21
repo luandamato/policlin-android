@@ -3,7 +3,7 @@ package br.com.data.datasource.networking.rest.mapper
 import br.com.data.datasource.networking.rest.model.JsonUserResponse
 import br.com.data.helper.DateHelper
 import br.com.data.helper.InvalidData
-import br.com.domain.model.Person
+import br.com.policlinsaude.domain.model.Person
 
 object JsonUserResponseMapper {
 

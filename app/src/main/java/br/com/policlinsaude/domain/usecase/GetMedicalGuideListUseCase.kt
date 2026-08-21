@@ -1,11 +1,11 @@
-package br.com.domain.usecase
+package br.com.policlinsaude.domain.usecase
 
-import br.com.domain.exception.RequestValuesNotImplementedException
-import br.com.domain.helper.InvalidData
-import br.com.domain.model.MedicalGuideList
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.base.BaseUseCase
-import br.com.domain.usecase.requestvalues.MedicalGuideListRV
+import br.com.policlinsaude.domain.exception.RequestValuesNotImplementedException
+import br.com.policlinsaude.domain.helper.InvalidData
+import br.com.policlinsaude.domain.model.MedicalGuideList
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.base.BaseUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.MedicalGuideListRV
 import io.reactivex.Flowable
 
 class GetMedicalGuideListUseCase(private val repository: Repository) :

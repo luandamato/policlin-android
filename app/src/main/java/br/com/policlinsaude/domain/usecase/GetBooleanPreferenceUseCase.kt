@@ -1,8 +1,8 @@
-package br.com.domain.usecase
+package br.com.policlinsaude.domain.usecase
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.base.BaseUseCase
-import br.com.domain.usecase.requestvalues.GetBooleanPreferenceRV
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.base.BaseUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.GetBooleanPreferenceRV
 import io.reactivex.Flowable
 
 /**

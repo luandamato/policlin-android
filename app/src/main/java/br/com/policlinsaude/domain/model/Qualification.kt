@@ -1,6 +1,6 @@
-package br.com.domain.model
+package br.com.policlinsaude.domain.model
 
-import br.com.domain.helper.InvalidData
+import br.com.policlinsaude.domain.helper.InvalidData
 
 data class Qualification(var image: String = InvalidData.UNINITIALIZED.getString(),
                          var initial: String = InvalidData.UNINITIALIZED.getString(),

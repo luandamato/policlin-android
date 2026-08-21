@@ -17,8 +17,8 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import br.com.domain.exception.MessageErrorException
-import br.com.domain.helper.InvalidData
+import br.com.policlinsaude.domain.exception.MessageErrorException
+import br.com.policlinsaude.domain.helper.InvalidData
 import br.com.policlinsaude.R
 
 import br.com.policlinsaude.core.base.BaseActivity

@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
-import br.com.domain.exception.MessageErrorException
+import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper

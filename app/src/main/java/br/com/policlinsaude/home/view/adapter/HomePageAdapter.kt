@@ -9,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import br.com.domain.model.Banner
+import br.com.policlinsaude.domain.model.Banner
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.helper.IntentHelper
 import br.com.policlinsaude.core.helper.getBitmapFromImage

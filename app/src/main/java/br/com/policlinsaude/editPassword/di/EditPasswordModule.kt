@@ -1,7 +1,7 @@
 package br.com.policlinsaude.editPassword.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.EditPasswordUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.EditPasswordUseCase
 import br.com.policlinsaude.editPassword.presenter.EditPasswordPresenter
 import br.com.policlinsaude.editPassword.presenter.EditPasswordPresenterImpl
 import br.com.policlinsaude.editPassword.view.EditPasswordActivity

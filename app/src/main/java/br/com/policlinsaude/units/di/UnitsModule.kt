@@ -1,7 +1,7 @@
 package br.com.policlinsaude.units.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.GetUnitsUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.GetUnitsUseCase
 import br.com.policlinsaude.units.navigator.UnitsNavigator
 import br.com.policlinsaude.units.navigator.UnitsNavigatorImpl
 import br.com.policlinsaude.units.presenter.UnitsPresenter

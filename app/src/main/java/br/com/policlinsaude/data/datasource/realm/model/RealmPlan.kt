@@ -1,6 +1,6 @@
 package br.com.data.datasource.realm.model
 
-import br.com.domain.helper.InvalidData
+import br.com.policlinsaude.domain.helper.InvalidData
 import io.realm.RealmObject
 import java.util.*
 

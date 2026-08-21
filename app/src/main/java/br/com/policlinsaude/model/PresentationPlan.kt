@@ -1,6 +1,6 @@
 package br.com.policlinsaude.model
 
-import br.com.domain.helper.InvalidData
+import br.com.policlinsaude.domain.helper.InvalidData
 import java.util.*
 
 data class PresentationPlan(var register: String = InvalidData.UNINITIALIZED.getString(),

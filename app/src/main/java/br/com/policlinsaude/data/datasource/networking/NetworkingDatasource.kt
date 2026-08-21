@@ -1,6 +1,6 @@
 package br.com.data.datasource.networking
 
-import br.com.domain.model.*
+import br.com.policlinsaude.domain.model.*
 import io.reactivex.Completable
 import io.reactivex.Flowable
 

@@ -1,9 +1,9 @@
-package br.com.domain.usecase
+package br.com.policlinsaude.domain.usecase
 
-import br.com.domain.exception.RequestValuesNotImplementedException
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.base.BaseUseCase
-import br.com.domain.usecase.requestvalues.RegisterPasswordRV
+import br.com.policlinsaude.domain.exception.RequestValuesNotImplementedException
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.base.BaseUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.RegisterPasswordRV
 import io.reactivex.Flowable
 
 class RegisterPasswordUseCase(private val repository: Repository) :

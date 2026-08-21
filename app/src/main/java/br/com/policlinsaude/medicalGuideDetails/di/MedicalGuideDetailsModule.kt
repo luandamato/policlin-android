@@ -1,10 +1,10 @@
 package br.com.policlinsaude.medicalGuideDetails.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.AddToFavoriteUseCase
-import br.com.domain.usecase.GetFavoritesUseCase
-import br.com.domain.usecase.GetPlansUseCase
-import br.com.domain.usecase.RemoveFromFavoritesUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.AddToFavoriteUseCase
+import br.com.policlinsaude.domain.usecase.GetFavoritesUseCase
+import br.com.policlinsaude.domain.usecase.GetPlansUseCase
+import br.com.policlinsaude.domain.usecase.RemoveFromFavoritesUseCase
 import br.com.policlinsaude.favorites.navigator.FavoritesNavigator
 import br.com.policlinsaude.favorites.presenter.FavoritesPresenter
 import br.com.policlinsaude.favorites.view.FavoritesView

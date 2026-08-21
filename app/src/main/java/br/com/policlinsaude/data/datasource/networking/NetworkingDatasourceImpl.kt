@@ -6,8 +6,8 @@ import br.com.data.datasource.networking.rest.NetworkingService
 import br.com.data.datasource.networking.rest.mapper.*
 import br.com.data.datasource.networking.rest.model.JsonUnitsResponse
 import br.com.data.helper.DateHelper
-import br.com.domain.exception.MessageErrorException
-import br.com.domain.model.*
+import br.com.policlinsaude.domain.exception.MessageErrorException
+import br.com.policlinsaude.domain.model.*
 import io.reactivex.Completable
 import io.reactivex.Flowable
 
@@ -234,7 +234,7 @@ class NetworkingDatasourceImpl(private val networkingService: NetworkingService)
                 email = person.email,
                 expirationDate = DateHelper.getStringFromDate(DateHelper.FORMAT_DATE_YYYYMMDD, plan.validationRegister),
                 method = "Validar",
-                name = person.name.toUpperCase(),
+                name = person.name.uppercase(),
                 phone = person.getPhoneWithoutCodeArea(),
                 termAccepted = 1,
                 mothersName = person.mothersName

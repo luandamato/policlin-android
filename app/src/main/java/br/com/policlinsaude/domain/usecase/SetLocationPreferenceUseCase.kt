@@ -1,8 +1,8 @@
-package br.com.domain.usecase
+package br.com.policlinsaude.domain.usecase
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.base.BaseCompletableUseCase
-import br.com.domain.usecase.requestvalues.SetLocationPreferenceRV
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.base.BaseCompletableUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.SetLocationPreferenceRV
 import io.reactivex.Completable
 
 /**

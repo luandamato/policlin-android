@@ -1,7 +1,7 @@
 package br.com.data.datasource.networking.rest.mapper
 
 import br.com.data.datasource.networking.rest.model.JsonFavoritesResponse
-import br.com.domain.model.Establishment
+import br.com.policlinsaude.domain.model.Establishment
 
 /**
  * Created by lmiyagi on 3/27/18.

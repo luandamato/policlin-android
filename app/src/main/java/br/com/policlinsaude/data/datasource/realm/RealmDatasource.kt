@@ -1,6 +1,6 @@
 package br.com.data.datasource.realm
 
-import br.com.domain.model.Person
+import br.com.policlinsaude.domain.model.Person
 import io.reactivex.Completable
 import io.reactivex.Flowable
 

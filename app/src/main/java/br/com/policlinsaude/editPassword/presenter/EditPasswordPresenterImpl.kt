@@ -1,7 +1,7 @@
 package br.com.policlinsaude.editPassword.presenter
 
-import br.com.domain.usecase.EditPasswordUseCase
-import br.com.domain.usecase.requestvalues.EditPasswordRV
+import br.com.policlinsaude.domain.usecase.EditPasswordUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.EditPasswordRV
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.editPassword.view.EditPasswordView
 import io.reactivex.rxkotlin.subscribeBy

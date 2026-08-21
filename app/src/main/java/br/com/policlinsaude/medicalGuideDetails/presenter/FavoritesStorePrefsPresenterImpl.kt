@@ -1,7 +1,7 @@
 package br.com.policlinsaude.medicalGuideDetails.presenter
 
 import android.util.Log
-import br.com.domain.usecase.GetFavoritesUseCase
+import br.com.policlinsaude.domain.usecase.GetFavoritesUseCase
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.mapper.PresentationMedicalGuideListMapper
 import br.com.policlinsaude.medicalGuideDetails.view.MedicalGuideDetailsView

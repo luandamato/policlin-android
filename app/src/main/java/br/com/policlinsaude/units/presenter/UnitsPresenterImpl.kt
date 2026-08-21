@@ -2,7 +2,7 @@ package br.com.policlinsaude.units.presenter
 
 
 import android.util.Log
-import br.com.domain.usecase.GetUnitsUseCase
+import br.com.policlinsaude.domain.usecase.GetUnitsUseCase
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.mapper.PresentationMedicalGuideListMapper
 import br.com.policlinsaude.model.PresentationEstablishment

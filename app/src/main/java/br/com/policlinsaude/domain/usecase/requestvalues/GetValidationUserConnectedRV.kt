@@ -1,6 +1,6 @@
-package br.com.domain.usecase.requestvalues
+package br.com.policlinsaude.domain.usecase.requestvalues
 
-import br.com.domain.usecase.base.BaseRequestValues
+import br.com.policlinsaude.domain.usecase.base.BaseRequestValues
 
 class GetValidationUserConnectedRV(
     val registration: String,

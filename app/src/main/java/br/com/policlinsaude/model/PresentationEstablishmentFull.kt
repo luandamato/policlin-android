@@ -2,7 +2,7 @@ package br.com.policlinsaude.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import br.com.domain.helper.InvalidData
+import br.com.policlinsaude.domain.helper.InvalidData
 import java.io.Serializable  //tirado por Andre
 
 data class PresentationEstablishmentFull(var planNameV4: String = InvalidData.UNINITIALIZED.getString(),//Andre

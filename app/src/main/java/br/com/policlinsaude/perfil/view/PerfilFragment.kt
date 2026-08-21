@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.*
-import br.com.domain.exception.MessageErrorException
+import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.base.BaseFragmentWithInject

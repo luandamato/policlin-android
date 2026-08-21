@@ -1,7 +1,7 @@
 package br.com.policlinsaude.medicalGuideList.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.GetMedicalGuideListUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.GetMedicalGuideListUseCase
 import br.com.policlinsaude.medicalGuideList.navigator.MedicalGuideListNavigator
 import br.com.policlinsaude.medicalGuideList.navigator.MedicalGuideListNavigatorImpl
 import br.com.policlinsaude.medicalGuideList.presenter.MedicalGuideListPresenter

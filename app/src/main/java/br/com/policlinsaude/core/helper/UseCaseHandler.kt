@@ -1,9 +1,9 @@
 package br.com.policlinsaude.core.helper
 
 import android.util.Log
-import br.com.domain.usecase.base.BaseCompletableUseCase
-import br.com.domain.usecase.base.BaseRequestValues
-import br.com.domain.usecase.base.BaseUseCase
+import br.com.policlinsaude.domain.usecase.base.BaseCompletableUseCase
+import br.com.policlinsaude.domain.usecase.base.BaseRequestValues
+import br.com.policlinsaude.domain.usecase.base.BaseUseCase
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -1,10 +1,10 @@
 package br.com.policlinsaude.medicalGuideOptions.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.GetBooleanPreferenceUseCase
-import br.com.domain.usecase.GetCurrentPersonUseCase
-import br.com.domain.usecase.GetMedicalGuideOptionsUseCase
-import br.com.domain.usecase.SetLocationPreferenceUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.GetBooleanPreferenceUseCase
+import br.com.policlinsaude.domain.usecase.GetCurrentPersonUseCase
+import br.com.policlinsaude.domain.usecase.GetMedicalGuideOptionsUseCase
+import br.com.policlinsaude.domain.usecase.SetLocationPreferenceUseCase
 import br.com.policlinsaude.medicalGuideOptions.navigator.MedicalGuideOptionsNavigator
 import br.com.policlinsaude.medicalGuideOptions.navigator.MedicalGuideOptionsNavigatorImpl
 import br.com.policlinsaude.medicalGuideOptions.presenter.MedicalGuideOptionsPresenter

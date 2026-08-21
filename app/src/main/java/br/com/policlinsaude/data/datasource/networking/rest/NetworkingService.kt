@@ -4,9 +4,9 @@ import br.com.data.BuildConfig
 import br.com.data.datasource.networking.rest.model.*
 import br.com.data.di.NetworkingModule
 import br.com.data.helper.InvalidData
-import br.com.domain.model.UserConnected
-import br.com.domain.model.ValidateButtonBody
-import br.com.domain.model.ValidateButtons
+import br.com.policlinsaude.domain.model.UserConnected
+import br.com.policlinsaude.domain.model.ValidateButtonBody
+import br.com.policlinsaude.domain.model.ValidateButtons
 import io.reactivex.Flowable
 import retrofit2.http.*
 

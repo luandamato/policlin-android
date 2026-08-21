@@ -1,9 +1,9 @@
 package br.com.policlinsaude.notHasPassword.presenter
 
-import br.com.domain.usecase.CheckPlanUseCase
-import br.com.domain.usecase.RegisterPasswordUseCase
-import br.com.domain.usecase.requestvalues.CheckPlanRV
-import br.com.domain.usecase.requestvalues.RegisterPasswordRV
+import br.com.policlinsaude.domain.usecase.CheckPlanUseCase
+import br.com.policlinsaude.domain.usecase.RegisterPasswordUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.CheckPlanRV
+import br.com.policlinsaude.domain.usecase.requestvalues.RegisterPasswordRV
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.mapper.PresentationPersonMapper
 import br.com.policlinsaude.mapper.RegisterPasswordMapper

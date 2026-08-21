@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import br.com.domain.AppConstants.REGEX_MIN_AND_MAX_LENGTH_PASSWORD
+import br.com.policlinsaude.domain.AppConstants.REGEX_MIN_AND_MAX_LENGTH_PASSWORD
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseFragment
 import br.com.policlinsaude.core.helper.getBitmapFromImage

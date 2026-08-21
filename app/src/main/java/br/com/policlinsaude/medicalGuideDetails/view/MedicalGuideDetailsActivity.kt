@@ -19,8 +19,8 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ImageView
-import br.com.domain.exception.MessageErrorException
-import br.com.domain.model.MedicalGuidePlan
+import br.com.policlinsaude.domain.exception.MessageErrorException
+import br.com.policlinsaude.domain.model.MedicalGuidePlan
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper

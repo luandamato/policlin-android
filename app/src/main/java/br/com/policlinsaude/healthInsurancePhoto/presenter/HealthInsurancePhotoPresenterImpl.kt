@@ -3,7 +3,7 @@ package br.com.policlinsaude.healthInsurancePhoto.presenter
 import android.content.Context
 import android.util.Log
 import br.com.data.datasource.networking.CheckInternetConnection
-import br.com.domain.usecase.GetHealthInsurancePhotoUseCase
+import br.com.policlinsaude.domain.usecase.GetHealthInsurancePhotoUseCase
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.healthInsurancePhoto.navigator.HealthInsurancePhotoNavigator
 import br.com.policlinsaude.healthInsurancePhoto.view.HealthInsurancePhotoView

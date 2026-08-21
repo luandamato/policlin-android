@@ -1,9 +1,9 @@
 package br.com.policlinsaude.login.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.DoLoginUseCase
-import br.com.domain.usecase.GetCurrentPersonUseCase
-import br.com.domain.usecase.GetTokenUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.DoLoginUseCase
+import br.com.policlinsaude.domain.usecase.GetCurrentPersonUseCase
+import br.com.policlinsaude.domain.usecase.GetTokenUseCase
 import br.com.policlinsaude.login.navigator.LoginNavigator
 import br.com.policlinsaude.login.navigator.LoginNavigatorImpl
 import br.com.policlinsaude.login.presenter.LoginPresenter

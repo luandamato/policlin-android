@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import android.util.Log
 import br.com.data.datasource.networking.CheckInternetConnection
-import br.com.domain.usecase.GetFavoritesUseCase
+import br.com.policlinsaude.domain.usecase.GetFavoritesUseCase
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.favorites.navigator.FavoritesNavigator
 import br.com.policlinsaude.favorites.view.FavoritesView

@@ -1,9 +1,9 @@
-package br.com.domain.usecase
+package br.com.policlinsaude.domain.usecase
 
-import br.com.domain.model.Person
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.base.BaseRequestValues
-import br.com.domain.usecase.base.BaseUseCase
+import br.com.policlinsaude.domain.model.Person
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.base.BaseRequestValues
+import br.com.policlinsaude.domain.usecase.base.BaseUseCase
 import io.reactivex.Flowable
 
 class GetCurrentPersonUseCase(private val repository: Repository) :

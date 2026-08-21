@@ -1,8 +1,8 @@
 package br.com.policlinsaude.notHasPassword.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.CheckPlanUseCase
-import br.com.domain.usecase.RegisterPasswordUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.CheckPlanUseCase
+import br.com.policlinsaude.domain.usecase.RegisterPasswordUseCase
 import br.com.policlinsaude.notHasPassword.navigator.NotHasPasswordNavigator
 import br.com.policlinsaude.notHasPassword.navigator.NotHasPasswordNavigatorImpl
 import br.com.policlinsaude.notHasPassword.presenter.NotHasPasswordPresenter

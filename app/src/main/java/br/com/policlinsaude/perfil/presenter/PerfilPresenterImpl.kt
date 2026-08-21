@@ -1,8 +1,8 @@
 package br.com.policlinsaude.perfil.presenter
 
-import br.com.domain.usecase.GetCurrentPersonUseCase
-import br.com.domain.usecase.UpdateAvatarUseCase
-import br.com.domain.usecase.requestvalues.UpdateAvatarRV
+import br.com.policlinsaude.domain.usecase.GetCurrentPersonUseCase
+import br.com.policlinsaude.domain.usecase.UpdateAvatarUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.UpdateAvatarRV
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.mapper.PresentationPersonMapper
 import br.com.policlinsaude.perfil.navigator.PerfilNavigator

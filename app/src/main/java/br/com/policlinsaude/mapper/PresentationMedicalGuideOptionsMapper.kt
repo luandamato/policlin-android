@@ -1,7 +1,7 @@
 package br.com.policlinsaude.mapper
 
 import android.util.Log
-import br.com.domain.model.*
+import br.com.policlinsaude.domain.model.*
 import br.com.policlinsaude.model.*
 
 object PresentationMedicalGuideOptionsMapper {

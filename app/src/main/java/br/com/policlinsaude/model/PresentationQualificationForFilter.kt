@@ -2,7 +2,7 @@ package br.com.policlinsaude.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import br.com.domain.helper.InvalidData
+import br.com.policlinsaude.domain.helper.InvalidData
 import java.io.Serializable
 
 data class PresentationQualificationForFilter(var imgQualificacao: String = InvalidData.UNINITIALIZED.getString(),

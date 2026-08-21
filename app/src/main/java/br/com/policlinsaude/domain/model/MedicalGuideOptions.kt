@@ -1,4 +1,4 @@
-package br.com.domain.model
+package br.com.policlinsaude.domain.model
 
 data class MedicalGuideOptions(var cityOptions: List<CityOptions> = mutableListOf(),
                                var planOptions: List<PlanOptions> = mutableListOf(),

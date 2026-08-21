@@ -1,9 +1,9 @@
-package br.com.domain.usecase.requestvalues
+package br.com.policlinsaude.domain.usecase.requestvalues
 
-import br.com.domain.helper.InvalidData
-import br.com.domain.model.Person
-import br.com.domain.model.Plan
-import br.com.domain.usecase.base.BaseRequestValues
+import br.com.policlinsaude.domain.helper.InvalidData
+import br.com.policlinsaude.domain.model.Person
+import br.com.policlinsaude.domain.model.Plan
+import br.com.policlinsaude.domain.usecase.base.BaseRequestValues
 
 data class MedicalGuideListRV(val codePlan: Int = InvalidData.UNINITIALIZED.getInt(),
                               val codeCity: Int = InvalidData.UNINITIALIZED.getInt(),

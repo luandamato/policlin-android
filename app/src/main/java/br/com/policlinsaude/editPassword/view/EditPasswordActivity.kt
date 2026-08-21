@@ -3,8 +3,8 @@ package br.com.policlinsaude.editPassword.view
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import br.com.domain.AppConstants.REGEX_MIN_AND_MAX_LENGTH_PASSWORD
-import br.com.domain.exception.MessageErrorException
+import br.com.policlinsaude.domain.AppConstants.REGEX_MIN_AND_MAX_LENGTH_PASSWORD
+import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper

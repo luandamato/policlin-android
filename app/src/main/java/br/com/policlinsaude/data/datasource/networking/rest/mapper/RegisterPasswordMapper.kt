@@ -2,8 +2,8 @@ package br.com.data.datasource.networking.rest.mapper
 
 import br.com.data.datasource.networking.rest.model.JsonRegisterPasswordBody
 import br.com.data.helper.DateHelper
-import br.com.domain.model.Person
-import br.com.domain.model.Plan
+import br.com.policlinsaude.domain.model.Person
+import br.com.policlinsaude.domain.model.Plan
 
 /**
  * Created by uziassantos on 2/4/18.

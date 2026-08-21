@@ -1,7 +1,7 @@
 package br.com.policlinsaude.forgotPassword.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.RecoverPasswordUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.RecoverPasswordUseCase
 import br.com.policlinsaude.forgotPassword.navigator.ForgotPasswordNavigator
 import br.com.policlinsaude.forgotPassword.navigator.ForgotPasswordNavigatorImpl
 import br.com.policlinsaude.forgotPassword.presenter.ForgotPasswordPresenter

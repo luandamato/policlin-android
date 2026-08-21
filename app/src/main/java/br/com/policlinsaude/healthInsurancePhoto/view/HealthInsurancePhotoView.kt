@@ -1,7 +1,7 @@
 package br.com.policlinsaude.healthInsurancePhoto.view
 
-import br.com.domain.model.HealthInsurancePhoto
-import br.com.domain.model.HealthInsurancePhotoList
+import br.com.policlinsaude.domain.model.HealthInsurancePhoto
+import br.com.policlinsaude.domain.model.HealthInsurancePhotoList
 
 interface HealthInsurancePhotoView {
     fun showLoading()

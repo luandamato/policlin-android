@@ -1,8 +1,8 @@
 package br.com.policlinsaude.home.di
 
-import br.com.domain.model.ValidateButtons
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.*
+import br.com.policlinsaude.domain.model.ValidateButtons
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.*
 import br.com.policlinsaude.home.navigator.HomeNavigator
 import br.com.policlinsaude.home.navigator.HomeNavigatorImpl
 import br.com.policlinsaude.home.presenter.HomePresenter

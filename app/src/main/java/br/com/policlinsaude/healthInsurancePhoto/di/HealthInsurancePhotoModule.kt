@@ -1,7 +1,7 @@
 package br.com.policlinsaude.healthInsurancePhoto.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.GetHealthInsurancePhotoUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.GetHealthInsurancePhotoUseCase
 import br.com.policlinsaude.healthInsurancePhoto.navigator.HealthInsurancePhotoNavigator
 import br.com.policlinsaude.healthInsurancePhoto.navigator.HealthInsurancePhotoNavigatorImpl
 import br.com.policlinsaude.healthInsurancePhoto.presenter.HealthInsurancePhotoPresenter

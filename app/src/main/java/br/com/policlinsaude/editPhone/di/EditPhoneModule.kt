@@ -1,7 +1,7 @@
 package br.com.policlinsaude.editPhone.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.UpdateEmailUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.UpdateEmailUseCase
 import br.com.policlinsaude.editPhone.presenter.EditPhonePresenter
 import br.com.policlinsaude.editPhone.presenter.EditPhonePresenterImpl
 import br.com.policlinsaude.editPhone.view.EditPhoneActivity

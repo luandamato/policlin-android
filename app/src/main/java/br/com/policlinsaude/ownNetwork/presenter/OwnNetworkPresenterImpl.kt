@@ -2,7 +2,7 @@ package br.com.policlinsaude.ownNetwork.presenter
 
 
 import android.util.Log
-import br.com.domain.usecase.GetOwnNetworkUseCase
+import br.com.policlinsaude.domain.usecase.GetOwnNetworkUseCase
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.mapper.PresentationMedicalGuideListMapper
 import br.com.policlinsaude.model.PresentationEstablishment

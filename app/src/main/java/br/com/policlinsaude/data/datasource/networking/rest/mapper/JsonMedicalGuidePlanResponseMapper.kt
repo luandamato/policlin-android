@@ -3,7 +3,7 @@ package br.com.data.datasource.networking.rest.mapper
 import br.com.data.datasource.networking.rest.model.JsonMedicalGuidePlanResponse
 import br.com.data.datasource.networking.rest.model.JsonMedicalGuidePlansResponse
 import br.com.data.helper.InvalidData
-import br.com.domain.model.MedicalGuidePlan
+import br.com.policlinsaude.domain.model.MedicalGuidePlan
 
 /**
  * Created by lmiyagi on 3/21/18.

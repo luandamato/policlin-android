@@ -1,7 +1,7 @@
 package br.com.policlinsaude.perfil.di
 
-import br.com.domain.usecase.GetCurrentPersonUseCase
-import br.com.domain.usecase.UpdateAvatarUseCase
+import br.com.policlinsaude.domain.usecase.GetCurrentPersonUseCase
+import br.com.policlinsaude.domain.usecase.UpdateAvatarUseCase
 import br.com.policlinsaude.perfil.navigator.PerfilNavigator
 import br.com.policlinsaude.perfil.navigator.PerfilNavigatorImpl
 import br.com.policlinsaude.perfil.presenter.PerfilPresenter

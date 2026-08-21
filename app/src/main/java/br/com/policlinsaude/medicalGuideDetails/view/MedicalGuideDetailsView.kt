@@ -1,6 +1,6 @@
 package br.com.policlinsaude.medicalGuideDetails.view
 
-import br.com.domain.model.MedicalGuidePlan
+import br.com.policlinsaude.domain.model.MedicalGuidePlan
 import br.com.policlinsaude.model.PresentationEstablishment
 import br.com.policlinsaude.model.PresentationPlan
 

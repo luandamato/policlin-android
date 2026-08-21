@@ -1,4 +1,4 @@
-package br.com.domain.helper
+package br.com.policlinsaude.domain.helper
 
 import java.util.*
 

@@ -1,7 +1,7 @@
-package br.com.domain.usecase.requestvalues
+package br.com.policlinsaude.domain.usecase.requestvalues
 
-import br.com.domain.model.Establishment
-import br.com.domain.usecase.base.BaseRequestValues
+import br.com.policlinsaude.domain.model.Establishment
+import br.com.policlinsaude.domain.usecase.base.BaseRequestValues
 
 class RemoveFromFavoritesRV(val establishment: Establishment)
     : BaseRequestValues

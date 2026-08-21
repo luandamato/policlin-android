@@ -1,9 +1,9 @@
 package br.com.policlinsaude.core.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.GetBooleanPreferenceUseCase
-import br.com.domain.usecase.SetLocationPreferenceUseCase
-import br.com.domain.usecase.SetNotificationPreferenceUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.GetBooleanPreferenceUseCase
+import br.com.policlinsaude.domain.usecase.SetLocationPreferenceUseCase
+import br.com.policlinsaude.domain.usecase.SetNotificationPreferenceUseCase
 import dagger.Module
 import dagger.Provides
 

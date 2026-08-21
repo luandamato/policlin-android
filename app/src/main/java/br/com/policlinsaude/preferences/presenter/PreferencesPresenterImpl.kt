@@ -1,14 +1,14 @@
 package br.com.policlinsaude.preferences.presenter
 
 import android.util.Log
-import br.com.domain.AppConstants
-import br.com.domain.usecase.GetBooleanPreferenceUseCase
-import br.com.domain.usecase.SetLocationPreferenceUseCase
-import br.com.domain.usecase.SetNotificationPreferenceUseCase
-import br.com.domain.usecase.DoLogoffUseCase
-import br.com.domain.usecase.requestvalues.GetBooleanPreferenceRV
-import br.com.domain.usecase.requestvalues.SetLocationPreferenceRV
-import br.com.domain.usecase.requestvalues.SetNotificationPreferenceRV
+import br.com.policlinsaude.domain.AppConstants
+import br.com.policlinsaude.domain.usecase.GetBooleanPreferenceUseCase
+import br.com.policlinsaude.domain.usecase.SetLocationPreferenceUseCase
+import br.com.policlinsaude.domain.usecase.SetNotificationPreferenceUseCase
+import br.com.policlinsaude.domain.usecase.DoLogoffUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.GetBooleanPreferenceRV
+import br.com.policlinsaude.domain.usecase.requestvalues.SetLocationPreferenceRV
+import br.com.policlinsaude.domain.usecase.requestvalues.SetNotificationPreferenceRV
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.preferences.navigator.PreferencesNavigator
 import br.com.policlinsaude.preferences.view.PreferencesView

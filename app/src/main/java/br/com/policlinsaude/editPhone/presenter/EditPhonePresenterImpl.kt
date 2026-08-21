@@ -1,7 +1,7 @@
 package br.com.policlinsaude.editPhone.presenter
 
-import br.com.domain.usecase.UpdateEmailUseCase
-import br.com.domain.usecase.requestvalues.UpdatePhoneRV
+import br.com.policlinsaude.domain.usecase.UpdateEmailUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.UpdatePhoneRV
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.editPhone.view.EditPhoneView
 import io.reactivex.rxkotlin.subscribeBy

@@ -2,7 +2,7 @@ package br.com.data.datasource.realm.mapper
 
 import br.com.data.datasource.realm.model.RealmPerson
 import br.com.data.datasource.realm.model.RealmPlan
-import br.com.domain.model.Person
+import br.com.policlinsaude.domain.model.Person
 
 object RealmPersonMapper {
 

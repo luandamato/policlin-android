@@ -1,9 +1,9 @@
 package br.com.policlinsaude.home.view
 
-import br.com.domain.model.Banner
-import br.com.domain.model.Person
-import br.com.domain.model.UserConnected
-import br.com.domain.model.ValidateButtons
+import br.com.policlinsaude.domain.model.Banner
+import br.com.policlinsaude.domain.model.Person
+import br.com.policlinsaude.domain.model.UserConnected
+import br.com.policlinsaude.domain.model.ValidateButtons
 
 /**
  * Created by lmiyagi on 3/23/18.

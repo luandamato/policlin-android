@@ -1,4 +1,4 @@
-package br.com.domain.model
+package br.com.policlinsaude.domain.model
 
 class ValidateButtons(
     val boleto: Boolean = false,

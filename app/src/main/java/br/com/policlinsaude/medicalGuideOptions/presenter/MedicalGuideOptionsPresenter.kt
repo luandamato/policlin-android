@@ -1,9 +1,9 @@
 package br.com.policlinsaude.medicalGuideOptions.presenter
 
-import br.com.domain.helper.InvalidData
-import br.com.domain.model.Establishment
-import br.com.domain.model.ProfessionalClassOptions
-import br.com.domain.model.ServiceTypeOptions
+import br.com.policlinsaude.domain.helper.InvalidData
+import br.com.policlinsaude.domain.model.Establishment
+import br.com.policlinsaude.domain.model.ProfessionalClassOptions
+import br.com.policlinsaude.domain.model.ServiceTypeOptions
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.helper.IntentHelper
 import br.com.policlinsaude.medicalGuideOptions.presenter.model.PresentationLocation

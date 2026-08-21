@@ -1,6 +1,6 @@
 package br.com.policlinsaude.mapper
 
-import br.com.domain.model.Person
+import br.com.policlinsaude.domain.model.Person
 import br.com.policlinsaude.model.PresentationPerson
 
 object PresentationPersonMapper {

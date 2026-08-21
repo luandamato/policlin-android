@@ -11,10 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import br.com.domain.model.Banner
-import br.com.domain.model.Person
-import br.com.domain.model.UserConnected
-import br.com.domain.model.ValidateButtons
+import br.com.policlinsaude.domain.model.Banner
+import br.com.policlinsaude.domain.model.Person
+import br.com.policlinsaude.domain.model.UserConnected
+import br.com.policlinsaude.domain.model.ValidateButtons
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseFragmentWithInject
 import br.com.policlinsaude.core.helper.DialogHelper

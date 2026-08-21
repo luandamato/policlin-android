@@ -1,14 +1,14 @@
 package br.com.policlinsaude.medicalGuideOptions.presenter
 
 import android.util.Log
-import br.com.domain.AppConstants
-import br.com.domain.model.Person
-import br.com.domain.usecase.GetBooleanPreferenceUseCase
-import br.com.domain.usecase.GetCurrentPersonUseCase
-import br.com.domain.usecase.GetMedicalGuideOptionsUseCase
-import br.com.domain.usecase.SetLocationPreferenceUseCase
-import br.com.domain.usecase.requestvalues.GetBooleanPreferenceRV
-import br.com.domain.usecase.requestvalues.SetLocationPreferenceRV
+import br.com.policlinsaude.domain.AppConstants
+import br.com.policlinsaude.domain.model.Person
+import br.com.policlinsaude.domain.usecase.GetBooleanPreferenceUseCase
+import br.com.policlinsaude.domain.usecase.GetCurrentPersonUseCase
+import br.com.policlinsaude.domain.usecase.GetMedicalGuideOptionsUseCase
+import br.com.policlinsaude.domain.usecase.SetLocationPreferenceUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.GetBooleanPreferenceRV
+import br.com.policlinsaude.domain.usecase.requestvalues.SetLocationPreferenceRV
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.helper.IntentHelper
 import br.com.policlinsaude.core.helper.LocationHelper

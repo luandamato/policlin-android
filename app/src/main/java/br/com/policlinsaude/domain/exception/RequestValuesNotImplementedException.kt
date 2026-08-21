@@ -1,4 +1,4 @@
-package br.com.domain.exception
+package br.com.policlinsaude.domain.exception
 
 class RequestValuesNotImplementedException(private val className: String) : RuntimeException() {
 

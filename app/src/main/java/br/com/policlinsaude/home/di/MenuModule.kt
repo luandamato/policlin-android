@@ -1,8 +1,8 @@
 package br.com.policlinsaude.home.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.DoLogoffUseCase
-import br.com.domain.usecase.GetCurrentPersonUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.DoLogoffUseCase
+import br.com.policlinsaude.domain.usecase.GetCurrentPersonUseCase
 import br.com.policlinsaude.home.navigator.MenuNavigator
 import br.com.policlinsaude.home.navigator.MenuNavigatorImpl
 import br.com.policlinsaude.home.presenter.MenuPresenter

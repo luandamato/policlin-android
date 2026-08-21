@@ -10,9 +10,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import br.com.domain.exception.MessageErrorException
-import br.com.domain.model.HealthInsurancePhoto
-import br.com.domain.model.HealthInsurancePhotoList
+import br.com.policlinsaude.domain.exception.MessageErrorException
+import br.com.policlinsaude.domain.model.HealthInsurancePhoto
+import br.com.policlinsaude.domain.model.HealthInsurancePhotoList
 import br.com.policlinsaude.R
 import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.helper.DialogHelper

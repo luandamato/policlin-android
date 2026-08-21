@@ -1,9 +1,9 @@
 package br.com.policlinsaude.core.di
 
-import br.com.domain.repository.Repository
-import br.com.domain.usecase.GetCurrentPersonUseCase
-import br.com.domain.usecase.GetTokenUseCase
-import br.com.domain.usecase.UpdateAvatarUseCase
+import br.com.policlinsaude.domain.repository.Repository
+import br.com.policlinsaude.domain.usecase.GetCurrentPersonUseCase
+import br.com.policlinsaude.domain.usecase.GetTokenUseCase
+import br.com.policlinsaude.domain.usecase.UpdateAvatarUseCase
 import dagger.Module
 import dagger.Provides
 

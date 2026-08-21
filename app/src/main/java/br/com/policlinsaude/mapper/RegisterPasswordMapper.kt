@@ -1,7 +1,7 @@
 package br.com.policlinsaude.mapper
 
-import br.com.domain.model.Person
-import br.com.domain.model.Plan
+import br.com.policlinsaude.domain.model.Person
+import br.com.policlinsaude.domain.model.Plan
 import br.com.policlinsaude.model.PresentationPerson
 import br.com.policlinsaude.model.PresentationPlan
 

@@ -1,7 +1,7 @@
 package br.com.policlinsaude.forgotPassword.presenter
 
-import br.com.domain.usecase.RecoverPasswordUseCase
-import br.com.domain.usecase.requestvalues.RecoverPasswordRV
+import br.com.policlinsaude.domain.usecase.RecoverPasswordUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.RecoverPasswordRV
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.forgotPassword.navigator.ForgotPasswordNavigator
 import br.com.policlinsaude.forgotPassword.view.ForgotPasswordView

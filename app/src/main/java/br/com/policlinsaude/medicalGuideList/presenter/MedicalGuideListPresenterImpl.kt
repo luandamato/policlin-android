@@ -1,8 +1,8 @@
 package br.com.policlinsaude.medicalGuideList.presenter
 
 import android.util.Log
-import br.com.domain.usecase.GetMedicalGuideListUseCase
-import br.com.domain.usecase.requestvalues.MedicalGuideListRV
+import br.com.policlinsaude.domain.usecase.GetMedicalGuideListUseCase
+import br.com.policlinsaude.domain.usecase.requestvalues.MedicalGuideListRV
 import br.com.policlinsaude.core.helper.InvalidData
 import br.com.policlinsaude.core.helper.UseCaseHandler
 import br.com.policlinsaude.mapper.PresentationMedicalGuideListMapper
