@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentGuideAuthorizerBinding
+import br.com.policlinsaude.databinding.FragmentGuideAuthorizerBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.activities.GuideAuthorizerActivity
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.adapters.GuideAuthorizerAdapter
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.viewmodels.GuideAuthorizerViewModel

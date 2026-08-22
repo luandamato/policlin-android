@@ -5,8 +5,8 @@ import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.policlinsaude.newfeature.databinding.AdapterConsultingBinding
-import com.policlinsaude.newfeature.databinding.AdapterPictureBinding
+import br.com.policlinsaude.databinding.AdapterConsultingBinding
+import br.com.policlinsaude.databinding.AdapterPictureBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.DeadlinesItemsModel
 
 @SuppressLint("NotifyDataSetChanged")

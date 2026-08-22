@@ -17,8 +17,8 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.FragmentTicketDetailBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.FragmentTicketDetailBinding
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketDetail
 import com.policlinsaude.newfeature.utils.openBrowser
 import com.policlinsaude.newfeature.utils.toCurrencyBRL

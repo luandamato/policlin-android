@@ -12,8 +12,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.ActivityResearchCoParticipationBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.ActivityResearchCoParticipationBinding
 import com.policlinsaude.newfeature.features.coparticipation.ui.viewmodels.CoParticipationViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

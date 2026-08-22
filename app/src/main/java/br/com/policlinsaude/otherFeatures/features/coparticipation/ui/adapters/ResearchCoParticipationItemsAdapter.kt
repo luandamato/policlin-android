@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
-import com.policlinsaude.newfeature.databinding.AdapterFactorExtractorDetailBinding
-import com.policlinsaude.newfeature.databinding.AdapterResearshCoParticipationBinding
+import br.com.policlinsaude.databinding.AdapterResearshCoParticipationBinding
 import com.policlinsaude.newfeature.features.coparticipation.data.models.CoParticipationItemsDetails
 import com.policlinsaude.newfeature.features.extractor.data.models.FactorExtractorDetailItemsModel
 import com.policlinsaude.newfeature.utils.toCurrencyBRL

@@ -10,9 +10,9 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentNotificationsBinding
+import br.com.policlinsaude.databinding.FragmentNotificationsBinding
+import br.com.policlinsaude.otherFeatures.features.notifications.ui.activities.NotificationActivity
 import com.policlinsaude.newfeature.features.extractor.ui.activities.FactorExtractorActivity
-import com.policlinsaude.newfeature.features.notifications.ui.activities.NotificationActivity
 import com.policlinsaude.newfeature.features.notifications.ui.adapters.NotificationsAdapter
 import com.policlinsaude.newfeature.features.notifications.ui.viewmodels.NotificationViewModel
 import com.policlinsaude.newfeature.utils.DialogHelper

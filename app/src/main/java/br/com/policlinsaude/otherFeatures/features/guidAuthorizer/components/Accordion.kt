@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.ComponentAccordionBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.ComponentAccordionBinding
 import com.policlinsaude.newfeature.utils.ViewAnimation
 
 @SuppressLint("Recycle")

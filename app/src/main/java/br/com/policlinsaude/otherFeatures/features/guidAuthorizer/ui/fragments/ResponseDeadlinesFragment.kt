@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentConsultingBinding
-import com.policlinsaude.newfeature.databinding.FragmentRequestDataBinding
+import br.com.policlinsaude.databinding.FragmentConsultingBinding
+import br.com.policlinsaude.databinding.FragmentRequestDataBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.adapters.AdapterConsulting
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.adapters.ProcessRequestAdapter
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.viewmodels.GuideAuthorizerViewModel
@@ -53,6 +53,8 @@ class ResponseDeadlinesFragment: Fragment() {
                     ViewModelResponseStatus.FAILED -> {
                         hideLoading()
                     }
+
+                    else -> {}
                 }
             }
         }

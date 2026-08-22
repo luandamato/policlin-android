@@ -217,7 +217,7 @@
     <!-- Formatting Strings -->
     <string name="text_date">%1$02d/%2$02d/%3$04d</string>
     <string name="text_version">Versão %s</string>
-    <string name="text_register_and_order_number">Registro/Ordem: %1$s / %2$s</string>
+    <string name="text_register_and_order_number">Registro/Ordem: %1$d / %2$d</string>
     <string name="text_person_home_title">Olá, %1$s\nPlano: %2$s</string>
 
     <!-- URLs -->

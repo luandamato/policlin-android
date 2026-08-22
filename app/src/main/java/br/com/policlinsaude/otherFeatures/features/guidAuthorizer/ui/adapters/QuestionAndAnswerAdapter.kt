@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.AdapterQuestionAndAnswerBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.AdapterQuestionAndAnswerBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerQuestionsItemsModel
 import com.policlinsaude.newfeature.utils.toDDMMYYYY
 import com.policlinsaude.newfeature.utils.toHHMMSS

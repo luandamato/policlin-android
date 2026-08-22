@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentIncomeTaxBinding
+import br.com.policlinsaude.databinding.FragmentIncomeTaxBinding
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxItemModel
 import com.policlinsaude.newfeature.features.incometax.ui.activities.IncomeTaxActivity
 import com.policlinsaude.newfeature.features.incometax.ui.adapters.IncomeTaxItemAdapter

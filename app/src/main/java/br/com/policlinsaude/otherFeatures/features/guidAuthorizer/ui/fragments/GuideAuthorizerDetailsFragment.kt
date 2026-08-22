@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentGuideAuthorizerDetailsBinding
+import br.com.policlinsaude.databinding.FragmentGuideAuthorizerDetailsBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerQuestionsItemsModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerReponsePicturesItemsModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerResponseItemModel
@@ -157,6 +157,8 @@ class GuideAuthorizerDetailsFragment: Fragment() {
                                 dividerGuideAuthorization.isVisible = false
                             }
                     }
+
+                    else -> {}
                 }
             }
 
@@ -202,6 +204,8 @@ class GuideAuthorizerDetailsFragment: Fragment() {
                             }
 
                     }
+
+                    else -> {}
                 }
             }
 

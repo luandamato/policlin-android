@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.policlinsaude.newfeature.databinding.AdapterFactorExtractorCardsBinding
+import br.com.policlinsaude.databinding.AdapterFactorExtractorCardsBinding
 import com.policlinsaude.newfeature.features.extractor.data.models.FactorExtractorDetailModel
 import com.policlinsaude.newfeature.utils.toDDMMYYYY
 

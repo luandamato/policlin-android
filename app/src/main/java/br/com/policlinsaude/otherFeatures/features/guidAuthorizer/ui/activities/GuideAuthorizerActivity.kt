@@ -10,8 +10,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.ActivityGuideAuthorizerBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.ActivityGuideAuthorizerBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.viewmodels.GuideAuthorizerViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

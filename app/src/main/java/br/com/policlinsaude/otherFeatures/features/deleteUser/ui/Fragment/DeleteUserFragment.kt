@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.policlinsaude.newfeature.R
+import br.com.policlinsaude.R
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentDeleteUserBinding
+import br.com.policlinsaude.databinding.FragmentDeleteUserBinding
 import com.policlinsaude.newfeature.features.deleteUser.ui.ViewModel.DeleteUserViewModel
 import com.policlinsaude.newfeature.features.deleteUser.ui.Activity.DeleteUserActivity
 import com.policlinsaude.newfeature.utils.DialogHelper
@@ -55,6 +55,8 @@ class DeleteUserFragment : Fragment() {
                         hideLoading()
                         viewModel.logout()
                     }
+
+                    else -> {}
                 }
             }
             logout.observe(viewLifecycleOwner) {
@@ -65,6 +67,8 @@ class DeleteUserFragment : Fragment() {
                         viewModel.removeToken()
                         showDeleted()
                     }
+
+                    else -> {}
                 }
             }
         }

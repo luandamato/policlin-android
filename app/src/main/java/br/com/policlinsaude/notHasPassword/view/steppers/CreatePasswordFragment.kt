@@ -1,5 +1,6 @@
 package br.com.policlinsaude.notHasPassword.view.steppers
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +32,9 @@ class CreatePasswordFragment : BaseFragment() {
 
         photoPickerHelper = PhotoPickerHelper(
             fragment = this,
-            onImageSelected = ::onImageSelected,
+            onImageSelected = { bitmap, file ->
+                handleImage(file, bitmap)
+            },
             onError = {
                 presenter.onImagePickError()
             }
@@ -65,7 +68,7 @@ class CreatePasswordFragment : BaseFragment() {
         setClickListener()
     }
 
-    private fun onImageSelected(file: File) {
+    private fun handleImage(file: File, bitmap: Bitmap) {
         try {
             val image = file.toBase64(500, 0)
 

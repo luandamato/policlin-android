@@ -7,8 +7,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.ActivityIncomeTaxBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.ActivityIncomeTaxBinding
 
 class IncomeTaxActivity : AppCompatActivity() {
 

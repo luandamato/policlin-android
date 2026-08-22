@@ -10,7 +10,7 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.policlinsaude.newfeature.databinding.FragmentRequestDetailBinding
+import br.com.policlinsaude.databinding.FragmentRequestDetailBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerResponseItemModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.activities.GuideAuthorizerActivity
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.viewmodels.GuideAuthorizerViewModel

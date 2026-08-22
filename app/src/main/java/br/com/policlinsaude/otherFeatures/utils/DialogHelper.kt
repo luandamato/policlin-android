@@ -3,7 +3,7 @@ package com.policlinsaude.newfeature.utils
 import android.content.Context
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import com.policlinsaude.newfeature.R
+import br.com.policlinsaude.R
 
 object DialogHelper {
 

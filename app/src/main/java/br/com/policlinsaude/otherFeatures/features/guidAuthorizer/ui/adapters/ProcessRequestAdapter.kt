@@ -6,7 +6,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.policlinsaude.newfeature.databinding.AdapterPictureBinding
+import br.com.policlinsaude.databinding.AdapterPictureBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.PictureSave
 import com.policlinsaude.newfeature.features.notifications.data.models.NotificationsModel
 

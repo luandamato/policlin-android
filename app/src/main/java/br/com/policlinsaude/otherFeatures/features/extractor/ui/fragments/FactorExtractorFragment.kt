@@ -8,10 +8,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.policlinsaude.newfeature.R
+import br.com.policlinsaude.R
 import com.policlinsaude.newfeature.components.bottomsheet.BottomSheetCommon
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentFactorExtractorBinding
+import br.com.policlinsaude.databinding.FragmentFactorExtractorBinding
 import com.policlinsaude.newfeature.features.extractor.data.models.FactorExtractorDetailItemsModel
 import com.policlinsaude.newfeature.features.extractor.data.models.FactorExtractorDetailModel
 import com.policlinsaude.newfeature.features.extractor.ui.activities.FactorExtractorActivity

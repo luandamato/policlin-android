@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.AdapterGuideAuthorizerBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.AdapterGuideAuthorizerBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerItemsModel
 import com.policlinsaude.newfeature.features.notifications.data.models.NotificationsModel
 import com.policlinsaude.newfeature.utils.toDDMMYYYY

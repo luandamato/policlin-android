@@ -10,8 +10,8 @@ import androidx.core.view.marginEnd
 import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.AdapterPictureBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.AdapterPictureBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerReponsePicturesItemsModel
 
 class PicturesAdapter (

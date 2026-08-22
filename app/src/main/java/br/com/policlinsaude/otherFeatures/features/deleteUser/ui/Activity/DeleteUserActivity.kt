@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.ActivityDeleteUserBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.ActivityDeleteUserBinding
 
 class DeleteUserActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDeleteUserBinding

@@ -1,6 +1,7 @@
 package br.com.policlinsaude.perfil.view
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.media.ExifInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import br.com.policlinsaude.core.base.BaseActivity
 import br.com.policlinsaude.core.base.BaseFragmentWithInject
 import br.com.policlinsaude.core.helper.DateHelper
 import br.com.policlinsaude.core.helper.MaskUtils
+import br.com.policlinsaude.core.helper.PhotoPickerHelper
 import br.com.policlinsaude.core.helper.getBitmapFromImage
 import br.com.policlinsaude.core.helper.toBase64
 import br.com.policlinsaude.databinding.FragmentPerfilBinding
@@ -21,7 +23,6 @@ import br.com.policlinsaude.domain.exception.MessageErrorException
 import br.com.policlinsaude.home.view.MenuActivity
 import br.com.policlinsaude.model.PresentationPerson
 import br.com.policlinsaude.perfil.presenter.PerfilPresenter
-import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 import javax.inject.Inject
 
@@ -35,6 +36,7 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
 
     @Inject
     lateinit var presenter: PerfilPresenter
+    private lateinit var photoPickerHelper: PhotoPickerHelper
 
     private var _binding: FragmentPerfilBinding? = null
     private val binding get() = _binding!!
@@ -45,6 +47,16 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
 
         val toolbar: Toolbar = binding.root.findViewById(R.id.toolbar)
         (activity as MenuActivity).setupFragmentToolbar(toolbar, R.string.title_perfil)
+
+        photoPickerHelper = PhotoPickerHelper(
+            fragment = this,
+            onImageSelected = { bitmap, file ->
+                handleImage(file, bitmap)
+            },
+            onError = {
+                presenter.onImagePickError()
+            }
+        )
 
         return binding.root
     }
@@ -72,32 +84,28 @@ class PerfilFragment : BaseFragmentWithInject(), PerfilView {
         presenter.getPerfil()
     }
 
+    private fun handleImage(file: File, bitmap: Bitmap) {
+        try {
+            val image = file.toBase64(500, 0)
+
+            presenter.onImagePicked(image)
+
+//            if (image?.isNotEmpty() == true) {
+//                binding.imageView.setImageBitmap(
+//                    image.getBitmapFromImage()
+//                )
+//            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            presenter.onImagePickError()
+        }
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == AppCompatActivity.RESULT_OK && requestCode == 123) {
             val returnIntent = Intent()
             activity?.setResult(AppCompatActivity.RESULT_OK, returnIntent)
             activity?.finish()
         }
-        EasyImage.handleActivityResult(requestCode, resultCode, data, activity, object : EasyImage.Callbacks {
-            override fun onImagePicked(imageFile: File?, source: EasyImage.ImageSource?, type: Int) {
-                imageFile?.let {
-                    val rotation = applyRotationIfNeeded(it)
-                    presenter.onImagePicked(it.toBase64(500, rotation))
-                }
-            }
-
-            override fun onImagePickerError(e: Exception?, source: EasyImage.ImageSource?, type: Int) {
-                e?.printStackTrace()
-                presenter.onImagePickError()
-            }
-
-            override fun onCanceled(source: EasyImage.ImageSource?, type: Int) {
-                if (source === EasyImage.ImageSource.CAMERA) {
-                    val photoFile = EasyImage.lastlyTakenButCanceledPhoto(context)
-                    photoFile?.delete()
-                }
-            }
-        })
         super.onActivityResult(requestCode, resultCode, data)
     }
 

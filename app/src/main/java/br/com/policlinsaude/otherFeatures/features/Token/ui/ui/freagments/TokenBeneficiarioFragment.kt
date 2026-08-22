@@ -63,6 +63,8 @@ class TokenBeneficiarioFragment : Fragment() {
                             setupRecycler(it.getData()?.listaBeneficiario)
                         }
                     }
+
+                    else -> {}
                 }
             }
         }

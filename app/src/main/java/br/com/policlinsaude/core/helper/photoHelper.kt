@@ -2,17 +2,25 @@ package br.com.policlinsaude.core.helper
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.policlinsaude.newfeature.components.bottomsheet.BottomSheetCommon
+import com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.ProcessRequestFragment.Companion.CANCEL
+import com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.ProcessRequestFragment.Companion.GALLERY
+import com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments.ProcessRequestFragment.Companion.TAKE_PICTURE
+import com.policlinsaude.newfeature.features.tickets.ui.fragments.TicketsFragment
 import java.io.File
 
 class PhotoPickerHelper(
     private val fragment: Fragment,
-    private val onImageSelected: (File) -> Unit,
-    private val onError: (Exception?) -> Unit = {}
+    private val onImageSelected: (Bitmap, File) -> Unit,
+    private val onError: (String) -> Unit = {}
 ) {
 
     enum class Mode {
@@ -24,46 +32,52 @@ class PhotoPickerHelper(
     private var cameraFile: File? = null
 
     private val galleryLauncher =
-        fragment.registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        fragment.registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             if (uri == null) return@registerForActivityResult
 
             try {
-                val file = File.createTempFile(
-                    "gallery_",
-                    ".jpg",
-                    fragment.requireContext().cacheDir
-                )
+                val file = copyUriToCache(uri)
+                val bitmap = decodeAndValidateImage(file)
 
-                fragment.requireContext().contentResolver
-                    .openInputStream(uri)
-                    ?.use { input ->
-                        file.outputStream().use { output ->
-                            input.copyTo(output)
-                        }
-                    }
-                    ?: throw IllegalStateException("Não foi possível abrir a imagem.")
-
-                onImageSelected(file)
+                onImageSelected(bitmap, file)
             } catch (e: Exception) {
-                onError(e)
+                onError(
+                    e.message ?: "Não foi possível carregar a imagem selecionada."
+                )
             }
         }
 
     private val cameraLauncher =
         fragment.registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-            if (success) {
-                cameraFile?.let(onImageSelected)
-            } else {
-                cameraFile?.delete()
+            val file = cameraFile
+
+            if (!success || file == null) {
+                file?.delete()
+                cameraFile = null
+                return@registerForActivityResult
+            }
+
+            try {
+                val bitmap = decodeAndValidateImage(file)
+                onImageSelected(bitmap, file)
+            } catch (e: Exception) {
+                file.delete()
+                onError(
+                    e.message ?: "Não foi possível processar a foto tirada."
+                )
+            } finally {
+                cameraFile = null
             }
         }
 
     private val cameraPermissionLauncher =
-        fragment.registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        fragment.registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { granted ->
             if (granted) {
                 launchCamera()
             } else {
-                onError(SecurityException("Permissão da câmera negada."))
+                onError("Permissão da câmera negada. Autorize o acesso à câmera para tirar uma foto.")
             }
         }
 
@@ -75,21 +89,45 @@ class PhotoPickerHelper(
         }
     }
 
+    /**
+     * Quando as duas opções estão disponíveis, o próprio helper
+     * apresenta o BottomSheet com Câmera e Galeria.
+     */
     private fun showChooser() {
-        androidx.appcompat.app.AlertDialog.Builder(fragment.requireContext())
-            .setTitle("Selecionar imagem")
-            .setItems(arrayOf("Câmera", "Galeria")) { _, which ->
-                when (which) {
-                    0 -> openCameraWithPermission()
-                    1 -> openGallery()
+        BottomSheetCommon().apply {
+
+            list = mutableListOf(
+                TAKE_PICTURE,
+                GALLERY,
+                CANCEL
+            )
+
+            onItemSelected = { item ->
+                when (item) {
+
+                    TAKE_PICTURE -> {
+                        openCameraWithPermission()
+                    }
+
+                    GALLERY -> {
+                        openGallery()
+                    }
                 }
+
+                dismissAllowingStateLoss()
             }
-            .show()
+
+            isVisibleClearFilter = false
+            isVisibleButtonApply = false
+
+        }.show(
+            fragment.childFragmentManager,
+            TicketsFragment.OPEN_BOTTOM_SHEET_YEAR
+        )
     }
 
     private fun openGallery() {
-        // GetContent funciona sem READ_EXTERNAL_STORAGE /
-        // READ_MEDIA_IMAGES porque o usuário escolhe explicitamente a imagem.
+        // GetContent não exige READ_EXTERNAL_STORAGE nem READ_MEDIA_IMAGES.
         galleryLauncher.launch("image/*")
     }
 
@@ -126,7 +164,78 @@ class PhotoPickerHelper(
 
             cameraLauncher.launch(uri)
         } catch (e: Exception) {
-            onError(e)
+            cameraFile?.delete()
+            cameraFile = null
+            onError("Não foi possível abrir a câmera.")
         }
+    }
+
+    private fun copyUriToCache(uri: Uri): File {
+        val context = fragment.requireContext()
+
+        val mimeType = context.contentResolver.getType(uri)
+        if (mimeType != null && mimeType != "image/jpeg" &&
+            mimeType != "image/png" &&
+            mimeType != "image/webp"
+        ) {
+            throw IllegalArgumentException(
+                "Formato de imagem não suportado. Selecione uma imagem JPG, PNG ou WEBP."
+            )
+        }
+
+        val file = File.createTempFile(
+            "gallery_",
+            ".jpg",
+            context.cacheDir
+        )
+
+        context.contentResolver.openInputStream(uri)?.use { input ->
+            file.outputStream().use { output ->
+                input.copyTo(output)
+            }
+        } ?: throw IllegalStateException(
+            "Não foi possível acessar a imagem selecionada."
+        )
+
+        return file
+    }
+
+    private fun decodeAndValidateImage(file: File): Bitmap {
+        if (!file.exists() || file.length() == 0L) {
+            throw IllegalStateException("O arquivo da imagem está vazio ou não existe.")
+        }
+
+        // Limite de 2 MB, seguindo a regra utilizada atualmente na aplicação.
+        if (file.length() > MAX_FILE_SIZE) {
+            throw IllegalArgumentException(
+                "A imagem não pode ter mais de 2 MB."
+            )
+        }
+
+        val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+            ?: throw IllegalArgumentException(
+                "Não foi possível interpretar a imagem. Selecione outra imagem."
+            )
+
+        if (bitmap.width <= 0 || bitmap.height <= 0) {
+            bitmap.recycle()
+            throw IllegalArgumentException(
+                "A imagem selecionada possui dimensões inválidas."
+            )
+        }
+
+        if (bitmap.width < MIN_IMAGE_SIZE || bitmap.height < MIN_IMAGE_SIZE) {
+            bitmap.recycle()
+            throw IllegalArgumentException(
+                "A imagem é muito pequena. Selecione uma imagem com pelo menos ${MIN_IMAGE_SIZE}x${MIN_IMAGE_SIZE} pixels."
+            )
+        }
+
+        return bitmap
+    }
+
+    companion object {
+        private const val MAX_FILE_SIZE = 2L * 1024L * 1024L
+        private const val MIN_IMAGE_SIZE = 100
     }
 }

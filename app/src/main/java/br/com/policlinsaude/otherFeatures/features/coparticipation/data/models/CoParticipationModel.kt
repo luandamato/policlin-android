@@ -1,6 +1,7 @@
 package com.policlinsaude.newfeature.features.coparticipation.data.models
 
 import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import com.google.gson.annotations.SerializedName
 
 data class CoParticipationModel(
@@ -22,10 +23,11 @@ data class CoParticipationItems(
     val msgExterna: String = "",
 )
 
+@Parcelize
 data class CoParticipationItemsDetails(
     val tussCod: String = "",
     val tussDes: String = "",
     val copartCod: Int = 0,
     val copartDes: String = "",
     val valor: String = ""
-)
+): Parcelable

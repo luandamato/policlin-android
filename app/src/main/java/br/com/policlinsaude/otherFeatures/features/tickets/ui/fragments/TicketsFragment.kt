@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.policlinsaude.newfeature.R
+import br.com.policlinsaude.R
 import com.policlinsaude.newfeature.components.bottomsheet.BottomSheetCommon
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentTicketsBinding
+import br.com.policlinsaude.databinding.FragmentTicketsBinding
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketDetail
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketModel
 import com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity

@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.FragmentAuthorizerBeneficiaryListBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.FragmentAuthorizerBeneficiaryListBinding
 import com.policlinsaude.newfeature.features.Token.models.BeneficiarioModel
 import com.policlinsaude.newfeature.features.Token.ui.adapters.DependetAdapter
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.activities.GuideAuthorizerActivity

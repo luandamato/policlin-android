@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.FragmentFactorExtractorDetailBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.FragmentFactorExtractorDetailBinding
 import com.policlinsaude.newfeature.features.coparticipation.data.models.CoParticipationItemsDetails
 import com.policlinsaude.newfeature.features.coparticipation.ui.adapters.ResearchCoParticipationItemsAdapter
 import com.policlinsaude.newfeature.features.coparticipation.ui.viewmodels.CoParticipationViewModel

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.policlinsaude.newfeature.databinding.AdapterIncomeTaxItemBinding
+import br.com.policlinsaude.databinding.AdapterIncomeTaxItemBinding
 import com.policlinsaude.newfeature.features.incometax.data.models.IncomeTaxItemModel
 
 class IncomeTaxItemAdapter(

@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import com.policlinsaude.newfeature.R
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.FragmentTokenBinding
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentTokenBinding
 import com.policlinsaude.newfeature.features.Token.ui.TokenActivity
 import com.policlinsaude.newfeature.features.Token.ui.TokenViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -80,6 +80,8 @@ class TokenFragment : Fragment() {
                             setupTimer(viewModel.validade)
                         }
                     }
+
+                    else -> {}
                 }
             }
             userSelected.observe(viewLifecycleOwner){
@@ -94,6 +96,8 @@ class TokenFragment : Fragment() {
                          !it.getData()?.listaBeneficiario.isNullOrEmpty()
                         binding.linearBeneficiaryData.isVisible = !it.getData()?.listaBeneficiario.isNullOrEmpty() && it.getData()?.listaBeneficiario!!.count() > 1
                     }
+
+                    else -> {}
                 }
             }
         }

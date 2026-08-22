@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.policlinsaude.newfeature.R
-import com.policlinsaude.newfeature.databinding.AdapterTicketsBinding
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.AdapterTicketsBinding
 import com.policlinsaude.newfeature.features.tickets.data.models.TicketDetail
 import com.policlinsaude.newfeature.utils.toCurrencyBRL
 import com.policlinsaude.newfeature.utils.toDDMMYYYY

@@ -7,9 +7,9 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doBeforeTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.policlinsaude.newfeature.R
+import br.com.policlinsaude.R
+import br.com.policlinsaude.databinding.FragmentResearchCoParticipationFiltersBinding
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentResearchCoParticipationFiltersBinding
 import com.policlinsaude.newfeature.features.coparticipation.ui.activities.ResearchCoParticipationActivity
 import com.policlinsaude.newfeature.features.coparticipation.ui.viewmodels.CoParticipationViewModel
 import com.policlinsaude.newfeature.features.tickets.ui.fragments.TicketsFragment

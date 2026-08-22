@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.fragment.findNavController
-import com.policlinsaude.newfeature.R
+import br.com.policlinsaude.R
 import com.policlinsaude.newfeature.data.models.UserModel
 import com.policlinsaude.newfeature.data.networking.ViewModelResponseStatus
-import com.policlinsaude.newfeature.databinding.FragmentBeneficiaryDataBinding
+import br.com.policlinsaude.databinding.FragmentBeneficiaryDataBinding
 import com.policlinsaude.newfeature.features.Token.models.BeneficiarioModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.activities.GuideAuthorizerActivity
 import com.policlinsaude.newfeature.features.guidAuthorizer.ui.viewmodels.GuideAuthorizerViewModel
-import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class BeneficiaryDataFragment : Fragment() {
@@ -98,6 +97,7 @@ class BeneficiaryDataFragment : Fragment() {
                         }
                     }
                     ViewModelResponseStatus.FAILED -> hideLoading()
+                    else -> {}
                 }
             }
         }

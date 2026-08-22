@@ -84,14 +84,21 @@ class MedicalGuideListAdapter(private val onItemClickListener: OnItemClickListen
 
         fun format() {
             binding.recyclerView.adapter = QualificationAdapter(qualifications)
-            binding.recyclerView.layoutManager = LinearLayoutManager(itemView.context)
+            binding.recyclerView.layoutManager = LinearLayoutManager(binding.root.context)
 
             binding.infoTextView.setOnClickListener {
-                IntentHelper.openUrlInBrowser(itemView.context, itemView.context.getString(R.string.url_custom_infos))
+                IntentHelper.openUrlInBrowser(
+                    binding.root.context,
+                    binding.root.context.getString(R.string.url_custom_infos)
+                )
             }
 
             binding.infoTextView.setText(
-                Html.fromHtml(itemView.context.getString(R.string.msg_information_about_icon_and_qualification_and_link)),
+                Html.fromHtml(
+                    binding.root.context.getString(
+                        R.string.msg_information_about_icon_and_qualification_and_link
+                    )
+                ),
                 TextView.BufferType.SPANNABLE
             )
         }

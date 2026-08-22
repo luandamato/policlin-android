@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.policlinsaude.newfeature.databinding.AdapterNotificationsBinding
+import br.com.policlinsaude.databinding.AdapterNotificationsBinding
 import com.policlinsaude.newfeature.features.notifications.data.models.NotificationsModel
 import com.policlinsaude.newfeature.features.notifications.ui.viewmodels.NotificationViewModel
 
