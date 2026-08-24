@@ -3,8 +3,8 @@ package com.policlinsaude.newfeature.features.guidAuthorizer.ui.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.pdf.PdfRenderer
 import android.net.Uri
-import android.os.ParcelFileDescriptor
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -18,7 +18,6 @@ import br.com.policlinsaude.R
 import br.com.policlinsaude.databinding.AdapterPictureBinding
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.GuideAuthorizerReponsePicturesItemsModel
 import com.policlinsaude.newfeature.features.guidAuthorizer.data.models.QuestionsAttachmentsModel
-import com.shockwave.pdfium.PdfiumCore
 
 class QuestionPicturesAdapter (
     private var list: MutableList<QuestionsAttachmentsModel> = arrayListOf(),
@@ -83,22 +82,33 @@ class QuestionPicturesAdapter (
     }
 
     private fun generateImageFromPdf(pdfUri: Uri, context: Context): Bitmap? {
-        val pageNumber = 0
-        val pdfiumCore = PdfiumCore(context)
-        var bmp: Bitmap? = null
-        try {
-            val fd: ParcelFileDescriptor? =
-                context.contentResolver.openFileDescriptor(pdfUri, "r")
-            val pdfDocument = pdfiumCore.newDocument(fd)
-            pdfiumCore.openPage(pdfDocument, pageNumber)
-            val width: Int = pdfiumCore.getPageWidthPoint(pdfDocument, pageNumber)
-            val height: Int = pdfiumCore.getPageHeightPoint(pdfDocument, pageNumber)
-            bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-            pdfiumCore.renderPageBitmap(pdfDocument, bmp, pageNumber, 0, 0, width, height)
-            pdfiumCore.closeDocument(pdfDocument)
-        } catch (e: java.lang.Exception) {
+        val fileDescriptor = context.contentResolver.openFileDescriptor(pdfUri, "r") ?: return null
 
+        return try {
+            PdfRenderer(fileDescriptor).use { renderer ->
+                if (renderer.pageCount == 0) return null
+
+                val page = renderer.openPage(0)
+                val bitmap = Bitmap.createBitmap(
+                    page.width,
+                    page.height,
+                    Bitmap.Config.ARGB_8888
+                )
+
+                page.render(
+                    bitmap,
+                    null,
+                    null,
+                    PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY
+                )
+                page.close()
+
+                bitmap
+            }
+        } catch (e: Exception) {
+            null
+        } finally {
+            fileDescriptor.close()
         }
-        return bmp
     }
 }

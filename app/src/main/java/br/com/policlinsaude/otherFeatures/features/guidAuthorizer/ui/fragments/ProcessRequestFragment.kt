@@ -3,10 +3,11 @@ package com.policlinsaude.newfeature.features.guidAuthorizer.ui.fragments
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.graphics.pdf.PdfRenderer
 import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +29,6 @@ import com.policlinsaude.newfeature.features.guidAuthorizer.ui.viewmodels.GuideA
 import com.policlinsaude.newfeature.features.tickets.ui.fragments.TicketsFragment
 import com.policlinsaude.newfeature.utils.DialogHelper
 import com.policlinsaude.newfeature.utils.toDDMMYYYY
-import com.shockwave.pdfium.PdfiumCore
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.File
 import java.io.FileOutputStream
@@ -462,66 +462,35 @@ class ProcessRequestFragment : Fragment() {
     }
 
     private fun generateImageFromPdf(pdfUri: Uri): Bitmap? {
-        val pageNumber = 0
-        val pdfiumCore = PdfiumCore(requireContext())
+        val fileDescriptor = requireContext().contentResolver.openFileDescriptor(pdfUri, "r") ?: return null
 
-        var bitmap: Bitmap? = null
-        var document: com.shockwave.pdfium.PdfDocument? = null
+        return try {
+            PdfRenderer(fileDescriptor).use { renderer ->
+                if (renderer.pageCount == 0) return null
 
-        try {
-            val fileDescriptor: ParcelFileDescriptor? =
-                requireContext()
-                    .contentResolver
-                    .openFileDescriptor(pdfUri, "r")
+                val page = renderer.openPage(0)
+                val bitmap = Bitmap.createBitmap(
+                    page.width,
+                    page.height,
+                    Bitmap.Config.ARGB_8888
+                )
 
-            if (fileDescriptor == null) {
-                return null
+                page.render(
+                    bitmap,
+                    null,
+                    null,
+                    PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY
+                )
+                page.close()
+
+                bitmap
             }
-
-            document = pdfiumCore.newDocument(fileDescriptor)
-
-            pdfiumCore.openPage(document, pageNumber)
-
-            val width =
-                pdfiumCore.getPageWidthPoint(
-                    document,
-                    pageNumber
-                )
-
-            val height =
-                pdfiumCore.getPageHeightPoint(
-                    document,
-                    pageNumber
-                )
-
-            bitmap = Bitmap.createBitmap(
-                width,
-                height,
-                Bitmap.Config.ARGB_8888
-            )
-
-            pdfiumCore.renderPageBitmap(
-                document,
-                bitmap,
-                pageNumber,
-                0,
-                0,
-                width,
-                height
-            )
-
         } catch (e: Exception) {
             e.printStackTrace()
+            null
         } finally {
-            try {
-                document?.let {
-                    pdfiumCore.closeDocument(it)
-                }
-            } catch (_: Exception) {
-            }
+            fileDescriptor.close()
         }
-
-        return bitmap
     }
 
     private fun messageSuccess() {

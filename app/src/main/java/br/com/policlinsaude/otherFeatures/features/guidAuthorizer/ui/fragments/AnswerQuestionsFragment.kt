@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.pdf.PdfRenderer
 import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
@@ -28,7 +29,6 @@ import com.policlinsaude.newfeature.utils.DialogHelper
 import com.policlinsaude.newfeature.utils.openBrowser
 import com.policlinsaude.newfeature.utils.toDDMMYYYY
 import com.policlinsaude.newfeature.utils.toHHMMSS
-import com.shockwave.pdfium.PdfiumCore
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.io.File
 import java.io.FileOutputStream
@@ -307,101 +307,87 @@ class AnswerQuestionsFragment : Fragment() {
                 }
             }
         } catch (e: Exception) {
-            e.printStackTrace()
-        }
+                e.printStackTrace()
+            }
 
         return tempFile
     }
 
     private fun getFileExtension(uri: Uri): String? {
-        val mimeType = requireContext()
-            .contentResolver
-            .getType(uri)
+        val contentResolver = requireContext().contentResolver
+        val mimeType = contentResolver.getType(uri)
+        val map = MimeTypeMap.getSingleton()
 
-        return MimeTypeMap
-            .getSingleton()
-            .getExtensionFromMimeType(mimeType)
+        return map.getExtensionFromMimeType(mimeType)
     }
 
-    @Throws(IOException::class)
-    private fun copy(
-        source: InputStream,
-        target: OutputStream
-    ) {
-        val buffer = ByteArray(8192)
-        var length: Int
+    private fun copy(input: InputStream, output: OutputStream) {
+        val buffer = ByteArray(1024)
+        var read: Int
 
-        while (
-            source.read(buffer).also { length = it } > 0
-        ) {
-            target.write(buffer, 0, length)
+        try {
+            while (input.read(buffer).also { read = it } != -1) {
+                output.write(buffer, 0, read)
+            }
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
     }
 
     private fun generateImageFromPdf(pdfUri: Uri): Bitmap? {
-        val pageNumber = 0
-        val pdfiumCore = PdfiumCore(requireContext())
+        val fileDescriptor = requireContext().contentResolver.openFileDescriptor(pdfUri, "r") ?: return null
 
         return try {
-            val fd: ParcelFileDescriptor? =
-                requireContext()
-                    .contentResolver
-                    .openFileDescriptor(pdfUri, "r")
+            PdfRenderer(fileDescriptor).use { renderer ->
+                if (renderer.pageCount == 0) return null
 
-            val pdfDocument = pdfiumCore.newDocument(fd)
+                val page = renderer.openPage(0)
+                val bitmap = Bitmap.createBitmap(
+                    page.width,
+                    page.height,
+                    Bitmap.Config.ARGB_8888
+                )
 
-            pdfiumCore.openPage(pdfDocument, pageNumber)
+                page.render(
+                    bitmap,
+                    null,
+                    null,
+                    PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY
+                )
+                page.close()
 
-            val width =
-                pdfiumCore.getPageWidthPoint(pdfDocument, pageNumber)
-
-            val height =
-                pdfiumCore.getPageHeightPoint(pdfDocument, pageNumber)
-
-            val bitmap = Bitmap.createBitmap(
-                width,
-                height,
-                Bitmap.Config.ARGB_8888
-            )
-
-            pdfiumCore.renderPageBitmap(
-                pdfDocument,
-                bitmap,
-                pageNumber,
-                0,
-                0,
-                width,
-                height
-            )
-
-            pdfiumCore.closeDocument(pdfDocument)
-
-            bitmap
-
+                bitmap
+            }
         } catch (e: Exception) {
+            e.printStackTrace()
             null
+        } finally {
+            fileDescriptor.close()
         }
     }
 
     private fun showLoading() {
-        binding.constraintAnswer.alpha = .1F
-        binding.progressBar.visibility = View.VISIBLE
+        with(binding) {
+            constraintAnswer.alpha = .1F
+            progressBar.visibility = View.VISIBLE
+        }
     }
 
     private fun hideLoading() {
-        binding.constraintAnswer.alpha = 1F
-        binding.progressBar.visibility = View.GONE
+        with(binding) {
+            constraintAnswer.alpha = 1F
+            progressBar.visibility = View.GONE
+        }
     }
 
     private fun messageSuccess() {
         DialogHelper.showDialog(
             requireContext(),
             "Sucesso!",
-            "Resposta foi enviada com sucesso",
+            "Resposta enviada com sucesso.",
             messagePositiveButton = "Voltar",
             listenerPositiveButton = {
-                onBack()
-                viewModel.clearAnswer()
+                findNavController().navigateUp()
             }
         )
     }
@@ -411,15 +397,5 @@ class AnswerQuestionsFragment : Fragment() {
             requireContext(),
             message
         )
-    }
-
-    private fun onBack() {
-        viewModel.isFromActivity = true
-        findNavController().popBackStack()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel.clearAnswer()
     }
 }

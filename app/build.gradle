@@ -270,9 +270,6 @@ dependencies {
         exclude group: 'org.jetbrains.kotlin', module: 'kotlin-android-extensions-runtime'
     }
 
-    implementation 'com.github.barteksc:pdfium-android:1.9.0'
-
-    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 
     // ============================================================
     // TESTES
