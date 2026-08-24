@@ -5,7 +5,7 @@ Definir um padrão arquitetural simples antes de migrar features.
 
 REFERÊNCIA:
 Queremos uma organização semelhante a um projeto em que:
-- data concentra models/services/repositories;
+- data concentra models/services/repositories, sem armazenamento em banco de dados locais;
 - ui/activities/<feature> concentra os arquivos da feature;
 - ViewModel fica junto da feature;
 - adapters específicos ficam junto da feature;
@@ -19,13 +19,9 @@ ESTRUTURA ALVO:
 com.<empresa>.<app>
 ├── data
 │   ├── models
+├── domain
 │   ├── services
 │   ├── repositories
-│   └── local
-├── domain
-│   ├── models
-│   ├── repositories
-│   └── usecases
 ├── ui
 │   ├── activities
 │   │   └── <feature>

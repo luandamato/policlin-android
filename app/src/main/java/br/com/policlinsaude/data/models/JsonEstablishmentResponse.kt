@@ -1,0 +1,38 @@
+package br.com.policlinsaude.data.models
+
+import br.com.policlinsaude.util.helpers.InvalidData
+import com.google.gson.annotations.SerializedName
+
+data class JsonEstablishmentResponse(@SerializedName("nome") val name: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("razao") val socialName: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("cnpj") val cnpj: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("qualificacao") val qualifications: List<JsonQualificationResponse>? = mutableListOf(),
+                                     @SerializedName("tipoEstabelecimento") val type: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("titulo") val title: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("subTitulo") val subTitle: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("especialidade") val speciality: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("logrodouro") val publicPlace: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("numero") val number: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("bairro") val neighborhood: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("cep") val zipCode: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("complemento") val complement: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("cidade") val city: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("uf") val state: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("telefone1") val phoneOne: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("telefone2") val phoneTwo: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("tipoTelefone1") val typePhoneOne: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("tipoTelefone2") val typePhoneTwo: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("latitude") val latitude: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("longitude") val longitude: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("distancia") val distance: Double? = InvalidData.UNINITIALIZED.getDouble(),
+                                     @SerializedName("fotoFachada") val photoFront: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("_CIDCOD") val cidCod: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("_ESCOD") val esCod: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("_PRSSEQ") val prsSeq: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("_PRSCOD") val prsCod: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("_PROUF") val proUf: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("_PROCLS") val proCls: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("_PROCOD") val proCod: String? = InvalidData.UNINITIALIZED.getString(),
+                                     @SerializedName("redePropria") val isOwnNetwork: Boolean? = false,
+                                     @SerializedName("_Favorito") val favorited: Boolean? = false,
+                                     @SerializedName("_Tipo") val uType: String? = InvalidData.UNINITIALIZED.getString())
