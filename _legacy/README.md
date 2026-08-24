@@ -10,20 +10,27 @@ base de referência durante a reescritura da aplicação para a nova arquitetura
 ## Estrutura
 
 ```
-_legacy/src/
-├── main/        # Código de produção anterior (Dagger + RxJava + Koin + MVVM novo)
-│   └── java/br/com/policlinsaude/...
-├── test/        # Testes anteriores
-└── androidTest/ # Testes de integração anteriores
+_legacy/
+├── src/
+│   ├── main/        # Código de produção anterior (Dagger + RxJava + Koin + MVVM novo)
+│   │   └── java/br/com/policlinsaude/...
+│   ├── test/        # Testes anteriores
+│   └── androidTest/ # Testes de integração anteriores
+└── res/
+    ├── layout/      # Layouts legados (97 arquivos)
+    ├── navigation/  # Nav-graphs legados (safeargs)
+    └── menu/        # Menus legados
 ```
 
 ## Como usar
 
 1. **Não editar aqui**: é um snapshot de referência para consulta/adaptação feature a feature.
-2. Ao migrar, **copiar/adaptar** os arquivos desta pasta para a nova raiz de código
-   (`app/src/main/java/br/com/policlinsaude/...`), seguindo a arquitetura alvo (Tarefa 04).
-3. O source set de `app/src` ficou **vazio** de arquivos `.kt`/`.java`; os assets
-   (`res/`, `AndroidManifest.xml`) permanecem em `app/src/main` até serem reescritos.
+2. Ao migrar, **copiar/adaptar** arquivos desta pasta para a nova raiz:
+   - código → `app/src/main/java/br/com/policlinsaude/...`
+   - recursos → `app/src/main/res/...`
+3. O source set de `app/src` ficou **vazio** de arquivos `.kt`/`.java`; os assets comuns
+   (`res/values`, `res/drawable`, `res/font`, `res/mipmap`, `AndroidManifest.xml`) permanecem,
+   simplificados num manifest mínimo que executa a `MainActivity` placeholder.
 
 ## Normalização para a migração
 

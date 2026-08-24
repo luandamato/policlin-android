@@ -2,58 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- ========================================================= -->
-    <!-- PERMISSIONS                                               -->
+    <!-- PERMISSÕES (mínimo por enquanto; serão re-adicionadas       -->
+    <!-- conforme as features forem migradas)                       -->
     <!-- ========================================================= -->
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
-    <!-- Android 13+ -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-
-    <!-- Android <= 12 -->
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
-    <!-- Firebase / FCM -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-
-    <!-- ========================================================= -->
-    <!-- FEATURES                                                  -->
-    <!-- ========================================================= -->
-
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
-
-    <!-- ========================================================= -->
-    <!-- PACKAGE VISIBILITY                                        -->
-    <!-- ========================================================= -->
-
-    <queries>
-
-        <intent>
-            <action android:name="android.media.action.IMAGE_CAPTURE" />
-        </intent>
-
-        <package android:name="com.google.android.apps.maps" />
-
-    </queries>
 
     <!-- ========================================================= -->
     <!-- APPLICATION                                                -->
     <!-- ========================================================= -->
 
     <application
-        android:name=".core.application.PoliclinSaudeApplication"
+        android:name=".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -62,30 +23,13 @@
         android:usesCleartextTraffic="true">
 
         <!-- ===================================================== -->
-        <!-- FILE PROVIDER                                          -->
-        <!-- ===================================================== -->
-
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-
-        </provider>
-
-        <!-- ===================================================== -->
-        <!-- MAIN ACTIVITY                                          -->
+        <!-- MAIN ACTIVITY (placeholder)                            -->
         <!-- ===================================================== -->
 
         <activity
-            android:name=".login.view.LoginActivity"
+            android:name=".ui.activities.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -93,152 +37,6 @@
             </intent-filter>
 
         </activity>
-
-        <!-- ===================================================== -->
-        <!-- LEGACY ACTIVITIES                                      -->
-        <!-- ===================================================== -->
-
-        <activity
-            android:name=".forgotPassword.view.ForgotPasswordActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".notHasPassword.view.NotHasPasswordActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".home.view.MenuActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".healthInsurancePhoto.view.HealthInsurancePhotoActivity"
-            android:label="@string/title_health_insurance"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".medicalGuideOptions.view.MedicalGuideOptionsActivity"
-            android:label="@string/title_medical_guide"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".medicalGuideList.view.MedicalGuideListActivity"
-            android:label="@string/title_medical_guide_list"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".medicalGuideDetails.view.MedicalGuideDetailsActivity"
-            android:label="@string/title_medical_guide_details"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".ownNetwork.view.OwnNetworkActivity"
-            android:label="@string/title_own_network"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".favorites.view.FavoritesActivity"
-            android:label="@string/title_favorites"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".editPassword.view.EditPasswordActivity"
-            android:label="@string/title_edit_password"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".editPhone.view.EditPhoneActivity"
-            android:label="@string/title_edit_phone"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".map.view.MapsActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".units.view.UnitsActivity"
-            android:label="@string/title_unities"
-            android:screenOrientation="portrait" />
-
-        <!-- ===================================================== -->
-        <!-- NEW FEATURES                                           -->
-        <!-- ===================================================== -->
-
-        <activity
-            android:name="com.policlinsaude.newfeature.features.guidAuthorizer.ui.activities.GuideAuthorizerActivity"
-            android:exported="false"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.policlinsaude.newfeature.features.incometax.ui.activities.IncomeTaxActivity"
-            android:exported="false" />
-
-        <activity
-            android:name="br.com.policlinsaude.otherFeatures.features.notifications.ui.activities.NotificationActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.policlinsaude.newfeature.features.extractor.ui.activities.FactorExtractorActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.policlinsaude.newfeature.features.coparticipation.ui.activities.ResearchCoParticipationActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.policlinsaude.newfeature.features.tickets.ui.activities.TicketsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.policlinsaude.newfeature.features.ScheduleCentral.ui.activities.ScheduleCentralActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.policlinsaude.newfeature.features.Token.ui.TokenActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-
-        <activity
-            android:name="com.policlinsaude.newfeature.features.deleteUser.ui.Activity.DeleteUserActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
-
-        <!-- ===================================================== -->
-        <!-- GOOGLE MAPS                                            -->
-        <!-- ===================================================== -->
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/maps_key" />
-
-        <!-- ===================================================== -->
-        <!-- DEXTER                                                 -->
-        <!-- ===================================================== -->
-
-        <activity
-            android:name="com.karumi.dexter.DexterActivity"
-            android:theme="@style/Dexter.Internal.Theme.Transparent" />
-
-        <!-- ===================================================== -->
-        <!-- LEGACY HTTP                                            -->
-        <!-- ===================================================== -->
-
-        <uses-library
-            android:name="org.apache.http.legacy"
-            android:required="false" />
 
     </application>
 
