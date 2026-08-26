@@ -1,4 +1,4 @@
-package com.policlinsaude.newfeature.features.guidAuthorizer.data.models
+package br.com.policlinsaude.data.models
 
 class ResponseDeadlineModel(
     val sdtAutPrazoResposta: ResponseDeadlineItemsModel? = ResponseDeadlineItemsModel(),

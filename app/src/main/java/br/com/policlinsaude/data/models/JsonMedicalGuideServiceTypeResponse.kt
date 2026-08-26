@@ -31,4 +31,3 @@ campos plano: PlanoNome
 //JsonServiceType
 data class JsonMedicalGuideServiceTypeResponse (@SerializedName("TIPOSERV") val serviceType: String? = InvalidData.UNINITIALIZED.getString(),
                                               @SerializedName("especialidade") val speciality: List<JsonMedicalGuideSpecialitiesResponse>? = mutableListOf())
-

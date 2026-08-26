@@ -1,4 +1,4 @@
-package com.policlinsaude.newfeature.features.Token.models
+package br.com.policlinsaude.data.models
 
 data class BeneficiariosRequestModel(
     val token: String = ""

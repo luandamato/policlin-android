@@ -1,7 +1,7 @@
-package com.policlinsaude.newfeature.features.guidAuthorizer.data.models
+package br.com.policlinsaude.data.models
 
 import com.google.gson.annotations.SerializedName
-import com.policlinsaude.newfeature.features.coparticipation.data.models.CoParticipationItemsModel
+import br.com.policlinsaude.data.models.CoParticipationItemsModel
 
 data class GuideAuthorizerRequestResponseModel(
     val sdtAutCabecalho : GuideAuthorizerResponseItemModel = GuideAuthorizerResponseItemModel(),

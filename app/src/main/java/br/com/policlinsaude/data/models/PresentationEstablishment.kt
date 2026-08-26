@@ -1,9 +1,6 @@
 package br.com.policlinsaude.data.models
 
-import android.os.Parcel
-import android.os.Parcelable
 import br.com.policlinsaude.util.helpers.InvalidData
-import java.io.Serializable  //tirado por Andre
 
 data class PresentationEstablishment(
     var showPlansV4: Int = 0,//Andre
@@ -47,108 +44,10 @@ data class PresentationEstablishment(
                                      var isOwnNetwork: Boolean = false,
                                      var favorited: Boolean = false,
                                      var uType: String = InvalidData.UNINITIALIZED.getString()
-) : Parcelable {//, Serializable {
-constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readString().orEmpty(),
-        parcel.readInt(),
-        parcel.readString().orEmpty(),
-        parcel.readInt(),
-        parcel.readString().orEmpty(),
-        parcel.readInt(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.createTypedArrayList(PresentationQualification) ?: arrayListOf(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readDouble(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readString().orEmpty(),
-        parcel.readByte() != 0.toByte(),
-        parcel.readByte() != 0.toByte(),
-        parcel.readString().orEmpty()) {
-}
+) {
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(showPlansV4)
-        parcel.writeString(planNameV4)
-        parcel.writeInt(showCityV4)
-        parcel.writeString(cityV4)
-        parcel.writeInt(showServiceTypesV4)
-        parcel.writeString(serviceTypeV4)
-        parcel.writeInt(showEspecialityV4)
-        parcel.writeString(especialityNameV4)
-        parcel.writeString(name)
-        parcel.writeString(socialName)
-        parcel.writeString(cnpj)
-        parcel.writeTypedList(qualifications)
-        parcel.writeString(type)
-        parcel.writeString(title)
-        parcel.writeString(subTitle)
-        parcel.writeString(speciality)
-        parcel.writeString(publicPlace)
-        parcel.writeString(number)
-        parcel.writeString(neighborhood)
-        parcel.writeString(zipCode)
-        parcel.writeString(complement)
-        parcel.writeString(city)
-        parcel.writeString(state)
-        parcel.writeString(phoneOne)
-        parcel.writeString(phoneTwo)
-        parcel.writeString(typePhoneOne)
-        parcel.writeString(typePhoneTwo)
-        parcel.writeString(latitude)
-        parcel.writeString(longitude)
-        parcel.writeDouble(distance)
-        parcel.writeString(photoFront)
-        parcel.writeString(cidCod)
-        parcel.writeString(esCod)
-        parcel.writeString(prsSeq)
-        parcel.writeString(prsCod)
-        parcel.writeString(proUf)
-        parcel.writeString(proCls)
-        parcel.writeString(proCod)
-        parcel.writeByte(if (isOwnNetwork) 1 else 0)
-        parcel.writeByte(if (favorited) 1 else 0)
-        parcel.writeString(uType)
-    }
 
-    override fun describeContents(): Int {
-        return 0
-    }
 
-    companion object CREATOR : Parcelable.Creator<PresentationEstablishment> {
-        override fun createFromParcel(parcel: Parcel): PresentationEstablishment {
-            return PresentationEstablishment(parcel)
-        }
-
-        override fun newArray(size: Int): Array<PresentationEstablishment?> {
-            return arrayOfNulls(size)
-        }
-    }
 
     fun getFullAddress(): String {
         return "$publicPlace - $number\n" +

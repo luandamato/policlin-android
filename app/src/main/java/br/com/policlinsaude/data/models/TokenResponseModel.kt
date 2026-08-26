@@ -1,4 +1,4 @@
-package com.policlinsaude.newfeature.features.Token.models
+package br.com.policlinsaude.data.models
 
 class TokenResponseModel (
     val codAcao: Int = 0,

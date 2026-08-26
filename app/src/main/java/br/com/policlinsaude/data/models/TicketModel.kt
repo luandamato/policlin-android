@@ -1,6 +1,5 @@
-package com.policlinsaude.newfeature.features.tickets.data.models
+package br.com.policlinsaude.data.models
 
-import android.os.Parcelable
 
 data class TicketModel(
     val sdtBoleto: ArrayList<TicketDetail> = arrayListOf(),

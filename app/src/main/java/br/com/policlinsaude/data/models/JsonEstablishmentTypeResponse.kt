@@ -11,4 +11,3 @@ data class JsonEstablishmentTypeOptions(@SerializedName("Codigo_TipoEstabelecime
                                         @SerializedName("Descricao_TipoEstabelecimento") val descriptionEstablishmentType: String?
                                                                    = InvalidData.UNINITIALIZED.getString())
 
-

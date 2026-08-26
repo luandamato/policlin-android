@@ -8,4 +8,3 @@ data class JsonEditPasswordResponse(@SerializedName("msgInterna") val msgInterna
                                     @SerializedName("msgExterna") val msgExternal: String?
                                     = InvalidData.UNINITIALIZED.getString())
 
-

@@ -1,4 +1,4 @@
-package com.policlinsaude.newfeature.features.incometax.data.models
+package br.com.policlinsaude.data.models
 
 data class IncomeTaxResponseModel(
     val listaIR: ArrayList<IncomeTaxItemModel> = arrayListOf(),

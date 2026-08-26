@@ -34,4 +34,3 @@ data class JsonMedicalGuideSpecialitiesResponse (@SerializedName("EspecialidadeN
                                               @SerializedName("_ESCOD") val specialityCode: String? = InvalidData.UNINITIALIZED.getString(),
                                               @SerializedName("_Ent_Tipo") val entType: String? = InvalidData.UNINITIALIZED.getString(),
                                               @SerializedName("guiamedico") val medicalGuide: List<JsonEstablishmentResponse>? = mutableListOf())
-

@@ -1,4 +1,4 @@
-package com.policlinsaude.newfeature.features.tickets.data.models
+package br.com.policlinsaude.data.models
 
 import com.google.gson.annotations.SerializedName
 

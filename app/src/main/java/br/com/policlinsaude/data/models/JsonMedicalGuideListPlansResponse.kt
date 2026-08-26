@@ -25,4 +25,3 @@ data class JsonMedicalGuideListPlansResponse(
                     @SerializedName("PlanoNome") val planName: String? = InvalidData.UNINITIALIZED.getString(),
                     @SerializedName("_PlanCod") val planCod: String? = InvalidData.UNINITIALIZED.getString(),
                     @SerializedName("cidades") val cities: List<JsonMedicalGuideListCitiesResponse>? = mutableListOf())
-

@@ -28,4 +28,3 @@ campos plano: PlanoNome
 data class JsonMedicalGuideListCitiesResponse (@SerializedName("CidadeNome") val cityName: String? = InvalidData.UNINITIALIZED.getString(),
                               @SerializedName("_CIDCOD") val cidCod: String? = InvalidData.UNINITIALIZED.getString(),
                               @SerializedName("tiposervico") val serviceType: List<JsonMedicalGuideServiceTypeResponse>? = mutableListOf())
-

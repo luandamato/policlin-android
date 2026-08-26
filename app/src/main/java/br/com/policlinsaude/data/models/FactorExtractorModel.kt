@@ -1,6 +1,5 @@
-package com.policlinsaude.newfeature.features.extractor.data.models
+package br.com.policlinsaude.data.models
 
-import android.os.Parcelable
 
 data class FactorExtractorModel(
     val extratoCopart: ArrayList<FactorExtractorDetailModel> = arrayListOf(),

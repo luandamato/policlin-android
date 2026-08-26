@@ -1,4 +1,4 @@
-package com.policlinsaude.newfeature.features.incometax.data.models
+package br.com.policlinsaude.data.models
 
 data class ScheduleCentralResponseModel(
     val codAcao: Int = 0,
@@ -9,4 +9,3 @@ data class ScheduleCentralResponseModel(
     val email: String? = "",
     val whatsapp: String? = "",
 )
-

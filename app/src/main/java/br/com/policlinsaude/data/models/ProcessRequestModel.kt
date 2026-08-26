@@ -1,7 +1,6 @@
-package com.policlinsaude.newfeature.features.guidAuthorizer.data.models
+package br.com.policlinsaude.data.models
 
 import android.graphics.Bitmap
-import android.os.Parcelable
 import java.io.File
 import java.util.Base64
 
