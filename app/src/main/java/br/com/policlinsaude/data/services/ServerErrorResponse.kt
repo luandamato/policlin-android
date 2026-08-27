@@ -1,4 +1,4 @@
-package com.policlinsaude.newfeature.data.networking
+package br.com.policlinsaude.data.services
 
 import com.google.gson.GsonBuilder
 import java.io.InterruptedIOException
