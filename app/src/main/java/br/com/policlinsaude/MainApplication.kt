@@ -1,17 +1,23 @@
 package br.com.policlinsaude
 
 import android.app.Application
+import br.com.policlinsaude.di.appModules
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 /**
  * Application do app sob a nova arquitetura.
  *
- * Punto de entrada do ciclo de vida. Por agora não inicializa
- * nenhum stack de deps (Dagger/Koin) — se reexará a medida que se
- * migren features desde `_legacy` e se unifique `data`/`ui`/`util`.
+ * Inicializa o Koin (DI) com a camada de dados e, a medida que as
+ * features forem migradas, seus ViewModels.
  */
 class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        startKoin {
+            androidContext(this@MainApplication)
+            modules(appModules)
+        }
     }
 }
