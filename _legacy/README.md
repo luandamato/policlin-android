@@ -3,7 +3,6 @@
 Esta pasta guarda **todo o código-fonte anterior** do módulo `app`, movido aqui para servir como
 base de referência durante a reescritura da aplicação para a nova arquitetura.
 
-> Data: 24/08/2026.
 > As próximas tarefas de migração devem usar esta pasta como base de consulta e **não** alterar
 > a aplicação atual.
 
@@ -17,46 +16,26 @@ _legacy/
 │   ├── test/        # Testes anteriores
 │   └── androidTest/ # Testes de integração anteriores
 └── res/
-    ├── layout/      # Layouts legados (97 arquivos)
+    ├── layout/      # Layouts legados (restantes da migração)
     ├── navigation/  # Nav-graphs legados (safeargs)
     └── menu/        # Menus legados
 ```
 
 ## Já migrado para o app
 
-- **`data/models`** (81): DTOs `Json*`, apresentação `Presentation*`, modelos por feature + `UserModel`.
-- **`domain/models`** (25): modelos de domínio.
-- **`data/services`**: **`AppService`** (serviço único com todos os 47 endpoints), `RetrofitProvider`,
+- **`data/models`** + **`domain/models`**: todos os modelos (DTOs, apresentação, feature).
+- **`data/services`**: `AppService` (serviço único, 47 endpoints), `RetrofitProvider`,
   `NetworkConstants`, `ServerErrorResponse`.
-- **`data/repositories`**: **`AppRepository`** (repositório único, 1 método por endpoint), sem `RequestHandler` (embutido).
-- **`util/helpers/InvalidData`**: helper único (deixa de haver 3 cópias).
-
-### Camada de rede (`data/services` + `data/repositories`)
-
-A camada de rede segue o padrão do projeto de referência, mas **consolidada**:
-
-```
-data/services/
-├── AppService.kt            # SERVICE ÚNICO — todos os endpoints (47)
-├── RetrofitProvider.kt      # centralizador Retrofit (ServiceGenerator-like)
-├── NetworkConstants.kt      # URLs/códigos de rede
-└── ServerErrorResponse.kt
-data/repositories/
-└── AppRepository.kt         # REPOSITORY ÚNICO — 1 método por endpoint
-```
-
-- **1 arquivo de service** (`AppService`) contém todos os endpoints modernos (`rest/api*`) e legados
-  (`MAPP_*`, `Banner`, `apiAcessoBotoes`, `apiExcluirCadastroApp`, etc.).
-- **1 arquivo de repositório** (`AppRepository`) expõe um método para cada endpoint, com o tratamento
-  de erro (`ServerErrorResponse`) embutido via `.request { ... }`.
-- Base URL: usa `NetworkConstants.BASE_URL` (padrão) e `BASE_URL_NOTIFICATION` (para notificações/perfil).
-
-## Como usar
-
-1. **Não editar aqui**: é um snapshot de referência para consulta/adaptação feature a feature.
-2. Ao migrar, **copiar/adaptar** arquivos desta pasta para a nova raiz:
-   - código → `app/src/main/java/br/com/policlinsaude/...`
-   - recursos → `app/src/main/res/...`
+- **`data/repositories`**: `AppRepository` (repositório único, 1 método por endpoint).
+- **`data/local`**: `SessionManager` (token, pessoa, carteirinha, preferências).
+- **`di`** + `MainApplication`: Koin com `AppRepository`/`SessionManager`.
+- **`util/extensions`**: `ViewExt` (animações/autoscroll/teclado), `BitmapExt`, `StringExt`,
+  `DateExt`, `ContextExt` (DatePickerHelper/openBrowser).
+- **`util/helpers`**: `InvalidData`, `Mask`, `Validations`, `LocationHelper` (coroutines),
+  `PhotoPickerHelper`, `ConnectivityHelper`, `UiState`.
+- **`ui/dialogs`**: `DialogHelper` (unificado dos 2 legados), `BottomSheetCommon` +
+  `BottomSheetAdapter` (layouts migrados).
+- **`ui/views`**: `BaseActivity`, `BaseFragment`, `BaseViewModel` (sem Dagger).
 
 ## Normalização para a migração
 
