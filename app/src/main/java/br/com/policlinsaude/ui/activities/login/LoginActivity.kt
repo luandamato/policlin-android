@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import br.com.policlinsaude.R
 import br.com.policlinsaude.databinding.ActivityLoginBinding
+import br.com.policlinsaude.ui.activities.forgotPassword.ForgotPasswordActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.util.extensions.openBrowser
 import com.google.firebase.messaging.FirebaseMessaging
@@ -174,8 +175,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToForgotPassword() {
-        // Esqueci a senha ainda não migrada.
-        Toast.makeText(this, "Em construção", Toast.LENGTH_SHORT).show()
+        ForgotPasswordActivity.start(this)
     }
 
     private fun navigateToNotHasPassword() {
