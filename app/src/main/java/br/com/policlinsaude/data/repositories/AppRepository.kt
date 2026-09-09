@@ -1,5 +1,6 @@
 package br.com.policlinsaude.data.repositories
 
+import android.util.Log
 import br.com.policlinsaude.data.models.*
 import br.com.policlinsaude.data.services.AppService
 import br.com.policlinsaude.data.services.NetworkConstants
@@ -19,7 +20,7 @@ class AppRepository {
 
     private val service = RetrofitProvider.createService(AppService::class.java)
     private val notificationService =
-        RetrofitProvider.createService(AppService::class.java, baseUrl = NetworkConstants.BASE_URL_NOTIFICATION)
+        RetrofitProvider.createService(AppService::class.java, baseUrl = NetworkConstants.BASE_URL_APIAPP)
 
     // =====================================================================
     // TICKETS / 2ª VIA DE BOLETO
@@ -226,15 +227,23 @@ class AppRepository {
     // =====================================================================
     private suspend fun <T> request(call: suspend () -> Response<T>): T =
         coroutineScope {
+            Log.d(TAG_REPO, "Chamando API: $call")
             val response = try {
                 call.invoke()
             } catch (ex: Exception) {
+                Log.e(TAG_REPO, "Erro de transporte ao chamar API: ${ex.message}", ex)
                 throw ServerErrorResponse.verifyError(ex)
             }
+            Log.d(TAG_REPO, "RESPONSE code=${response.code()} body=${response.body()}")
             if (!response.isSuccessful) {
+                Log.e(TAG_REPO, "RESPONSE HTTP ${response.code()} - erroBody=${response.errorBody()}")
                 throw ServerErrorResponse.verifyError(response.errorBody(), response.code())
             }
             @Suppress("UNCHECKED_CAST")
             response.body() as T
         }
+
+    private companion object {
+        const val TAG_REPO = "AppRepository"
+    }
 }
