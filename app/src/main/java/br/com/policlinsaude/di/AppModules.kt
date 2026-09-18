@@ -3,6 +3,8 @@ package br.com.policlinsaude.di
 import br.com.policlinsaude.data.local.SessionManager
 import br.com.policlinsaude.data.repositories.AppRepository
 import br.com.policlinsaude.ui.activities.forgotPassword.ForgotPasswordViewModel
+import br.com.policlinsaude.ui.activities.home.MenuViewModel
+import br.com.policlinsaude.ui.fragments.home.HomeViewModel
 import br.com.policlinsaude.ui.activities.login.LoginViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -20,4 +22,6 @@ val appModules = module {
 
     viewModel { LoginViewModel(get(), get()) }
     viewModel { ForgotPasswordViewModel(get()) }
+    viewModel { MenuViewModel(get(), get()) }
+    viewModel { HomeViewModel(get(), get()) }
 }

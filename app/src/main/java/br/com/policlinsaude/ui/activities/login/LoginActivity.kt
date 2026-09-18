@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import br.com.policlinsaude.R
 import br.com.policlinsaude.databinding.ActivityLoginBinding
 import br.com.policlinsaude.ui.activities.forgotPassword.ForgotPasswordActivity
+import br.com.policlinsaude.ui.activities.home.MenuActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.util.extensions.openBrowser
 import com.google.firebase.messaging.FirebaseMessaging
@@ -165,13 +166,11 @@ class LoginActivity : AppCompatActivity() {
     // Navegação (na UI)
     // =====================================================================
     private fun navigateToHome() {
-        // Home ainda não migrada (ARCHITECTURE_TARGET §10) — placeholder.
-        Toast.makeText(this, "Em construção", Toast.LENGTH_SHORT).show()
+        MenuActivity.start(this)
     }
 
     private fun navigateToHomeWithoutLogin() {
-        // Home ainda não migrada.
-        Toast.makeText(this, "Em construção", Toast.LENGTH_SHORT).show()
+        MenuActivity.start(this)
     }
 
     private fun navigateToForgotPassword() {
