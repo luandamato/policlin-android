@@ -59,15 +59,32 @@ object RetrofitProvider {
 }
 
 /**
- * Interceptor de log de rede que imprime TODOS os dados do request
- * (método, URL, headers, body) e do response (status, headers, body).
+ * Interceptor de log de rede que controla verbosidade via BuildConfig.DEBUG.
+ *
+ * Comportamento:
+ * - DEBUG=true (development):  Logs detalhados (request/response completo)
+ * - DEBUG=false (production):  Somente erros são registrados
+ *
+ * Para logs manuais em desenvolvimento, use LogManager.log()
  */
 class LoggingInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
         val request = chain.request()
-        val method = request.method
 
+        // Em produção, apenas prosseguir sem logs
+        if (!isDebug()) {
+            return try {
+                chain.proceed(request)
+            } catch (e: Exception) {
+                // Apenas erros são logados em produção
+                Log.e(TAG, "ERRO NA API: ${request.method} ${request.url} - ${e.message}", e)
+                throw e
+            }
+        }
+
+        // Em desenvolvimento, logs detalhados
+        val method = request.method
         val requestBodyText = request.body.copyBody() ?: "sem body"
 
         Log.d(TAG, "========== REQUEST ($method) ==========")
@@ -95,13 +112,26 @@ class LoggingInterceptor : Interceptor {
 
             response
         } catch (e: Exception) {
-            Log.d(TAG, "ERROR ao chamar API: ${e.message}", e)
+            Log.e(TAG, "ERRO ao chamar API (${method} ${request.url}): ${e.message}", e)
             throw e
         }
     }
 
     private companion object {
         const val TAG = "RETROFIT"
+
+        /**
+         * Verifica se está em modo debug usando reflexão
+         */
+        private fun isDebug(): Boolean {
+            return try {
+                val buildConfigClass = Class.forName("br.com.policlinsaude.BuildConfig")
+                val debugField = buildConfigClass.getField("DEBUG")
+                debugField.getBoolean(null)
+            } catch (e: Exception) {
+                true // Fallback: assume DEBUG em caso de erro
+            }
+        }
     }
 }
 
