@@ -18,7 +18,7 @@ object NetworkConstants {
     const val APP_VERSION = "1.60.10"
 
     /** Base principal (stack novo / outros endpoints). */
-    const val BASE_URL = "http://policlinsaude.com.br/mapp/api/ "
+    const val BASE_URL = "http://policlinsaude.com.br/mapp/api/"
 
     /** Base de notificações / perfil (stack de notificações). */
     const val BASE_URL_APIAPP = "http://policlinsaude.com.br/apiapp/"

@@ -55,7 +55,7 @@ interface AppService {
     @POST("rest/apiAutorizadorGravarCabecalho")
     suspend fun postGuideAuthorizer(@Body body: ProcessRequestModel): Response<GuideAuthorizerRequestResponseModel>
 
-    @POST("apiAutorizadorGravarAnexo")
+    @POST("rest/apiAutorizadorGravarAnexo")
     suspend fun postGuideAuthorizerPhotos(@Body body: ProcessRequestPhotosModel): Response<ProcessResponsePhotosModel>
 
     @POST("rest/apiAutorizadorCancelar")
@@ -79,7 +79,7 @@ interface AppService {
     @POST("rest/apiAutorizadorGravarResposta")
     suspend fun postGuideAnswer(@Body body: ProcessRequestSendAnswerModel): Response<ComumModel>
 
-    @POST("apiAutorizadorGravarRespostaAnexo")
+    @POST("rest/apiAutorizadorGravarRespostaAnexo")
     suspend fun postGuideAnswerAttachment(@Body body: ProcessRequestSendAnswerAttachmentModel): Response<ComumModel>
 
     // =====================================================================
