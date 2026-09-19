@@ -1,6 +1,8 @@
 package br.com.policlinsaude.data.services
 
 import android.util.Log
+import br.com.policlinsaude.utils.LogManager
+import br.com.policlinsaude.utils.LogTags
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -78,7 +80,7 @@ class LoggingInterceptor : Interceptor {
                 chain.proceed(request)
             } catch (e: Exception) {
                 // Apenas erros são logados em produção
-                Log.e(TAG, "ERRO NA API: ${request.method} ${request.url} - ${e.message}", e)
+                LogManager.e(TAG, "ERRO NA API: ${request.method} ${request.url} - ${e.message}", e)
                 throw e
             }
         }
@@ -87,12 +89,12 @@ class LoggingInterceptor : Interceptor {
         val method = request.method
         val requestBodyText = request.body.copyBody() ?: "sem body"
 
-        Log.d(TAG, "========== REQUEST ($method) ==========")
-        Log.d(TAG, "URL: ${request.url}")
+        LogManager.d(TAG, "========== REQUEST ($method) ==========")
+        LogManager.d(TAG, "URL: ${request.url}")
         request.headers.forEach { header ->
-            Log.d(TAG, "Header: ${header.first} = ${header.second}")
+            LogManager.d(TAG, "Header: ${header.first} = ${header.second}")
         }
-        Log.d(TAG, "Body: $requestBodyText")
+        LogManager.d(TAG, "Body: $requestBodyText")
 
         val startedAt = System.currentTimeMillis()
 
@@ -101,24 +103,25 @@ class LoggingInterceptor : Interceptor {
             val elapsed = System.currentTimeMillis() - startedAt
             val responseBodyText = response.peekBody(1_000_000L)?.string() ?: "sem body"
 
-            Log.d(TAG, "========== RESPONSE ==========")
-            Log.d(TAG, "Code: ${response.code}")
-            Log.d(TAG, "Message: ${response.message}")
-            Log.d(TAG, "Duration: ${elapsed}ms")
+            LogManager.d(TAG, "========== RESPONSE ==========")
+            LogManager.d(TAG, "URL: ${request.url}")
+            LogManager.d(TAG, "Code: ${response.code}")
+            LogManager.d(TAG, "Message: ${response.message}")
+            LogManager.d(TAG, "Duration: ${elapsed}ms")
             response.headers.forEach { header ->
-                Log.d(TAG, "Header: ${header.first} = ${header.second}")
+                LogManager.d(TAG, "Header: ${header.first} = ${header.second}")
             }
-            Log.d(TAG, "Body: $responseBodyText")
+            LogManager.d(TAG, "Body: $responseBodyText")
 
             response
         } catch (e: Exception) {
-            Log.e(TAG, "ERRO ao chamar API (${method} ${request.url}): ${e.message}", e)
+            LogManager.e(TAG, "ERRO ao chamar API (${method} ${request.url}): ${e.message}", e)
             throw e
         }
     }
 
     private companion object {
-        const val TAG = "RETROFIT"
+        private const val TAG = "DebugPoliclin"
 
         /**
          * Verifica se está em modo debug usando reflexão

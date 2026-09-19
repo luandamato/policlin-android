@@ -10,6 +10,7 @@ import br.com.policlinsaude.data.local.SessionManager
 import br.com.policlinsaude.data.models.toPerson
 import br.com.policlinsaude.data.repositories.AppRepository
 import br.com.policlinsaude.util.helpers.SingleLiveEvent
+import br.com.policlinsaude.utils.LogManager
 import kotlinx.coroutines.launch
 
 /**
@@ -51,7 +52,7 @@ class LoginViewModel(
 
     fun login(register: String, order: String, password: String, firebaseToken: String) {
         val osVersion = Build.VERSION.RELEASE
-        Log.d(TAG, "login() chamado => register=$register order=$order password=$password firebaseToken=$firebaseToken osVersion=$osVersion")
+        LogManager.d(TAG, "login() chamado => register=$register order=$order password=$password firebaseToken=$firebaseToken osVersion=$osVersion")
         viewModelScope.launch {
             _loading.value = true
             try {
@@ -62,15 +63,15 @@ class LoginViewModel(
                     firebaseToken = firebaseToken,
                     osVersion = osVersion
                 )
-                Log.d(TAG, "login() response => $response")
+                LogManager.d(TAG, "login() response => $response")
 
                 val updateCodes = listOf(450, 455)
                 val needUpdate = updateCodes.contains(response.actionCode ?: 0)
                 val hasErrorMsg = response.msgInternal.isNullOrEmpty() || response.msgInternal != "OK"
-                Log.d(TAG, "login() análise => actionCode=${response.actionCode} needUpdate=$needUpdate hasErrorMsg=$hasErrorMsg user=${response.user != null} token=${response.token != null}")
+                LogManager.d(TAG, "login() análise => actionCode=${response.actionCode} needUpdate=$needUpdate hasErrorMsg=$hasErrorMsg user=${response.user != null} token=${response.token != null}")
 
                 if ((hasErrorMsg && !needUpdate) || response.user == null || response.token.isNullOrEmpty()) {
-                    Log.w(TAG, "login() SEM SUCESSO => event=${
+                    LogManager.d(TAG, "login() SEM SUCESSO => event=${
                         if (needUpdate) "ShowUpdateApp" else "ShowError"
                     } msgExternal=${response.msgExternal}")
                     _event.value = if (needUpdate) {
@@ -81,17 +82,17 @@ class LoginViewModel(
                 } else {
                     response.user?.let {
                         val person = it.toPerson()
-                        Log.d(TAG, "login() salvando pessoa => $person")
+                        LogManager.d(TAG, "login() salvando pessoa => $person")
                         sessionManager.savePerson(person)
                     }
                     response.token?.let {
-                        Log.d(TAG, "login() salvando token => $it")
+                        LogManager.d(TAG, "login() salvando token => $it")
                         sessionManager.saveToken(it)
                     }
                     _event.value = LoginEvent.NavigateToHome
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "login() EXCEPTION => ${e.message}", e)
+                LogManager.e(TAG, "login() EXCEPTION => ${e.message}", e)
                 _event.value = LoginEvent.ShowError(
                     e.message?.takeIf { it.isNotBlank() } ?: "Ocorreu um erro inesperado"
                 )

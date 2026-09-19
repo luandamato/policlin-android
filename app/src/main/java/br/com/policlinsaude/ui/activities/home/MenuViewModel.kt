@@ -9,6 +9,7 @@ import br.com.policlinsaude.data.local.SessionManager
 import br.com.policlinsaude.data.repositories.AppRepository
 import br.com.policlinsaude.domain.models.Person
 import br.com.policlinsaude.util.helpers.SingleLiveEvent
+import br.com.policlinsaude.utils.LogManager
 import kotlinx.coroutines.launch
 
 /**
@@ -55,7 +56,7 @@ class MenuViewModel(
             _loading.value = true
             try {
                 val user = appRepository.onGetProfile(token, 1)
-                Log.d(TAG, "MenuVM: usuario cargado => $user")
+                LogManager.d(TAG, "MenuVM: usuario cargado => $user")
                 val person = Person(
                     name = user.name.orEmpty(),
                     cpf = user.cpf.orEmpty(),
@@ -68,7 +69,7 @@ class MenuViewModel(
                 _person.value = person
                 _isGuest.value = false
             } catch (e: Exception) {
-                Log.e(TAG, "MenuVM: error al cargar persona => ${e.message}")
+                LogManager.e(TAG, "MenuVM: error al cargar persona => ${e.message}")
                 _isGuest.value = true
                 _event.value = MenuEvent.ShowLoginDialog
             } finally {
@@ -89,7 +90,7 @@ class MenuViewModel(
                     appRepository.onDoLogoff(token)
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "MenuVM: error en logoff => ${e.message}")
+                LogManager.e(TAG, "MenuVM: error en logoff => ${e.message}")
             } finally {
                 sessionManager.clearSession()
                 _event.value = MenuEvent.LoggedOut

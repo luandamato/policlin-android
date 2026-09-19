@@ -13,6 +13,7 @@ import br.com.policlinsaude.domain.models.Person
 import br.com.policlinsaude.domain.models.ValidateButtonBody
 import br.com.policlinsaude.domain.models.ValidateButtons
 import br.com.policlinsaude.util.helpers.SingleLiveEvent
+import br.com.policlinsaude.utils.LogManager
 import kotlinx.coroutines.launch
 
 /**
@@ -103,7 +104,7 @@ class HomeViewModel(
                     }
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "HomeVM: validateUser error => ${e.message}")
+                LogManager.e(TAG, "HomeVM: validateUser error => ${e.message}")
                 _event.value = HomeEvent.ShowError(e.message.orEmpty())
             }
         }
@@ -116,7 +117,7 @@ class HomeViewModel(
                 val buttons = appRepository.onValidateButtons(ValidateButtonBody(token))
                 applyButtonVisibility(buttons)
             } catch (e: Exception) {
-                Log.e(TAG, "HomeVM: validateButtons error => ${e.message}")
+                LogManager.e(TAG, "HomeVM: validateButtons error => ${e.message}")
                 applyButtonVisibility(ValidateButtons())
             }
         }
@@ -151,7 +152,7 @@ class HomeViewModel(
                 val response = appRepository.onGetBanners(url = BANNERS_URL, returnImage = true, id = 0)
                 _banners.value = response.toBanners()
             } catch (e: Exception) {
-                Log.e(TAG, "HomeVM: loadBanners error => ${e.message}")
+                LogManager.e(TAG, "HomeVM: loadBanners error => ${e.message}")
                 _banners.value = mutableListOf()
             } finally {
                 _bannerLoading.value = false

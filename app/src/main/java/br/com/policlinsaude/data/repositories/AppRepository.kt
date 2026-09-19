@@ -9,6 +9,7 @@ import br.com.policlinsaude.data.services.ServerErrorResponse
 import br.com.policlinsaude.domain.models.UserConnected
 import br.com.policlinsaude.domain.models.ValidateButtonBody
 import br.com.policlinsaude.domain.models.ValidateButtons
+import br.com.policlinsaude.utils.LogManager
 import kotlinx.coroutines.coroutineScope
 import retrofit2.Response
 
@@ -227,16 +228,16 @@ class AppRepository {
     // =====================================================================
     private suspend fun <T> request(call: suspend () -> Response<T>): T =
         coroutineScope {
-            Log.d(TAG_REPO, "Chamando API: $call")
+            LogManager.d(TAG_REPO, "Chamando API: $call")
             val response = try {
                 call.invoke()
             } catch (ex: Exception) {
-                Log.e(TAG_REPO, "Erro de transporte ao chamar API: ${ex.message}", ex)
+                LogManager.e(TAG_REPO, "Erro de transporte ao chamar API: ${ex.message}", ex)
                 throw ServerErrorResponse.verifyError(ex)
             }
-            Log.d(TAG_REPO, "RESPONSE code=${response.code()} body=${response.body()}")
+            LogManager.d(TAG_REPO, "RESPONSE code=${response.code()} body=${response.body()}")
             if (!response.isSuccessful) {
-                Log.e(TAG_REPO, "RESPONSE HTTP ${response.code()} - erroBody=${response.errorBody()}")
+                LogManager.e(TAG_REPO, "RESPONSE HTTP ${response.code()} - erroBody=${response.errorBody()}")
                 throw ServerErrorResponse.verifyError(response.errorBody(), response.code())
             }
             @Suppress("UNCHECKED_CAST")

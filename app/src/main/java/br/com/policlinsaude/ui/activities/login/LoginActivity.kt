@@ -14,6 +14,7 @@ import br.com.policlinsaude.ui.activities.forgotPassword.ForgotPasswordActivity
 import br.com.policlinsaude.ui.activities.home.MenuActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.util.extensions.openBrowser
+import br.com.policlinsaude.utils.LogManager
 import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -135,14 +136,14 @@ class LoginActivity : AppCompatActivity() {
     // =====================================================================
     @SuppressLint("MissingPermission")
     private fun getFirebaseToken(onToken: (String) -> Unit) {
-        Log.d("LoginActivity", "getFirebaseToken() chamado")
+        LogManager.d("LoginActivity", "getFirebaseToken() chamado")
         FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
             if (!task.isSuccessful) {
-                Log.w("LoginActivity", "Falha ao obter token FCM", task.exception)
+                LogManager.d("LoginActivity", "Falha ao obter token FCM", task.exception)
                 return@addOnCompleteListener
             }
             val token = task.result
-            Log.d("LoginActivity", "token FCM obtido: $token")
+            LogManager.d("LoginActivity", "token FCM obtido: $token")
             token?.let(onToken)
         }
     }
