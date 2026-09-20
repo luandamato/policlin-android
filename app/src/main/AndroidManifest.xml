@@ -46,6 +46,12 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
+            android:name=".ui.activities.notHasPassword.NotHasPasswordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
             android:name=".ui.activities.home.MenuActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

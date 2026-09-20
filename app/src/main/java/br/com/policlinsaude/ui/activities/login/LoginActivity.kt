@@ -12,6 +12,7 @@ import br.com.policlinsaude.R
 import br.com.policlinsaude.databinding.ActivityLoginBinding
 import br.com.policlinsaude.ui.activities.forgotPassword.ForgotPasswordActivity
 import br.com.policlinsaude.ui.activities.home.MenuActivity
+import br.com.policlinsaude.ui.activities.notHasPassword.NotHasPasswordActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.util.extensions.openBrowser
 import br.com.policlinsaude.utils.LogManager
@@ -179,8 +180,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun navigateToNotHasPassword() {
-        // Sem senha ainda não migrada.
-        Toast.makeText(this, "Em construção", Toast.LENGTH_SHORT).show()
+        NotHasPasswordActivity.start(this)
     }
 
     private fun showDialogError(message: String) {
