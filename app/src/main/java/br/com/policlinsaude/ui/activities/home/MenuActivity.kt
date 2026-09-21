@@ -99,7 +99,8 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
             MenuOptionEnum.INFORMATION,
             MenuOptionEnum.UNITIES,
             MenuOptionEnum.LINKS,
-            MenuOptionEnum.TELEFONECID
+            MenuOptionEnum.CIB,
+            MenuOptionEnum.LOGOUT
         )
         val adapter = MenuAdapter(this, R.layout.list_item_menu, menuItems, this)
         binding.menuItemsListView.adapter = adapter
@@ -165,7 +166,7 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
             MenuOptionEnum.INFORMATION,
             MenuOptionEnum.UNITIES,
             MenuOptionEnum.LINKS,
-            MenuOptionEnum.TELEFONECID -> {
+            MenuOptionEnum.CIB -> {
                 if (isGuest) {
                     showLoginDialog()
                 } else {

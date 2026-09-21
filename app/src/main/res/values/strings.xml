@@ -71,7 +71,7 @@
     <string name="title_favorites">Favoritos</string>
     <string name="title_edit_password">Alterar Senha</string>
     <string name="title_edit_phone">Alterar Telefone</string>
-    <string name="title_unities">Unidades</string>
+    <string name="title_unities">Unidades Policlin Saúde</string>
     <string name="maps_key">CHAVE_MAPS</string>
 
     <!-- Missing Strings from layouts -->
@@ -84,7 +84,7 @@
     <string name="text_order">Ordem</string>
     <string name="action_recover_password">Recuperar Senha</string>
     <string name="action_back">Voltar</string>
-    <string name="text_logoff">Sair</string>
+    <string name="text_logoff">Efetuar Logoff</string>
     <string name="title_client_area">Área do Cliente</string>
     <string name="text_password">Senha</string>
     <string name="action_forgot_password">Esqueci minha senha</string>
@@ -121,7 +121,7 @@
     <string name="text_policlin_rights">© Policlin Saúde. Todos os direitos reservados.</string>
     <string name="title_health_policlin">Policlin Saúde</string>
     <string name="title_policlin_group">Grupo Policlin</string>
-    <string name="title_cib">CIB</string>
+    <string name="title_cib">CIB - Central de Informações ao Beneficiário</string>
     <string name="title_ombudsman">Ouvidoria</string>
     <string name="title_contact_phones">Telefones de Contato</string>
     <string name="title_abramge">Abramge</string>
@@ -173,7 +173,7 @@
 
     <!-- Menu Strings -->
     <string name="action_info">Informação</string>
-    <string name="title_home">Início</string>
+    <string name="title_home">Home</string>
     <string name="title_perfil">Perfil</string>
     <string name="title_information">Informações</string>
     <string name="title_links">Links</string>

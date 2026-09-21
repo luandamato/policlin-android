@@ -16,6 +16,6 @@ enum class MenuOptionEnum(@StringRes val title: Int, @DrawableRes val icon: Int)
     INFORMATION(R.string.title_information, R.drawable.ic_informacoes),
     UNITIES(R.string.title_unities, R.drawable.ic_action_unidades),
     LINKS(R.string.title_links, R.drawable.ic_links),
-    TELEFONECID(R.string.title_telefonecid, R.drawable.ic_ligar_branco),
+    CIB(R.string.title_cib, R.drawable.ic_ligar_branco),
     LOGOUT(R.string.text_logoff, R.drawable.ic_logout)
 }
