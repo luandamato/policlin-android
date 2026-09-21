@@ -52,6 +52,11 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
+            android:name=".ui.activities.notifications.NotificationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".ui.activities.home.MenuActivity"
             android:exported="false"
             android:screenOrientation="portrait" />

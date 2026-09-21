@@ -12,6 +12,7 @@ import br.com.policlinsaude.R
 import br.com.policlinsaude.databinding.FragmentHomeBinding
 import br.com.policlinsaude.domain.models.Banner
 import br.com.policlinsaude.ui.activities.home.MenuActivity
+import br.com.policlinsaude.ui.activities.notifications.NotificationActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.views.BaseFragment
 import br.com.policlinsaude.util.extensions.openBrowser
@@ -58,6 +59,10 @@ class HomeFragment : BaseFragment() {
 
         binding.viewPager.adapter = bannersAdapter
         binding.viewPager.setupAutoscroll(5000L)
+
+        binding.appBarContainer.alertMenu.setOnClickListener {
+            NotificationActivity.start(requireContext())
+        }
     }
 
     private fun observeViewModel() {

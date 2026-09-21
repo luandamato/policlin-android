@@ -272,4 +272,9 @@
     <string name="msg_speciality">Especialidade: %s</string>
     <string name="msg_address_format">Endereço: %s, %s, %s, %s, %s, %s, %s</string>
 
+    <!-- Notificações -->
+    <string name="action_edit_notifications">Editar</string>
+    <string name="action_delete_notifications">Apagar Notificação</string>
+    <string name="msg_notifications_empty">Nenhuma notificação encontrada.</string>
+
 </resources>
