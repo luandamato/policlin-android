@@ -12,6 +12,7 @@ import br.com.policlinsaude.databinding.ActivityHomeBinding
 import br.com.policlinsaude.ui.activities.home.MenuAdapter.OnMenuItemClickListener
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.fragments.home.HomeFragment
+import br.com.policlinsaude.ui.activities.login.LoginActivity
 import br.com.policlinsaude.ui.views.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +37,8 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     private val viewModel: MenuViewModel by viewModel()
 
     private var isGuest = false
+
+    fun isGuestMode(): Boolean = isGuest
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -195,7 +198,7 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     }
 
     private fun navigateToLogin() {
-        Toast.makeText(this, "Em construção", Toast.LENGTH_SHORT).show()
+        LoginActivity.start(this)
     }
 
     private fun notMigrated() {

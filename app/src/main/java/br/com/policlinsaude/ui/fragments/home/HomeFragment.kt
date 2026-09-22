@@ -12,6 +12,7 @@ import br.com.policlinsaude.R
 import br.com.policlinsaude.databinding.FragmentHomeBinding
 import br.com.policlinsaude.domain.models.Banner
 import br.com.policlinsaude.ui.activities.home.MenuActivity
+import br.com.policlinsaude.ui.activities.login.LoginActivity
 import br.com.policlinsaude.ui.activities.notifications.NotificationActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.views.BaseFragment
@@ -147,7 +148,15 @@ class HomeFragment : BaseFragment() {
             HomeOptionEnum.INCOME_TAX,
             HomeOptionEnum.GUIDE_AUTHORIZER,
             HomeOptionEnum.SCHEDULE,
-            HomeOptionEnum.SERVICE_TOKEN -> notMigrated()
+            HomeOptionEnum.SERVICE_TOKEN -> onProtectedOption()
+        }
+    }
+
+    private fun onProtectedOption() {
+        if ((activity as? MenuActivity)?.isGuestMode() == true) {
+            showLoginDialog()
+        } else {
+            notMigrated()
         }
     }
 
@@ -162,8 +171,12 @@ class HomeFragment : BaseFragment() {
             getString(R.string.text_login),
             getString(R.string.global_yes),
             getString(R.string.action_cancel),
-            listenerPositiveButton = { notMigrated() }
+            listenerPositiveButton = { navigateToLogin() }
         )
+    }
+
+    private fun navigateToLogin() {
+        LoginActivity.start(requireActivity())
     }
 
     private fun showUpdateDialog(message: String) {

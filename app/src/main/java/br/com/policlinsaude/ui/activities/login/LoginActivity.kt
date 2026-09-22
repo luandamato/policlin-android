@@ -28,6 +28,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 class LoginActivity : AppCompatActivity() {
 
+    companion object {
+        fun start(activity: android.app.Activity) {
+            val intent = Intent(activity, LoginActivity::class.java)
+            intent.flags = android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP or android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+            activity.startActivity(intent)
+        }
+    }
+
     private lateinit var binding: ActivityLoginBinding
 
     private val viewModel: LoginViewModel by viewModel()
@@ -169,6 +177,7 @@ class LoginActivity : AppCompatActivity() {
     // =====================================================================
     private fun navigateToHome() {
         MenuActivity.start(this)
+        finish()
     }
 
     private fun navigateToHomeWithoutLogin() {
