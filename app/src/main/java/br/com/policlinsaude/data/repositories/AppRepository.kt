@@ -19,117 +19,117 @@ import retrofit2.Response
  */
 class AppRepository {
 
-    private val service = RetrofitProvider.createService(AppService::class.java)
-    private val notificationService =
+    private val serviceMappApi = RetrofitProvider.createService(AppService::class.java)
+    private val serviceApiappRest =
         RetrofitProvider.createService(AppService::class.java, baseUrl = NetworkConstants.BASE_URL_APIAPP)
 
     // =====================================================================
     // TICKETS / 2ª VIA DE BOLETO
     // =====================================================================
     suspend fun onGetTickets(body: TicketBodyModel): TicketModel =
-        request { service.getTickets(body) }
+        request { serviceMappApi.getTickets(body) }
 
     suspend fun onGetIncomeTax(body: IncomeTaxBodyModel): IncomeTaxResponseModel =
-        request { service.getIncomeTax(body) }
+        request { serviceMappApi.getIncomeTax(body) }
 
     suspend fun onGetScheduleCentral(body: ScheduleCentralBodyModel): ScheduleCentralResponseModel =
-        request { service.getScheduleCentral(body) }
+        request { serviceMappApi.getScheduleCentral(body) }
 
     suspend fun onGetToken(body: TokenBodyModel): TokenResponseModel =
-        request { service.getAttendanceToken(body) }
+        request { serviceMappApi.getAttendanceToken(body) }
 
     suspend fun onGetDependents(body: BeneficiariosRequestModel): BeneficiariosResponseModel =
-        request { service.getDependents(body) }
+        request { serviceMappApi.getDependents(body) }
 
     suspend fun onLogout(body: DeleteUserRequest): ComumModel =
-        request { notificationService.logout(body) }
+        request { serviceApiappRest.logout(body) }
 
     // =====================================================================
     // AUTORIZADOR / GUIAS
     // =====================================================================
     suspend fun onGetGuideAuthorizer(body: GuideAuthorizerRequestModel): GuideAuthorizerResponseModel =
-        request { service.getGuideAuthorizer(body) }
+        request { serviceMappApi.getGuideAuthorizer(body) }
 
     suspend fun onGetCities(body: CityRequestModel): CitiesResponseModel =
-        request { service.getCities(body) }
+        request { serviceMappApi.getCities(body) }
 
     suspend fun onPostGuideAuthorizer(body: ProcessRequestModel): GuideAuthorizerRequestResponseModel =
-        request { service.postGuideAuthorizer(body) }
+        request { serviceMappApi.postGuideAuthorizer(body) }
 
     suspend fun onPostGuideAuthorizerPhotos(body: ProcessRequestPhotosModel): ProcessResponsePhotosModel =
-        request { notificationService.postGuideAuthorizerPhotos(body) }
+        request { serviceApiappRest.postGuideAuthorizerPhotos(body) }
 
     suspend fun onPostGuideAuthorizerCancel(body: GuideAuthorizerRequestCancelModel): GuideAuthorizerResponseCancelModel =
-        request { service.postGuideAuthorizerCancel(body) }
+        request { serviceMappApi.postGuideAuthorizerCancel(body) }
 
     suspend fun onPostRequestDeadlines(body: CityRequestModel): ResponseDeadlineModel =
-        request { service.postRequestDeadline(body) }
+        request { serviceMappApi.postRequestDeadline(body) }
 
     suspend fun onPostGuideDetails(body: GuideAuthorizerRequestCancelModel): GuideAuthorizerRequestResponseModel =
-        request { service.postGuideDetails(body) }
+        request { serviceMappApi.postGuideDetails(body) }
 
     suspend fun onPostGuidePictures(body: GuideAuthorizerRequestCancelModel): GuideAuthorizerResponsePicturesDetailsModel =
-        request { service.postGuidePictures(body) }
+        request { serviceMappApi.postGuidePictures(body) }
 
     suspend fun onPostGuideQuestions(body: GuideAuthorizerRequestCancelModel): GuideAuthorizerQuestionsModel =
-        request { service.postGuideQuestions(body) }
+        request { serviceMappApi.postGuideQuestions(body) }
 
     suspend fun onPostGuide(body: GuideAuthorizerRequestCancelModel): GuideModel =
-        request { service.postGuide(body) }
+        request { serviceMappApi.postGuide(body) }
 
     suspend fun onPostGuideAnswer(body: ProcessRequestSendAnswerModel): ComumModel =
-        request { service.postGuideAnswer(body) }
+        request { serviceMappApi.postGuideAnswer(body) }
 
     suspend fun onPostGuideAnswerAttachment(body: ProcessRequestSendAnswerAttachmentModel): ComumModel =
-        request { notificationService.postGuideAnswerAttachment(body) }
+        request { serviceApiappRest.postGuideAnswerAttachment(body) }
 
     // =====================================================================
     // NOTIFICAÇÕES
     // =====================================================================
     suspend fun onGetNotifications(token: String): NotificationsResponseModel =
-        request { notificationService.getNotifications(token) }
+        request { serviceMappApi.getNotifications(token) }
 
     suspend fun onDeleteNotifications(token: String, body: NotificationDeleteRequest): NotificationsResponseModel =
-        request { notificationService.postNotifications(token, body) }
+        request { serviceMappApi.postNotifications(token, body) }
 
     // =====================================================================
     // EXTRATOR (COPARTICIPAÇÃO)
     // =====================================================================
     suspend fun onPostFactorExtractor(body: FactorExtractorBodyModel): FactorExtractorModel =
-        request { service.postFactorExtractor(body) }
+        request { serviceMappApi.postFactorExtractor(body) }
 
     suspend fun onGetFactorExtractorYears(): FactorExtractorYearsModel =
-        request { service.getFactorExtractorYears() }
+        request { serviceMappApi.getFactorExtractorYears() }
 
     suspend fun onGetFactorExtractorMonths(body: FactorExtractorMonthsBody): FactorExtractorMonthsModel =
-        request { service.getFactorExtractorMonths(body) }
+        request { serviceMappApi.getFactorExtractorMonths(body) }
 
     // =====================================================================
     // COPARTICIPAÇÃO
     // =====================================================================
     suspend fun onPostCoParticipationCombos(body: CoParticipationBodyCombo): CoParticipationModel =
-        request { service.postCoParticipationCombos(body) }
+        request { serviceMappApi.postCoParticipationCombos(body) }
 
     suspend fun onPostCoParticipationValues(body: CoParticipationBodyValue): CoParticipationItems =
-        request { service.postCoParticipationValues(body) }
+        request { serviceMappApi.postCoParticipationValues(body) }
 
     // =====================================================================
     // PERFIL / SESSÃO
     // =====================================================================
     suspend fun onGetProfile(token: String, verify: Int): UserModel =
-        request { notificationService.getPerson(token, verify) }
+        request { serviceMappApi.getPerson(token, verify) }
 
     // =====================================================================
     // AUTENTICAÇÃO / SESSÃO (legado)
     // =====================================================================
     suspend fun onLogin(register: String, order: String, password: String, firebaseToken: String, osVersion: String): JsonLoginResponse =
-        request { service.login(register, order, password, firebaseToken, osVersion) }
+        request { serviceMappApi.login(register, order, password, firebaseToken, osVersion) }
 
     suspend fun onRecoverPassword(register: String, order: String, email: String): JsonRecoverPasswordResponse =
-        request { service.recoverPassword(register, order, email) }
+        request { serviceMappApi.recoverPassword(register, order, email) }
 
     suspend fun onRegisterPassword(json: JsonRegisterPasswordBody): JsonRecoverPasswordResponse =
-        request { service.registerPassword(json) }
+        request { serviceMappApi.registerPassword(json) }
 
     suspend fun onCheckPlan(
         register: String, order: String, cpf: String, contract: String, email: String, name: String,
@@ -137,48 +137,48 @@ class AppRepository {
         method: String, mothersName: String
     ): JsonCheckPlanResponse =
         request {
-            service.checkPlan(
+            serviceMappApi.checkPlan(
                 register, order, cpf, contract, email, name, ddd, phone,
                 expirationDate, termAccepted, birthday, method, mothersName
             )
         }
 
     suspend fun onGetHealthInsurancePhoto(token: String, checkUpdated: Int): JsonHealthInsurancePhotoResponse =
-        request { service.getHealthInsurancePhoto(token, checkUpdated) }
+        request { serviceMappApi.getHealthInsurancePhoto(token, checkUpdated) }
 
     // =====================================================================
     // GUIA MÉDICO / REDE (legado)
     // =====================================================================
     suspend fun onGetMedicalGuideOptions(): JsonMedicalGuideOptionsResponse =
-        request { service.getMedicalGuideOptions() }
+        request { serviceMappApi.getMedicalGuideOptions() }
 
     suspend fun onGetMedicalGuideList(
         codePlan: Int, codeCity: Int, codeSpecialityService: Int, ownNetwork: Int,
-        latitude: Double?, longitude: Double?, professionalClassOption: String?, serviceTypeOption: String?,
+        latitude: Double?, longitude: Double?, professionalClassOption: String?, serviceMappApiTypeOption: String?,
         establishmentType: String?, specialityType: String?, addressFilter: String?, neighborhoodFilter: String?,
         zipcodeFilter: String?, numberOnBoardFilter: String?, profFantasyFilter: String?, cnpjFilter: String?,
         phonesFilter: String?, qualificationsSearch: String?, token: String?
     ): JsonMedicalGuideListResponse =
         request {
-            service.getMedicalGuideList(
+            serviceMappApi.getMedicalGuideList(
                 codePlan, codeCity, codeSpecialityService, ownNetwork, latitude, longitude,
-                professionalClassOption, serviceTypeOption, establishmentType, specialityType,
+                professionalClassOption, serviceMappApiTypeOption, establishmentType, specialityType,
                 addressFilter, neighborhoodFilter, zipcodeFilter, numberOnBoardFilter, profFantasyFilter,
                 cnpjFilter, phonesFilter, qualificationsSearch, token
             )
         }
 
     suspend fun onGetMedicalGuideDetails(proUF: String, prsCod: String, proCls: String, proCod: String): JsonMedicalGuidePlansResponse =
-        request { service.getMedicalGuideDetails(proUF, prsCod, proCls, proCod) }
+        request { serviceMappApi.getMedicalGuideDetails(proUF, prsCod, proCls, proCod) }
 
     suspend fun onGetOwnNetwork(token: String?): JsonOwnNetworkResponse =
-        request { service.getOwnNetwork(token) }
+        request { serviceMappApi.getOwnNetwork(token) }
 
     suspend fun onGetUnits(token: String?): JsonUnitsResponse =
-        request { service.getUnits(token) }
+        request { serviceMappApi.getUnits(token) }
 
     suspend fun onGetBanners(url: String, returnImage: Boolean, id: Int): JsonGetBannersResponse =
-        request { service.getBanners(url, returnImage, id) }
+        request { serviceMappApi.getBanners(url, returnImage, id) }
 
     // =====================================================================
     // FAVORITOS (legado)
@@ -187,40 +187,40 @@ class AppRepository {
         token: String, method: String, proCls: String, proCod: String, proUF: String,
         prsCod: String, prsSeq: String, esCod: String, type: String
     ): JsonFavoriteResponse =
-        request { service.addToFavorite(token, method, proCls, proCod, proUF, prsCod, prsSeq, esCod, type) }
+        request { serviceMappApi.addToFavorite(token, method, proCls, proCod, proUF, prsCod, prsSeq, esCod, type) }
 
     suspend fun onRemoveFromFavorites(
         token: String, method: String, proCls: String, proCod: String, proUF: String,
         prsCod: String, prsSeq: String, esCod: String, type: String
     ): JsonRemoveFromFavoritesResponse =
-        request { service.removeFromFavorites(token, method, proCls, proCod, proUF, prsCod, prsSeq, esCod, type) }
+        request { serviceMappApi.removeFromFavorites(token, method, proCls, proCod, proUF, prsCod, prsSeq, esCod, type) }
 
     suspend fun onGetFavorites(token: String): JsonFavoritesResponse =
-        request { service.getFavorites(token) }
+        request { serviceMappApi.getFavorites(token) }
 
     // =====================================================================
     // PERFIL / CONTA (legado)
     // =====================================================================
     suspend fun onUpdateAvatar(token: String, imageString: String): JsonUpdateAvatarResponse =
-        request { service.updateAvatar(token, imageString) }
+        request { serviceMappApi.updateAvatar(token, imageString) }
 
     suspend fun onDoLogoff(token: String): JsonLogoffResponse =
-        request { service.doLogoff(token) }
+        request { serviceMappApi.doLogoff(token) }
 
     suspend fun onEditPassword(token: String, password: String): JsonEditPasswordResponse =
-        request { service.editPassword(token, password) }
+        request { serviceMappApi.editPassword(token, password) }
 
     suspend fun onEditPhone(token: String, codeArea: String, phone: String): JsonEditPhoneResponse =
-        request { service.editPhone(token, codeArea, phone) }
+        request { serviceMappApi.editPhone(token, codeArea, phone) }
 
     suspend fun onValidateUserConnected(registration: String, order: String, token: String): UserConnected =
-        request { service.validateUserConnected(registration, order, token) }
+        request { serviceMappApi.validateUserConnected(registration, order, token) }
 
     suspend fun onValidateButtons(body: ValidateButtonBody): ValidateButtons =
-        request { service.validateButtons(body) }
+        request { serviceApiappRest.validateButtons(body) }
 
     suspend fun onDeleteUser(body: DeleteUserRequest): ComumModel =
-        request { service.deleteUser(body) }
+        request { serviceMappApi.deleteUser(body) }
 
 
     // =====================================================================

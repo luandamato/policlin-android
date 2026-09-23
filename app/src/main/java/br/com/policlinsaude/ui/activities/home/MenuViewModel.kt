@@ -48,7 +48,6 @@ class MenuViewModel(
         val token = sessionManager.getToken()
         if (token.isEmpty()) {
             _isGuest.value = true
-            _event.value = MenuEvent.ShowLoginDialog
             return
         }
 
@@ -65,13 +64,28 @@ class MenuViewModel(
                     codePlan = user.codePlan.orEmpty(),
                     descriptionPlan = user.descriptionPlan.orEmpty(),
                     photo = user.photo.orEmpty()
-                )
+                ).apply {
+                    plan.register = user.register.orEmpty()
+                    plan.order = user.order.orEmpty()
+                    plan.contract = user.contract.orEmpty()
+                }
+                sessionManager.savePerson(person)
                 _person.value = person
                 _isGuest.value = false
             } catch (e: Exception) {
                 LogManager.e(TAG, "MenuVM: error al cargar persona => ${e.message}")
-                _isGuest.value = true
-                _event.value = MenuEvent.ShowLoginDialog
+                if (sessionManager.getToken().isEmpty()) {
+                    _isGuest.value = true
+                } else {
+                    // Mantém a pessoa local (se houver) e apenas sinaliza erro sem
+                    // diálogo de login (o legado mostrava um erro genérico).
+                    _person.value = sessionManager.getPerson()
+                    _event.value = MenuEvent.ShowError(
+                        e.message
+                            ?.takeIf { it.isNotBlank() }
+                            ?: "Não foi possível carregar seus dados."
+                    )
+                }
             } finally {
                 _loading.value = false
             }

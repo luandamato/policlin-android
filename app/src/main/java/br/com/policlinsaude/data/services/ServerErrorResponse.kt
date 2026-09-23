@@ -25,10 +25,10 @@ class ServerErrorResponse (
                 }
 
                 is String -> {
-                    getErrorModelWithSTR(ServerErrorType.DEFAULT.toString(), responseCode)
+                    getErrorModelWithSTR("Ocorreu um erro inesperado. Tente novamente!", responseCode)
                 }
 
-                else -> getErrorModelWithSTR(ServerErrorType.DEFAULT.toString(), responseCode)
+                else -> getErrorModelWithSTR("Ocorreu um erro inesperado. Tente novamente!", responseCode)
             }
         }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <br.com.policlinsaude.ui.views.ZoomClass
         android:id="@+id/imageView"
@@ -10,7 +10,6 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-
         android:padding="15dp"
         android:src="@drawable/banner_one" />
 </FrameLayout>

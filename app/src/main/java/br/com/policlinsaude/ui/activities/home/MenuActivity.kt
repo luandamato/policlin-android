@@ -133,9 +133,6 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
 
         viewModel.isGuest.observe(this) { guest ->
             isGuest = guest
-            if (guest) {
-                viewModel.onMenuClickedAsGuest()
-            }
         }
 
         viewModel.event.observe(this) { event ->

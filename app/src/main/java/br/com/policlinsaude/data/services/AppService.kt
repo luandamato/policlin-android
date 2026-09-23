@@ -25,19 +25,19 @@ interface AppService {
     // =====================================================================
     // TICKETS / 2ª VIA DE BOLETO
     // =====================================================================
-    @POST("rest/apiBoletos")
+    @POST("apiBoletos")
     suspend fun getTickets(@Body body: TicketBodyModel): Response<TicketModel>
 
-    @POST("rest/apiIR")
+    @POST("apiIR")
     suspend fun getIncomeTax(@Body body: IncomeTaxBodyModel): Response<IncomeTaxResponseModel>
 
-    @POST("rest/apiGetDadosCentral")
+    @POST("apiGetDadosCentral")
     suspend fun getScheduleCentral(@Body body: ScheduleCentralBodyModel): Response<ScheduleCentralResponseModel>
 
-    @POST("rest/apiTokenAtendimento")
+    @POST("apiTokenAtendimento")
     suspend fun getAttendanceToken(@Body body: TokenBodyModel): Response<TokenResponseModel>
 
-    @POST("rest/apiListaBeneficiario")
+    @POST("apiListaBeneficiario")
     suspend fun getDependents(@Body body: BeneficiariosRequestModel): Response<BeneficiariosResponseModel>
 
     @POST("MAPP_Sair")
@@ -46,40 +46,40 @@ interface AppService {
     // =====================================================================
     // AUTORIZADOR / GUIAS
     // =====================================================================
-    @POST("rest/apiAutorizadorPesquisa")
+    @POST("apiAutorizadorPesquisa")
     suspend fun getGuideAuthorizer(@Body body: GuideAuthorizerRequestModel): Response<GuideAuthorizerResponseModel>
 
-    @POST("rest/apiAutorizadorCombo")
+    @POST("apiAutorizadorCombo")
     suspend fun getCities(@Body body: CityRequestModel): Response<CitiesResponseModel>
 
-    @POST("rest/apiAutorizadorGravarCabecalho")
+    @POST("apiAutorizadorGravarCabecalho")
     suspend fun postGuideAuthorizer(@Body body: ProcessRequestModel): Response<GuideAuthorizerRequestResponseModel>
 
-    @POST("rest/apiAutorizadorGravarAnexo")
+    @POST("apiAutorizadorGravarAnexo")
     suspend fun postGuideAuthorizerPhotos(@Body body: ProcessRequestPhotosModel): Response<ProcessResponsePhotosModel>
 
-    @POST("rest/apiAutorizadorCancelar")
+    @POST("apiAutorizadorCancelar")
     suspend fun postGuideAuthorizerCancel(@Body body: GuideAuthorizerRequestCancelModel): Response<GuideAuthorizerResponseCancelModel>
 
-    @POST("rest/apiAutorizadorPrazoResposta")
+    @POST("apiAutorizadorPrazoResposta")
     suspend fun postRequestDeadline(@Body body: CityRequestModel): Response<ResponseDeadlineModel>
 
-    @POST("rest/apiAutorizadorBuscaCabecalho")
+    @POST("apiAutorizadorBuscaCabecalho")
     suspend fun postGuideDetails(@Body body: GuideAuthorizerRequestCancelModel): Response<GuideAuthorizerRequestResponseModel>
 
-    @POST("rest/apiAutorizadorBuscaAnexos")
+    @POST("apiAutorizadorBuscaAnexos")
     suspend fun postGuidePictures(@Body body: GuideAuthorizerRequestCancelModel): Response<GuideAuthorizerResponsePicturesDetailsModel>
 
-    @POST("rest/apiAutorizadorBuscaPerguntas")
+    @POST("apiAutorizadorBuscaPerguntas")
     suspend fun postGuideQuestions(@Body body: GuideAuthorizerRequestCancelModel): Response<GuideAuthorizerQuestionsModel>
 
-    @POST("rest/apiAutorizadorBuscaGuias")
+    @POST("apiAutorizadorBuscaGuias")
     suspend fun postGuide(@Body body: GuideAuthorizerRequestCancelModel): Response<GuideModel>
 
-    @POST("rest/apiAutorizadorGravarResposta")
+    @POST("apiAutorizadorGravarResposta")
     suspend fun postGuideAnswer(@Body body: ProcessRequestSendAnswerModel): Response<ComumModel>
 
-    @POST("rest/apiAutorizadorGravarRespostaAnexo")
+    @POST("apiAutorizadorGravarRespostaAnexo")
     suspend fun postGuideAnswerAttachment(@Body body: ProcessRequestSendAnswerAttachmentModel): Response<ComumModel>
 
     // =====================================================================
@@ -97,22 +97,22 @@ interface AppService {
     // =====================================================================
     // EXTRATOR (COPARTICIPAÇÃO)
     // =====================================================================
-    @POST("rest/apiExtratoCoparticipacao")
+    @POST("apiExtratoCoparticipacao")
     suspend fun postFactorExtractor(@Body body: FactorExtractorBodyModel): Response<FactorExtractorModel>
 
-    @POST("rest/apiExtratoCopartComboAno")
+    @POST("apiExtratoCopartComboAno")
     suspend fun getFactorExtractorYears(): Response<FactorExtractorYearsModel>
 
-    @POST("rest/apiExtratoCopartComboMes")
+    @POST("apiExtratoCopartComboMes")
     suspend fun getFactorExtractorMonths(@Body body: FactorExtractorMonthsBody): Response<FactorExtractorMonthsModel>
 
     // =====================================================================
     // COPARTICIPAÇÃO
     // =====================================================================
-    @POST("rest/APIValoresCopartCombos")
+    @POST("APIValoresCopartCombos")
     suspend fun postCoParticipationCombos(@Body body: CoParticipationBodyCombo): Response<CoParticipationModel>
 
-    @POST("rest/apiValoresCopart")
+    @POST("apiValoresCopart")
     suspend fun postCoParticipationValues(@Body body: CoParticipationBodyValue): Response<CoParticipationItems>
 
     // =====================================================================
@@ -283,13 +283,13 @@ interface AppService {
         @Field("token") token: String
     ): Response<UserConnected>
 
-    @POST("rest/apiAcessoBotoes")
+    @POST("apiAcessoBotoes")
     suspend fun validateButtons(@Body body: ValidateButtonBody): Response<ValidateButtons>
 
     // =====================================================================
     // EXCLUIR CADASTRO
     // =====================================================================
-    @POST("rest/apiExcluirCadastroApp")
+    @POST("apiExcluirCadastroApp")
     suspend fun deleteUser(@Body body: DeleteUserRequest): Response<ComumModel>
     @FormUrlEncoded
     @POST

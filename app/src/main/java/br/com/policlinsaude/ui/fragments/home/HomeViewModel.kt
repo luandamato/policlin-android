@@ -73,7 +73,9 @@ class HomeViewModel(
         val person = sessionManager.getPerson()
         _person.value = person
         if (person == null) {
-            _event.value = HomeEvent.ShowLoginDialog
+            if (sessionManager.getToken().isEmpty()) {
+                _event.value = HomeEvent.ShowLoginDialog
+            }
             _loading.value = false
             return
         }

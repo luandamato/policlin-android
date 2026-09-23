@@ -21,7 +21,7 @@ object NetworkConstants {
     const val BASE_URL = "http://policlinsaude.com.br/mapp/api/"
 
     /** Base de notificações / perfil (stack de notificações). */
-    const val BASE_URL_APIAPP = "http://policlinsaude.com.br/apiapp/"
+    const val BASE_URL_APIAPP = "http://policlinsaude.com.br/apiapp/rest/"
 
     // Códigos de resposta úteis
     const val CODE_SUCCESS = 200
