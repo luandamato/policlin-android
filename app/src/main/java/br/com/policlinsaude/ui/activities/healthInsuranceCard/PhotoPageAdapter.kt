@@ -1,8 +1,7 @@
-package br.com.policlinsaude.ui.activity_healthInsurancePhoto
+package br.com.policlinsaude.ui.activities.healthInsuranceCard
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.util.DisplayMetrics

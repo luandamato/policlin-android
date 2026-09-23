@@ -52,7 +52,7 @@
             android:windowSoftInputMode="stateHidden" />
 
         <activity
-            android:name=".ui.activity_healthInsurancePhoto.HealthInsurancePhotoActivity"
+            android:name=".ui.activities.healthInsuranceCard.HealthInsurancePhotoActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

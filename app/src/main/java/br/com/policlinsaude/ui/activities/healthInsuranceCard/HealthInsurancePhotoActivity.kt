@@ -1,12 +1,12 @@
-package br.com.policlinsaude.ui.activity_healthInsurancePhoto
+package br.com.policlinsaude.ui.activities.healthInsuranceCard
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import br.com.policlinsaude.R
@@ -96,7 +96,7 @@ class HealthInsurancePhotoActivity : BaseActivity() {
     private fun updateBannerIndicator(count: Int) {
         binding.pageIndicatorViewPhoto.removeAllViews()
         for (i in 0 until count) {
-            val lp = android.widget.LinearLayout.LayoutParams(12, 12)
+            val lp = LinearLayout.LayoutParams(12, 12)
             lp.marginStart = 4
             lp.marginEnd = 4
             val dot = View(this).apply {

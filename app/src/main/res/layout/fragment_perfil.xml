@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightBg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="32dp"
+                    android:paddingTop="@dimen/nav_header_vertical_spacing"
+                    android:src="@drawable/male_placeholder"
+                    app:civ_border_color="@color/colorPrimary"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:id="@+id/textViewWelcome"
+                    style="@style/Primary.Text.Style.Bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toTopOf="@+id/textViewChoicheOptionBellow"
+                    tools:text="Joaquim" />
+
+                <TextView
+                    android:id="@+id/textViewChoicheOptionBellow"
+                    style="@style/Primary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:text="@string/msg_click_at_image"
+                    app:layout_constraintBottom_toTopOf="@+id/buttonIamClient" />
+
+                <TextView
+                    android:id="@+id/textViewMsgWhenEntering"
+                    style="@style/Secondary.Text.Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/msg_edit_register" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:text="@string/text_name"
+                        android:textColor="@color/disabledText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/nameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:textColor="@color/disabledText"
+                        tools:text="@tools:sample/full_names" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:text="@string/text_email"
+                        android:textColor="@color/disabledText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/emailTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:textColor="@color/disabledText"
+                        tools:text="email@email.com" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/phoneContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:text="@string/text_phone"
+                        android:textColor="@color/secondaryText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/phoneTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableEnd="@drawable/ic_arrow_right"
+                        android:drawablePadding="12dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="12dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:textColor="@color/secondaryText"
+                        tools:text="(11) 99999-9999" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/passwordContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:text="@string/text_password"
+                        android:textColor="@color/secondaryText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/passwordTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableEnd="@drawable/ic_arrow_right"
+                        android:drawablePadding="12dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="12dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:text="@string/text_password_placeholder"
+                        android:textColor="@color/secondaryText" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:text="@string/text_cpf"
+                        android:textColor="@color/disabledText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/cpfTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:textColor="@color/disabledText"
+                        tools:text="999.999.999-99" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:text="@string/text_birthday"
+                        android:textColor="@color/disabledText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/birthdayTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:textColor="@color/disabledText"
+                        tools:text="31/12/1980" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:text="@string/text_register_and_order"
+                        android:textColor="@color/disabledText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/registerAndOrderTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:textColor="@color/disabledText"
+                        tools:text="123456/1" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/deleteAccountContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:text="@string/delete_profile_title"
+                        android:textColor="@color/secondaryText"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:drawableEnd="@drawable/ic_arrow_right"
+                        android:drawablePadding="12dp"
+                        android:ellipsize="end"
+                        android:lines="1"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="12dp"
+                        android:paddingStart="8dp"
+                        android:paddingTop="16dp"
+                        android:textColor="@color/secondaryText"
+                        tools:text="" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <include
+        android:id="@+id/loadingView"
+        layout="@layout/view_loading" />
+</FrameLayout>

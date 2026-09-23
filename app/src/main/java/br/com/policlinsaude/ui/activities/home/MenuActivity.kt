@@ -13,6 +13,7 @@ import br.com.policlinsaude.ui.activities.home.MenuAdapter.OnMenuItemClickListen
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.fragments.home.HomeFragment
 import br.com.policlinsaude.ui.activities.login.LoginActivity
+import br.com.policlinsaude.ui.fragments.perfil.PerfilFragment
 import br.com.policlinsaude.ui.views.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -161,7 +162,7 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
                     listenerPositiveButton = { viewModel.onLogoutConfirmed() }
                 )
             }
-            MenuOptionEnum.PROFILE,
+            MenuOptionEnum.PROFILE -> showProfileFragment()
             MenuOptionEnum.PREFERENCES,
             MenuOptionEnum.INFORMATION,
             MenuOptionEnum.UNITIES,
@@ -179,6 +180,13 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     private fun showHomeFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.content_layout, HomeFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun showProfileFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.content_layout, PerfilFragment())
             .addToBackStack(null)
             .commit()
     }

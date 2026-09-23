@@ -1,10 +1,11 @@
-package br.com.policlinsaude.ui.activity_healthInsurancePhoto
+package br.com.policlinsaude.ui.activities.healthInsuranceCard
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.policlinsaude.data.local.SessionManager
+import br.com.policlinsaude.data.models.JsonHealthInsurancePhotoListResponse
 import br.com.policlinsaude.data.models.JsonHealthInsurancePhotoResponse
 import br.com.policlinsaude.data.repositories.AppRepository
 import br.com.policlinsaude.domain.models.HealthInsurancePhoto
@@ -97,6 +98,6 @@ class HealthInsurancePhotoViewModel(
             msgExterna = msgExternal
         )
 
-    private fun br.com.policlinsaude.data.models.JsonHealthInsurancePhotoListResponse.toDomain() =
+    private fun JsonHealthInsurancePhotoListResponse.toDomain() =
         HealthInsurancePhoto(imgFrente = imageFront, titular = titular, ordem = ordem)
 }
