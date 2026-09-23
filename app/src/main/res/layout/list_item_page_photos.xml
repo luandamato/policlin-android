@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <br.com.policlinsaude.healthInsurancePhoto.view.ZoomClass
+    <br.com.policlinsaude.ui.views.ZoomClass
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

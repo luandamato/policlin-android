@@ -14,6 +14,7 @@ import br.com.policlinsaude.domain.models.Banner
 import br.com.policlinsaude.ui.activities.home.MenuActivity
 import br.com.policlinsaude.ui.activities.login.LoginActivity
 import br.com.policlinsaude.ui.activities.notifications.NotificationActivity
+import br.com.policlinsaude.ui.activity_healthInsurancePhoto.HealthInsurancePhotoActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.views.BaseFragment
 import br.com.policlinsaude.util.extensions.openBrowser
@@ -138,8 +139,14 @@ class HomeFragment : BaseFragment() {
             return
         }
         when (option) {
+            HomeOptionEnum.HEALTH_INSURANCE -> {
+                if ((activity as? MenuActivity)?.isGuestMode() == true) {
+                    showLoginDialog()
+                } else {
+                    HealthInsurancePhotoActivity.start(requireActivity())
+                }
+            }
             HomeOptionEnum.MEDICAL_GUIDE,
-            HomeOptionEnum.HEALTH_INSURANCE,
             HomeOptionEnum.OWN_NETWORK,
             HomeOptionEnum.FAVORITES,
             HomeOptionEnum.TICKET,

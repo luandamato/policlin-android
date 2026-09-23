@@ -6,6 +6,7 @@ import br.com.policlinsaude.ui.activities.forgotPassword.ForgotPasswordViewModel
 import br.com.policlinsaude.ui.activities.home.MenuViewModel
 import br.com.policlinsaude.ui.activities.login.LoginViewModel
 import br.com.policlinsaude.ui.activities.notHasPassword.NotHasPasswordViewModel
+import br.com.policlinsaude.ui.activity_healthInsurancePhoto.HealthInsurancePhotoViewModel
 import br.com.policlinsaude.ui.fragments.home.HomeViewModel
 import br.com.policlinsaude.ui.fragments.notifications.NotificationViewModel
 import org.koin.android.ext.koin.androidContext
@@ -28,4 +29,5 @@ val appModules = module {
     viewModel { MenuViewModel(get(), get()) }
     viewModel { HomeViewModel(get(), get()) }
     viewModel { NotificationViewModel(get(), get()) }
+    viewModel { HealthInsurancePhotoViewModel(get(), get()) }
 }
