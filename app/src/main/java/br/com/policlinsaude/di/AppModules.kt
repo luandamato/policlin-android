@@ -13,6 +13,7 @@ import br.com.policlinsaude.ui.activities.deleteUser.DeleteUserViewModel
 import br.com.policlinsaude.ui.fragments.home.HomeViewModel
 import br.com.policlinsaude.ui.fragments.notifications.NotificationViewModel
 import br.com.policlinsaude.ui.fragments.perfil.PerfilViewModel
+import br.com.policlinsaude.ui.fragments.preferences.PreferencesViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -38,4 +39,5 @@ val appModules = module {
     viewModel { EditPhoneViewModel(get(), get()) }
     viewModel { EditPasswordViewModel(get(), get()) }
     viewModel { DeleteUserViewModel(get(), get()) }
+    viewModel { PreferencesViewModel(get(), get()) }
 }
