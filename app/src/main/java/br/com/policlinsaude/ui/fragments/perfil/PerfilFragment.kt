@@ -13,10 +13,11 @@ import androidx.fragment.app.Fragment
 import br.com.policlinsaude.R
 import br.com.policlinsaude.databinding.FragmentPerfilBinding
 import br.com.policlinsaude.data.models.PresentationPerson
+import br.com.policlinsaude.ui.activities.deleteUser.DeleteUserActivity
+import br.com.policlinsaude.ui.activities.editPassword.EditPasswordActivity
+import br.com.policlinsaude.ui.activities.editPhone.EditPhoneActivity
 import br.com.policlinsaude.ui.activities.home.MenuActivity
 import br.com.policlinsaude.util.extensions.getBitmapFromImage
-import br.com.policlinsaude.ui.fragments.perfil.PerfilEvent
-import br.com.policlinsaude.ui.fragments.perfil.PerfilViewModel
 import br.com.policlinsaude.ui.views.BaseActivity
 import br.com.policlinsaude.util.extensions.DateHelper
 import br.com.policlinsaude.util.extensions.toBase64
@@ -148,16 +149,16 @@ class PerfilFragment : Fragment() {
 
     private fun setClickListeners() {
         binding.phoneContainer.setOnClickListener {
-            (activity as? BaseActivity)?.showToast("Em construção")
+            EditPhoneActivity.start(requireContext())
         }
         binding.passwordContainer.setOnClickListener {
-            (activity as? BaseActivity)?.showToast("Em construção")
+            EditPasswordActivity.start(requireContext())
         }
         binding.imageView.setOnClickListener {
             photoPickerHelper.open(PhotoPickerHelper.Mode.CAMERA_AND_GALLERY)
         }
         binding.deleteAccountContainer.setOnClickListener {
-            (activity as? BaseActivity)?.showToast("Em construção")
+            DeleteUserActivity.start(requireContext())
         }
     }
 

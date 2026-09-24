@@ -220,7 +220,7 @@ class AppRepository {
         request { serviceApiappRest.validateButtons(body) }
 
     suspend fun onDeleteUser(body: DeleteUserRequest): ComumModel =
-        request { serviceMappApi.deleteUser(body) }
+        request { serviceApiappRest.deleteUser(body) }
 
 
     // =====================================================================

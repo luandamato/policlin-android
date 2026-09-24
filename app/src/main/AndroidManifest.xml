@@ -2,12 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- ========================================================= -->
-    <!-- PERMISSÕES (mínimo por enquanto; serão re-adicionadas       -->
-    <!-- conforme as features forem migradas)                       -->
+    <!-- PERMISSÕES                                                 -->
     <!-- ========================================================= -->
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
 
     <!-- ========================================================= -->
     <!-- APPLICATION                                                -->
@@ -63,6 +65,27 @@
 
         <activity
             android:name=".ui.activities.home.MenuActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- ===================================================== -->
+        <!-- PERFIL - SUB-FEATURES                                 -->
+        <!-- ===================================================== -->
+
+        <activity
+            android:name=".ui.activities.editPhone.EditPhoneActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
+
+        <activity
+            android:name=".ui.activities.editPassword.EditPasswordActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" />
+
+        <activity
+            android:name=".ui.activities.deleteUser.DeleteUserActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
 

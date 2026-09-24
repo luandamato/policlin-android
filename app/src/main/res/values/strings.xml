@@ -59,6 +59,7 @@
     <string name="delete_profile_title_modal">Confirmar Exclusão</string>
     <string name="delete_profile_modal_title"> Essa ação excluirá o seu cadastro no App  e PIN-SS, Deseja continuar?</string>
     <string name="delete_profile_deleted">Cadastro excluído com sucesso!</string>
+    <string name="delete_profile_exit">Sair</string>
     <string name="delete_profile_deleted_modal">Você poderá se cadastrar novamente caso permaneça como beneficiário.</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

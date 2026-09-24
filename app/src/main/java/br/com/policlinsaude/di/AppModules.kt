@@ -7,6 +7,9 @@ import br.com.policlinsaude.ui.activities.home.MenuViewModel
 import br.com.policlinsaude.ui.activities.login.LoginViewModel
 import br.com.policlinsaude.ui.activities.notHasPassword.NotHasPasswordViewModel
 import br.com.policlinsaude.ui.activities.healthInsuranceCard.HealthInsurancePhotoViewModel
+import br.com.policlinsaude.ui.activities.editPassword.EditPasswordViewModel
+import br.com.policlinsaude.ui.activities.editPhone.EditPhoneViewModel
+import br.com.policlinsaude.ui.activities.deleteUser.DeleteUserViewModel
 import br.com.policlinsaude.ui.fragments.home.HomeViewModel
 import br.com.policlinsaude.ui.fragments.notifications.NotificationViewModel
 import br.com.policlinsaude.ui.fragments.perfil.PerfilViewModel
@@ -32,4 +35,7 @@ val appModules = module {
     viewModel { NotificationViewModel(get(), get()) }
     viewModel { HealthInsurancePhotoViewModel(get(), get()) }
     viewModel { PerfilViewModel(get(), get()) }
+    viewModel { EditPhoneViewModel(get(), get()) }
+    viewModel { EditPasswordViewModel(get(), get()) }
+    viewModel { DeleteUserViewModel(get(), get()) }
 }
