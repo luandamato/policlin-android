@@ -223,14 +223,14 @@
 
     <!-- URLs -->
     <string name="url_policlin">https://www.policlinsaude.com.br</string>
-    <string name="url_cib">https://www.policlinsaude.com.br/cib</string>
+    <string name="url_cib">https://policlinsaude.com.br/cib.html</string>
     <string name="url_ans">http://www.ans.gov.br</string>
-    <string name="url_abramge">https://www.abramge.com.br</string>
-    <string name="url_ombudsman">https://www.policlinsaude.com.br/ouvidoria</string>
-    <string name="url_contact_phones">https://www.policlinsaude.com.br/contato</string>
-    <string name="url_policlin_group">https://www.grupopoliclin.com.br</string>
-    <string name="url_privacy_policy">https://www.policlinsaude.com.br/politica-de-privacidade</string>
-    <string name="url_terms">https://www.policlinsaude.com.br/termos-de-uso</string>
+    <string name="url_abramge">http://www.policlinsaude.com.br/abramge.html</string>
+    <string name="url_ombudsman">https://www.policlinsaude.com.br/ouvidoria.html</string>
+    <string name="url_contact_phones">https://policlinsaude.com.br/unidades.html</string>
+    <string name="url_policlin_group">http://grupo.policlin.com.br/grupo/</string>
+    <string name="url_privacy_policy">https://policlinsaude.com.br/termos-de-uso-e-politica-de-privacidade.html</string>
+    <string name="url_terms">https://policlinsaude.com.br/termos-de-uso-e-politica-de-privacidade.html</string>
 
     <!-- Map Specific Strings -->
     <string name="title_medical_guide_map">Mapa do Guia Médico</string>

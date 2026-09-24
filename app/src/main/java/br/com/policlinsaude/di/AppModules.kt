@@ -14,6 +14,7 @@ import br.com.policlinsaude.ui.fragments.home.HomeViewModel
 import br.com.policlinsaude.ui.fragments.notifications.NotificationViewModel
 import br.com.policlinsaude.ui.fragments.perfil.PerfilViewModel
 import br.com.policlinsaude.ui.fragments.preferences.PreferencesViewModel
+import br.com.policlinsaude.ui.fragments.informations.InformationsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -40,4 +41,5 @@ val appModules = module {
     viewModel { EditPasswordViewModel(get(), get()) }
     viewModel { DeleteUserViewModel(get(), get()) }
     viewModel { PreferencesViewModel(get(), get()) }
+    viewModel { InformationsViewModel() }
 }

@@ -13,6 +13,8 @@ import br.com.policlinsaude.ui.activities.home.MenuAdapter.OnMenuItemClickListen
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.fragments.home.HomeFragment
 import br.com.policlinsaude.ui.activities.login.LoginActivity
+import br.com.policlinsaude.ui.fragments.informations.InformationsFragment
+import br.com.policlinsaude.ui.fragments.links.LinksFragment
 import br.com.policlinsaude.ui.fragments.perfil.PerfilFragment
 import br.com.policlinsaude.ui.fragments.preferences.PreferencesFragment
 import br.com.policlinsaude.ui.views.BaseActivity
@@ -165,9 +167,9 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
             }
             MenuOptionEnum.PROFILE -> showProfileFragment()
             MenuOptionEnum.PREFERENCES -> showPreferencesFragment()
-            MenuOptionEnum.INFORMATION,
+            MenuOptionEnum.INFORMATION -> showInformationsFragment()
             MenuOptionEnum.UNITIES,
-            MenuOptionEnum.LINKS,
+            MenuOptionEnum.LINKS -> showLinksFragment()
             MenuOptionEnum.CIB -> {
                 if (isGuest) {
                     showLoginDialog()
@@ -195,6 +197,20 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     private fun showPreferencesFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.content_layout, PreferencesFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun showLinksFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.content_layout, LinksFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun showInformationsFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.content_layout, InformationsFragment())
             .addToBackStack(null)
             .commit()
     }
