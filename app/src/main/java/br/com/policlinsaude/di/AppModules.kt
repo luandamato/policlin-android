@@ -15,6 +15,8 @@ import br.com.policlinsaude.ui.fragments.notifications.NotificationViewModel
 import br.com.policlinsaude.ui.fragments.perfil.PerfilViewModel
 import br.com.policlinsaude.ui.fragments.preferences.PreferencesViewModel
 import br.com.policlinsaude.ui.fragments.informations.InformationsViewModel
+import br.com.policlinsaude.ui.fragments.links.LinksViewModel
+import br.com.policlinsaude.ui.fragments.units.UnitsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -42,4 +44,6 @@ val appModules = module {
     viewModel { DeleteUserViewModel(get(), get()) }
     viewModel { PreferencesViewModel(get(), get()) }
     viewModel { InformationsViewModel() }
+    viewModel { LinksViewModel() }
+    viewModel { UnitsViewModel(get()) }
 }

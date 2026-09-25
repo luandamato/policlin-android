@@ -17,6 +17,7 @@ import br.com.policlinsaude.ui.fragments.informations.InformationsFragment
 import br.com.policlinsaude.ui.fragments.links.LinksFragment
 import br.com.policlinsaude.ui.fragments.perfil.PerfilFragment
 import br.com.policlinsaude.ui.fragments.preferences.PreferencesFragment
+import br.com.policlinsaude.ui.fragments.units.UnitsFragment
 import br.com.policlinsaude.ui.views.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -168,7 +169,7 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
             MenuOptionEnum.PROFILE -> showProfileFragment()
             MenuOptionEnum.PREFERENCES -> showPreferencesFragment()
             MenuOptionEnum.INFORMATION -> showInformationsFragment()
-            MenuOptionEnum.UNITIES,
+            MenuOptionEnum.UNITIES -> showUnitsFragment()
             MenuOptionEnum.LINKS -> showLinksFragment()
             MenuOptionEnum.CIB -> {
                 if (isGuest) {
@@ -211,6 +212,13 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     private fun showInformationsFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.content_layout, InformationsFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun showUnitsFragment() {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.content_layout, UnitsFragment())
             .addToBackStack(null)
             .commit()
     }
