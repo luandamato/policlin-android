@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.policlinsaude.R
 import br.com.policlinsaude.databinding.FragmentUnitsBinding
 import br.com.policlinsaude.ui.activities.home.MenuActivity
+import br.com.policlinsaude.ui.activities.unitDetail.UnitDetailActivity
 import br.com.policlinsaude.ui.views.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -83,8 +84,7 @@ class UnitsFragment : Fragment() {
                     (activity as? BaseActivity)?.showError(message = event.message)
                 }
                 is UnitsEvent.NavigateToDetails -> {
-                    // TODO: Navegar para detalhes quando a feature estiver migrada
-                    (activity as? BaseActivity)?.showToast("Detalhes em construção")
+                    UnitDetailActivity.start(requireActivity(), event.establishment)
                 }
             }
         }

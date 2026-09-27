@@ -10,6 +10,7 @@ import br.com.policlinsaude.ui.activities.healthInsuranceCard.HealthInsurancePho
 import br.com.policlinsaude.ui.activities.editPassword.EditPasswordViewModel
 import br.com.policlinsaude.ui.activities.editPhone.EditPhoneViewModel
 import br.com.policlinsaude.ui.activities.deleteUser.DeleteUserViewModel
+import br.com.policlinsaude.ui.activities.unitDetail.UnitDetailViewModel
 import br.com.policlinsaude.ui.fragments.home.HomeViewModel
 import br.com.policlinsaude.ui.fragments.notifications.NotificationViewModel
 import br.com.policlinsaude.ui.fragments.perfil.PerfilViewModel
@@ -46,4 +47,5 @@ val appModules = module {
     viewModel { InformationsViewModel() }
     viewModel { LinksViewModel() }
     viewModel { UnitsViewModel(get()) }
+    viewModel { UnitDetailViewModel() }
 }
