@@ -96,22 +96,22 @@ class AppRepository {
     // EXTRATOR (COPARTICIPAÇÃO)
     // =====================================================================
     suspend fun onPostFactorExtractor(body: FactorExtractorBodyModel): FactorExtractorModel =
-        request { serviceMappApi.postFactorExtractor(body) }
+        request { serviceApiappRest.postFactorExtractor(body) }
 
     suspend fun onGetFactorExtractorYears(): FactorExtractorYearsModel =
-        request { serviceMappApi.getFactorExtractorYears() }
+        request { serviceApiappRest.getFactorExtractorYears() }
 
     suspend fun onGetFactorExtractorMonths(body: FactorExtractorMonthsBody): FactorExtractorMonthsModel =
-        request { serviceMappApi.getFactorExtractorMonths(body) }
+        request { serviceApiappRest.getFactorExtractorMonths(body) }
 
     // =====================================================================
     // COPARTICIPAÇÃO
     // =====================================================================
     suspend fun onPostCoParticipationCombos(body: CoParticipationBodyCombo): CoParticipationModel =
-        request { serviceMappApi.postCoParticipationCombos(body) }
+        request { serviceApiappRest.postCoParticipationCombos(body) }
 
     suspend fun onPostCoParticipationValues(body: CoParticipationBodyValue): CoParticipationItems =
-        request { serviceMappApi.postCoParticipationValues(body) }
+        request { serviceApiappRest.postCoParticipationValues(body) }
 
     // =====================================================================
     // PERFIL / SESSÃO

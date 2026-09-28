@@ -281,4 +281,7 @@
     <!-- COPARTICIPAÇÃO (Pesquisa de Valores) -->
     <string name="title_research_co_participation">Pesquisa de Valores de Coparticipação</string>
 
+    <!-- EXTRATO -->
+    <string name="title_factor_extractor">Extrato de Coparticipação</string>
+
 </resources>

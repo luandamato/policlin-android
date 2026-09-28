@@ -11,6 +11,7 @@ import br.com.policlinsaude.ui.activities.editPassword.EditPasswordViewModel
 import br.com.policlinsaude.ui.activities.editPhone.EditPhoneViewModel
 import br.com.policlinsaude.ui.activities.deleteUser.DeleteUserViewModel
 import br.com.policlinsaude.ui.activities.unitDetail.UnitDetailViewModel
+import br.com.policlinsaude.ui.activities.factorExtractor.FactorExtractorViewModel
 import br.com.policlinsaude.ui.fragments.home.HomeViewModel
 import br.com.policlinsaude.ui.fragments.notifications.NotificationViewModel
 import br.com.policlinsaude.ui.fragments.coparticipation.CoParticipationViewModel
@@ -50,4 +51,5 @@ val appModules = module {
     viewModel { LinksViewModel() }
     viewModel { UnitsViewModel(get()) }
     viewModel { UnitDetailViewModel() }
+    viewModel { FactorExtractorViewModel(get(), get()) }
 }

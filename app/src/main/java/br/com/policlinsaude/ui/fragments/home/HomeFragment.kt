@@ -16,6 +16,7 @@ import br.com.policlinsaude.ui.activities.login.LoginActivity
 import br.com.policlinsaude.ui.activities.notifications.NotificationActivity
 import br.com.policlinsaude.ui.activities.coparticipation.ResearchCoParticipationActivity
 import br.com.policlinsaude.ui.activities.healthInsuranceCard.HealthInsurancePhotoActivity
+import br.com.policlinsaude.ui.activities.factorExtractor.FactorExtractorActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.views.BaseFragment
 import br.com.policlinsaude.util.extensions.openBrowser
@@ -156,7 +157,7 @@ class HomeFragment : BaseFragment() {
             HomeOptionEnum.INCOME_TAX,
             HomeOptionEnum.GUIDE_AUTHORIZER,
             HomeOptionEnum.SCHEDULE,
-            HomeOptionEnum.SERVICE_TOKEN -> onProtectedOption()
+            HomeOptionEnum.SERVICE_TOKEN -> onProtectedOption(option)
         }
     }
 
@@ -168,10 +169,14 @@ class HomeFragment : BaseFragment() {
         }
     }
 
-    private fun onProtectedOption() {
+    private fun onProtectedOption(option: HomeOptionEnum) {
         if ((activity as? MenuActivity)?.isGuestMode() == true) {
             showLoginDialog()
         } else {
+            if (option == HomeOptionEnum.FACTOR_EXTRACTOR) {
+                FactorExtractorActivity.start(requireActivity(), viewModel.isCoPartFMValue())
+                return
+            }
             notMigrated()
         }
     }

@@ -10,6 +10,7 @@ import br.com.policlinsaude.databinding.ActivityResearchCoParticipationBinding
 import br.com.policlinsaude.ui.fragments.coparticipation.CoParticipationViewModel
 import br.com.policlinsaude.ui.fragments.coparticipation.ResearchCoParticipationFiltersFragment
 import br.com.policlinsaude.ui.fragments.coparticipation.ResearchCoParticipationItemsFragment
+import br.com.policlinsaude.ui.views.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -22,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  *
  * Fluxo novo: UI → `CoParticipationViewModel` → `AppRepository` → `AppService`.
  */
-class ResearchCoParticipationActivity : AppCompatActivity() {
+class ResearchCoParticipationActivity : BaseActivity() {
 
     companion object {
         private const val EXTRA_CO_PART_FM = "CO_PART_FM"
