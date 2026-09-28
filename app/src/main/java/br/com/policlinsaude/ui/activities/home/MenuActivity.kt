@@ -1,5 +1,7 @@
 package br.com.policlinsaude.ui.activities.home
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -20,6 +22,7 @@ import br.com.policlinsaude.ui.fragments.preferences.PreferencesFragment
 import br.com.policlinsaude.ui.fragments.units.UnitsFragment
 import br.com.policlinsaude.ui.views.BaseActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import androidx.core.net.toUri
 
 /**
  * Shell principal (home): drawer + barra superior.
@@ -171,15 +174,17 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
             MenuOptionEnum.INFORMATION -> showInformationsFragment()
             MenuOptionEnum.UNITIES -> showUnitsFragment()
             MenuOptionEnum.LINKS -> showLinksFragment()
-            MenuOptionEnum.CIB -> {
-                if (isGuest) {
-                    showLoginDialog()
-                } else {
-                    notMigrated()
-                }
-            }
+            MenuOptionEnum.CIB -> callCib()
         }
     }
+
+    private fun isGuest(): Boolean {
+        if (isGuest) {
+            showLoginDialog()
+            return true
+        }
+        return false
+}
 
     private fun showHomeFragment() {
         supportFragmentManager.beginTransaction()
@@ -189,6 +194,7 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     }
 
     private fun showProfileFragment() {
+        if (isGuest()) return
         supportFragmentManager.beginTransaction()
             .replace(R.id.content_layout, PerfilFragment())
             .addToBackStack(null)
@@ -196,6 +202,7 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     }
 
     private fun showPreferencesFragment() {
+        if (isGuest()) return
         supportFragmentManager.beginTransaction()
             .replace(R.id.content_layout, PreferencesFragment())
             .addToBackStack(null)
@@ -203,6 +210,7 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     }
 
     private fun showLinksFragment() {
+        if (isGuest()) return
         supportFragmentManager.beginTransaction()
             .replace(R.id.content_layout, LinksFragment())
             .addToBackStack(null)
@@ -217,10 +225,15 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     }
 
     private fun showUnitsFragment() {
+        if (isGuest()) return
         supportFragmentManager.beginTransaction()
             .replace(R.id.content_layout, UnitsFragment())
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun callCib() {
+        startActivity(Intent(Intent.ACTION_DIAL).setData("tel:01221392599".toUri()))
     }
 
     fun showLoginDialog() {
@@ -236,9 +249,5 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
 
     private fun navigateToLogin() {
         LoginActivity.start(this)
-    }
-
-    private fun notMigrated() {
-        Toast.makeText(this, "Em construção", Toast.LENGTH_SHORT).show()
     }
 }
