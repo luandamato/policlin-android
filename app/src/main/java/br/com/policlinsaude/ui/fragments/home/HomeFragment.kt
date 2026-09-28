@@ -14,6 +14,7 @@ import br.com.policlinsaude.domain.models.Banner
 import br.com.policlinsaude.ui.activities.home.MenuActivity
 import br.com.policlinsaude.ui.activities.login.LoginActivity
 import br.com.policlinsaude.ui.activities.notifications.NotificationActivity
+import br.com.policlinsaude.ui.activities.coparticipation.ResearchCoParticipationActivity
 import br.com.policlinsaude.ui.activities.healthInsuranceCard.HealthInsurancePhotoActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.views.BaseFragment
@@ -146,16 +147,24 @@ class HomeFragment : BaseFragment() {
                     HealthInsurancePhotoActivity.start(requireActivity())
                 }
             }
+            HomeOptionEnum.RESEARCH_VALUES_CO_PARTICIPATION -> onResearchCoParticipationValue()
             HomeOptionEnum.MEDICAL_GUIDE,
             HomeOptionEnum.OWN_NETWORK,
             HomeOptionEnum.FAVORITES,
             HomeOptionEnum.TICKET,
-            HomeOptionEnum.RESEARCH_VALUES_CO_PARTICIPATION,
             HomeOptionEnum.FACTOR_EXTRACTOR,
             HomeOptionEnum.INCOME_TAX,
             HomeOptionEnum.GUIDE_AUTHORIZER,
             HomeOptionEnum.SCHEDULE,
             HomeOptionEnum.SERVICE_TOKEN -> onProtectedOption()
+        }
+    }
+
+    private fun onResearchCoParticipationValue() {
+        if ((activity as? MenuActivity)?.isGuestMode() == true) {
+            showLoginDialog()
+        } else {
+            ResearchCoParticipationActivity.start(requireActivity(), viewModel.isCoPartFMValue())
         }
     }
 

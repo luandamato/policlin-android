@@ -13,6 +13,7 @@ import br.com.policlinsaude.ui.activities.deleteUser.DeleteUserViewModel
 import br.com.policlinsaude.ui.activities.unitDetail.UnitDetailViewModel
 import br.com.policlinsaude.ui.fragments.home.HomeViewModel
 import br.com.policlinsaude.ui.fragments.notifications.NotificationViewModel
+import br.com.policlinsaude.ui.fragments.coparticipation.CoParticipationViewModel
 import br.com.policlinsaude.ui.fragments.perfil.PerfilViewModel
 import br.com.policlinsaude.ui.fragments.preferences.PreferencesViewModel
 import br.com.policlinsaude.ui.fragments.informations.InformationsViewModel
@@ -38,6 +39,7 @@ val appModules = module {
     viewModel { MenuViewModel(get(), get()) }
     viewModel { HomeViewModel(get(), get()) }
     viewModel { NotificationViewModel(get(), get()) }
+    viewModel { CoParticipationViewModel(get(), get()) }
     viewModel { HealthInsurancePhotoViewModel(get(), get()) }
     viewModel { PerfilViewModel(get(), get()) }
     viewModel { EditPhoneViewModel(get(), get()) }

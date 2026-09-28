@@ -68,6 +68,11 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".ui.activities.coparticipation.ResearchCoParticipationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".ui.activities.home.MenuActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
