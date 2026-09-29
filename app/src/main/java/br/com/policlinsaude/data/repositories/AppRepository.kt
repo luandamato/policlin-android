@@ -36,10 +36,10 @@ class AppRepository {
         request { serviceMappApi.getScheduleCentral(body) }
 
     suspend fun onGetToken(body: TokenBodyModel): TokenResponseModel =
-        request { serviceMappApi.getAttendanceToken(body) }
+        request { serviceApiappRest.getAttendanceToken(body) }
 
     suspend fun onGetDependents(body: BeneficiariosRequestModel): BeneficiariosResponseModel =
-        request { serviceMappApi.getDependents(body) }
+        request { serviceApiappRest.getDependents(body) }
 
     suspend fun onLogout(body: DeleteUserRequest): ComumModel =
         request { serviceApiappRest.logout(body) }

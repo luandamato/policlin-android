@@ -17,6 +17,7 @@ import br.com.policlinsaude.ui.activities.notifications.NotificationActivity
 import br.com.policlinsaude.ui.activities.coparticipation.ResearchCoParticipationActivity
 import br.com.policlinsaude.ui.activities.healthInsuranceCard.HealthInsurancePhotoActivity
 import br.com.policlinsaude.ui.activities.factorExtractor.FactorExtractorActivity
+import br.com.policlinsaude.ui.activities.token.TokenActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.views.BaseFragment
 import br.com.policlinsaude.util.extensions.openBrowser
@@ -141,14 +142,8 @@ class HomeFragment : BaseFragment() {
             return
         }
         when (option) {
-            HomeOptionEnum.HEALTH_INSURANCE -> {
-                if ((activity as? MenuActivity)?.isGuestMode() == true) {
-                    showLoginDialog()
-                } else {
-                    HealthInsurancePhotoActivity.start(requireActivity())
-                }
-            }
             HomeOptionEnum.RESEARCH_VALUES_CO_PARTICIPATION -> onResearchCoParticipationValue()
+            HomeOptionEnum.HEALTH_INSURANCE,
             HomeOptionEnum.MEDICAL_GUIDE,
             HomeOptionEnum.OWN_NETWORK,
             HomeOptionEnum.FAVORITES,
@@ -173,8 +168,16 @@ class HomeFragment : BaseFragment() {
         if ((activity as? MenuActivity)?.isGuestMode() == true) {
             showLoginDialog()
         } else {
+            if (option == HomeOptionEnum.HEALTH_INSURANCE) {
+                HealthInsurancePhotoActivity.start(requireActivity())
+                return
+            }
             if (option == HomeOptionEnum.FACTOR_EXTRACTOR) {
                 FactorExtractorActivity.start(requireActivity(), viewModel.isCoPartFMValue())
+                return
+            }
+            if (option == HomeOptionEnum.SERVICE_TOKEN) {
+                TokenActivity.start(requireActivity())
                 return
             }
             notMigrated()
