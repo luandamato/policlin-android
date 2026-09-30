@@ -6,6 +6,7 @@ import br.com.policlinsaude.ui.activities.forgotPassword.ForgotPasswordViewModel
 import br.com.policlinsaude.ui.activities.home.MenuViewModel
 import br.com.policlinsaude.ui.activities.login.LoginViewModel
 import br.com.policlinsaude.ui.activities.notHasPassword.NotHasPasswordViewModel
+import br.com.policlinsaude.ui.activities.ownNetwork.OwnNetworkViewModel
 import br.com.policlinsaude.ui.activities.healthInsuranceCard.HealthInsurancePhotoViewModel
 import br.com.policlinsaude.ui.activities.editPassword.EditPasswordViewModel
 import br.com.policlinsaude.ui.activities.editPhone.EditPhoneViewModel
@@ -51,6 +52,7 @@ val appModules = module {
     viewModel { InformationsViewModel() }
     viewModel { LinksViewModel() }
     viewModel { UnitsViewModel(get()) }
+    viewModel { OwnNetworkViewModel(get(), get()) }
     viewModel { UnitDetailViewModel() }
     viewModel { FactorExtractorViewModel(get(), get()) }
     viewModel { TokenViewModel(get(), get()) }
