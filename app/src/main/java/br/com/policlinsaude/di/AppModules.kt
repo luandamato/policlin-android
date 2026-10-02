@@ -11,6 +11,7 @@ import br.com.policlinsaude.ui.activities.healthInsuranceCard.HealthInsurancePho
 import br.com.policlinsaude.ui.activities.editPassword.EditPasswordViewModel
 import br.com.policlinsaude.ui.activities.editPhone.EditPhoneViewModel
 import br.com.policlinsaude.ui.activities.deleteUser.DeleteUserViewModel
+import br.com.policlinsaude.ui.activities.favorites.FavoritesViewModel
 import br.com.policlinsaude.ui.activities.unitDetail.UnitDetailViewModel
 import br.com.policlinsaude.ui.activities.factorExtractor.FactorExtractorViewModel
 import br.com.policlinsaude.ui.activities.token.TokenViewModel
@@ -53,6 +54,7 @@ val appModules = module {
     viewModel { LinksViewModel() }
     viewModel { UnitsViewModel(get()) }
     viewModel { OwnNetworkViewModel(get(), get()) }
+    viewModel { FavoritesViewModel(get(), get()) }
     viewModel { UnitDetailViewModel(get(), get()) }
     viewModel { FactorExtractorViewModel(get(), get()) }
     viewModel { TokenViewModel(get(), get()) }

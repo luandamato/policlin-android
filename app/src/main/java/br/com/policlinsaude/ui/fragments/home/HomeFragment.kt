@@ -18,6 +18,7 @@ import br.com.policlinsaude.ui.activities.ownNetwork.OwnNetworkActivity
 import br.com.policlinsaude.ui.activities.coparticipation.ResearchCoParticipationActivity
 import br.com.policlinsaude.ui.activities.healthInsuranceCard.HealthInsurancePhotoActivity
 import br.com.policlinsaude.ui.activities.factorExtractor.FactorExtractorActivity
+import br.com.policlinsaude.ui.activities.favorites.FavoritesActivity
 import br.com.policlinsaude.ui.activities.token.TokenActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.views.BaseFragment
@@ -171,6 +172,10 @@ class HomeFragment : BaseFragment() {
         } else {
             if (option == HomeOptionEnum.HEALTH_INSURANCE) {
                 HealthInsurancePhotoActivity.start(requireActivity())
+                return
+            }
+            if (option == HomeOptionEnum.FAVORITES) {
+                FavoritesActivity.start(requireActivity())
                 return
             }
             if (option == HomeOptionEnum.OWN_NETWORK) {

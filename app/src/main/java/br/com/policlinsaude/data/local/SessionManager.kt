@@ -2,6 +2,7 @@ package br.com.policlinsaude.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
+import br.com.policlinsaude.data.models.PresentationEstablishment
 import br.com.policlinsaude.domain.models.HealthInsurancePhoto
 import br.com.policlinsaude.domain.models.HealthInsurancePhotoList
 import br.com.policlinsaude.domain.models.Person
@@ -93,6 +94,23 @@ class SessionManager(context: Context) {
     }
 
     // =====================================================================
+    // FAVORITOS (cache offline — legado: "myPrefs"/"favoritesPref")
+    // =====================================================================
+    fun saveFavorites(favorites: List<PresentationEstablishment>) {
+        preferences.edit().putString(KEY_FAVORITES, gson.toJson(favorites)).apply()
+    }
+
+    fun getFavorites(): List<PresentationEstablishment> {
+        val json = preferences.getString(KEY_FAVORITES, null) ?: return emptyList()
+        return try {
+            val type = object : TypeToken<List<PresentationEstablishment>>() {}.type
+            gson.fromJson<List<PresentationEstablishment>>(json, type).orEmpty()
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+
+    // =====================================================================
     // PREFERÊNCIAS BOOLEANAS
     // =====================================================================
     fun putBoolean(key: String, value: Boolean) {
@@ -120,6 +138,7 @@ class SessionManager(context: Context) {
         const val KEY_PERSON = "person"
         const val KEY_PHOTOS = "photosPref"
         const val KEY_PHOTO_VERSO = "photoVersoPref"
+        const val KEY_FAVORITES = "favoritesPref"
         const val KEY_SELECAO_BENEFICIARIO = "selecaoBeneficiarioAutorizador"
     }
 }
