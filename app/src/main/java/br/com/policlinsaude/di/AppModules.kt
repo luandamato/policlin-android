@@ -53,7 +53,7 @@ val appModules = module {
     viewModel { LinksViewModel() }
     viewModel { UnitsViewModel(get()) }
     viewModel { OwnNetworkViewModel(get(), get()) }
-    viewModel { UnitDetailViewModel() }
+    viewModel { UnitDetailViewModel(get(), get()) }
     viewModel { FactorExtractorViewModel(get(), get()) }
     viewModel { TokenViewModel(get(), get()) }
 }

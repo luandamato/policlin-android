@@ -86,8 +86,15 @@ class UnitDetailAdapter(
         }
 }
 
-    fun setEstablishment(context: Context, establishment: PresentationEstablishment) {
+    fun setEstablishment(context: Context, establishment: PresentationEstablishment, caller: String = "Units") {
         list.clear()
+
+        // Modo Rede Propia (caller != "Units"): mesmas filas extras do legado.
+        if (caller != "Units") {
+            list.add(Pair(context.getString(R.string.title_social_name), establishment.socialName))
+            list.add(Pair(context.getString(R.string.title_cnpj).uppercase(), establishment.cnpj))
+            list.add(Pair(context.getString(R.string.title_type_establishment), establishment.type))
+        }
 
         if (!establishment.isOwnNetwork) {
             list.add(Pair(context.getString(R.string.title_speciality), establishment.speciality))

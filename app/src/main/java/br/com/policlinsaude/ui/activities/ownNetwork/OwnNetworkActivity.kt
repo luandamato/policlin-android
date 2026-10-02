@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import br.com.policlinsaude.R
 import br.com.policlinsaude.databinding.ActivityOwnNetworkBinding
+import br.com.policlinsaude.ui.activities.unitDetail.UnitDetailActivity
 import br.com.policlinsaude.ui.views.BaseActivity
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -30,6 +31,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class OwnNetworkActivity : BaseActivity() {
 
     companion object {
+        private const val OWN_NETWORK_CALLER = "OwnNetwork"
+
         fun start(activity: android.app.Activity) {
             val intent = Intent(activity, OwnNetworkActivity::class.java)
             activity.startActivity(intent)
@@ -138,7 +141,7 @@ class OwnNetworkActivity : BaseActivity() {
         viewModel.event.observe(this) { event ->
             when (event) {
                 is OwnNetworkEvent.ShowError -> showDialogError(event.message)
-                is OwnNetworkEvent.ShowDetails -> notMigrated()
+                is OwnNetworkEvent.ShowDetails -> navigateToDetails(event.establishment)
                 is OwnNetworkEvent.ShowMap -> notMigrated()
             }
         }
@@ -150,6 +153,11 @@ class OwnNetworkActivity : BaseActivity() {
     private fun showDialogError(message: String) {
         val listener = { viewModel.loadOwnNetwork() }
         showDialogTryAgain(listenerPositiveButton = listener, message = message)
+    }
+
+    /** Navegación na UI: detalle → UnitDetailActivity en modo Rede Propia (favoritos habilitados). */
+    private fun navigateToDetails(establishment: br.com.policlinsaude.data.models.PresentationEstablishment) {
+        UnitDetailActivity.start(this, establishment, OWN_NETWORK_CALLER)
     }
 
     private fun notMigrated() {

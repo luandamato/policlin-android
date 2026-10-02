@@ -2,18 +2,25 @@ package br.com.policlinsaude.ui.activities.unitDetail
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.policlinsaude.R
+import br.com.policlinsaude.data.models.JsonMedicalGuidePlanResponse
 import br.com.policlinsaude.data.models.PresentationEstablishment
 import br.com.policlinsaude.databinding.ActivityUnitDetailBinding
+import br.com.policlinsaude.ui.activities.login.LoginActivity
+import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.views.BaseActivity
 import br.com.policlinsaude.util.extensions.getBitmapFromImage
+import br.com.policlinsaude.util.helpers.ConnectivityHelper
 import br.com.policlinsaude.util.helpers.LocationHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -21,22 +28,27 @@ import com.google.gson.Gson
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * Detalhe da unidade (exibido a partir da lista de unidades).
+ * Detalhe da unidade.
  *
- * Migrado de `_legacy/.../medicalGuideDetails/view/MedicalGuideDetailsActivity.kt`
- * restrito ao caso "Units" (sem favorito/planos): mostra imagem/frente ou mapa,
- * telefones (com WhatsApp quando tipo = 2), mapa e compartilhar.
+ * Migrado de `_legacy/.../medicalGuideDetails/view/MedicalGuideDetailsActivity.kt`.
+ * Pantalla compartida para:
+ * - caller "Units" (lista de unidades): sem favorito/planos (comportamento atual).
+ * - caller "OwnNetwork" (rede própria): favoritos e planos habilitados
+ *   (mesmo comportamento do legado para caller != "Units").
  *
- * Fluxo: UI + navegação de intents direto na UI (sem Navigator).
+ * Fluxo: UI + navegación de intents direto na UI (sem Navigator/Presenter).
  */
 class UnitDetailActivity : BaseActivity() {
 
     companion object {
         private const val EXTRA_ESTABLISHMENT = "extra_establishment"
+        private const val EXTRA_CALLER = "extra_caller"
+        private const val CALLER_UNITS = "Units"
 
-        fun start(activity: Activity, establishment: PresentationEstablishment) {
+        fun start(activity: Activity, establishment: PresentationEstablishment, caller: String = CALLER_UNITS) {
             val intent = Intent(activity, UnitDetailActivity::class.java)
             intent.putExtra(EXTRA_ESTABLISHMENT, Gson().toJson(establishment))
+            intent.putExtra(EXTRA_CALLER, caller)
             activity.startActivity(intent)
         }
     }
@@ -60,22 +72,60 @@ class UnitDetailActivity : BaseActivity() {
 
         setupToolbar(binding.toolbar.toolbar)
 
-        // No modo "Units" não há favorito nem planos.
-        binding.imageButtonFavorite.visibility = View.GONE
-        binding.plansTextView.visibility = View.GONE
-
         val json = intent.getStringExtra(EXTRA_ESTABLISHMENT)
         establishment = viewModel.parseEstablishment(json) ?: run {
             finish()
             return
         }
-        renderEstablishment(establishment)
+
+        val caller = intent.getStringExtra(EXTRA_CALLER) ?: CALLER_UNITS
+
+        // No modo "Units" não há favorito nem planos (mesmo comportamento do legado).
+        if (caller == CALLER_UNITS) {
+            binding.imageButtonFavorite.visibility = View.GONE
+            binding.plansTextView.visibility = View.GONE
+        } else {
+            setupFavoriteButton(establishment)
+            setupPlansButton(establishment)
+        }
+
+        observeViewModel()
+        renderEstablishment(establishment, caller)
+    }
+
+    // =====================================================================
+    // Favoritos / Planos (modo Rede Propia)
+    // =====================================================================
+    private fun setupFavoriteButton(e: PresentationEstablishment) {
+        setFavorited(e.favorited)
+        binding.imageButtonFavorite.setOnClickListener {
+            if (ConnectivityHelper.isOnline(this)) {
+                viewModel.toggleFavorite(e)
+            } else {
+                showWithoutNetworkDialog()
+            }
+        }
+    }
+
+    private fun setFavorited(favorited: Boolean) {
+        binding.imageButtonFavorite.setImageDrawable(
+            ContextCompat.getDrawable(
+                this,
+                if (favorited) R.drawable.ic_favorite_full else R.drawable.ic_favorite
+            )
+        )
+    }
+
+    private fun setupPlansButton(e: PresentationEstablishment) {
+        binding.plansTextView.setOnClickListener {
+            viewModel.loadPlans(e)
+        }
     }
 
     // =====================================================================
     // Render
     // =====================================================================
-    private fun renderEstablishment(e: PresentationEstablishment) {
+    private fun renderEstablishment(e: PresentationEstablishment, caller: String) {
         binding.recyclerView.apply {
             adapter = this@UnitDetailActivity.adapter
             layoutManager = LinearLayoutManager(this@UnitDetailActivity)
@@ -87,7 +137,7 @@ class UnitDetailActivity : BaseActivity() {
         loadFrontImage(e)
 
         binding.titleTextView.text = e.title
-        adapter.setEstablishment(this, e)
+        adapter.setEstablishment(this, e, caller)
 
         setupPhoneButton(e)
         setupWhatsAppButton(e)
@@ -125,9 +175,34 @@ class UnitDetailActivity : BaseActivity() {
             // mantém placeholder
         }
     }
+// =====================================================================
+    // Observers (estado/eventos do ViewModel)
+    // =====================================================================
+    private fun observeViewModel() {
+        viewModel.loading.observe(this) { isLoading ->
+            binding.loadingContainer.visibility =
+                if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        viewModel.event.observe(this) { event ->
+            when (event) {
+                is UnitDetailEvent.FavoriteChanged -> {
+                    setFavorited(event.favorited)
+                    showToast(
+                        if (event.favorited) R.string.text_favorite_success
+                        else R.string.text_remove_favorite_success
+                    )
+                }
+                is UnitDetailEvent.ShowError -> showError(event.message)
+                UnitDetailEvent.ShowLogin -> showLoginDialog()
+                is UnitDetailEvent.ShowPlans -> showPlansDialog(event.plans)
+                UnitDetailEvent.ShowEmptyPlans -> showEmptyPlansDialog()
+            }
+        }
+    }
 
     // =====================================================================
-    // Ações (telefone / WhatsApp / mapa / compartilhar)
+    // Ações (telefone / WhatsApp / mapa / compartir)
     // =====================================================================
     private fun setupPhoneButton(e: PresentationEstablishment) {
         binding.imageButtonPhone.setOnClickListener {
@@ -213,5 +288,56 @@ class UnitDetailActivity : BaseActivity() {
             putExtra(Intent.EXTRA_TEXT, textToShare)
         }
         startActivity(intent)
+    }
+// =====================================================================
+    // Diálogos / navegación
+    // =====================================================================
+    private fun showPlansDialog(plans: List<JsonMedicalGuidePlanResponse>) {
+        val descriptions = plans.map { it.description.orEmpty() }
+        val builder = AlertDialog.Builder(this)
+            .setAdapter(
+                object : ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, descriptions.toTypedArray()) {},
+                null
+            )
+        builder.setPositiveButton(R.string.text_ok, null)
+        val dialog = builder.create()
+        dialog.listView.divider = ColorDrawable(ContextCompat.getColor(this, R.color.divider))
+        dialog.listView.dividerHeight = 1
+        dialog.show()
+    }
+
+    private fun showEmptyPlansDialog() {
+        DialogHelper.showDialog(
+            this,
+            getString(R.string.title_error_oops),
+            getString(R.string.text_nothing_to_show),
+            getString(R.string.text_ok),
+            null
+        )
+    }
+
+    private fun showLoginDialog() {
+        DialogHelper.showDialog(
+            this,
+            getString(R.string.title_login),
+            getString(R.string.text_login),
+            getString(R.string.global_yes),
+            getString(R.string.action_cancel),
+            listenerPositiveButton = { navigateToLogin() }
+        )
+    }
+
+    private fun showWithoutNetworkDialog() {
+        DialogHelper.showDialog(
+            this,
+            getString(R.string.title_no_internet_connection),
+            getString(R.string.text_no_internet),
+            getString(R.string.text_ok),
+            null
+        )
+    }
+
+    private fun navigateToLogin() {
+        LoginActivity.start(this)
     }
 }
