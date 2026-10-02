@@ -86,6 +86,16 @@ class SessionManager(context: Context) {
         photoList.imgVerso?.let { saveHealthInsuranceVerso(it) }
     }
 
+    /**
+     * Guarda o dono do cache da carteirinha (beneficiário que a carregou).
+     * Permite oferecer o cache offline com segurança em trocas de usuário.
+     */
+    fun saveCarteirinhaOwner(register: String, order: String) {
+        preferences.edit().putString(KEY_CARTEIRINHA_OWNER, "$register|$order").apply()
+    }
+
+    fun getCarteirinhaOwner(): String? = preferences.getString(KEY_CARTEIRINHA_OWNER, null)
+
     fun clearCarteirinha() {
         preferences.edit()
             .remove(KEY_PHOTOS)
@@ -129,7 +139,9 @@ class SessionManager(context: Context) {
     fun clearSession() {
         removeToken()
         removePerson()
-        clearCarteirinha()
+        // NOTA: o cache da carteirinha (e do favoritos) NÃO é removido no logoff para
+        // preservar o comportamento offline por usuário; a leitura offline é protegida
+        // pelo dono do cache (KEY_CARTEIRINHA_OWNER) em HealthInsurancePhotoViewModel.
     }
 
     private companion object {
@@ -138,6 +150,7 @@ class SessionManager(context: Context) {
         const val KEY_PERSON = "person"
         const val KEY_PHOTOS = "photosPref"
         const val KEY_PHOTO_VERSO = "photoVersoPref"
+        const val KEY_CARTEIRINHA_OWNER = "carteirinhaOwner"
         const val KEY_FAVORITES = "favoritesPref"
         const val KEY_SELECAO_BENEFICIARIO = "selecaoBeneficiarioAutorizador"
     }

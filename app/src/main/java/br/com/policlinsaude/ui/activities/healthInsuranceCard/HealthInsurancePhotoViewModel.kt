@@ -64,6 +64,7 @@ class HealthInsurancePhotoViewModel(
                     )
                 } else {
                     sessionManager.saveCarteirinha(photoList)
+                    saveCarteirinhaOwner()
                     _event.value = HealthInsurancePhotoEvent.ShowImage(photoList)
                 }
             } catch (e: Exception) {
@@ -79,7 +80,13 @@ class HealthInsurancePhotoViewModel(
     // =====================================================================
     // Helpers
     // =====================================================================
+    /**
+     * Cache offline: só é oferecido quando o beneficiário logado é o mesmo que
+     * salvou a carteirinha (proteção contra exibir o cartão de outro usuário).
+     * O cache deixa de ser apagado no logoff para preservar esta leitura offline.
+     */
     private fun loadFromCache(): HealthInsurancePhotoList? {
+        if (!isCacheOwnerCurrentUser()) return null
         val photos = sessionManager.getHealthInsurancePhotos()
         val verso = sessionManager.getHealthInsuranceVerso()
         return if (photos.isEmpty() && verso.isEmpty()) null
@@ -87,6 +94,22 @@ class HealthInsurancePhotoViewModel(
             listaimgFrente = photos,
             imgVerso = verso.ifBlank { null }
         )
+    }
+
+    private fun saveCarteirinhaOwner() {
+        val person = sessionManager.getPerson() ?: return
+        val register = person.plan.register
+        val order = person.plan.order
+        if (register.isEmpty() && order.isEmpty()) return
+        sessionManager.saveCarteirinhaOwner(register, order)
+    }
+
+    private fun isCacheOwnerCurrentUser(): Boolean {
+        val person = sessionManager.getPerson() ?: return false
+        val register = person.plan.register
+        val order = person.plan.order
+        if (register.isEmpty() && order.isEmpty()) return false
+        return sessionManager.getCarteirinhaOwner() == "$register|$order"
     }
 
     private fun JsonHealthInsurancePhotoResponse.toDomain(): HealthInsurancePhotoList =
