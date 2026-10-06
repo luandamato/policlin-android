@@ -20,6 +20,7 @@ import br.com.policlinsaude.ui.activities.healthInsuranceCard.HealthInsurancePho
 import br.com.policlinsaude.ui.activities.factorExtractor.FactorExtractorActivity
 import br.com.policlinsaude.ui.activities.favorites.FavoritesActivity
 import br.com.policlinsaude.ui.activities.token.TokenActivity
+import br.com.policlinsaude.ui.activities.tickets.TicketsActivity
 import br.com.policlinsaude.ui.dialogs.DialogHelper
 import br.com.policlinsaude.ui.views.BaseFragment
 import br.com.policlinsaude.util.extensions.openBrowser
@@ -188,6 +189,10 @@ class HomeFragment : BaseFragment() {
             }
             if (option == HomeOptionEnum.SERVICE_TOKEN) {
                 TokenActivity.start(requireActivity())
+                return
+            }
+            if (option == HomeOptionEnum.TICKET) {
+                TicketsActivity.start(requireActivity())
                 return
             }
             notMigrated()

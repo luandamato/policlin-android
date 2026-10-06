@@ -23,6 +23,7 @@ import br.com.policlinsaude.ui.fragments.preferences.PreferencesViewModel
 import br.com.policlinsaude.ui.fragments.informations.InformationsViewModel
 import br.com.policlinsaude.ui.fragments.links.LinksViewModel
 import br.com.policlinsaude.ui.fragments.units.UnitsViewModel
+import br.com.policlinsaude.ui.fragments.tickets.TicketViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -58,4 +59,5 @@ val appModules = module {
     viewModel { UnitDetailViewModel(get(), get()) }
     viewModel { FactorExtractorViewModel(get(), get()) }
     viewModel { TokenViewModel(get(), get()) }
+    viewModel { TicketViewModel(get(), get()) }
 }
