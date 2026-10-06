@@ -21,6 +21,9 @@
     <string name="ticket_detail_button_copy_code">Copiar Código de Barras</string>
     <string name="ticket_detail_see_document">Ver PDF</string>
 
+    <!-- INCOME TAX -->
+    <string name="title_income_tax">Informe de Imposto de Renda</string>
+
     <!-- ERROR -->
     <string name="title_error_oops">Oops!</string>
     <string name="text_ok">OK</string>

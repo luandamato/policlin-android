@@ -24,6 +24,10 @@
         <activity
             android:name=".ui.activities.token.TokenActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.activities.incometax.IncomeTaxActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <!-- ===================================================== -->
         <!-- LOGIN ACTIVITY (launcher) -->
         <!-- ===================================================== -->
