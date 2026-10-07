@@ -4,11 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import br.com.policlinsaude.R
 import br.com.policlinsaude.data.models.IncomeTaxItemModel
 import br.com.policlinsaude.databinding.ActivityIncomeTaxBinding
 import br.com.policlinsaude.ui.dialogs.DialogHelper
+import br.com.policlinsaude.ui.views.BaseActivity
 import br.com.policlinsaude.util.extensions.openBrowser
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,7 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  *
  * Fluxo novo: UI → IncomeTaxViewModel → AppRepository (apiIR).
  */
-class IncomeTaxActivity : AppCompatActivity() {
+class IncomeTaxActivity : BaseActivity() {
 
     companion object {
         fun start(activity: Activity) {

@@ -3,12 +3,12 @@ package br.com.policlinsaude.ui.activities.tickets
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import br.com.policlinsaude.R
 import br.com.policlinsaude.data.models.TicketDetail
 import br.com.policlinsaude.databinding.ActivityTicketsBinding
 import br.com.policlinsaude.ui.fragments.tickets.TicketDetailFragment
 import br.com.policlinsaude.ui.fragments.tickets.TicketsFragment
+import br.com.policlinsaude.ui.views.BaseActivity
 
 /**
  * Tela de 2ª via de boletos (MVVM).
@@ -21,7 +21,7 @@ import br.com.policlinsaude.ui.fragments.tickets.TicketsFragment
  * Fluxo novo: UI → TicketViewModel → AppRepository (apiBoletos).
  * A navegação para o detalhe é feita na UI via [showDetail].
  */
-class TicketsActivity : AppCompatActivity() {
+class TicketsActivity : BaseActivity() {
 
     companion object {
         fun start(activity: Activity) {

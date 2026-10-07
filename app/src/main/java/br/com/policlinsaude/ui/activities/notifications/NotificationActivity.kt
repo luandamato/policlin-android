@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import br.com.policlinsaude.R
 import br.com.policlinsaude.databinding.ActivityNotificationBinding
 import br.com.policlinsaude.ui.fragments.notifications.NotificationsFragment
+import br.com.policlinsaude.ui.views.BaseActivity
 
 /**
  * Tela de notificações (MVVM).
@@ -18,7 +19,7 @@ import br.com.policlinsaude.ui.fragments.notifications.NotificationsFragment
  *
  * Fluxo novo: UI → NotificationViewModel → AppRepository (MAPP_Notificacoes).
  */
-class NotificationActivity : AppCompatActivity() {
+class NotificationActivity : BaseActivity() {
 
     companion object {
         fun start(activity: Activity) {

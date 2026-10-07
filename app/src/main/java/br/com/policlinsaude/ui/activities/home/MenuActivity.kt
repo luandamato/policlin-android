@@ -82,7 +82,7 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     }
 
     private fun setupDrawer() {
-        // Toolbar: proviene del app_bar_home incluido en HomeFragment.
+        // Toolbar: proviene do app_bar_home incluido em HomeFragment.
         setupFragmentToolbar(null, null)
     }
 
@@ -157,6 +157,8 @@ class MenuActivity : BaseActivity(), OnMenuItemClickListener {
     // Navegación (UI)
     // =====================================================================
     override fun onClick(menuItem: MenuOptionEnum) {
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+
         when (menuItem) {
             MenuOptionEnum.HOME -> showHomeFragment()
             MenuOptionEnum.LOGOUT -> {

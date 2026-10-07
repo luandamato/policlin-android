@@ -27,13 +27,13 @@ class AppRepository {
     // TICKETS / 2ª VIA DE BOLETO
     // =====================================================================
     suspend fun onGetTickets(body: TicketBodyModel): TicketModel =
-        request { serviceMappApi.getTickets(body) }
+        request { serviceApiappRest.getTickets(body) }
 
     suspend fun onGetIncomeTax(body: IncomeTaxBodyModel): IncomeTaxResponseModel =
-        request { serviceMappApi.getIncomeTax(body) }
+        request { serviceApiappRest.getIncomeTax(body) }
 
     suspend fun onGetScheduleCentral(body: ScheduleCentralBodyModel): ScheduleCentralResponseModel =
-        request { serviceMappApi.getScheduleCentral(body) }
+        request { serviceApiappRest.getScheduleCentral(body) }
 
     suspend fun onGetToken(body: TokenBodyModel): TokenResponseModel =
         request { serviceApiappRest.getAttendanceToken(body) }
